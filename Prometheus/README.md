@@ -114,7 +114,7 @@
 * 목적 : Prometheus server, adapter, node exporter, kube-state-metrics, grafana 등을 생성
 
 
-* kubectl create -f manifests/ 명령어를 통해 Prometheus 모듈 생성([manifests](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Prometheus/manifests)
+* kubectl create -f manifests/ 명령어를 통해 Prometheus 모듈 생성([manifests](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Prometheus/manifests))
 * 비고
 	* Prometheus UI 또는 Grafana 를 사용할 경우 kubectl edit svc $PROMETHEUS_SVC -n monitoring 또는 kubectl edit svc $GRAFANA_SVC -n monitoring 명령어를 통해 ClusterIP 타입으로 생성된 서비스를 LoadBalancer 타입으로 수정한 뒤 해당 IP:port 를 통해 대시보드에 접근할 수 있음
 

@@ -4,7 +4,7 @@
 
 | Module | Version | Guide |
 | ------ | ------ | ------ |
-| Kubernetes | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Kubernetes/README.md |
+| Kubernetes | | [Kubernetes installation guide](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Kubernetes/README.md) |
 | Calico & MetalLB | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Calico%20%26%20MetalLB/README.md |
 | Rook Ceph | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Rook%20Ceph/README.md |
 | KubeVirt | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/KubeVirt/README.md |

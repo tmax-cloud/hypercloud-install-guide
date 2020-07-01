@@ -6,7 +6,7 @@
 | ------ | ------ | ------ |
 | Kubernetes | CK2-3 |  |
 | Calico & MetalLB |  |  |
-| Ceph |  |  |
+| Rook Ceph |  |  |
 | KubeVirt |  |  |
 | HyperCloud Operator |  |  |
 | Console |  |  |

@@ -1,7 +1,7 @@
 
 # Prometheus 설치 가이드
 
-## 구성 요소(prometheus-2.11.0)
+## 구성 요소
 * prometheus ([quay.io/prometheus/prometheus:v2.11.0](https://quay.io/repository/prometheus/prometheus?tag=latest&tab=tags))
 * prometheus-operator ([quay.io/coreos/prometheus-operator:v0.34.0](https://quay.io/repository/coreos/prometheus-operator?tag=latest&tab=tags))
 * node-exporter ([quay.io/prometheus/node-exporter:v0.18.1](https://quay.io/repository/prometheus/node-exporter?tag=latest&tab=tags))
@@ -96,8 +96,8 @@
 
 ## Install Steps
 1. [prometheus namespace 및 crd 생성](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Prometheus#step-1-prometheus-namespace-%EB%B0%8F-crd-%EC%83%9D%EC%84%B1)
-2. [Prometheus 모듈들에 대한 deploy 및 RBAC 생성 설치]
-3. [kube-scheduler 와 kube-controller-manager 설정]()
+2. [Prometheus 모듈들에 대한 deploy 및 RBAC 생성 설치](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Prometheus#step-2-prometheus-%EB%AA%A8%EB%93%88%EB%93%A4%EC%97%90-%EB%8C%80%ED%95%9C-deploy-%EB%B0%8F-rbac-%EC%83%9D%EC%84%B1)
+3. [kube-scheduler 와 kube-controller-manager 설정](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Prometheus#step-3-kube-scheduler-%EC%99%80-kube-controller-manager-%EC%84%A4%EC%A0%95)
 	
 
 
@@ -114,7 +114,7 @@
 * 목적 : Prometheus server, adapter, node exporter, kube-state-metrics, grafana 등을 생성
 
 
-* kubectl create -f manifests/ 명령어를 통해 Prometheus 모듈 생성
+* kubectl create -f manifests/ 명령어를 통해 Prometheus 모듈 생성([manifests](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Prometheus/manifests)
 * 비고
 	* Prometheus UI 또는 Grafana 를 사용할 경우 kubectl edit svc $PROMETHEUS_SVC -n monitoring 또는 kubectl edit svc $GRAFANA_SVC -n monitoring 명령어를 통해 ClusterIP 타입으로 생성된 서비스를 LoadBalancer 타입으로 수정한 뒤 해당 IP:port 를 통해 대시보드에 접근할 수 있음
 

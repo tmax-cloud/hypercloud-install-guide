@@ -139,8 +139,8 @@
 * kubectl get svc -n monitoring 을 실행 후 prometheus와 alertmanager의 ui 주소를 확인하고 접속한다.
 * prometheus에서는 Target 탭에 다음과 같이 설정 한 타겟들이 보이면 정상이다.
 
-![image] (figure/prometheus-ui.png)
+![image](figure/prometheus-ui.png)
 
 * alertmanager에서는 Alerts 탭에서 다음과 같이 alert들이 보이면 정상이다.
 
-![image] (figure/alertmanager-ui.png)
+![image](figure/alertmanager-ui.png)

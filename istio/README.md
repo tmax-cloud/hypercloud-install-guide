@@ -76,39 +76,39 @@
 
 ## Step 1. istio namespace 및 customresourcedefinition 생성
 * 목적 : `istio system namespace, clusterrole, clusterrolebinding, serviceaccount, customresourcedefinition 생성`
-* 생성 순서: [1.istio-base.yaml](Istio/yaml/1.istio-base.yaml) 실행 `ex) kubectl apply -f 1.istio-base.yaml`
+* 생성 순서: [1.istio-base.yaml](yaml/1.istio-base.yaml) 실행 `ex) kubectl apply -f 1.istio-base.yaml`
 
 
 
 ## Step 2. kiali 설치
 * 목적 : `istio ui kiali 설치`
-* 생성 순서: [2.kiali.yaml](Istio/yaml/2.kiali.yaml) 실행
+* 생성 순서: [2.kiali.yaml](yaml/2.kiali.yaml) 실행
 * 비고 :
-    * kiali에 접속하기 위한 서비스를 [원하는 타입](Istio/yaml/2.kiali.yaml#L346)으로 변경할 수 있다.
-    * kiali에 접속하기 위한 [id/password](Istio/yaml/2.kiali.yaml#L215)를 configmap을 수정해 변경할 수 있다.(default: admin/admin)
+    * kiali에 접속하기 위한 서비스를 [원하는 타입](yaml/2.kiali.yaml#L346)으로 변경할 수 있다.
+    * kiali에 접속하기 위한 [id/password](yaml/2.kiali.yaml#L215)를 configmap을 수정해 변경할 수 있다.(default: admin/admin)
     * kilai pod가 running임을 확인한 뒤 http://$KIALI_URL/kiali 에 접속해 정상 동작을 확인한다.
-![image](Istio/figure/kiali-ui.png)
+![image](figure/kiali-ui.png)
 
 
 
 ## Step 3. istio-tracing 설치
 * 목적 : `tracing component jaeger 설치`
-* 생성 순서: [3.istio-tracing.yaml](Istio/yaml/3.istio-tracing.yaml) 실행
+* 생성 순서: [3.istio-tracing.yaml](yaml/3.istio-tracing.yaml) 실행
 * 비고 : 
-    * jaeger ui에 접속하기 위한 서비스를 [원하는 타입](Istio/yaml/3.istio-tracing.yaml#L245)으로 변경할 수 있다.
+    * jaeger ui에 접속하기 위한 서비스를 [원하는 타입](yaml/3.istio-tracing.yaml#L245)으로 변경할 수 있다.
     * istio-tracing pod가 running임을 확인한 뒤 http://$JAEGER_URL/jaeger/search 에 접속해 정상 동작을 확인한다.
-![image](Istio/yaml/yaeger-ui.png)
+![image](yaml/yaeger-ui.png)
 
 
 
 
 ## Step 4. istiod 설치
 * 목적 : `istio core component 설치(istiod deployment, sidecar configmap, mutatingwebhookconfiguration...)`
-* 생성 순서: [4.istio-core.yaml](Istio/yaml/4.istio-core.yaml) 실행
+* 생성 순서: [4.istio-core.yaml](yaml/4.istio-core.yaml) 실행
 * 비고 : 
-    * [istio라는 이름의 configmap](Istio/yaml/4.istio-core.yaml#L403)을 수정하여 설정을 변경할 수 있다. 관련 설정은 [istio mesh config](https://istio.io/docs/reference/config/istio.mesh.v1alpha1/#MeshConfig)를 참고한다.
-        * access log format을 변경하고 싶은 경우 [mesh.accessLogFormat](Istio/yaml/4.istio-core.yaml#L468)을 원하는 format으로 변경한다.
-        * tracing sampling rate을 변경하고 싶은 경우 [value.traceSampling](Istio/yaml/4.istio-core.yaml#L459)을 원하는 값으로 변경한다.
+    * [istio라는 이름의 configmap](yaml/4.istio-core.yaml#L403)을 수정하여 설정을 변경할 수 있다. 관련 설정은 [istio mesh config](https://istio.io/docs/reference/config/istio.mesh.v1alpha1/#MeshConfig)를 참고한다.
+        * access log format을 변경하고 싶은 경우 [mesh.accessLogFormat](yaml/4.istio-core.yaml#L468)을 원하는 format으로 변경한다.
+        * tracing sampling rate을 변경하고 싶은 경우 [value.traceSampling](yaml/4.istio-core.yaml#L459)을 원하는 값으로 변경한다.
 
 
 
@@ -116,14 +116,14 @@
 
 ## Step 5. istio-ingressgateway 설치
 * 목적 : `istio ingressgateway 설치`
-* 생성 순서: [5.istio-ingressgateway.yaml](Istio/yaml/5.istio-ingressgateway.yaml) 실행
+* 생성 순서: [5.istio-ingressgateway.yaml](yaml/5.istio-ingressgateway.yaml) 실행
 
 
 
 
 ## Step 6. istio metric prometheus에 등록
 * 목적 : `istio metric을 수집하기 위한 podmonitor 생성`
-* 생성 순서: [6.istio-metric.yaml](Istio/yaml/6.istio-metric.yaml) 실행
+* 생성 순서: [6.istio-metric.yaml](yaml/6.istio-metric.yaml) 실행
 * 비고 : 
     * http://$PROMETHEUS_URL/graph 에 접속해 'envoy_'로 시작하는 istio 관련 metric이 수집되었는지 확인한다.
     * 만약 istio 관련 metric이 수집되지 않을 경우, Prometheus의 권한설정 문제일 수 있다. [prometheus-clusterRole.yaml](http://192.168.1.150:9090/share/page/site/cloud-rnd-site/document-details?nodeRef=workspace://SpacesStore/7c979728-6d13-4396-a0d2-2aeb2e594194#)을 적용하거나 Prometheus를 최신 버전으로 설치한다.
@@ -134,14 +134,14 @@
 
 ## Step 7. bookinfo 예제
 * 목적 : `istio 설치 검증을 위한 bookinfo 예제`
-* 생성 순서: [bookinfo.yaml](Istio/yaml/bookinfo.yaml) 실행
+* 생성 순서: [bookinfo.yaml](yaml/bookinfo.yaml) 실행
 * 비고 : 
     * bookinfo 예제 배포
-        * application에 접속하기 위해 [service productpage의 타입](Istio/yaml/bookinfo.yaml#L278)을 NodePort/LoadBalancer로 변경한다.
+        * application에 접속하기 위해 [service productpage의 타입](yaml/bookinfo.yaml#L278)을 NodePort/LoadBalancer로 변경한다.
         * bookinfo 예제를 배포할 namespace에 istio-injected=enabled label을 추가한 뒤, bookinfo 예제를 배포한다. 
         ```bash
         $ kubectl label namespace $YOUR_NAMESPACE istio-injection=enabled
         $ kubectl apply -f bookinfo.yaml -n $YOUR_NAMESPACE
         ```
     * http://$PRODUCTPAGE_URL/productpage 에 접속해 정상적으로 배포되었는지 확인한 뒤, kiali dashboard(http://$KIALI_URL/kiali)에 접속해 아래 그림과 같이 서비스간에 관계를 표현해주는 그래프가 나오는지 확인한다.
-![image](Istio/figure/bookinfo-example.png)
+![image](figure/bookinfo-example.png)

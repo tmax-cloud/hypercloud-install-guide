@@ -95,30 +95,41 @@
 
 
 ## Install Steps
-1. [prometheus namespace 및 crd 생성]
-2. [prometheus 설치]
-3. [alertmanager 설치]
-4. [grafana 설치]
+1. [prometheus namespace 및 crd 생성](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Prometheus#step-1-prometheus-namespace-%EB%B0%8F-crd-%EC%83%9D%EC%84%B1)
+2. [Prometheus 모듈들에 대한 deploy 및 RBAC 생성 설치]
+3. [kube-scheduler 와 kube-controller-manager 설정]()
+	
 
 
 ***
 
 ## Step 1. prometheus namespace 및 crd 생성
+* 목적 : Prometheus Namespace, CRD, Service Account, RBAC 생성
+* kubectl create -f setup/ 명령어를 통해 Prometheus CRD 및 Operator 등을 생성 
+[setup](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Prometheus/setup)
 
 ***
 
-## Step 2. prometheus 설치
+## Step 2. Prometheus 모듈들에 대한 deploy 및 RBAC 생성
+* 목적 : Prometheus server, adapter, node exporter, kube-state-metrics, grafana 등을 생성
 
+
+* kubectl create -f manifests/ 명령어를 통해 Prometheus 모듈 생성
+* 비고
+	* Prometheus UI 또는 Grafana 를 사용할 경우 kubectl edit svc $PROMETHEUS_SVC -n monitoring 또는 kubectl edit svc $GRAFANA_SVC -n monitoring 명령어를 통해 ClusterIP 타입으로 생성된 서비스를 LoadBalancer 타입으로 수정한 뒤 해당 IP:port 를 통해 대시보드에 접근할 수 있음
 
 ***
 
-## Step 3. istio-tracing 설치
+## Step 3. kube-scheduler 와 kube-controller-manager 설정
 
+* 목적 : Kubernetes의 scheduler 정보와 controller 정보를 수집하기 위함
 
-
-***
-
-## Step 4. istiod 설치
+* kube-controller-manager-prometheus-discovery.yaml와 kube-scheduler-prometheus-discovery.yaml를 다운로드 하여
+* kubectl create -f kube-controller-manager-prometheus-discovery.yaml 와
+* kubectl create -f kube-scheduler-prometheus-discovery.yaml명령어를 실행한다.
+* monitoring namespace의 servicemonitor 객체 중 kube-controller-manager 와 kube-scheduler의 spec.endpoints.metricRelabelings 부분 삭제
+* kube-system namespace에 있는 모든 kube-schduler pod의 metadata.labels에k8s-app: kube-scheduler추가
+* kube-system namespace에 있는 모든 kube-contoroller-manager pod의 metadata.labels에k8s-app: kube-controller-manager 추가
 
 
 

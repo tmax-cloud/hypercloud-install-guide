@@ -4,7 +4,7 @@
 
 | Module | TEAM | GUIDE |
 | ------ | ------ | ------ |
-| Kubernetes | CK2-3 | https://github.com/tmax-cloud/hypercloud-install-guide/wiki/Kubernetes |
+| Kubernetes | CK2-3 |  |
 | Calico |  |  |
 | MetalLB |  |  |
 | Ceph |  |  |

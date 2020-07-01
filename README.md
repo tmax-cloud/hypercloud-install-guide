@@ -5,8 +5,7 @@
 | Module | TEAM | GUIDE |
 | ------ | ------ | ------ |
 | Kubernetes | CK2-3 |  |
-| Calico |  |  |
-| MetalLB |  |  |
+| Calico & MetalLB |  |  |
 | Ceph |  |  |
 | KubeVirt |  |  |
 | HyperCloud Operator |  |  |

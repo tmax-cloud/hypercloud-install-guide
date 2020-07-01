@@ -4,9 +4,13 @@
 
 | Module | TEAM | GUIDE |
 | ------ | ------ | ------ |
-| Dropbox |  |  |
-| GitHub |  |  |
-| Google Drive |  |  |
-| OneDrive |  |  |
-| Medium |  |  |
-| Google Analytics |  |  |
+| Kubernetes |  |  |
+| Calico |  |  |
+| MetalLB |  |  |
+| Ceph |  |  |
+| KubeVirt |  |  |
+| HyperCloud Operator |  |  |
+| Console |  |  |
+| Prometheus |  |  |
+| Istio |  |  |
+| Kubeflow |  |  |

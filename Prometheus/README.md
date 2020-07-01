@@ -2,16 +2,16 @@
 # Prometheus 설치 가이드
 
 ## 구성 요소(prometheus-2.11.0)
-* prometheus ([quay.io/prometheus/prometheus:v2.11.0])
-* prometheus-operator ([quay.io/coreos/prometheus-operator:v0.34.0])
-* node-exporter ([quay.io/prometheus/node-exporter:v0.18.1])
-* grafana ([grafana/grafana:6.4.3])
-* kube-state-metric ([quay.io/coreos/kube-state-metrics:v1.8.0])
-* configmap-reloader ([quay.io/coreos/prometheus-config-reloader:v0.34.0])
-* configmap-reload ([quay.io/coreos/configmap-reload:v0.0.1])
-* kube-rbac-proxy ([quay.io/coreos/kube-rbac-proxy:v0.4.1])
-* prometheus-adapter ([quay.io/coreos/k8s-prometheus-adapter-amd64:v0.5.0])
-* alertmanager ([quay.io/prometheus/alertmanager:v0.20.0])
+* prometheus ([quay.io/prometheus/prometheus:v2.11.0](https://quay.io/repository/prometheus/prometheus?tag=latest&tab=tags))
+* prometheus-operator ([quay.io/coreos/prometheus-operator:v0.34.0](https://quay.io/repository/coreos/prometheus-operator?tag=latest&tab=tags))
+* node-exporter ([quay.io/prometheus/node-exporter:v0.18.1](https://quay.io/repository/prometheus/node-exporter?tag=latest&tab=tags))
+* grafana ([grafana/grafana:6.4.3](https://grafana.com/grafana/download))
+* kube-state-metric ([quay.io/coreos/kube-state-metrics:v1.8.0](https://quay.io/repository/coreos/kube-state-metrics?tag=latest&tab=tags))
+* configmap-reloader ([quay.io/coreos/prometheus-config-reloader:v0.34.0](https://quay.io/repository/coreos/prometheus-config-reloader?tag=latest&tab=tags))
+* configmap-reload ([quay.io/coreos/configmap-reload:v0.0.1](https://quay.io/repository/coreos/configmap-reload?tag=latest&tab=tags))
+* kube-rbac-proxy ([quay.io/coreos/kube-rbac-proxy:v0.4.1](https://quay.io/repository/coreos/kube-rbac-proxy?tag=latest&tab=tags))
+* prometheus-adapter ([quay.io/coreos/k8s-prometheus-adapter-amd64:v0.5.0](https://quay.io/repository/coreos/k8s-prometheus-adapter-amd64?tag=latest&tab=tags))
+* alertmanager ([quay.io/prometheus/alertmanager:v0.20.0](https://quay.io/repository/prometheus/alertmanager?tag=latest&tab=tags))
 
 
 ## Prerequisite

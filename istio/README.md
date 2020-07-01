@@ -112,7 +112,7 @@
     * jaeger ui에 접속하기 위한 서비스를 [원하는 타입](yaml/3.istio-tracing.yaml#L245)으로 변경할 수 있다.
     * istio-tracing pod가 running임을 확인한 뒤 http://$JAEGER_URL/jaeger/search 에 접속해 정상 동작을 확인한다.
 	
-![image](yaml/yaeger-ui.png)
+![image](figure/jaeger-ui.png)
 
 
 

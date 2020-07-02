@@ -1,7 +1,7 @@
 #!/bin/bash
 export HYPERCLOUD4_CA_CERT=$(openssl base64 -A <"./pki/ca.crt")
 
-WEBHOOK_CONFIG_FILE=04_webhook-configuration.yaml
+WEBHOOK_CONFIG_FILE=05_webhook-configuration.yaml
 if [ -f "$WEBHOOK_CONFIG_FILE" ]; then
    echo "Remove existed webhook config file."
    rm $WEBHOOK_CONFIG_FILE

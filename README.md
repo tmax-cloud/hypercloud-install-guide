@@ -14,6 +14,13 @@
 | Istio | | [installation guide](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/istio/README.md) |
 | Kubeflow | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Kubeflow/README.md |
 
+
+### VM_Module (Optional)
+| Module | Version | Guide |
+| ------ | ------ | ------ |
+| KubeVirt | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/KubeVirt/README.md |
+
+
 * OS 설치 & package repo    R
 * Image registry            R(updating)
 * K8s Master                R(updating)

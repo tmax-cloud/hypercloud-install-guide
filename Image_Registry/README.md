@@ -1,11 +1,7 @@
-Image_Registry README.md
-
-
-
 # Private Registry 설치 가이드
 
 ## 구성 요소 및 버전
-* 구성 요소1([tmaxcloud/tmax/cafe:v2](https://hub.docker.com/cafe/tags))
+* docker
 * 구성 요소2([tmaxcloud/tmax/gym:v2](https://hub.docker.com/gym/tags))
 * 구성 요소3
 
@@ -33,7 +29,7 @@ Image_Registry README.md
 2. [스텝 2](https://스텝_2로_바로_가기_위한_링크)
 
 ## Step 0. 스텝 0
-* 목적 : `해당 step의 간단한 설명을 기술합니다.`
+* 목적 : 폐쇄망 환경에서 docker hub에 접속할 수 없을 때, docker registry를 이용해 이미지 pull을 위한 설정
 * 생성 순서 : 
     * step을 진행하기 위한 과정에 대해 기술합니다.
 	    * 상세 설명

@@ -13,7 +13,7 @@
 | HyperCloud Operator | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/README.md |
 | Console | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Console/README.md |
 | Prometheus | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Prometheus/README.md |
-| Istio | | [installation guide](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/istio/README.md) |
+| Istio | | [installation guide](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Istio/README.md) |
 | Kubeflow | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Kubeflow/README.md |
 | Pod_GPU plugin | | <ul><li>https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Pod_GPU%20plugin</li><li> nVidia GPU plugin : https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Pod_GPU%20plugin/nVidia%20Gpu%20Plugin/README.md</li><li> Monitoring : https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Pod_GPU%20plugin/Monitoring/README.md</li></ul> |
 

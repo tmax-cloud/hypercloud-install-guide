@@ -13,3 +13,34 @@
 | Prometheus | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Prometheus/README.md |
 | Istio | | [installation guide](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/istio/README.md) |
 | Kubeflow | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Kubeflow/README.md |
+
+* OS 설치 & package repo    R
+* Image registry            R
+* K8s Master                R
+* K8s Worker    R
+* CNI           R
+* Rook-Ceph     R
+* Prometheus    R
+* Teckton
+* TemplateServiceBroker
+* SecretWatcher
+* WebhookServer
+* Hypercloud operator
+* Console
+
+* MetalLB   O
+* Network Agent O
+* VM KubeVirt  O
+* VM CDI       O
+* VM ImageController   O
+* VM FailoverController   O
+* VM GPU Plugin O
+* VM Exporter   O
+* nVidia GPU Plugin   O
+* Istio     O
+* Kubeflow  O
+* Multicloud-console  O
+* Capi provider O
+* nginx-ingress controller O
+* kubefed O
+* efk   O

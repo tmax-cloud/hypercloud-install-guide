@@ -58,14 +58,14 @@
 
 
 ## Install Steps
-0. [istio yaml 수정](http://192.168.1.150:10080/hypercloud/hypercloud/wikis/Istio-InstallerGuide#step-1-istio-namespace-%EB%B0%8F-customresourcedefinition-%EC%83%9D%EC%84%B1)
-1. [istio namespace 및 customresourcedefinition 생성](http://192.168.1.150:10080/hypercloud/hypercloud/wikis/Istio-InstallerGuide#step-1-istio-namespace-%EB%B0%8F-customresourcedefinition-%EC%83%9D%EC%84%B1)
-2. [kiali 설치](http://192.168.1.150:10080/hypercloud/hypercloud/wikis/Istio-InstallerGuide#step-2-kiali-%EC%84%A4%EC%B9%98)
-3. [istio-tracing 설치](http://192.168.1.150:10080/hypercloud/hypercloud/wikis/Istio-InstallerGuide#step-3-istio-tracing-%EC%84%A4%EC%B9%98)
-4. [istiod 설치](http://192.168.1.150:10080/hypercloud/hypercloud/wikis/Istio-InstallerGuide#step-4-istiod-%EC%84%A4%EC%B9%98)
-5. [istio-ingressgateway 설치](http://192.168.1.150:10080/hypercloud/hypercloud/wikis/Istio-InstallerGuide#step-5-istio-ingressgateway-%EC%84%A4%EC%B9%98)
-6. [istio metric prometheus에 등록](http://192.168.1.150:10080/hypercloud/hypercloud/wikis/Istio-InstallerGuide#step-6-istio-metric-prometheus%EC%97%90-%EB%93%B1%EB%A1%9D)
-7. [bookinfo 예제](http://192.168.1.150:10080/hypercloud/hypercloud/wikis/Istio-InstallerGuide#step-7-bookinfo-%EC%98%88%EC%A0%9C)
+0. [istio yaml 수정](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio#step0-istio-yaml-%EC%88%98%EC%A0%95)
+1. [istio namespace 및 customresourcedefinition 생성](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio#step-1-istio-namespace-%EB%B0%8F-customresourcedefinition-%EC%83%9D%EC%84%B1)
+2. [kiali 설치](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio#step-2-kiali-%EC%84%A4%EC%B9%98)
+3. [istio-tracing 설치](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio#step-3-istio-tracing-%EC%84%A4%EC%B9%98)
+4. [istiod 설치](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio#step-4-istiod-%EC%84%A4%EC%B9%98)
+5. [istio-ingressgateway 설치](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio#step-5-istio-ingressgateway-%EC%84%A4%EC%B9%98)
+6. [istio metric prometheus에 등록](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio#step-6-istio-metric-prometheus%EC%97%90-%EB%93%B1%EB%A1%9D)
+7. [bookinfo 예제](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio#step-7-bookinfo-%EC%98%88%EC%A0%9C)
 
 
 ## Step0. istio yaml 수정
@@ -141,7 +141,7 @@
 * 생성 순서 : [6.istio-metric.yaml](yaml/6.istio-metric.yaml) 실행
 * 비고 : 
     * http://$PROMETHEUS_URL/graph 에 접속해 'envoy_'로 시작하는 istio 관련 metric이 수집되었는지 확인한다.
-    * 만약 istio 관련 metric이 수집되지 않을 경우, Prometheus의 권한설정 문제일 수 있다. [prometheus-clusterRole.yaml](http://192.168.1.150:9090/share/page/site/cloud-rnd-site/document-details?nodeRef=workspace://SpacesStore/7c979728-6d13-4396-a0d2-2aeb2e594194#)을 적용하거나 Prometheus를 최신 버전으로 설치한다.
+    * 만약 istio 관련 metric이 수집되지 않을 경우, Prometheus의 권한설정 문제일 수 있다. [prometheus-clusterRole.yaml](../Prometheus/manifests/prometheus-clusterRole.yaml)을 적용하거나 Prometheus를 최신 버전으로 설치한다.
 
 
 

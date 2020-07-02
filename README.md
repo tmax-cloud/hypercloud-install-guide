@@ -38,11 +38,11 @@
 * MetalLB   O
 * Network Agent O
 * VM KubeVirt  O (updating)
-* VM CDI       O
-* VM ImageController   O
-* VM FailoverController   O
-* VM GPU Plugin O
-* VM Exporter   O
+* VM CDI       O (updating)
+* VM ImageController   O (updating)
+* VM FailoverController   O (updating)
+* VM GPU Plugin O (updating)
+* VM Exporter   O (updating)
 * nVidia GPU Plugin   O (updating)
 * Istio     O
 * Kubeflow  O

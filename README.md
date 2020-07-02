@@ -13,6 +13,7 @@
 | Prometheus | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Prometheus/README.md |
 | Istio | | [installation guide](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/istio/README.md) |
 | Kubeflow | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Kubeflow/README.md |
+| Pod_GPU plugin | | https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Pod_GPU%20plugin |
 
 
 ### VM_Module (Optional)

@@ -15,9 +15,9 @@
 | Kubeflow | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Kubeflow/README.md |
 
 * OS 설치 & package repo    R
-* Image registry            R
-* K8s Master                R
-* K8s Worker    R
+* Image registry            R(updating)
+* K8s Master                R(updating)
+* K8s Worker    R(updating)
 * CNI           R
 * Rook-Ceph     R
 * Prometheus    R

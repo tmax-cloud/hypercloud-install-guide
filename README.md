@@ -5,7 +5,9 @@
 | Module | Version | Guide |
 | ------ | ------ | ------ |
 | Kubernetes | | [installation guide](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Kubernetes/README.md) |
-| Calico & MetalLB | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Calico%20%26%20MetalLB/README.md |
+| CNI | | https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/CNI |
+| MetalLB | | https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/MetalLB |
+| NetworkAgent | | https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/NetworkAgent |
 | Rook Ceph | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Rook%20Ceph/README.md |
 | KubeVirt | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/KubeVirt/README.md |
 | HyperCloud Operator | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/README.md |

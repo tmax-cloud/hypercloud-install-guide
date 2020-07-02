@@ -22,9 +22,9 @@
 
 
 * OS 설치 & package repo    R
-* Image registry            R(updating)
-* K8s Master                R(updating)
-* K8s Worker    R(updating)
+* Image registry            R (updating)
+* K8s Master                R (updating)
+* K8s Worker    R (updating)
 * CNI           R
 * Rook-Ceph     R
 * Prometheus    R
@@ -37,13 +37,13 @@
 
 * MetalLB   O
 * Network Agent O
-* VM KubeVirt  O
+* VM KubeVirt  O (updating)
 * VM CDI       O
 * VM ImageController   O
 * VM FailoverController   O
 * VM GPU Plugin O
 * VM Exporter   O
-* nVidia GPU Plugin   O
+* nVidia GPU Plugin   O (updating)
 * Istio     O
 * Kubeflow  O
 * Multicloud-console  O

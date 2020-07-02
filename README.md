@@ -19,7 +19,11 @@
 | Module | Version | Guide |
 | ------ | ------ | ------ |
 | KubeVirt | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/KubeVirt/README.md |
-
+| CDI | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/VM_KubeVirt/CDI/README.md |
+| ImageController | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/VM_KubeVirt/Image%20Controller/README.md |
+| FailoverController | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/VM_KubeVirt/Failover%20Controller/README.md |
+| Exporter | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/VM_KubeVirt/Exporter/README.md |
+| GPU Plugin | | https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/VM_KubeVirt/GPU%20plugin |
 
 * OS 설치 & package repo    R
 * Image registry            R (updating)

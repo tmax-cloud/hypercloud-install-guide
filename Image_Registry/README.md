@@ -2,7 +2,7 @@ Image_Registry README.md
 
 
 
-# {모듈} 설치 가이드
+# Private Registry 설치 가이드
 
 ## 구성 요소 및 버전
 * 구성 요소1([tmaxcloud/tmax/cafe:v2](https://hub.docker.com/cafe/tags))

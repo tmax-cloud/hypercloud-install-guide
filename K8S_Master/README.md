@@ -176,9 +176,27 @@
 * 순서 :
     * 쿠버네티스 설치시 필요한 kubeadm-config를 작성한다.(kubeadm-config.yaml)
 	```bash
-	sudo yum -y install cri-o
-	systemctl enable crio
-	systemctl start crio
+	apiVersion: kubeadm.k8s.io/v1beta2
+	kind: InitConfiguration
+	localAPIEndpoint:
+  		advertiseAddress: 172.22.5.2
+  		bindPort: 6443
+	nodeRegistration:
+  		criSocket: /var/run/crio/crio.sock
+	---
+	apiVersion: kubeadm.k8s.io/v1beta2
+	kind: ClusterConfiguration
+	kubernetesVersion: v1.17.6
+	controlPlaneEndpoint: 172.22.5.2:6443
+	imageRepository: “172.22.5.2:5000/tmaxcloudck”
+	networking:
+ 		serviceSubnet: 10.96.0.0/16
+  		podSubnet: "10.244.0.0/16"
+	---
+	apiVersion: kubelet.config.k8s.io/v1beta1
+	kind: KubeletConfiguration
+	cgroupDriver: systemd
+
 	```
     * kubeadm init
 	```bash

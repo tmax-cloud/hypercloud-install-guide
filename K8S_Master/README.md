@@ -189,12 +189,12 @@
 	kind: KubeletConfiguration
 	cgroupDriver: systemd
 	```
-    * kubernetesVersion : kube version
-    * advertiseAddress : API server IP (master IP)
-    * serviceSubnet : "${SERVICE_IP_POOL}/${CIDR}"
-    * podSubnet : "${POD_IP_POOL}/${CIDR}"
-    * imageRepository : "${registry} / docker hub name"
-    * cgroupDriver: systemd cgroup driver 사용
+      * kubernetesVersion : kube version
+      * advertiseAddress : API server IP (master IP)
+      * serviceSubnet : "${SERVICE_IP_POOL}/${CIDR}"
+      * podSubnet : "${POD_IP_POOL}/${CIDR}"
+      * imageRepository : "${registry} / docker hub name"
+      * cgroupDriver: systemd cgroup driver 사용
 	
     * kubeadm init
 	```bash

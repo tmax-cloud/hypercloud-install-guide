@@ -30,11 +30,6 @@
     $ sudo docker pull istio/pilot:${ISTIO_VERSION}
     $ sudo docker save istio/pilot:${ISTIO_VERSION} > istio-pilot_${ISTIO_VERSION}.tar
     $ sudo docker pull istio/proxyv2:${ISTIO_VERSION}
-    $ sudo docker save istio/proxyv2:${ISTIO_VERSION} > istio-proxyv2_${ISTIO_VERSION}.tar
-    $ sudo docker pull jaegertracing/all-in-one:${JAEGER_VERSION}
-    $ sudo docker save jaegertracing/all-in-one:${JAEGER_VERSION} > jaeger_${JAEGER_VERSION}.tar
-    $ sudo docker pull quay.io/kiali/kiali:${KIALI_VERSION}
-    $ sudo docker save quay.io/kiali/kiali:${KIALI_VERSION} > kiali_${KIALI_VERSION}.tar
     ```
     * install yaml을 다운로드한다.
     ```bash
@@ -43,10 +38,13 @@
   
 2. 위의 과정에서 생성한 tar 파일들을 폐쇄망 환경으로 이동시킨 뒤 사용하려는 registry에 이미지를 push한다.
     ```bash
-    $ sudo docker load < istio-pilot_${ISTIO_VERSION}.tar
-    $ sudo docker load < istio-proxyv2_${ISTIO_VERSION}.tar
-    $ sudo docker load < jaeger_${JAEGER_VERSION}.tar
-    $ sudo docker load < kiali_${KIALI_VERSION}.tar
+    $ sudo docker load -i kube-apiserver.tar
+    $ sudo docker load -i kube-scheduler.tar
+    $ sudo docker load -i kube-controller-manager.tar 
+    $ sudo docker load -i kube-proxy.tar
+    $ sudo docker load -i etcd.tar
+    $ sudo docker load -i coredns.tar
+    $ sudo docker load -i pause.tar
     
     $ sudo docker tag istio/pilot:${ISTIO_VERSION} ${REGISTRY}/istio/pilot:${ISTIO_VERSION}
     $ sudo docker tag istio/proxyv2:${ISTIO_VERSION} ${REGISTRY}/istio/proxyv2:${ISTIO_VERSION}

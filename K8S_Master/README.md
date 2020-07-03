@@ -214,4 +214,68 @@
 	ex) kubectl taint node k8s- node-role.kubernetes.io/master:NoSchedule- 
 	```    
 
+## Step 3-1. kubernetes cluster 다중화 구성을 위한 Keepalived 설치
+* 목적 : `K8S cluster의 Master 다중화 구성을 위한 Keepalived를 설치 및 설정한다`
+* 순서 : 
+    * Keepalived 설치
+        ```bash
+	yum install -y keepalived
+	```
+    * Keepalived 설정
+        ```bash
+	vi /etc/keepalived/keepalived.conf
+	
+	vrrp_instance VI_1 {    
+	state MASTER    
+	interface enp0s8    
+	virtual_router_id 50    
+	priority 100    
+	advert_int 1    
+	nopreempt    
+	authentication {        
+		auth_type PASS        
+		auth_pass $ place secure password here.   
+		}   
+	virtual_ipaddress {        
+		VIP  
+		} 
+	}
+	```
+	* interface : network interface 이름 확인
+	* priority : Master 우선순위
+	    * priority 값이 높으면 최우선적으로 Master 역할 수행
+	    * 각 Master마다 다른 priority 값으로 수정.
+	* virtual_ipaddress : VIP를 입력. Master IP 아님!
+    * keepalived 재시작 및 상태 확인
+        ```bash
+	systemctl restart keepalived
+	systemctl status keepalived
+	```
+    * network interface 확인
+        ```bash
+        ip a
+        ```
+	* 설정한 VIP 확인 가능, 여러 마스터 중 하나만 보임.
+	* inet {VIP}/32 scope global eno1
 
+## Step 3-2. kubernetes cluster 다중화 구성 설정
+* 목적 : `K8S cluster의 Master 다중화 구성을 위함`
+* 순서 : 
+    * kubeadm-config.yaml 파일로 kubeadm 명령어 실행.
+        * Master 다중구성시 --upload-certs 옵션은 반드시 필요.
+	    ```bash
+	    kubeadm init --config=kubeadm-config.yaml --upload-certs
+	    kubeadm join {IP}:{PORT} --token ~~ --control-plane --certificate-key ~~   (1)
+	    kubeadm join {IP}:{PORT} --token ~~   (2)
+	    ```
+	* 해당 옵션은 certificates를 control-plane으로 upload하는 옵션
+	* 해당 옵션을 설정하지 않을 경우, 모든 Master 노드에서 key를 복사해야 함
+	* Master 단일구성과는 다르게, --control-plane --certificate-key 옵션이 추가된 명령어가 출력됨
+        * (1)처럼 Master 다중구성을 위한 hash 값을 포함한 kubeadm join 명령어가 출력되므로 해당 명령어를 복사하여 다중구성에 포함시킬 다른 Master에서 실행
+	* (2)처럼 Worker의 join을 위한 명령어도 출력되므로 Worker 노드 join시 사용
+	* kubernetes config 
+	    ```bash
+	    mkdir -p $HOME/.kube
+	    sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+	    sudo chown $(id -u):$(id -g) $HOME/.kube/config
+	    ```

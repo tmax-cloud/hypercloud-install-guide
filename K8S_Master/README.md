@@ -60,9 +60,9 @@
 
 ## Install Steps
 0. [환경 설정](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio#step0-istio-yaml-%EC%88%98%EC%A0%95)
-1. [CRI-O 설치](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio#step-1-istio-namespace-%EB%B0%8F-customresourcedefinition-%EC%83%9D%EC%84%B1)
+1. [cri-o 설치](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio#step-1-istio-namespace-%EB%B0%8F-customresourcedefinition-%EC%83%9D%EC%84%B1)
 2. [kubeadm, kubelet, kubectl 설치](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio#step-2-kiali-%EC%84%A4%EC%B9%98)
-3. [Kubernetes cluster 구성](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio#step-3-istio-tracing-%EC%84%A4%EC%B9%98)
+3. [kubernetes cluster 구성](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio#step-3-istio-tracing-%EC%84%A4%EC%B9%98)
 
 
 ## Step0. 환경 설정
@@ -99,7 +99,7 @@
 	sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 	```
 
-## Step 1. CRI-O 설치
+## Step 1. cri-o 설치
 * 목적 : `k8s container runtime 설치`
 * 순서 :
     * cri-o를 설치한다.
@@ -143,9 +143,25 @@
 
 
 
-## Step 3. istio-tracing 설치
-* 목적 : `tracing component jaeger 설치`
-* 생성 순서 : [3.istio-tracing.yaml](yaml/3.istio-tracing.yaml) 실행
+## Step 3. kubernetes cluster 구성
+* 목적 : `kubernetes master를 구축한다.`
+* 순서 :
+    * 쿠버네티스 설치시 필요한 kubeadm-config를 작성한다.(kubeadm-config.yaml)
+	```bash
+	sudo yum -y install cri-o
+	systemctl enable crio
+	systemctl start crio
+	```
+    * kubeadm init
+	```bash
+	kubeadm init --config=kubeadm-config.yaml
+	```
+    * kubeadm init
+	```bash
+	mkdir -p $HOME/.kube
+	sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+	sudo chown $(id -u):$(id -g) $HOME/.kube/config
+	```	
 * 비고 : 
     * jaeger ui에 접속하기 위한 서비스를 [원하는 타입](yaml/3.istio-tracing.yaml#L245)으로 변경할 수 있다.
     * istio-tracing pod가 running임을 확인한 뒤 http://$JAEGER_URL/jaeger/search 에 접속해 정상 동작을 확인한다.

@@ -70,12 +70,11 @@
 ## Step0. 환경 설정
 * 목적 : `k8s 설치 진행을 위한 os 환경 설정`
 * 순서 : 
-    * 아래의 command를 수정하여 사용하고자 하는 image 버전 정보를 수정한다.
+    * hostname을 설정한다.
 	```bash
-	$ sed -i 's/{kiali_version}/'${KIALI_VERSION}'/g' 2.kiali.yaml
-	$ sed -i 's/{jaeger_version}/'${JAEGER_VERSION}'/g' 3.istio-tracing.yaml
-	$ sed -i 's/{istio_version}/'${ISTIO_VERSION}'/g' 4.istio-core.yaml
-	$ sed -i 's/{istio_version}/'${ISTIO_VERSION}'/g' 5.istio-ingressgateway.yaml
+	master : hostnamectl set-hostname k8s-master
+	node1 : hostnamectl set-hostname k8s-node1
+	node2 : hostnamectl set-hostname k8s-node2
 	```
 * 비고 :
     * `폐쇄망에서 설치를 진행하여 별도의 image registry를 사용하는 경우 registry 정보를 추가로 설정해준다.`

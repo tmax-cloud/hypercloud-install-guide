@@ -70,11 +70,14 @@
 ## Step0. 환경 설정
 * 목적 : `k8s 설치 진행을 위한 os 환경 설정`
 * 순서 : 
-    * hostname을 설정한다.
+    * os hostname을 설정한다.
 	```bash
-	master : hostnamectl set-hostname k8s-master
-	node1 : hostnamectl set-hostname k8s-node1
-	node2 : hostnamectl set-hostname k8s-node2
+	hostnamectl set-hostname k8s-master
+	```
+    * /etc/hosts에 hostname과 ip를 등록한다. 
+	```bash
+	hostnamectl set-hostname k8s-master
+	
 	```
 * 비고 :
     * `폐쇄망에서 설치를 진행하여 별도의 image registry를 사용하는 경우 registry 정보를 추가로 설정해준다.`

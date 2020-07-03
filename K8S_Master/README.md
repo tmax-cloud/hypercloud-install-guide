@@ -221,6 +221,7 @@
         ```bash
 	yum install -y keepalived
 	```
+	
     * Keepalived 설정
         ```bash
 	vi /etc/keepalived/keepalived.conf
@@ -241,20 +242,24 @@
 		} 
 	}
 	```
+	
 	* interface : network interface 이름 확인
 	* priority : Master 우선순위
 	    * priority 값이 높으면 최우선적으로 Master 역할 수행
 	    * 각 Master마다 다른 priority 값으로 수정.
 	* virtual_ipaddress : VIP를 입력. Master IP 아님!
+	
     * keepalived 재시작 및 상태 확인
         ```bash
 	systemctl restart keepalived
 	systemctl status keepalived
 	```
+	
     * network interface 확인
         ```bash
         ip a
-        ```
+	```
+	
 	* 설정한 VIP 확인 가능, 여러 마스터 중 하나만 보임.
 	* inet {VIP}/32 scope global eno1
 

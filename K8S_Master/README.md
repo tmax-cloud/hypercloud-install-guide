@@ -202,4 +202,10 @@
 	```	
 * 비고 : 
     * cri-o 매이저와 마이너 버전은 kubernetes 메이저와 마이너 버전이 일치해야 한다.
+    * single node cluster 구성시 master taint를 제거한다
+	```bash
+	kubectl taint node [master hostname] node-role.kubernetes.io/master:NoSchedule-
+	ex) kubectl taint node k8s- node-role.kubernetes.io/master:NoSchedule- 
+	```    
+
 

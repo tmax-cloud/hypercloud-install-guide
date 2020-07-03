@@ -189,7 +189,7 @@
 	kind: KubeletConfiguration
 	cgroupDriver: systemd
 	```
-      * kubernetesVersion : kube version
+      * kubernetesVersion : kubernetes version
       * advertiseAddress : API server IP (master IP)
       * serviceSubnet : "${SERVICE_IP_POOL}/${CIDR}"
       * podSubnet : "${POD_IP_POOL}/${CIDR}"

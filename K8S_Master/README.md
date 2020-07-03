@@ -113,7 +113,20 @@
 	systemctl status crio
 	rpm -qi cri-o
 	```
-
+* 비고 :
+    * 추후 설치예정인 network plugin과 crio의 가상 인터페이스 충돌을 막기위해 cri-o의 default 인터페이스 설정을 제거한다.
+	```bash
+	rm -rf  /etc/cni/net.d/100-crio-bridge
+ 	rm -rf  /etc/cni/net.d/200-loopback
+	``` 
+    * 폐쇄망 환경에서 private registry 접근을 위해 crio.conf 내용을 수정한다. (/etc/crio/crio.conf)
+	```bash
+	insecure_registry 와 registries에 image_docker_registries_ip:port 추가
+	registries = [“172.22.5.2:5000(레지스트리 주소:포트)”,”docker.io”]
+	insecure_registries=[“172.22.5.2:5000(레지스트리 주소:포트)”]
+	plugin_dirs에 "/opt/cni/bin" 추가
+	!!!!!!!!!!!수정해야댐!!!!!!!!!!!!!!!!!
+	``` 	
 ## Step 2. kiali 설치
 * 목적 : `istio ui kiali 설치`
 * 생성 순서: [2.kiali.yaml](yaml/2.kiali.yaml) 실행

@@ -1,4 +1,4 @@
-# Private Registry 설치 가이드
+# Image Registry 설치 가이드
 
 ## 구성 요소 및 버전
 * docker

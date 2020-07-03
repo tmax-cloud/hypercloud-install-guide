@@ -1,5 +1,5 @@
 
-# CNI 설치 가이드
+# Console 설치 가이드
 
 ## 구성 요소 및 버전
 * 구성 요소1([tmaxcloud/tmax/cafe:v2](https://hub.docker.com/cafe/tags))

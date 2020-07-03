@@ -171,7 +171,7 @@
 	apiVersion: kubeadm.k8s.io/v1beta2
 	kind: InitConfiguration
 	localAPIEndpoint:
-  		advertiseAddress: 172.22.5.2
+  		advertiseAddress: {master IP}
   		bindPort: 6443
 	nodeRegistration:
   		criSocket: /var/run/crio/crio.sock
@@ -179,8 +179,8 @@
 	apiVersion: kubeadm.k8s.io/v1beta2
 	kind: ClusterConfiguration
 	kubernetesVersion: v1.17.6
-	controlPlaneEndpoint: 172.22.5.2:6443
-	imageRepository: “172.22.5.2:5000/tmaxcloudck”
+	controlPlaneEndpoint: {master IP}:6443
+	imageRepository: “{registry}/k8s.gcr.io”
 	networking:
  		serviceSubnet: 10.96.0.0/16
   		podSubnet: "10.244.0.0/16"
@@ -188,7 +188,6 @@
 	apiVersion: kubelet.config.k8s.io/v1beta1
 	kind: KubeletConfiguration
 	cgroupDriver: systemd
-
 	```
     * kubeadm init
 	```bash

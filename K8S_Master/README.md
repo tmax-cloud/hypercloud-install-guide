@@ -76,8 +76,10 @@
 	```
     * /etc/hosts에 hostname과 ip를 등록한다. 
 	```bash
-	hostnamectl set-hostname k8s-master
-	
+	127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+	::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+
+	172.22.5.2 k8s-master
 	```
 * 비고 :
     * `폐쇄망에서 설치를 진행하여 별도의 image registry를 사용하는 경우 registry 정보를 추가로 설정해준다.`

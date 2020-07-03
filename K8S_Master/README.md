@@ -92,9 +92,10 @@
 	```bash
 	swap 관련 부분 주석처리
 	```	
-    * 스왑 메모리를 비활성화 한다. 
+    * SELinux 설정을 해제한다. 
 	```bash
-	swapoff -a
+	setenforce 0
+	sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 	```
 * 비고 :
     * `폐쇄망에서 설치를 진행하여 별도의 image registry를 사용하는 경우 registry 정보를 추가로 설정해준다.`

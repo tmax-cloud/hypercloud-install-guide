@@ -13,12 +13,12 @@
 ## Prerequisites
 
 ## 폐쇄망 설치 가이드
-설치를 진행하기 전 아래의 과정을 통해 필요한 이미지 및 yaml 파일을 준비한다.
-1. **폐쇄망에서 설치하는 경우** 사용하는 image repository에 istio 설치 시 필요한 이미지를 push한다. 
+설치를 진행하기 전 아래의 과정을 통해 필요한 이미지 tar 파일을 준비한다.
+1. **폐쇄망에서 설치하는 경우** 사용하는 image repository에 k8s 설치 시 필요한 이미지를 push한다. 
 
     * 작업 디렉토리 생성 및 환경 설정
     ```bash
-    $ mkdir -p ~/istio-install
+    $ mkdir -p ~/k8s-install
     $ export ISTIO_HOME=~/istio-install
     $ export ISTIO_VERSION=1.5.1
     $ export JAEGER_VERSION=1.16

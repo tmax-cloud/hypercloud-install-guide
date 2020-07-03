@@ -19,21 +19,28 @@
     * 작업 디렉토리 생성 및 환경 설정
     ```bash
     $ mkdir -p ~/k8s-install
-    $ export ISTIO_HOME=~/istio-install
-    $ export ISTIO_VERSION=1.5.1
-    $ export JAEGER_VERSION=1.16
-    $ export KIALI_VERSION=v1.19
-    $ cd $ISTIO_HOME
+    $ export K8S_HOME=~/k8s-install
+    $ cd $K8S_HOME
     ```
     * 외부 네트워크 통신이 가능한 환경에서 필요한 이미지를 다운받는다.
     ```bash
-    $ sudo docker pull istio/pilot:${ISTIO_VERSION}
-    $ sudo docker save istio/pilot:${ISTIO_VERSION} > istio-pilot_${ISTIO_VERSION}.tar
-    $ sudo docker pull istio/proxyv2:${ISTIO_VERSION}
+    $ sudo docker pull k8s.gcr.io/kube-proxy:v1.17.6
+    $ sudo docker pull k8s.gcr.io/kube-apiserver:v1.17.6
+    $ sudo docker pull k8s.gcr.io/kube-controller-manager:v1.17.6
+    $ sudo docker pull k8s.gcr.io/kube-scheduler:v1.17.6
+    $ sudo docker pull k8s.gcr.io/etcd:3.4.3-0
+    $ sudo docker pull k8s.gcr.io/coredns:1.6.5
+    $ sudo docker pull k8s.gcr.io/pause:3.1
     ```
-    * install yaml을 다운로드한다.
+    * docker image를 tar로 저장한다.
     ```bash
-    $ wget -O hypercloud-install.tar.gz https://github.com/tmax-cloud/hypercloud-install-guide/archive/v${INSTALL_GUIDE_VERSION}.tar.gz
+    $ docker save -o kube-proxy.tar k8s.gcr.io/kube-proxy:v1.17.6
+    $ docker save -o kube-controller-manager.tar k8s.gcr.io/kube-controller-manager:v1.17.6
+    $ docker save -o etcd.tar docker.io/tmaxcloudck/etcd
+    $ docker save -o coredns.tar k8s.gcr.io/coredns:1.6.5
+    $ docker save -o kube-scheduler.tar k8s.gcr.io/kube-scheduler:v1.17.6
+    $ docker save -o kube-apiserver.tar k8s.gcr.io/kube-apiserver:v1.17.6
+    $ docker save -o pause.tar k8s.gcr.io/pause:3.1
     ```
   
 2. 위의 과정에서 생성한 tar 파일들을 폐쇄망 환경으로 이동시킨 뒤 사용하려는 registry에 이미지를 push한다.
@@ -47,14 +54,9 @@
     $ sudo docker load -i pause.tar
     
     $ sudo docker tag istio/pilot:${ISTIO_VERSION} ${REGISTRY}/istio/pilot:${ISTIO_VERSION}
-    $ sudo docker tag istio/proxyv2:${ISTIO_VERSION} ${REGISTRY}/istio/proxyv2:${ISTIO_VERSION}
-    $ sudo docker tag jaegertracing/all-in-one:${JAEGER_VERSION} ${REGISTRY}/jaegertracing/all-in-one:${JAEGER_VERSION}
-    $ sudo docker tag quay.io/kiali/kiali:${KIALI_VERSION} ${REGISTRY}/quay.io/kiali/kiali:${KIALI_VERSION}
-    
+
     $ sudo docker push ${REGISTRY}/istio/pilot:${ISTIO_VERSION}
-    $ sudo docker push ${REGISTRY}/istio/proxyv2:${ISTIO_VERSION}
-    $ sudo docker push ${REGISTRY}/jaegertracing/all-in-one:${JAEGER_VERSION}
-    $ sudo docker push ${REGISTRY}/quay.io/kiali/kiali:${KIALI_VERSION}
+
     ```
 
 

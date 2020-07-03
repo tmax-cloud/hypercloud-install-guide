@@ -91,24 +91,17 @@
     * 스왑 메모리 비활성화 영구설정(/etc/fstap). 
 	```bash
 	swap 관련 부분 주석처리
+	# /dev/mapper/centos-swap swap                    swap    defaults        0
 	```	
     * SELinux 설정을 해제한다. 
 	```bash
 	setenforce 0
 	sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 	```
-* 비고 :
-    * `폐쇄망에서 설치를 진행하여 별도의 image registry를 사용하는 경우 registry 정보를 추가로 설정해준다.`
-	```bash
-	$ sed -i 's/quay.io\/kiali\/kiali/'${REGISTRY}'\/kiali\/kiali/g' 2.kiali.yaml
-	$ sed -i 's/docker.io\/jaegertracing\/all-in-one/'${REGISTRY}'\/jaegertracing\/all-in-one/g' 3.istio-tracing.yaml
-	$ sed -i 's/docker.io\/istio\/pilot/'${REGISTRY}'\/istio\/pilot/g' 4.istio-core.yaml
-	$ sed -i 's/docker.io\/istio\/proxyv2/'${REGISTRY}'\/istio\/proxyv2/g' 5.istio-ingressgateway.yaml
-	```
 
-## Step 1. istio namespace 및 customresourcedefinition 생성
-* 목적 : `istio system namespace, clusterrole, clusterrolebinding, serviceaccount, customresourcedefinition 생성`
-* 생성 순서 : [1.istio-base.yaml](yaml/1.istio-base.yaml) 실행 `ex) kubectl apply -f 1.istio-base.yaml`
+## Step 1. CRI-O 설치
+* 목적 : `k8s container runtime 설치`
+* 순서 : [1.istio-base.yaml](yaml/1.istio-base.yaml) 실행 `ex) kubectl apply -f 1.istio-base.yaml`
 
 
 

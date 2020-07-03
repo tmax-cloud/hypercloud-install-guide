@@ -101,9 +101,18 @@
 
 ## Step 1. CRI-O 설치
 * 목적 : `k8s container runtime 설치`
-* 순서 : [1.istio-base.yaml](yaml/1.istio-base.yaml) 실행 `ex) kubectl apply -f 1.istio-base.yaml`
-
-
+* 순서 :
+    * cri-o를 설치한다.
+	```bash
+	sudo yum -y install cri-o
+	systemctl enable crio
+	systemctl start crio
+	```
+    * cri-o 설치를 확인한다.
+	```bash
+	systemctl status crio
+	rpm -qi cri-o
+	```
 
 ## Step 2. kiali 설치
 * 목적 : `istio ui kiali 설치`

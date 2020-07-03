@@ -53,12 +53,22 @@
     $ sudo docker load -i coredns.tar
     $ sudo docker load -i pause.tar
     
-    $ sudo docker tag istio/pilot:${ISTIO_VERSION} ${REGISTRY}/istio/pilot:${ISTIO_VERSION}
+    $ docker tag k8s.gcr.io/kube-apiserver:v1.17.6 ${REGISTRY}/k8s.gcr.io/kube-apiserver:v1.17.6
+    $ docker tag k8s.gcr.io/kube-proxy:v1.17.6 ${REGISTRY}/k8s.gcr.io/kube-proxy:v1.17.6
+    $ docker tag k8s.gcr.io/kube-controller-manager:v1.17.6 ${REGISTRY}/k8s.gcr.io/kube-controller-manager:v1.17.6
+    $ docker tag k8s.gcr.io/etcd:3.4.3-0 ${REGISTRY}/k8s.gcr.io/etcd:3.4.3-0
+    $ docker tag k8s.gcr.io/coredns:1.6.5 ${REGISTRY}/k8s.gcr.io/coredns:1.6.5
+    $ docker tag k8s.gcr.io/kube-scheduler:v1.17.6 ${REGISTRY}/k8s.gcr.io/kube-scheduler:v1.17.6
+    $ docker tag k8s.gcr.io/pause:3.1 ${REGISTRY}/k8s.gcr.io/pause:3.1
 
-    $ sudo docker push ${REGISTRY}/istio/pilot:${ISTIO_VERSION}
-
+    $ docker push ${REGISTRY}/k8s.gcr.io/kube-apiserver:v1.17.6
+    $ docker push ${REGISTRY}/k8s.gcr.io/kube-proxy:v1.17.6
+    $ docker push ${REGISTRY}/k8s.gcr.io/kube-controller-manager:v1.17.6
+    $ docker push ${REGISTRY}/k8s.gcr.io/etcd:3.4.3-0
+    $ docker push ${REGISTRY}/k8s.gcr.io/coredns:1.6.5
+    $ docker push ${REGISTRY}/k8s.gcr.io/kube-scheduler:v1.17.6
+    $ docker push ${REGISTRY}/k8s.gcr.io/pause:3.1
     ```
-
 
 ## Install Steps
 0. [환경 설정](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio#step0-istio-yaml-%EC%88%98%EC%A0%95)

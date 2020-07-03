@@ -5,17 +5,13 @@
 
 ## Prerequisites
 * helm version 2
-* ingress/service federatedResource 추가 사용
-  * etcd cluster
-  * coreDNS
-  * ExternalDNS
 
 ## 폐쇄망 설치 가이드
 추후 작업 예정.
 
 ## Install Steps
-0. [Binary 설치]
-1. [helm을 통한 federation 설치]
+0. [Binary 설치](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Fed#step-0-binary-%EC%84%A4%EC%B9%98)
+1. [helm을 통한 federation 설치](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Fed#step-1-helm%EC%9D%84-%ED%86%B5%ED%95%9C-federation-%EC%84%A4%EC%B9%98)
 
 ## Step 0. Binary 설치
 * 목적 : Fed 구축에 필요한 binary 설치
@@ -42,10 +38,16 @@
       $ helm repo add kubefed-charts https://raw.githubusercontent.com/kubernetes-sigs/kubefed/master/charts
       $ helm repo list
       ```
+      ![image](figure/helm_repo_list.JPG)
     * 지정된 버전으로 kubefed chart 설치
       ```bash
       $ helm search kubefed --devel
       ```
+      ![image](figure/helm_search.JPG)
       ```bash
       $ helm install kubefed-charts/kubefed --name kubefed --version=<x.x.x> --namespace kube-federation-system --devel
       ```
+    * 정상 동작 확인
+      ```bash
+      $ kubectl get pod -n kube-federation-system
+      ![image](figure/pod.JPG)

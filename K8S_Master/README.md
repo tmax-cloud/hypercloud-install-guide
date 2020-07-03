@@ -218,12 +218,12 @@
 * 목적 : `K8S cluster의 Master 다중화 구성을 위한 Keepalived를 설치 및 설정한다`
 * 순서 : 
     * Keepalived 설치
-        ```bash
-	yum install -y keepalived
-	```
-	
+    ```bash
+    yum install -y keepalived
+    ```
+
     * Keepalived 설정
-        ```bash
+    ```bash
 	vi /etc/keepalived/keepalived.conf
 	
 	vrrp_instance VI_1 {    
@@ -241,7 +241,7 @@
 		VIP  
 		} 
 	}
-	```
+    ```
 	
 	* interface : network interface 이름 확인
 	* priority : Master 우선순위
@@ -250,15 +250,15 @@
 	* virtual_ipaddress : VIP를 입력. Master IP 아님!
 	
     * keepalived 재시작 및 상태 확인
-        ```bash
-	systemctl restart keepalived
-	systemctl status keepalived
-	```
+    ```bash
+    systemctl restart keepalived
+    systemctl status keepalived
+    ```
 	
     * network interface 확인
-        ```bash
-        ip a
-	```
+    ```bash
+    ip a
+    ```
 	
 	* 설정한 VIP 확인 가능, 여러 마스터 중 하나만 보임.
 	* inet {VIP}/32 scope global eno1

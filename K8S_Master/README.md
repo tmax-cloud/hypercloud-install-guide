@@ -81,6 +81,15 @@
 
 	172.22.5.2 k8s-master
 	```
+    * 방화벽(firewall)을 해제한다. 
+	```bash
+	systemctl stop firewalld
+	systemctl disable firewalld
+	```	
+    * 스왑 메모리를 비활성화 한다. 
+	```bash
+	swapoff -a
+	```	
 * 비고 :
     * `폐쇄망에서 설치를 진행하여 별도의 image registry를 사용하는 경우 registry 정보를 추가로 설정해준다.`
 	```bash

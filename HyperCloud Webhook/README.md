@@ -62,7 +62,8 @@
 * 목적 : `HTTPS 활성화를 위한 CA 인증서를 생성`
 * 생성 순서 : 아래의 command를 실행하여 CA 인증서를 생성한다.
     ```bash
-    $ 01_gen_certs.sh
+    $ mkdir ./pki
+    $ ./01_gen_certs.sh
     $ openssl pkcs12 -export -in ./pki/hypercloud4-webhook.crt -inkey ./pki/hypercloud4-webhook.key -out ./pki/hypercloud4-webhook.p12 (Export Password: tmax@23)
     $ keytool -importkeystore -deststorepass tmax@23 -destkeypass tmax@23 -destkeystore ./pki/hypercloud4-webhook.jks -srckeystore ./pki/hypercloud4-webhook.p12 -srcstoretype PKCS12 -srcstorepass tmax@23
     ```

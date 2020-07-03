@@ -61,7 +61,7 @@
 ## Install Steps
 0. [환경 설정](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio#step0-istio-yaml-%EC%88%98%EC%A0%95)
 1. [CRI-O 설치](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio#step-1-istio-namespace-%EB%B0%8F-customresourcedefinition-%EC%83%9D%EC%84%B1)
-2. [Kubernetes component 설치](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio#step-2-kiali-%EC%84%A4%EC%B9%98)
+2. [kubeadm, kubelet, kubectl 설치](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio#step-2-kiali-%EC%84%A4%EC%B9%98)
 3. [Kubernetes cluster 구성](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio#step-3-istio-tracing-%EC%84%A4%EC%B9%98)
 
 
@@ -131,7 +131,7 @@
 	```bash
 	systemctl restart crio
 	``` 	
-## Step 2. Kubernetes kubeadm, kubelet, kubectl 설치
+## Step 2. kubeadm, kubelet, kubectl 설치
 * 목적 : `Kubernetes 구성을 위한 kubeadm, kubelet, kubectl 설치한다.`
 * 순서: [2.kiali.yaml](yaml/2.kiali.yaml) 실행
 * 비고 :

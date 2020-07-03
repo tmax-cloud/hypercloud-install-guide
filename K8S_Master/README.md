@@ -193,7 +193,7 @@
 	```bash
 	kubeadm init --config=kubeadm-config.yaml
 	```
-    * kubeadm init
+    * kubernetes config 
 	```bash
 	mkdir -p $HOME/.kube
 	sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config

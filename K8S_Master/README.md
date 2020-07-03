@@ -271,7 +271,7 @@
 	* 해당 옵션은 certificates를 control-plane으로 upload하는 옵션
 	* 해당 옵션을 설정하지 않을 경우, 모든 Master 노드에서 key를 복사해야 함
 	* Master 단일구성과는 다르게, --control-plane --certificate-key 옵션이 추가된 명령어가 출력됨
-        * (1)처럼 Master 다중구성을 위한 hash 값을 포함한 kubeadm join 명령어가 출력되므로 해당 명령어를 복사하여 다중구성에 포함시킬 다른 Master에서 실행
+	* (1)처럼 Master 다중구성을 위한 hash 값을 포함한 kubeadm join 명령어가 출력되므로 해당 명령어를 복사하여 다중구성에 포함시킬 다른 Master에서 실행
 	* (2)처럼 Worker의 join을 위한 명령어도 출력되므로 Worker 노드 join시 사용
 	
 	* kubernetes config 

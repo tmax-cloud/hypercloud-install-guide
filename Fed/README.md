@@ -50,4 +50,5 @@
     * 정상 동작 확인
       ```bash
       $ kubectl get pod -n kube-federation-system
+      ```
       ![image](figure/pod.JPG)

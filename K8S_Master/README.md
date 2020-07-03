@@ -126,10 +126,14 @@
 	insecure_registries=[“172.22.5.2:5000(레지스트리 주소:포트)”]
 	plugin_dirs에 "/opt/cni/bin" 추가
 	!!!!!!!!!!!수정해야댐!!!!!!!!!!!!!!!!!
+	```
+    * cri-o를 재시작 한다.
+	```bash
+	systemctl restart crio
 	``` 	
-## Step 2. kiali 설치
-* 목적 : `istio ui kiali 설치`
-* 생성 순서: [2.kiali.yaml](yaml/2.kiali.yaml) 실행
+## Step 2. Kubernetes kubeadm, kubelet, kubectl 설치
+* 목적 : `Kubernetes 구성을 위한 kubeadm, kubelet, kubectl 설치한다.`
+* 순서: [2.kiali.yaml](yaml/2.kiali.yaml) 실행
 * 비고 :
     * kiali에 접속하기 위한 서비스를 [원하는 타입](yaml/2.kiali.yaml#L346)으로 변경할 수 있다.
     * kiali에 접속하기 위한 [id/password](yaml/2.kiali.yaml#L215)를 configmap을 수정해 변경할 수 있다.(default: admin/admin)

@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment-test-woo
+  labels:
+    app: nginx-deployment
+    app2: nginx-deployment2
+  annotations: 
+    foo: bar
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-deployment
+      app2: nginx-deployment2
+  template:
+    metadata:
+      labels:
+        app: nginx-deployment
+        app2: nginx-deployment2
+      annotations:
+        foo3: bar
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 12345

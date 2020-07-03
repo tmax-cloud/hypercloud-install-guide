@@ -12,9 +12,9 @@
 추후 작업 예정.
 
 ## Install Steps
-0. [Binary 설치]
-1. [Capi/infraProvider 구축]
-2. [CapiCluster 생성]
+0. [Binary 설치](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Capi/README.md#step-0-binary-%EC%84%A4%EC%B9%98)
+1. [Capi/infraProvider 구축](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Capi#step-1-capiinfraprovider-%EA%B5%AC%EC%B6%95)
+2. [CapiCluster 생성](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Capi#step-1-capiinfraprovider-%EA%B5%AC%EC%B6%95)
 
 ## Step 0. Binary 설치
 * 목적 : Capi 구축에 필요한 binary 설치

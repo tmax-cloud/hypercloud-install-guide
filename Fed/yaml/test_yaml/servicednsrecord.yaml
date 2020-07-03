@@ -1,0 +1,21 @@
+apiVersion: multiclusterdns.kubefed.io/v1alpha1
+kind: Domain
+metadata:
+  # Corresponds to <federation> in the resource records.
+  name: test-domain
+  # The namespace running kubefed-controller-manager.
+  namespace: kube-federation-system
+# The domain/subdomain that is setup in your externl-dns provider.
+domain: example.com
+---
+apiVersion: multiclusterdns.kubefed.io/v1alpha1
+kind: ServiceDNSRecord
+metadata:
+  # The name of the sample service.
+  name: test-service
+  # The namespace of the sample deployment/service.
+  namespace: test-namespace
+spec:
+  # The name of the corresponding Domain.
+  domainRef: test-domain
+  recordTTL: 300

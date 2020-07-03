@@ -1,0 +1,19 @@
+apiVersion: types.kubefed.io/v1beta1
+kind: FederatedConfigMap
+metadata:
+  name: test-configmap2
+  namespace: test-namespace
+spec:
+  template:
+    data:
+      A: ala ma kota
+  placement:
+    clusters:
+    - name: cluster2
+    - name: cluster1
+  overrides:
+  - clusterName: cluster2
+    clusterOverrides:
+    - path: /data
+      value:
+        foo: bar

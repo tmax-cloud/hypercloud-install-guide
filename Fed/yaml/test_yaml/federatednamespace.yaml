@@ -1,0 +1,10 @@
+apiVersion: types.kubefed.io/v1beta1
+kind: FederatedNamespace
+metadata:
+  name: fed-test
+  namespace: fed-test
+spec:
+  placement:
+    clusters:
+    - name: capi-quickstart
+      name: member1

@@ -2,13 +2,13 @@
 # k8s-master 설치 가이드
 
 ## 구성 요소 및 버전
-* docker.io/k8s.gcr.io/kube-apiserver
-* docker.io/k8s.gcr.io/kube-proxy
-* docker.io/k8s.gcr.io/kube-scheduler
-* docker.io/k8s.gcr.io/kube-controller-manager
-* docker.io/k8s.gcr.io/etcd
-* docker.io/k8s.gcr.io/pause
-* docker.io/k8s.gcr.io/coredns
+* docker.io/k8s.gcr.io/kube-apiserver:v1.17.6
+* docker.io/k8s.gcr.io/kube-proxy:v1.17.6
+* docker.io/k8s.gcr.io/kube-scheduler:v1.17.6
+* docker.io/k8s.gcr.io/kube-controller-manager:v1.17.6
+* docker.io/k8s.gcr.io/etcd:3.4.3-0
+* docker.io/k8s.gcr.io/pause:3.1
+* docker.io/k8s.gcr.io/coredns:1.6.5
 
 ## Prerequisites
 

@@ -61,14 +61,10 @@
 
 
 ## Install Steps
-0. [istio yaml 수정](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio#step0-istio-yaml-%EC%88%98%EC%A0%95)
-1. [istio namespace 및 customresourcedefinition 생성](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio#step-1-istio-namespace-%EB%B0%8F-customresourcedefinition-%EC%83%9D%EC%84%B1)
-2. [kiali 설치](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio#step-2-kiali-%EC%84%A4%EC%B9%98)
-3. [istio-tracing 설치](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio#step-3-istio-tracing-%EC%84%A4%EC%B9%98)
-4. [istiod 설치](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio#step-4-istiod-%EC%84%A4%EC%B9%98)
-5. [istio-ingressgateway 설치](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio#step-5-istio-ingressgateway-%EC%84%A4%EC%B9%98)
-6. [istio metric prometheus에 등록](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio#step-6-istio-metric-prometheus%EC%97%90-%EB%93%B1%EB%A1%9D)
-7. [bookinfo 예제](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio#step-7-bookinfo-%EC%98%88%EC%A0%9C)
+0. [환경 설정](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio#step0-istio-yaml-%EC%88%98%EC%A0%95)
+1. [CRI-O 설치](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio#step-1-istio-namespace-%EB%B0%8F-customresourcedefinition-%EC%83%9D%EC%84%B1)
+2. [Kubernetes component 설치](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio#step-2-kiali-%EC%84%A4%EC%B9%98)
+3. [Kubernetes cluster 구성](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio#step-3-istio-tracing-%EC%84%A4%EC%B9%98)
 
 
 ## Step0. 환경 설정

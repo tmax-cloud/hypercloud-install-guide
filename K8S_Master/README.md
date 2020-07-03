@@ -129,13 +129,29 @@
 	plugin_dirs에 "/opt/cni/bin" 추가
 	!!!!!!!!!!!수정해야댐!!!!!!!!!!!!!!!!!
 	```
+    * crio 사용 전 환경 설정
+	```bash
+	modprobe overlay
+	modprobe br_netfilter
+	
+	cat > /etc/sysctl.d/99-kubernetes-cri.conf <<EOF
+	net.bridge.bridge-nf-call-iptables  = 1
+	net.ipv4.ip_forward                 = 1
+	net.bridge.bridge-nf-call-ip6tables = 1
+	EOF
+	```	
     * cri-o를 재시작 한다.
 	```bash
 	systemctl restart crio
 	``` 	
 ## Step 2. kubeadm, kubelet, kubectl 설치
 * 목적 : `Kubernetes 구성을 위한 kubeadm, kubelet, kubectl 설치한다.`
-* 순서: [2.kiali.yaml](yaml/2.kiali.yaml) 실행
+* 순서:
+    * CRI-O 메이저와 마이너 버전은 쿠버네티스 메이저와 마이너 버전이 일치해야 한다.
+    * kubeadm, kubectl, kubelet 설치 (v1.17.6)
+	```bash
+	yum install -y kubeadm-1.17.6-0 kubelet-1.17.6-0 kubectl-1.17.6-0
+	```  	
 * 비고 :
     * kiali에 접속하기 위한 서비스를 [원하는 타입](yaml/2.kiali.yaml#L346)으로 변경할 수 있다.
     * kiali에 접속하기 위한 [id/password](yaml/2.kiali.yaml#L215)를 configmap을 수정해 변경할 수 있다.(default: admin/admin)

@@ -43,7 +43,8 @@
 	```bash
 	swap 관련 부분 주석처리
 	# /dev/mapper/centos-swap swap                    swap    defaults        0
-	```	
+	```
+    ![image](figure/fstab.PNG)
     * SELinux 설정을 해제한다. 
 	```bash
 	setenforce 0
@@ -64,6 +65,7 @@
 	systemctl status crio
 	rpm -qi cri-o
 	```
+    ![image](figure/crio.PNG)
 * 비고 :
     * 추후 설치예정인 network plugin과 crio의 가상 인터페이스 충돌을 막기위해 cri-o의 default 인터페이스 설정을 제거한다.
 	```bash
@@ -78,6 +80,7 @@
 	insecure_registries=[“172.22.5.2:5000(레지스트리 주소:포트)”]
 	plugin_dirs에 "/opt/cni/bin" 추가
 	```
+      ![image](figure/crio_config.PNG)
     * crio 사용 전 환경 설정
 	```bash
 	modprobe overlay
@@ -110,6 +113,7 @@
 	```bash
 	kubeadm join 172.22.5.2:6443 --token r5ks9p.q0ifuz5pcphqvc14 \ --discovery-token-ca-cert-hash sha256:90751da5966ad69a49f2454c20a7b97cdca7f125b8980cf25250a6ee6c804d88
 	```
+    ![image](figure/noding.PNG)
 * 비고 : 
     * kubeadm join command를 저장해놓지 못한 경우, master node에서 아래 명령어를 통해 token 재생성이 가능하다.
 	```bash

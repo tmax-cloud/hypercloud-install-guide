@@ -96,7 +96,7 @@
 * 목적 : `Webhook 연동 설정을 적용하여 API 서버가 Webhook Server와 HTTPS 통신을 하도록 설정`
 * 생성 순서 : [05_webhook-configuration.yaml](manifests/05_webhook-configuration.yaml) 실행 `ex) kubectl apply -f 05_webhook-configuration.yaml`
 
-## Step 6. test-yaml 생성
+## Step 6. test-yaml 배포
 * 목적 : `Webhook Server 설치 및 설정이 정상적으로 적용되었는지 검증하기 위한 예제`
 * 생성 순서 :
     * 테스트 네임스페이스에 webhook 동작을 허용하는 label을 부착한다.

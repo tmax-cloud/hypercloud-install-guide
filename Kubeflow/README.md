@@ -137,25 +137,25 @@
 	apiVersion: v1
 	kind: PersistentVolumeClaim
 	metadata:
-	    labels:
-	        app.kubernetes.io/component: katib
-	        app.kubernetes.io/instance: katib-controller-0.8.0
-	        app.kubernetes.io/managed-by: kfctl
-	        app.kubernetes.io/name: katib-controller
-	        app.kubernetes.io/part-of: kubeflow
-	        app.kubernetes.io/version: 0.8.0
-	    name: katib-mysql
-	    namespace: kubeflow
-	    spec:
-	        accessModes:
-	        - ReadWriteOnce
-	        resources:
-	            requests:
-	                storage: 10Gi
-	        storageClassName: csi-cephfs-sc
-		volumeMode: Filesystem
-		volumeName: ${VOLUME_NAME}
-EOF
+	  labels:
+	    app.kubernetes.io/component: katib
+	    app.kubernetes.io/instance: katib-controller-0.8.0
+	    app.kubernetes.io/managed-by: kfctl
+	    app.kubernetes.io/name: katib-controller
+	    app.kubernetes.io/part-of: kubeflow
+	    app.kubernetes.io/version: 0.8.0
+	  name: katib-mysql
+	  namespace: kubeflow
+	spec:
+	  accessModes:
+	  - ReadWriteOnce
+	  resources:
+	    requests:
+	      storage: 10Gi
+	  storageClassName: csi-cephfs-sc
+	  volumeMode: Filesystem
+	  volumeName: ${VOLUME_NAME}
+	EOF
 	$ kubectl apply -f katib-mysql.yaml
 	```
     * 모든 pod의 상태가 정상이라면 KFServing과 Istio 1.5.1과의 호환을 위해 아래 명령어를 수행하여 Istio의 mTLS 기능을 disable한다.

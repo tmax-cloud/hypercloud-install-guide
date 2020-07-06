@@ -103,7 +103,7 @@
      ```bash
     $ kubectl label namespace default webhook=true
     ```
-    * 설치 매니페스트 파일과 함께 동봉된 test-yaml 파일을 사용하여 webhook 동작이 정상적으로 수행되는지 확인한다.
+    * 설치 매니페스트 파일과 함께 동봉된 test-yaml 파일을 적용 후, Annotation에 create, update 정보가 추가되었는지 확인한다.
      ```bash
     $ cd ./test-yaml
     $ kubectl apply -f cm.yaml -n default

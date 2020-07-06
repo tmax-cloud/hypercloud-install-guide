@@ -1,8 +1,7 @@
 # Image Registry 설치 가이드
 
 ## 구성 요소 및 버전
-* docker([tmaxcloud/tmax/gym:v1](https://hub.docker.com/gym/tags))
-* 구성 요소2([tmaxcloud/tmax/gym:v2](https://hub.docker.com/gym/tags))
+* docker
 
 ## Prerequisites
 ## 폐쇄망 설치 가이드

@@ -216,11 +216,11 @@
 	```bash
 	kubectl get nodes
 	```
-	![image](figure/kubectl get nodes.PNG)
+	![image](figure/nodes.PNG)
 	```bash
 	kubectl get pods -A -o wide
 	```
-	![image](figure/init.PNG)	
+	![image](figure/pods.PNG)	
 * 비고 : 
     * cri-o 매이저와 마이너 버전은 kubernetes 메이저와 마이너 버전이 일치해야 한다.
     * single node cluster 구성시 master taint를 제거한다

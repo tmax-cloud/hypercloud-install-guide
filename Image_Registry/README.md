@@ -1,7 +1,7 @@
 # Image Registry 설치 가이드
 
 ## 구성 요소 및 버전
-* docker
+* docker-ce(v18.09.7)
 
 ## Prerequisites
 ## 폐쇄망 설치 가이드
@@ -23,7 +23,7 @@
 * 생성 순서 : 
     * docker를 설치한다.
     ```bash
-    $ sudo yum install -y docker
+    $ sudo yum install -y docker-ce
     ```
     * docker damon에 insecure-registries를 등록한다.
       * vi /etc/docker/daemon.json

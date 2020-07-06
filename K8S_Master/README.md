@@ -204,7 +204,7 @@
 	```bash
 	kubeadm init --config=kubeadm-config.yaml
 	```
-    ![image](figure/kubeadm init.PNG)
+	![image](figure/kubeadm init.PNG)
     * kubernetes config 
 	```bash
 	mkdir -p $HOME/.kube

@@ -1,74 +1,11 @@
 
-# k8s-master 설치 가이드
+# k8s-node 설치 가이드
 
 ## 구성 요소 및 버전
-* docker.io/k8s.gcr.io/kube-apiserver:v1.17.6
-* docker.io/k8s.gcr.io/kube-proxy:v1.17.6
-* docker.io/k8s.gcr.io/kube-scheduler:v1.17.6
-* docker.io/k8s.gcr.io/kube-controller-manager:v1.17.6
-* docker.io/k8s.gcr.io/etcd:3.4.3-0
-* docker.io/k8s.gcr.io/pause:3.1
-* docker.io/k8s.gcr.io/coredns:1.6.5
+* cri-o
+* kubeadm, kubelet, kubectl
 
 ## Prerequisites
-
-## 폐쇄망 설치 가이드
-설치를 진행하기 전 아래의 과정을 통해 필요한 이미지 tar 파일을 준비한다.
-1. **폐쇄망에서 설치하는 경우** 사용하는 image repository에 k8s 설치 시 필요한 이미지를 push한다. 
-
-    * 작업 디렉토리 생성 및 환경 설정
-    ```bash
-    $ mkdir -p ~/k8s-install
-    $ export K8S_HOME=~/k8s-install
-    $ cd $K8S_HOME
-    ```
-    * 외부 네트워크 통신이 가능한 환경에서 필요한 이미지를 다운받는다.
-    ```bash
-    $ sudo docker pull k8s.gcr.io/kube-proxy:v1.17.6
-    $ sudo docker pull k8s.gcr.io/kube-apiserver:v1.17.6
-    $ sudo docker pull k8s.gcr.io/kube-controller-manager:v1.17.6
-    $ sudo docker pull k8s.gcr.io/kube-scheduler:v1.17.6
-    $ sudo docker pull k8s.gcr.io/etcd:3.4.3-0
-    $ sudo docker pull k8s.gcr.io/coredns:1.6.5
-    $ sudo docker pull k8s.gcr.io/pause:3.1
-    ```
-    * docker image를 tar로 저장한다.
-    ```bash
-    $ docker save -o kube-proxy.tar k8s.gcr.io/kube-proxy:v1.17.6
-    $ docker save -o kube-controller-manager.tar k8s.gcr.io/kube-controller-manager:v1.17.6
-    $ docker save -o etcd.tar docker.io/k8s.gcr.io/etcd
-    $ docker save -o coredns.tar k8s.gcr.io/coredns:1.6.5
-    $ docker save -o kube-scheduler.tar k8s.gcr.io/kube-scheduler:v1.17.6
-    $ docker save -o kube-apiserver.tar k8s.gcr.io/kube-apiserver:v1.17.6
-    $ docker save -o pause.tar k8s.gcr.io/pause:3.1
-    ```
-  
-2. 위의 과정에서 생성한 tar 파일들을 폐쇄망 환경으로 이동시킨 뒤 사용하려는 registry에 이미지를 push한다.
-    ```bash
-    $ sudo docker load -i kube-apiserver.tar
-    $ sudo docker load -i kube-scheduler.tar
-    $ sudo docker load -i kube-controller-manager.tar 
-    $ sudo docker load -i kube-proxy.tar
-    $ sudo docker load -i etcd.tar
-    $ sudo docker load -i coredns.tar
-    $ sudo docker load -i pause.tar
-    
-    $ docker tag k8s.gcr.io/kube-apiserver:v1.17.6 ${REGISTRY}/k8s.gcr.io/kube-apiserver:v1.17.6
-    $ docker tag k8s.gcr.io/kube-proxy:v1.17.6 ${REGISTRY}/k8s.gcr.io/kube-proxy:v1.17.6
-    $ docker tag k8s.gcr.io/kube-controller-manager:v1.17.6 ${REGISTRY}/k8s.gcr.io/kube-controller-manager:v1.17.6
-    $ docker tag k8s.gcr.io/etcd:3.4.3-0 ${REGISTRY}/k8s.gcr.io/etcd:3.4.3-0
-    $ docker tag k8s.gcr.io/coredns:1.6.5 ${REGISTRY}/k8s.gcr.io/coredns:1.6.5
-    $ docker tag k8s.gcr.io/kube-scheduler:v1.17.6 ${REGISTRY}/k8s.gcr.io/kube-scheduler:v1.17.6
-    $ docker tag k8s.gcr.io/pause:3.1 ${REGISTRY}/k8s.gcr.io/pause:3.1
-
-    $ docker push ${REGISTRY}/k8s.gcr.io/kube-apiserver:v1.17.6
-    $ docker push ${REGISTRY}/k8s.gcr.io/kube-proxy:v1.17.6
-    $ docker push ${REGISTRY}/k8s.gcr.io/kube-controller-manager:v1.17.6
-    $ docker push ${REGISTRY}/k8s.gcr.io/etcd:3.4.3-0
-    $ docker push ${REGISTRY}/k8s.gcr.io/coredns:1.6.5
-    $ docker push ${REGISTRY}/k8s.gcr.io/kube-scheduler:v1.17.6
-    $ docker push ${REGISTRY}/k8s.gcr.io/pause:3.1
-    ```
 
 ## Install Steps
 0. [환경 설정](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio#step0-istio-yaml-%EC%88%98%EC%A0%95)
@@ -82,14 +19,15 @@
 * 순서 : 
     * os hostname을 설정한다.
 	```bash
-	hostnamectl set-hostname k8s-master
+	hostnamectl set-hostname k8s-node
 	```
-    * /etc/hosts에 hostname과 ip를 등록한다. 
+    * hostname과 ip를 등록한다. 
+       * vi /etc/hosts
 	```bash
 	127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
 	::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
 
-	172.22.5.2 k8s-master
+	172.22.5.3 k8s-node
 	```
     * 방화벽(firewall)을 해제한다. 
 	```bash
@@ -100,7 +38,7 @@
 	```bash
 	swapoff -a
 	```
-    * 스왑 메모리 비활성화 영구설정(/etc/fstap). 
+    * 스왑 메모리 비활성화 영구설정.(/etc/fstap)
 	```bash
 	swap 관련 부분 주석처리
 	# /dev/mapper/centos-swap swap                    swap    defaults        0

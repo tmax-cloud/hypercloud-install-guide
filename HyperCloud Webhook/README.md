@@ -53,10 +53,9 @@
 ## Step 0. hypercloud-webhook yaml 수정
 * 목적 : `hypercloud-webhook yaml에 이미지 registry, 버전 및 마스터 노드 정보를 수정`
 * 생성 순서 : 
-    * 아래의 command를 사용하여 사용하고자 하는 image 버전 및 마스터 노드 정보를 수정한다.
+    * 아래의 command를 사용하여 사용하고자 하는 image 버전  수정한다.
 	```bash
 	$ sed -i 's/{webhook_version}/'${WEBHOOK_VERSION}'/g' 03_webhook-deployment.yaml
-	$ sed -i 's/{hostname}/'${HOSTNAME}'/g' 03_webhook-deployment.yaml
 	```
 * 비고 :tmaxcloudck/hypercloud-webhook
     * `폐쇄망에서 설치를 진행하여 별도의 image registry를 사용하는 경우 registry 정보를 추가로 설정해준다.`

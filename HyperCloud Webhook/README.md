@@ -94,7 +94,7 @@
 
 ## Step 5. HyperCloud Webhook Config 적용
 * 목적 : `Webhook 연동 설정을 적용하여 API 서버가 Webhook Server와 HTTPS 통신을 하도록 설정`
-* 생성 순서 : [05_webhook-configuration.yaml](manifests/05_webhook-configuration.yaml) 실행 `ex) kubectl apply -f 05_webhook-configuration.yaml`
+* 생성 순서 : 05_webhook-configuration.yaml 실행 `ex) kubectl apply -f 05_webhook-configuration.yaml`
 
 ## Step 6. test-yaml 생성
 * 목적 : `Webhook Server 설치 및 설정이 정상적으로 적용되었는지 검증하기 위한 예제`
@@ -105,7 +105,7 @@
     ```
     * 설치 매니페스트 파일과 함께 동봉된 test-yaml 파일을 적용 후, Annotation에 create, update 정보가 추가되었는지 확인한다.
      ```bash
-    $ cd test-yaml/
+    $ cd ./test-yaml
     $ kubectl apply -f cm.yaml -n default
     $ kubectl describe cm config-dev -n default
     ```

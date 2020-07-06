@@ -2,8 +2,8 @@
 # k8s-node 설치 가이드
 
 ## 구성 요소 및 버전
-* cri-o
-* kubeadm, kubelet, kubectl
+* cri-o (v1.17.4)
+* kubeadm, kubelet, kubectl (v1.17.6)
 
 ## Prerequisites
 

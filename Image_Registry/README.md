@@ -45,7 +45,7 @@
     * run-registry.sh를 실행한다.
     	 * run-registry.sh, docker-registry.tar 파일이 같은 $REGISTRY_HOME 디렉토리에 있어야 한다.
     ```bash
-    $ sudo ./run-registry.sh $PWD {IP}:5000
+    $ sudo ./run-registry.sh ~/registry-install {IP}:5000
     ```
     ![image](figure/registry.PNG)
 

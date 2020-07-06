@@ -204,13 +204,23 @@
 	```bash
 	kubeadm init --config=kubeadm-config.yaml
 	```
-	![image](figure/kubeadm init.PNG)
+	![image](figure/init.PNG)
     * kubernetes config 
 	```bash
 	mkdir -p $HOME/.kube
 	sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 	sudo chown $(id -u):$(id -g) $HOME/.kube/config
-	```	
+	```
+	![image](figure/success.PNG)
+    * 확인
+	```bash
+	kubectl get nodes
+	```
+	![image](figure/kubectl get nodes.PNG)
+	```bash
+	kubectl get pods -A -o wide
+	```
+	![image](figure/init.PNG)	
 * 비고 : 
     * cri-o 매이저와 마이너 버전은 kubernetes 메이저와 마이너 버전이 일치해야 한다.
     * single node cluster 구성시 master taint를 제거한다

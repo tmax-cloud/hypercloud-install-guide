@@ -47,7 +47,8 @@
     ```bash
     $ sudo ./run-registry.sh $PWD {IP}:5000
     ```
-![image](figure/registry.png)    
+![image](figure/registry.PNG)
+
     * 확인
     ```bash
     $ curl {IP}:5000/v2/_catalog

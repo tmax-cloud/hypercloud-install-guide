@@ -7,11 +7,6 @@
 ## Prerequisites
 * Kubernetes, HyperCloud4 Operator, Grafana, Istio(Kiali, Jaeger), Prometheus가 설치되어 있어야 합니다.
 
-## 폐쇄망 설치 가이드
-폐쇄망에서 설치를 진행해야 하는 경우 필요한 추가 작업에 대해 기술합니다.
-1. 첫번째 폐쇄망 설치 작업
-    * 작업에 대한 상세 설명 1
-
 ## Install Steps
 0. [스텝 0](https://스텝_0로_바로_가기_위한_링크)
 1. [스텝 1](https://스텝_1로_바로_가기_위한_링크)
@@ -63,3 +58,5 @@
     | `@@VER@@` | hypercloud-console 이미지 태그 입력 | `1.1.x.x` |
     
     * `kubectl create -f 3.deployment-pod.yaml` 을 실행합니다.
+* 비고
+    * HCDC 모드로 설치할 경우 DNS 서버 세팅이 필요하고, console과 portal이 같은 도메인의 서브도메인을 사용해야 합니다. (포트는 둘 다 https 기본 포트인 443 사용)

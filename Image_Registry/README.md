@@ -15,11 +15,11 @@
     $ cd $REGISTRY_HOME
     ```
 2. 위의 과정에서 다운받은 파일들을 폐쇄망 환경으로 이동시킨 뒤 docker registry image를 이용하여 registry를 띄운다.
-    * run-registry.sh, docker-registry.tar 파일이 같은 디렉토리에 있어야 한다.
+    * run-registry.sh를 실행한다.
+    	    * run-registry.sh, docker-registry.tar 파일이 같은 $REGISTRY_HOME 디렉토리에 있어야 한다.
     ```bash
     $ sudo ./run-registry.sh $PWD {IP}:5000
     ```
-
 ## 폐쇄망 설치 가이드
 폐쇄망에서 설치를 진행해야 하는 경우 필요한 추가 작업에 대해 기술합니다.
 1. 첫번째 폐쇄망 설치 작업

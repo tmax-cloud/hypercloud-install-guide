@@ -8,19 +8,21 @@
 * Kubernetes, HyperCloud4 Operator, Grafana, Istio(Kiali, Jaeger), Prometheus가 설치되어 있어야 합니다.
 
 ## Install Steps
-0. [스텝 0](https://스텝_0로_바로_가기_위한_링크)
-1. [스텝 1](https://스텝_1로_바로_가기_위한_링크)
-2. [스텝 2](https://스텝_2로_바로_가기_위한_링크)
+1. [Step 1. Infra 세팅](#step-1-infra-세팅)
+2. [Step 2. Secret (TLS) 생성](#step-2-secret-tls-생성)
+3. [Step 3. Service (Load Balancer) 생성](#step-3-service-load-balancer-생성)
+4. [Step 4. Deployment (with Pod Template) 생성](#step-4-deployment-with-pod-template-생성)
+5. [Step 5. 동작 확인](#step-5-동작-확인)
 
 ## Step 1. Infra 세팅
-* 목적 : console을 위한 Namespace, ResourceQuota, ServiceAccount, ClusterRole, ClusterRoleBinding 생성
+* 목적 : console에서 사용할 Namespace, ResourceQuota, ServiceAccount, ClusterRole, ClusterRoleBinding을 생성한다.
 * 순서 : 
     * 작업 폴더에 [1.initialization.yaml](https://raw.githubusercontent.com/tmax-cloud/hypercloud-console/hc-dev/install-yaml/1.initialization.yaml) 파일을 생성하고, `@@NAME_NS@@`들을 모두 원하는 문자열로 교체합니다.
 	    * 이 과정에서 `@@NAME_NS@@` 대신 기입하는 문자열은 console이 설치될 Namespace의 이름이 됩니다.
     * `kubectl create -f 1.initialization.yaml` 을 실행합니다.
 
 ## Step 2. Secret (TLS) 생성
-* 목적 : console에 https 접속을 지원하기 위함
+* 목적 : console이 https를 지원하게 한다.
 * 순서 : 
     * 작업 폴더 하위의 tls 폴더에 crt, key 파일을 준비합니다.
 	    * 발급받은 인증서가 없는 경우
@@ -34,14 +36,14 @@
     * 작업 폴더로 이동하고, `kubectl create secret tls console-https-secret --cert=./tls/tls.crt --key=./tls/tls.key -n console-system(Step 1에서 @@NAME_NS@@ 대신 기입한 이름)` 을 실행합니다.
 
 ## Step 3. Service (Load Balancer) 생성
-* 목적 : 브라우저를 통해 console에 접속할 수 있게 하기 위함
+* 목적 : 브라우저를 통해 console에 접속할 수 있게 한다.
 * 순서 : 
     * 작업 폴더에 [2.svc-lb.yaml](https://raw.githubusercontent.com/tmax-cloud/hypercloud-console/hc-dev/install-yaml/2.svc-lb.yaml) 파일을 생성하고, `@@NAME_NS@@`를 원하는 문자열로 교체합니다.
 	    * `@@NAME_NS@@` 대신 기입하는 문자열은 Step 1에서와 같아야 합니다.
     * `kubectl create -f 2.svc-lb.yaml` 을 실행합니다.
 
 ## Step 4. Deployment (with Pod Template) 생성
-* 목적 : pod를 생성하여 console 웹서버를 호스팅하기 위함
+* 목적 : console 웹서버를 호스팅할 pod를 생성한다.
 * 순서 : 
     * 작업 폴더에 [3.deployment-pod.yaml](https://raw.githubusercontent.com/tmax-cloud/hypercloud-console/hc-dev/install-yaml/3.deployment-pod.yaml) 파일을 생성하고, 다음의 문자열들을 교체해줍니다.
     
@@ -63,7 +65,7 @@
 
 
 ## Step 5. 동작 확인
-* 목적 : console이 정상 동작하는지 확인하기 위함
+* 목적 : console이 정상 동작하는지 확인한다.
 * 순서 : 
     * `kubectl get po -n console-system(Step 1에서 @@NAME_NS@@ 대신 기입한 이름)` 을 실행하여 pod가 running 중인지 확인합니다.
     * `kubectl get svc -n console-system(Step 1에서 @@NAME_NS@@ 대신 기입한 이름)` 을 실행하여 EXTERNAL-IP를 확인합니다.

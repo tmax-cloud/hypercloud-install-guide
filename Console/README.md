@@ -20,7 +20,7 @@
     * `kubectl create -f 1.initialization.yaml` 을 실행합니다.
 
 ## Step 2. Secret (TLS) 생성
-* 목적 : console에 https를 지원하기 위함
+* 목적 : console에 https 접속을 지원하기 위함
 * 순서 : 
     * 작업 폴더 하위의 tls 폴더에 crt, key 파일을 준비합니다.
 	    * 발급받은 인증서가 없는 경우
@@ -34,14 +34,14 @@
     * 작업 폴더로 이동하고, `kubectl create secret tls console-https-secret --cert=./tls/tls.crt --key=./tls/tls.key -n console-system(Step 1에서 @@NAME_NS@@ 대신 기입한 이름)` 을 실행합니다.
 
 ## Step 3. Service (Load Balancer) 생성
-* 목적 : console로 접속할 수 있게 하기 위함
+* 목적 : 브라우저를 통해 console에 접속할 수 있게 하기 위함
 * 순서 : 
     * 작업 폴더에 [2.svc-lb.yaml](https://raw.githubusercontent.com/tmax-cloud/hypercloud-console/hc-dev/install-yaml/2.svc-lb.yaml) 파일을 생성하고, `@@NAME_NS@@`를 원하는 문자열로 교체합니다.
 	    * `@@NAME_NS@@` 대신 기입하는 문자열은 Step 1에서와 같아야 합니다.
     * `kubectl create -f 2.svc-lb.yaml` 을 실행합니다.
 
 ## Step 4. Deployment (with Pod Template) 생성
-* 목적 : console 웹서버를 실행하는 pod를 생성하기 위함
+* 목적 : pod를 생성하여 console 웹서버를 호스팅하기 위함
 * 순서 : 
     * 작업 폴더에 [3.deployment-pod.yaml](https://raw.githubusercontent.com/tmax-cloud/hypercloud-console/hc-dev/install-yaml/3.deployment-pod.yaml) 파일을 생성하고, 다음의 문자열들을 교체해줍니다.
     
@@ -60,3 +60,12 @@
     * `kubectl create -f 3.deployment-pod.yaml` 을 실행합니다.
 * 비고
     * HCDC 모드로 설치할 경우 DNS 서버 세팅이 필요하고, console과 portal이 같은 도메인의 서브도메인을 사용해야 합니다. (포트는 둘 다 https 기본 포트인 443 사용)
+
+
+## Step 5. 동작 확인
+* 목적 : console이 정상 동작하는지 확인하기 위함
+* 순서 : 
+    * `kubectl get po -n console-system(Step 1에서 @@NAME_NS@@ 대신 기입한 이름)` 을 실행하여 pod가 running 중인지 확인합니다.
+    * `kubectl get svc -n console-system(Step 1에서 @@NAME_NS@@ 대신 기입한 이름)` 을 실행하여 EXTERNAL-IP를 확인합니다.
+    * `https://EXTERNAL-IP` 로 접속하여 동작을 확인합니다.
+	    * 단, HCDC 모드에서 테스트하려 하는 경우에는 IP가 아니라 Domain Name을 통해 접속해야 합니다.

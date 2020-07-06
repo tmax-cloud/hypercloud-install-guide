@@ -31,8 +31,7 @@
         "insecure-registries": ["{IP}:5000"]
    }
     ```
-![image](figure/)
-
+    
 ## Step 1. registry 실행
 * 목적 : `폐쇄망 환경에서 docker hub에 접속할 수 없을 때, docker registry를 이용해 image 사용을 위한 registry를 구축한다.`
 * 생성 순서 : 
@@ -44,4 +43,3 @@
     * 확인
     ```bash
     $ curl {IP}:5000/v2/_catalog
-![image](figure/)

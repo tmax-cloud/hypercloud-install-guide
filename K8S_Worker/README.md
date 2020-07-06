@@ -75,11 +75,9 @@
     * 폐쇄망 환경에서 private registry 접근을 위해 crio.conf 내용을 수정한다.
     * insecure_registry, registries, plugin_dirs 내용을 수정한다.
       * vi /etc/crio/crio.conf
-	```bash
-	registries = [“172.22.5.2:5000(레지스트리 주소:포트)”,”docker.io”]
-	insecure_registries=[“172.22.5.2:5000(레지스트리 주소:포트)”]
-	plugin_dirs에 "/opt/cni/bin" 추가
-	```
+	 * registries = [“172.22.5.2:5000({registry}:{port})”,”docker.io”]
+	 * insecure_registries = [“172.22.5.2:5000({registry}:{port})”]
+	 * plugin_dirs : "/opt/cni/bin" 추가
      ![image](figure/crio_config.PNG)
     * crio 사용 전 환경 설정
 	```bash

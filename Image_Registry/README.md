@@ -3,7 +3,6 @@
 ## 구성 요소 및 버전
 * docker
 * 구성 요소2([tmaxcloud/tmax/gym:v2](https://hub.docker.com/gym/tags))
-* 구성 요소3
 
 ## Prerequisites
 ## 폐쇄망 설치 가이드

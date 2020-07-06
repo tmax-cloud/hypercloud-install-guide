@@ -3,14 +3,22 @@
 ## 구성 요소 및 버전
 * docker
 * 구성 요소2([tmaxcloud/tmax/gym:v2](https://hub.docker.com/gym/tags))
-* 구성 요소3
 
 ## Prerequisites
-1. 구성 요소를 설치하기 전에 필요한 조건을 기술합니다.
-    * 조건에 대한 상세 설명을 기술합니다.
-	    * 상세 설명
-		    * 상세 설명
-2. 해당 모듈 설치 전 모듈1 이 설치되어 있어야 합니다.
+## 폐쇄망 설치 가이드
+설치를 진행하기 전 아래의 과정을 통해 필요한 shell script와 tar파일을 준비한다.
+1. **폐쇄망에서 설치하는 경우** run-registry.sh, docker-registry.tar를 Master 환경에 다운로드한다. 
+    * 작업 디렉토리 생성 및 환경 설정
+    ```bash
+    $ mkdir -p ~/registry-install
+    $ export REGISTRY_HOME=~/registry-install
+    $ cd $REGISTRY_HOME
+    ```
+2. 위의 과정에서 다운받은 파일들을 폐쇄망 환경으로 이동시킨 뒤 docker registry image를 이용하여 registry를 띄운다.
+    * run-registry.sh, docker-registry.tar 파일이 같은 디렉토리에 있어야 한다.
+    ```bash
+    $ sudo ./run-registry.sh $PWD {IP}:5000
+    ```
 
 ## 폐쇄망 설치 가이드
 폐쇄망에서 설치를 진행해야 하는 경우 필요한 추가 작업에 대해 기술합니다.

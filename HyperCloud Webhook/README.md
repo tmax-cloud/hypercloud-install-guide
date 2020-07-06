@@ -1,11 +1,15 @@
 # HyperCloud Webhook 설치 가이드
 
 ## 구성 요소 및 버전
-* hypercloud-webhook ([tmaxcloudck/hypercloud-webhook:b4.1.0.5](https://hub.docker.com/layers/tmaxcloudck/hypercloud-webhook/b4.1.0.5/images/sha256-fca79244e3d460c0d8177e79cc6a35116e8db71f45178532ce7b697286afbf4b?context=explore))
+* hypercloud-webhook ([tmaxcloudck/hypercloud-webhook:b4.1.0.2](https://hub.docker.com/layers/tmaxcloudck/hypercloud-webhook/b4.1.0.2/images/sha256-ee1ae9fa79df947debf438c9be5b1e2d9204e7f6057fb40190be6be801d1d6d9?context=explore)) (Kuberntes v1.16 이상)
+* hypercloud-webhook ([tmaxcloudck/hypercloud-webhook:b4.1.0.5](https://hub.docker.com/layers/tmaxcloudck/hypercloud-webhook/b4.1.0.5/images/sha256-fca79244e3d460c0d8177e79cc6a35116e8db71f45178532ce7b697286afbf4b?context=explore)) (Kuberntes v1.16 이하)
 
 ## Prerequisites
 1. 해당 모듈 설치 전 HyperCloud Operator 모듈 설치 필요
     * ([HyperCloud Operator](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/README.md))
+    
+2. 설치 과정에 필요한 인증서 생성을 위해 JAVA 패키지 설치 필요
+    * ProLinux 7 기준 `ex) java-1.8.0-openjdk-devel.x86_64`
 
 ## 폐쇄망 설치 가이드
 설치를 진행하기 전 아래의 과정을 통해 필요한 이미지 및 yaml 파일을 준비한다.
@@ -15,7 +19,7 @@
     ```bash
     $ mkdir -p ~/hypercloud-webhook-install
     $ export WEBHOOK_HOME=~/hypercloud-webhook-install
-    $ export WEBHOOK_VERSION=b4.1.0.5
+    $ export WEBHOOK_VERSION=b4.1.0.x (Kuberntes version에 따라 정의)
     $ cd $WEBHOOK_HOME
     ```
     * 외부 네트워크 통신이 가능한 환경에서 필요한 이미지를 다운받는다.

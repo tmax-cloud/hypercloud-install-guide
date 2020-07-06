@@ -111,5 +111,7 @@
 	kubeadm join 172.22.5.2:6443 --token r5ks9p.q0ifuz5pcphqvc14 \ --discovery-token-ca-cert-hash sha256:90751da5966ad69a49f2454c20a7b97cdca7f125b8980cf25250a6ee6c804d88
 	```
 * 비고 : 
-    * jaeger ui에 접속하기 위한 서비스를 [원하는 타입](yaml/3.istio-tracing.yaml#L245)으로 변경할 수 있다.
-	
+    * kubeadm join command를 메모해두지 못한 경우 master node에서 아래 명령어를 통해 token 재생성이 가능하다.
+	```bash
+	kubeadm token create --print-join-command
+	```	

@@ -26,7 +26,7 @@
     ```bash
     $ sudo yum install -y docker
     ```
-    * docker damon을 설정한다.
+    * docker damon에 insecure-registries를 등록한다.
       * vi /etc/docker/daemon.json
     ```bash
    {

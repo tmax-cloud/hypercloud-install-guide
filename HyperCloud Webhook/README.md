@@ -65,7 +65,7 @@
 
 ## Step 1. 인증서 생성
 * 목적 : `HTTPS 활성화를 위한 CA 인증서를 생성`
-* 생성 순서 : 아래의 command를 실행하여 CA 인증서를 생성한다.
+* 생성 순서 : 아래의 command를 실행하여 CA 인증서를 생성한다. ([01_gen_certs.sh](manifests/01_gen_certs.sh))
     ```bash
     $ mkdir ./pki
     $ ./01_gen_certs.sh
@@ -94,7 +94,7 @@
 
 ## Step 5. HyperCloud Webhook Config 적용
 * 목적 : `Webhook 연동 설정을 적용하여 API 서버가 Webhook Server와 HTTPS 통신을 하도록 설정`
-* 생성 순서 : 05_webhook-configuration.yaml 실행 `ex) kubectl apply -f 05_webhook-configuration.yaml`
+* 생성 순서 : [05_webhook-configuration.yaml](manifests/05_webhook-configuration.yaml) 실행 `ex) kubectl apply -f 05_webhook-configuration.yaml`
 
 ## Step 6. test-yaml 생성
 * 목적 : `Webhook Server 설치 및 설정이 정상적으로 적용되었는지 검증하기 위한 예제`

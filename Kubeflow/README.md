@@ -156,7 +156,7 @@
           storageClassName: csi-cephfs-sc
           volumeMode: Filesystem
           volumeName: ${VOLUME_NAME}
-EOF
+        EOF
         $ kubectl apply -f katib-mysql.yaml
         ```
     * 모든 pod의 상태가 정상이라면 KFServing과 Istio 1.5.1과의 호환을 위해 아래 명령어를 수행하여 Istio의 mTLS 기능을 disable한다.

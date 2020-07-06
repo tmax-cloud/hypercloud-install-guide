@@ -15,8 +15,9 @@
     * run-registry.sh, docker-registry.tar를 Master 환경에 다운로드한다.
        * https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Image_Registry/installer
 ## Install Steps
-0. [docker 설치] (https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Image_Registry/README.md#step-0-docker-%EC%84%A4%EC%B9%98)
-0. [registry 실행] (https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Image_Registry/README.md#step-1-registry-%EC%8B%A4%ED%96%89)
+1. [bookinfo 예제](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Image_Registry/README.md#step-0-docker-%EC%84%A4%EC%B9%98)
+1. [docker 설치] (https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Image_Registry/README.md#step-0-docker-%EC%84%A4%EC%B9%98)
+2. [registry 실행] (https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Image_Registry/README.md#step-1-registry-%EC%8B%A4%ED%96%89)
 
 ## Step 0. docker 설치
 * 목적 : `docker registry를 구축하기 위해 docker를 설치한다.`

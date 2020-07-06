@@ -80,7 +80,7 @@
 	insecure_registries=[“172.22.5.2:5000(레지스트리 주소:포트)”]
 	plugin_dirs에 "/opt/cni/bin" 추가
 	```
-      ![image](figure/crio_config.PNG)
+     ![image](figure/crio_config.PNG)
     * crio 사용 전 환경 설정
 	```bash
 	modprobe overlay

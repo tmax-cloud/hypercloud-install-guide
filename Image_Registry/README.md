@@ -18,7 +18,7 @@
 0. [registry 실행](https://스텝_0로_바로_가기_위한_링크)
 
 ## Step 0. docker 설치
-* 목적 : `docker registry를 구축하기 위해 docker를 설치한다`
+* 목적 : `docker registry를 구축하기 위해 docker를 설치한다.`
 * 생성 순서 : 
     * docker를 설치한다.
     ```bash

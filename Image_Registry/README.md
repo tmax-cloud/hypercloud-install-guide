@@ -18,7 +18,7 @@
 0. [registry 실행](https://스텝_0로_바로_가기_위한_링크)
 
 ## Step 0. docker 설치
-* 목적 : 'docker registry를 구축하기 위해 docker를 설치한다'
+* 목적 : `docker registry를 구축하기 위해 docker를 설치한다`
 * 생성 순서 : 
     * docker를 설치한다.
     ```bash
@@ -34,7 +34,7 @@
 ![image](figure/)
 
 ## Step 1. registry 실행
-* 목적 : '폐쇄망 환경에서 docker hub에 접속할 수 없을 때, docker registry를 이용해 image 사용을 위한 registry를 구축한다.'
+* 목적 : `폐쇄망 환경에서 docker hub에 접속할 수 없을 때, docker registry를 이용해 image 사용을 위한 registry를 구축한다.`
 * 생성 순서 : 
     * run-registry.sh를 실행한다.
     	 * run-registry.sh, docker-registry.tar 파일이 같은 $REGISTRY_HOME 디렉토리에 있어야 한다.

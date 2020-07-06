@@ -13,9 +13,10 @@
 ## Prerequisites
 
 ## 폐쇄망 설치 가이드
-설치를 진행하기 전 아래의 과정을 통해 필요한 이미지 tar 파일을 준비한다.
-1. **폐쇄망에서 설치하는 경우** 사용하는 image repository에 k8s 설치 시 필요한 이미지를 push한다. 
+1. **폐쇄망에서 설치하는 경우** 아래 가이드를 참고 하여 image registry를 구축한다.
+    * https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Image_Registry
 
+2. 사용하는 image repository에 k8s 설치 시 필요한 이미지를 push한다. 
     * 작업 디렉토리 생성 및 환경 설정
     ```bash
     $ mkdir -p ~/k8s-install
@@ -43,7 +44,7 @@
     $ docker save -o pause.tar k8s.gcr.io/pause:3.1
     ```
   
-2. 위의 과정에서 생성한 tar 파일들을 폐쇄망 환경으로 이동시킨 뒤 사용하려는 registry에 이미지를 push한다.
+3. 위의 과정에서 생성한 tar 파일들을 폐쇄망 환경으로 이동시킨 뒤 사용하려는 registry에 이미지를 push한다.
     ```bash
     $ sudo docker load -i kube-apiserver.tar
     $ sudo docker load -i kube-scheduler.tar
@@ -100,7 +101,8 @@
 	```bash
 	swapoff -a
 	```
-    * 스왑 메모리 비활성화 영구설정(/etc/fstap). 
+    * 스왑 메모리 비활성화 영구설정
+      * vi /etc/fstap 
 	```bash
 	swap 관련 부분 주석처리
 	# /dev/mapper/centos-swap swap                    swap    defaults        0
@@ -131,7 +133,8 @@
 	rm -rf  /etc/cni/net.d/100-crio-bridge
  	rm -rf  /etc/cni/net.d/200-loopback
 	``` 
-    * 폐쇄망 환경에서 private registry 접근을 위해 crio.conf 내용을 수정한다. (/etc/crio/crio.conf)
+    * 폐쇄망 환경에서 private registry 접근을 위해 crio.conf 내용을 수정한다. 
+        * vi /etc/crio/crio.conf
 	```bash
 	insecure_registry 와 registries에 image_docker_registries_ip:port 추가
 	registries = [“172.22.5.2:5000(레지스트리 주소:포트)”,”docker.io”]
@@ -166,7 +169,8 @@
 ## Step 3. kubernetes cluster 구성
 * 목적 : `kubernetes master를 구축한다.`
 * 순서 :
-    * 쿠버네티스 설치시 필요한 kubeadm-config를 작성한다.(kubeadm-config.yaml)
+    * 쿠버네티스 설치시 필요한 kubeadm-config를 작성한다.
+        * vi kubeadm-config.yaml
 	```bash
 	apiVersion: kubeadm.k8s.io/v1beta2
 	kind: InitConfiguration

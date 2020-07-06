@@ -1,8 +1,9 @@
 # HyperCloud Webhook 설치 가이드
 
 ## 구성 요소 및 버전
-* hypercloud-webhook ([tmaxcloudck/hypercloud-webhook:b4.1.0.2](https://hub.docker.com/layers/tmaxcloudck/hypercloud-webhook/b4.1.0.2/images/sha256-ee1ae9fa79df947debf438c9be5b1e2d9204e7f6057fb40190be6be801d1d6d9?context=explore)) (Kuberntes v1.16 이상)
-* hypercloud-webhook ([tmaxcloudck/hypercloud-webhook:b4.1.0.5](https://hub.docker.com/layers/tmaxcloudck/hypercloud-webhook/b4.1.0.5/images/sha256-fca79244e3d460c0d8177e79cc6a35116e8db71f45178532ce7b697286afbf4b?context=explore)) (Kuberntes v1.16 이하)
+* hypercloud-webhook 
+    * ([tmaxcloudck/hypercloud-webhook:b4.1.0.2](https://hub.docker.com/layers/tmaxcloudck/hypercloud-webhook/b4.1.0.2/images/sha256-ee1ae9fa79df947debf438c9be5b1e2d9204e7f6057fb40190be6be801d1d6d9?context=explore)) (Kuberntes v1.16 이상)
+    * ([tmaxcloudck/hypercloud-webhook:b4.1.0.5](https://hub.docker.com/layers/tmaxcloudck/hypercloud-webhook/b4.1.0.5/images/sha256-fca79244e3d460c0d8177e79cc6a35116e8db71f45178532ce7b697286afbf4b?context=explore)) (Kuberntes v1.16 미만)
 
 ## Prerequisites
 1. 해당 모듈 설치 전 HyperCloud Operator 모듈 설치 필요
@@ -84,7 +85,11 @@
 
 ## Step 4. HyperCloud Webhook Config 생성
 * 목적 : `앞서 생성한 인증서 정보를 기반으로 Webhook 연동 설정 파일 생성`
-* 생성 순서 : [04_gen-webhook-config.sh](manifests/04_gen-webhook-config.sh) 실행 `ex) ./04_gen-webhook-config.sh`
+* 생성 순서 : 아래의 command를 실행하여 Webhook Config를 생성한다. `ex) ./04_gen-webhook-config.sh`
+    ```bash
+    $ export ADM_VERSION="v1/v1beta1" (Kuberntes 버전이 v1.16 이상이면 v1, v1.16 미만이면 v1beta1 정의)
+    $ ./04_gen-webhook-config.sh
+    ```
 
 
 ## Step 5. HyperCloud Webhook Config 적용

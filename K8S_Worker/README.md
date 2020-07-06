@@ -70,13 +70,13 @@
 	rm -rf  /etc/cni/net.d/100-crio-bridge
  	rm -rf  /etc/cni/net.d/200-loopback
 	``` 
-    * 폐쇄망 환경에서 private registry 접근을 위해 crio.conf 내용을 수정한다. (/etc/crio/crio.conf)
+    * 폐쇄망 환경에서 private registry 접근을 위해 crio.conf 내용을 수정한다. 
+      * vi /etc/crio/crio.conf
 	```bash
 	insecure_registry 와 registries에 image_docker_registries_ip:port 추가
 	registries = [“172.22.5.2:5000(레지스트리 주소:포트)”,”docker.io”]
 	insecure_registries=[“172.22.5.2:5000(레지스트리 주소:포트)”]
 	plugin_dirs에 "/opt/cni/bin" 추가
-	!!!!!!!!!!!수정해야댐!!!!!!!!!!!!!!!!!
 	```
     * crio 사용 전 환경 설정
 	```bash
@@ -101,14 +101,6 @@
 	```bash
 	yum install -y kubeadm-1.17.6-0 kubelet-1.17.6-0 kubectl-1.17.6-0
 	```  	
-* 비고 :
-    * kiali에 접속하기 위한 서비스를 [원하는 타입](yaml/2.kiali.yaml#L346)으로 변경할 수 있다.
-    * kiali에 접속하기 위한 [id/password](yaml/2.kiali.yaml#L215)를 configmap을 수정해 변경할 수 있다.(default: admin/admin)
-    * kilai pod가 running임을 확인한 뒤 http://$KIALI_URL/kiali 에 접속해 정상 동작을 확인한다.
-	
-![image](figure/kiali-ui.png)
-
-
 
 ## Step 3. kubernetes cluster 구성
 * 목적 : `kubernetes master를 구축한다.`

@@ -85,7 +85,7 @@
 
 ## Step 4. HyperCloud Webhook Config 생성
 * 목적 : `앞서 생성한 인증서 정보를 기반으로 Webhook 연동 설정 파일 생성`
-* 생성 순서 : 아래의 command를 실행하여 Webhook Config를 생성한다. `ex) ./04_gen-webhook-config.sh`
+* 생성 순서 : 아래의 command를 실행하여 Webhook Config를 생성한다.
     ```bash
     $ export ADM_VERSION="v1/v1beta1" (Kuberntes 버전이 v1.16 이상이면 v1, v1.16 미만이면 v1beta1 정의)
     $ ./04_gen-webhook-config.sh
@@ -95,4 +95,19 @@
 ## Step 5. HyperCloud Webhook Config 적용
 * 목적 : `Webhook 연동 설정을 적용하여 API 서버가 Webhook Server와 HTTPS 통신을 하도록 설정`
 * 생성 순서 : [05_webhook-configuration.yaml](manifests/05_webhook-configuration.yaml) 실행 `ex) kubectl apply -f 05_webhook-configuration.yaml`
+
+## Step 6. test-yaml 생성
+* 목적 : `Webhook Server 설치 및 설정이 정상적으로 적용되었는지 검증하기 위한 예제`
+* 생성 순서 :
+    * 테스트 네임스페이스에 webhook 동작을 허용하는 label을 부착한다.
+     ```bash
+    $ kubectl label namespace default webhook=true
+    ```
+    * 설치 매니페스트 파일과 함께 동봉된 test-yaml 파일을 사용하여 webhook 동작이 정상적으로 수행되는지 확인한다.
+     ```bash
+    $ cd ./test-yaml
+    $ kubectl apply -f cm.yaml -n default
+    $ kubectl describe cm config-dev -n default
+    ```
+![image](figure/test-cm.png) 
 

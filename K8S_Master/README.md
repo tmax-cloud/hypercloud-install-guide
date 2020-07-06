@@ -54,8 +54,9 @@
     $ sudo docker load -i etcd.tar
     $ sudo docker load -i coredns.tar
     $ sudo docker load -i pause.tar
+    ```
     ![image](figure/load.PNG)
-    
+    ```bash
     $ docker tag k8s.gcr.io/kube-apiserver:v1.17.6 ${REGISTRY}/k8s.gcr.io/kube-apiserver:v1.17.6
     $ docker tag k8s.gcr.io/kube-proxy:v1.17.6 ${REGISTRY}/k8s.gcr.io/kube-proxy:v1.17.6
     $ docker tag k8s.gcr.io/kube-controller-manager:v1.17.6 ${REGISTRY}/k8s.gcr.io/kube-controller-manager:v1.17.6
@@ -64,7 +65,8 @@
     $ docker tag k8s.gcr.io/kube-scheduler:v1.17.6 ${REGISTRY}/k8s.gcr.io/kube-scheduler:v1.17.6
     $ docker tag k8s.gcr.io/pause:3.1 ${REGISTRY}/k8s.gcr.io/pause:3.1
     ![image](figure/tag.PNG)
-    
+    ```
+    ```bash
     $ docker push ${REGISTRY}/k8s.gcr.io/kube-apiserver:v1.17.6
     $ docker push ${REGISTRY}/k8s.gcr.io/kube-proxy:v1.17.6
     $ docker push ${REGISTRY}/k8s.gcr.io/kube-controller-manager:v1.17.6

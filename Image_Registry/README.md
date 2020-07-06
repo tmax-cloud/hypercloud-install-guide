@@ -14,7 +14,7 @@
     $ cd $REGISTRY_HOME
     ```
     * run-registry.sh, docker-registry.tar를 Master 환경에 다운로드한다.
-       * https://github.com/tmax-cloud/hypercloud-install-guide/edit/master/Image_Registry
+       * https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Image_Registry/installer
 ## Install Steps
 0. [docker 설치](https://스텝_0로_바로_가기_위한_링크)
 0. [registry 실행](https://스텝_0로_바로_가기_위한_링크)

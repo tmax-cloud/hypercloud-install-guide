@@ -85,7 +85,7 @@
 
 ## Step 4. HyperCloud Webhook Config 생성
 * 목적 : `앞서 생성한 인증서 정보를 기반으로 Webhook 연동 설정 파일 생성`
-* 생성 순서 : 아래의 command를 실행하여 Webhook Config를 생성한다. [04_gen-webhook-config.sh](manifests/04_gen-webhook-config.sh)
+* 생성 순서 : 아래의 command를 실행하여 Webhook Config를 생성한다. ([04_gen-webhook-config.sh](manifests/04_gen-webhook-config.sh))
     ```bash
     $ export ADM_VERSION="v1/v1beta1" (Kuberntes 버전이 v1.16 이상이면 v1, v1.16 미만이면 v1beta1 정의)
     $ ./04_gen-webhook-config.sh

@@ -2,6 +2,7 @@
 
 ## 구성 요소 및 버전
 * docker
+* docker registry image
 
 ## Prerequisites
 ## 폐쇄망 설치 가이드

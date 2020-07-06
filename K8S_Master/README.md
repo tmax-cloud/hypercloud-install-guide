@@ -13,7 +13,6 @@
 ## Prerequisites
 
 ## 폐쇄망 설치 가이드
-설치를 진행하기 전 아래의 과정을 통해 필요한 이미지 tar 파일을 준비한다.
 1. **폐쇄망에서 설치하는 경우** 아래 가이드를 참고 하여 image registry를 구축한다.
     * https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Image_Registry
 

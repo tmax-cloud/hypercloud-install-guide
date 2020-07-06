@@ -33,6 +33,12 @@
         "insecure-registries": ["{IP}:5000"]
    }
     ```
+    * docker를 재실행하고 status를 확인한다.
+    ```bash
+    $  systemctl enable docker 
+    $  systemctl restart docker
+    $  systemctl status docker
+    ```    
     
 ## Step 1. registry 실행
 * 목적 : `폐쇄망 환경에서 docker hub에 접속할 수 없을 때, docker registry를 이용해 image 사용을 위한 registry를 구축한다.`

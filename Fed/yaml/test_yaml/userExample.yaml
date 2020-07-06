@@ -1,0 +1,10 @@
+apiVersion: tmax.co.kr/v1
+kind: User
+metadata:
+  name: seon
+userInfo:
+  name: seon
+  password: root
+  email: seonho_choi@tmax.co.kr	
+  phone: 010-4878-8544
+status: active

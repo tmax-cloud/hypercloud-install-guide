@@ -1,0 +1,16 @@
+apiVersion: types.kubefed.io/v1beta1
+kind: FederatedUser
+metadata:
+  name: woo-fed
+spec:
+  template:
+    userInfo:
+      name: woo-fed
+      password: root
+      email: taegeon_woo@tmax.co.kr	
+      phone: 010-4878-8544
+    status: active
+  placement:
+    clusters:
+            - name: cluster2
+            - name: cluster1

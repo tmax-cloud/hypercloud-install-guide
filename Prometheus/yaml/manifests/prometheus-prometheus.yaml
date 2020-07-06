@@ -6,6 +6,13 @@ metadata:
   name: k8s
   namespace: monitoring
 spec:
+  storage:
+    volumeclaimTemplate:
+      spec:
+        resources:
+          requests:
+            storage: 10Gi
+        storageClassName: rook-ceph-block
   alerting:
     alertmanagers:
     - name: alertmanager-main

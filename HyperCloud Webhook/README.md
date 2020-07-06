@@ -1,7 +1,7 @@
 # HyperCloud Webhook 설치 가이드
 
 ## 구성 요소 및 버전
-* hypercloud-webhook ([tmaxcloudck/hypercloud-webhook:b4.1.0.2](https://hub.docker.com/layers/tmaxcloudck/hypercloud-webhook/b4.1.0.2/images/sha256-ee1ae9fa79df947debf438c9be5b1e2d9204e7f6057fb40190be6be801d1d6d9?context=explore))
+* hypercloud-webhook ([tmaxcloudck/hypercloud-webhook:b4.1.0.5](https://hub.docker.com/layers/tmaxcloudck/hypercloud-webhook/b4.1.0.5/images/sha256-fca79244e3d460c0d8177e79cc6a35116e8db71f45178532ce7b697286afbf4b?context=explore))
 
 ## Prerequisites
 1. 해당 모듈 설치 전 HyperCloud Operator 모듈 설치 필요
@@ -15,7 +15,7 @@
     ```bash
     $ mkdir -p ~/hypercloud-webhook-install
     $ export WEBHOOK_HOME=~/hypercloud-webhook-install
-    $ export WEBHOOK_VERSION=b4.1.0.2
+    $ export WEBHOOK_VERSION=b4.1.0.5
     $ cd $WEBHOOK_HOME
     ```
     * 외부 네트워크 통신이 가능한 환경에서 필요한 이미지를 다운받는다.
@@ -62,7 +62,8 @@
 * 목적 : `HTTPS 활성화를 위한 CA 인증서를 생성`
 * 생성 순서 : 아래의 command를 실행하여 CA 인증서를 생성한다.
     ```bash
-    $ 01_gen_certs.sh
+    $ mkdir ./pki
+    $ ./01_gen_certs.sh
     $ openssl pkcs12 -export -in ./pki/hypercloud4-webhook.crt -inkey ./pki/hypercloud4-webhook.key -out ./pki/hypercloud4-webhook.p12 (Export Password: tmax@23)
     $ keytool -importkeystore -deststorepass tmax@23 -destkeypass tmax@23 -destkeystore ./pki/hypercloud4-webhook.jks -srckeystore ./pki/hypercloud4-webhook.p12 -srcstoretype PKCS12 -srcstorepass tmax@23
     ```
@@ -84,5 +85,5 @@
 
 ## Step 5. HyperCloud Webhook Config 적용
 * 목적 : `Webhook 연동 설정을 적용하여 API 서버가 Webhook Server와 HTTPS 통신을 하도록 설정`
-* 생성 순서 : [05_webhook-configuration.yaml](manifests/05_webhook-configuration.yaml) 실행 `ex) kubectl apply -f 05_webhook-configuration.yaml
+* 생성 순서 : [05_webhook-configuration.yaml](manifests/05_webhook-configuration.yaml) 실행 `ex) kubectl apply -f 05_webhook-configuration.yaml`
 

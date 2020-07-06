@@ -74,11 +74,10 @@
 
 
 ## Install Steps
+1. [hypercloud-secret-watcher-daemonset.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/SecretWatcher#step-1-hypercloud-secret-watcher-daemonset.yaml-%EC%8B%A4%ED%96%89)
 
 
-
-
-## Step 1. 7.secret-watcher.yaml 실행
+## Step 1. hypercloud-secret-watcher-daemonset.yaml 실행
 * 목적 : `secret-watcher daemonset 생성`
 * 실행: 
 	```bash

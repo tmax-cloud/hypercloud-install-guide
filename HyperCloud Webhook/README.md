@@ -49,6 +49,7 @@
 3. [HyperCloud Webhook Server 설치](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/HyperCloud%20Webhook#step-3-hypercloud-webhook-server-%EC%84%A4%EC%B9%98)
 4. [HyperCloud Webhook Config 생성](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/HyperCloud%20Webhook#step-4-hypercloud-webhook-config-%EC%83%9D%EC%84%B1)
 5. [HyperCloud Webhook Config 적용](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/HyperCloud%20Webhook#step-5-hypercloud-webhook-config-%EC%A0%81%EC%9A%A9)
+6. [test-yaml 배포](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/HyperCloud%20Webhook#step-6-test-yaml-%EB%B0%B0%ED%8F%AC)
 
 ## Step 0. hypercloud-webhook yaml 수정
 * 목적 : `hypercloud-webhook yaml에 이미지 registry, 버전 및 마스터 노드 정보를 수정`

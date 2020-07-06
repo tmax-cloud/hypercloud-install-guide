@@ -169,7 +169,8 @@
 ## Step 3. kubernetes cluster 구성
 * 목적 : `kubernetes master를 구축한다.`
 * 순서 :
-    * 쿠버네티스 설치시 필요한 kubeadm-config를 작성한다.(kubeadm-config.yaml)
+    * 쿠버네티스 설치시 필요한 kubeadm-config를 작성한다.
+        * vi kubeadm-config.yaml
 	```bash
 	apiVersion: kubeadm.k8s.io/v1beta2
 	kind: InitConfiguration

@@ -32,7 +32,7 @@
         "insecure-registries": ["{IP}:5000"]
     }
     ```
-    ![image](figure/registry.PNG)
+    ![image](figure/docker_registry.PNG)
     * docker를 재실행하고 status를 확인한다.
     ```bash
     $  systemctl enable docker 
@@ -48,7 +48,7 @@
     ```bash
     $ sudo ./run-registry.sh ~/registry-install {IP}:5000
     ```
-    ![image](figure/docker_registry.PNG)
+    ![image](figure/registry.PNG)
 
     * 확인
     ```bash

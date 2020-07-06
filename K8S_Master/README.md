@@ -33,6 +33,7 @@
     $ sudo docker pull k8s.gcr.io/coredns:1.6.5
     $ sudo docker pull k8s.gcr.io/pause:3.1
     ```
+    ![image](figure/pull.PNG)
     * docker image를 tar로 저장한다.
     ```bash
     $ docker save -o kube-proxy.tar k8s.gcr.io/kube-proxy:v1.17.6
@@ -43,7 +44,7 @@
     $ docker save -o kube-apiserver.tar k8s.gcr.io/kube-apiserver:v1.17.6
     $ docker save -o pause.tar k8s.gcr.io/pause:3.1
     ```
-  
+    ![image](figure/save.PNG)
 3. 위의 과정에서 생성한 tar 파일들을 폐쇄망 환경으로 이동시킨 뒤 사용하려는 registry에 이미지를 push한다.
     ```bash
     $ sudo docker load -i kube-apiserver.tar
@@ -53,6 +54,7 @@
     $ sudo docker load -i etcd.tar
     $ sudo docker load -i coredns.tar
     $ sudo docker load -i pause.tar
+    ![image](figure/load.PNG)
     
     $ docker tag k8s.gcr.io/kube-apiserver:v1.17.6 ${REGISTRY}/k8s.gcr.io/kube-apiserver:v1.17.6
     $ docker tag k8s.gcr.io/kube-proxy:v1.17.6 ${REGISTRY}/k8s.gcr.io/kube-proxy:v1.17.6
@@ -61,7 +63,8 @@
     $ docker tag k8s.gcr.io/coredns:1.6.5 ${REGISTRY}/k8s.gcr.io/coredns:1.6.5
     $ docker tag k8s.gcr.io/kube-scheduler:v1.17.6 ${REGISTRY}/k8s.gcr.io/kube-scheduler:v1.17.6
     $ docker tag k8s.gcr.io/pause:3.1 ${REGISTRY}/k8s.gcr.io/pause:3.1
-
+    ![image](figure/tag.PNG)
+    
     $ docker push ${REGISTRY}/k8s.gcr.io/kube-apiserver:v1.17.6
     $ docker push ${REGISTRY}/k8s.gcr.io/kube-proxy:v1.17.6
     $ docker push ${REGISTRY}/k8s.gcr.io/kube-controller-manager:v1.17.6
@@ -70,7 +73,8 @@
     $ docker push ${REGISTRY}/k8s.gcr.io/kube-scheduler:v1.17.6
     $ docker push ${REGISTRY}/k8s.gcr.io/pause:3.1
     ```
-
+    ![image](figure/push.PNG)
+    
 ## Install Steps
 0. [환경 설정](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/K8S_Master#step0)
 1. [cri-o 설치](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio#step-1-istio-namespace-%EB%B0%8F-customresourcedefinition-%EC%83%9D%EC%84%B1)

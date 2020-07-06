@@ -9,6 +9,8 @@
 * docker.io/k8s.gcr.io/etcd:3.4.3-0
 * docker.io/k8s.gcr.io/pause:3.1
 * docker.io/k8s.gcr.io/coredns:1.6.5
+* cri-o (v1.17.4)
+* kubeadm, kubelet, kubectl (v1.17.6)
 
 ## Prerequisites
 

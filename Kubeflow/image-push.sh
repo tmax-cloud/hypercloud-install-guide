@@ -22,3 +22,5 @@ do
 	sudo docker tag $line ${registry}/$line
 	sudo docker push ${registry}/$line
 done
+
+echo "[$0] Done"

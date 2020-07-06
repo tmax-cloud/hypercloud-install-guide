@@ -22,3 +22,4 @@ do
         kubectl apply -k ${dir}/$line
 done
 
+echo "[$0] Done"

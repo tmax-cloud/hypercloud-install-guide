@@ -53,4 +53,5 @@
     * 확인
     ```bash
     $ curl {IP}:5000/v2/_catalog
+    ```
     ![image](figure/catalog.PNG)

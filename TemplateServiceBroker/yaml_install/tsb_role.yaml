@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: service-broker-role
+  namespace: tsb-ns
+rules:
+- apiGroups: ["tmax.io"]
+  resources: ["*"]
+  verbs: ["*"]
+- apiGroups: ["servicecatalog.k8s.io"]
+  resources: ["*"]
+  verbs: ["*"]

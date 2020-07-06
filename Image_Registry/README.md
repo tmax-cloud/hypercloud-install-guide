@@ -20,14 +20,17 @@
 ## Step 0. docker 설치
 * 목적 : 'docker registry를 구축하기 위해 docker를 설치한다'
 * 생성 순서 : 
-    * run-registry.sh를 실행한다.
-    	 * run-registry.sh, docker-registry.tar 파일이 같은 $REGISTRY_HOME 디렉토리에 있어야 한다.
+    * docker를 설치한다.
     ```bash
-    $ sudo ./run-registry.sh $PWD {IP}:5000
+    $ sudo yum install -y docker
     ```
-    * 확인
+    * docker damon을 설정한다.
+      * vi /etc/docker/daemon.json
     ```bash
-    $ curl {IP}:5000/v2/_catalog
+   {
+        "insecure-registries": ["{IP}:5000"]
+   }
+    ```
 ![image](figure/)
 
 ## Step 1. registry 실행

@@ -70,10 +70,10 @@
 	rm -rf  /etc/cni/net.d/100-crio-bridge
  	rm -rf  /etc/cni/net.d/200-loopback
 	``` 
-    * 폐쇄망 환경에서 private registry 접근을 위해 crio.conf 내용을 수정한다. 
+    * 폐쇄망 환경에서 private registry 접근을 위해 crio.conf 내용을 수정한다.
+    * insecure_registry, registries, plugin_dirs 내용을 수정한다.
       * vi /etc/crio/crio.conf
 	```bash
-	insecure_registry 와 registries에 image_docker_registries_ip:port 추가
 	registries = [“172.22.5.2:5000(레지스트리 주소:포트)”,”docker.io”]
 	insecure_registries=[“172.22.5.2:5000(레지스트리 주소:포트)”]
 	plugin_dirs에 "/opt/cni/bin" 추가

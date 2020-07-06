@@ -49,13 +49,15 @@
 * 목적 : console 웹서버를 실행하는 pod를 생성하기 위함
 * 순서 : 
     * 작업 폴더에 [3.deployment-pod.yaml](https://raw.githubusercontent.com/tmax-cloud/hypercloud-console/hc-dev/install-yaml/3.deployment-pod.yaml) 파일을 생성하고, 다음의 문자열들을 교체해줍니다.
-	    * @@NAME_NS@@ : namespace의 이름 (Step 1에서와 같게)
-	    * @@HC4@@ : `kubectl get svc -n hypercloud4-system hypercloud4-operator-service` 에서 CLUSTER-IP와 PORT(S) 확인하여 입력 (포트는 `:` 왼쪽 값 사용)
-	    * @@PROM@@ : `kubectl get svc -n monitoring prometheus-k8s` 에서 CLUSTER-IP와 PORT(S) 확인하여 입력 (포트는 `:` 왼쪽 값 사용)
-	    * @@GRAFANA@@ : `kubectl get svc -n monitoring grafana` 에서 CLUSTER-IP와 PORT(S) 확인하여 입력 (포트는 `:` 왼쪽 값 사용)
-	    * @@KIALI@@ : `kubectl get svc -n istio-system kiali` 에서 CLUSTER-IP와 PORT(S) 확인하여 입력 (포트는 `:` 왼쪽 값 사용)
-	    * @@JAEGER@@ : `kubectl get svc -n istio-system tracing` 에서 CLUSTER-IP와 PORT(S) 확인하여 입력 (포트는 `:` 왼쪽 값 사용)
-	    * @@HDC_FLAG@@ : HCDC 모드로 설치하려는 경우 `true` 입력 (아닌 경우 행 삭제)
-	    * @@PORTAL@@ : HCDC 모드로 설치하려는 경우 tmaxcloud portal 로그인 페이지 URL(`https://.../#!/sign-in`) 입력 (아닌 경우 행 삭제)
-	    * @@VER@@ : hypercloud-console 이미지 태그 입력 (예시 형식 `1.1.9.9`)
+    | 문자열 | 상세내용 | 형식예시 |
+    | ---- | ---- | ---- |
+    | @@NAME_NS@@ | namespace의 이름 (Step 1에서와 같게) | `hypercloud-console` |
+    | @@HC4@@ | `kubectl get svc -n hypercloud4-system hypercloud4-operator-service` 에서 CLUSTER-IP와 PORT(S) 확인하여 입력 (포트는 `:` 왼쪽 값 사용) | `10.x.x.x:28677` |
+    | @@PROM@@ | `kubectl get svc -n monitoring prometheus-k8s` 에서 CLUSTER-IP와 PORT(S) 확인하여 입력 (포트는 `:` 왼쪽 값 사용) | `10.x.x.x:9090` |
+    | @@GRAFANA@@ | `kubectl get svc -n monitoring grafana` 에서 CLUSTER-IP와 PORT(S) 확인하여 입력 (포트는 `:` 왼쪽 값 사용) | `10.x.x.x:3000` |
+    | @@KIALI@@ | `kubectl get svc -n istio-system kiali` 에서 CLUSTER-IP와 PORT(S) 확인하여 입력 (포트는 `:` 왼쪽 값 사용) | `10.x.x.x:20001` |
+    | @@JAEGER@@ | `kubectl get svc -n istio-system tracing` 에서 CLUSTER-IP와 PORT(S) 확인하여 입력 (포트는 `:` 왼쪽 값 사용) | `10.x.x.x:80` |
+    | @@HDC_FLAG@@ | HCDC 모드로 설치하려는 경우 `true` 입력 (아닌 경우 행 삭제) | `true` |
+    | @@PORTAL@@ | HCDC 모드로 설치하려는 경우 tmaxcloud portal 로그인 페이지 URL 입력 (아닌 경우 행 삭제) | `https://tmaxcloud.com/#!/sign-in` |
+    | @@VER@@ | hypercloud-console 이미지 태그 입력 | `1.1.x.x` |
     * `kubectl create -f 3.deployment-pod.yaml` 을 실행합니다.

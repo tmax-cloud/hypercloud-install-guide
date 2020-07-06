@@ -37,7 +37,7 @@
     ```bash
     $ docker save -o kube-proxy.tar k8s.gcr.io/kube-proxy:v1.17.6
     $ docker save -o kube-controller-manager.tar k8s.gcr.io/kube-controller-manager:v1.17.6
-    $ docker save -o etcd.tar docker.io/k8s.gcr.io/etcd
+    $ docker save -o etcd.tar k8s.gcr.io/etcd:3.4.3-0
     $ docker save -o coredns.tar k8s.gcr.io/coredns:1.6.5
     $ docker save -o kube-scheduler.tar k8s.gcr.io/kube-scheduler:v1.17.6
     $ docker save -o kube-apiserver.tar k8s.gcr.io/kube-apiserver:v1.17.6

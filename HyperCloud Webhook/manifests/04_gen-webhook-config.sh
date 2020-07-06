@@ -6,15 +6,14 @@ if [ -f "$WEBHOOK_CONFIG_FILE" ]; then
    echo "Remove existed webhook config file."
    rm $WEBHOOK_CONFIG_FILE
 fi
-
-if [ $ADM_VERSION -eq "v1" ];then
-   ADM_VERSION2="["v1", "v1beta1"]"
-elif [ $ADM_VERSION -eq "v1beta1" ];then
-   ADM_VERSION2="["v1beta1"]"
+if [ $ADM_VERSION = "v1" ];then
+   export ADM_VERSION2="[\"v1\", \"v1beta1\"]"
+elif [ $ADM_VERSION = "v1beta1" ];then
+   export ADM_VERSION2="[\"v1beta1\"]"
 else
    echo "ADM_VERSION is not defined!! Default Version is v1"
-   ADM_VERSION="v1"
-   ADM_VERSION2="["v1", "v1beta1"]"
+   export ADM_VERSION="v1"
+   export ADM_VERSION2="[\"v1\", \"v1beta1\"]"
 fi
 
 echo "Generate webhook config file."

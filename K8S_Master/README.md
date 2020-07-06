@@ -106,7 +106,8 @@
 	```bash
 	swap 관련 부분 주석처리
 	# /dev/mapper/centos-swap swap                    swap    defaults        0
-	```	
+	```
+    ![image](figure/fstab.PNG)
     * SELinux 설정을 해제한다. 
 	```bash
 	setenforce 0
@@ -127,21 +128,20 @@
 	systemctl status crio
 	rpm -qi cri-o
 	```
+    ![image](figure/crio.PNG)
 * 비고 :
     * 추후 설치예정인 network plugin과 crio의 가상 인터페이스 충돌을 막기위해 cri-o의 default 인터페이스 설정을 제거한다.
 	```bash
 	rm -rf  /etc/cni/net.d/100-crio-bridge
  	rm -rf  /etc/cni/net.d/200-loopback
 	``` 
-    * 폐쇄망 환경에서 private registry 접근을 위해 crio.conf 내용을 수정한다. 
-        * vi /etc/crio/crio.conf
-	```bash
-	insecure_registry 와 registries에 image_docker_registries_ip:port 추가
-	registries = [“172.22.5.2:5000(레지스트리 주소:포트)”,”docker.io”]
-	insecure_registries=[“172.22.5.2:5000(레지스트리 주소:포트)”]
-	plugin_dirs에 "/opt/cni/bin" 추가
-	!!!!!!!!!!!수정해야댐!!!!!!!!!!!!!!!!!
-	```
+    * 폐쇄망 환경에서 private registry 접근을 위해 crio.conf 내용을 수정한다.
+    * insecure_registry, registries, plugin_dirs 내용을 수정한다.
+      * vi /etc/crio/crio.conf
+         * registries = ["{registry}:{port}" , "docker.io"]
+         * insecure_registries = ["{registry}:{port}"]
+         * plugin_dirs : "/opt/cni/bin" 추가
+	 ![image](figure/crio_config.PNG)
     * crio 사용 전 환경 설정
 	```bash
 	modprobe overlay
@@ -204,6 +204,7 @@
 	```bash
 	kubeadm init --config=kubeadm-config.yaml
 	```
+	![image](figure/kubeadm init.PNG)
     * kubernetes config 
 	```bash
 	mkdir -p $HOME/.kube

@@ -28,10 +28,11 @@
     * docker damon에 insecure-registries를 등록한다.
       * vi /etc/docker/daemon.json
     ```bash
-   {
+    {
         "insecure-registries": ["{IP}:5000"]
-   }
+    }
     ```
+    ![image](figure/registry.PNG)
     * docker를 재실행하고 status를 확인한다.
     ```bash
     $  systemctl enable docker 
@@ -47,7 +48,7 @@
     ```bash
     $ sudo ./run-registry.sh ~/registry-install {IP}:5000
     ```
-    ![image](figure/registry.PNG)
+    ![image](figure/docker_registry.PNG)
 
     * 확인
     ```bash

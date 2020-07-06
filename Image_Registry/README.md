@@ -47,7 +47,7 @@
     ```bash
     $ sudo ./run-registry.sh $PWD {IP}:5000
     ```
-![image](figure/registry.PNG)
+    ![image](figure/registry.PNG)
 
     * 확인
     ```bash

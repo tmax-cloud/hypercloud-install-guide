@@ -54,11 +54,11 @@
     * Step 0 ~ 4 중 Step 0은 진행할 필요없고 2, 3은 비고를 참고하여 진행한다. 나머지는 그대로 진행하면 된다.
 
 ## Install Steps
-0. [kfctl 설치](https://스텝_0로_바로_가기_위한_링크)
-1. [설치 디렉토리 생성](https://스텝_1로_바로_가기_위한_링크)
-2. [Kustomize 리소스 생성](https://스텝_2로_바로_가기_위한_링크)
-3. [Kubeflow 배포]()
-4. [배포 확인 및 기타 작업]()
+0. [kfctl 설치](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Kubeflow/README.md#step-0-kfctl-%EC%84%A4%EC%B9%98)
+1. [설치 디렉토리 생성](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Kubeflow/README.md#step-1-%EC%84%A4%EC%B9%98-%EB%94%94%EB%A0%89%ED%86%A0%EB%A6%AC-%EC%83%9D%EC%84%B1)
+2. [Kustomize 리소스 생성](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Kubeflow/README.md#step-2-kustomize-%EB%A6%AC%EC%86%8C%EC%8A%A4-%EC%83%9D%EC%84%B1)
+3. [Kubeflow 배포](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Kubeflow/README.md#step-3-kubeflow-%EB%B0%B0%ED%8F%AC)
+4. [배포 확인 및 기타 작업](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Kubeflow/README.md#step-4-%EB%B0%B0%ED%8F%AC-%ED%99%95%EC%9D%B8-%EB%B0%8F-%EA%B8%B0%ED%83%80-%EC%9E%91%EC%97%85)
 
 ## Step 0. kfctl 설치
 * 목적 : `Kubeflow component를 배포 및 관리하기 위한 커맨드 라인툴인 kfctl을 설치한다.`
@@ -73,93 +73,93 @@
 * 목적 : `Kubeflow의 설치 yaml이 저장될 설치 디렉토리를 생성하고 해당 경로로 이동한다.`
 * 생성 순서 : 
     * 아래 명령어를 수행하여 설치 디렉토리를 생성하고 해당 경로로 이동한다.
-    * ${KF_DIR}이 설치 디렉토리이며 ${KF_NAME}, ${BASE_DIR}은 임의로 변경 가능하다.
-    ```bash
-    $ export KF_NAME=kubeflow
-    $ export BASE_DIR=/home/${USER}
-    $ export KF_DIR=${BASE_DIR}/${KF_NAME}
-    $ mkdir -p ${KF_DIR}
-    $ cd ${KF_DIR}
-    ```
+    * ${KF_DIR}이 설치 디렉토리이며 ${KF_NAME}, ${BASE_DIR}은 임의로 변경 가능하다.	
+        ```bash
+	$ export KF_NAME=kubeflow
+	$ export BASE_DIR=/home/${USER}
+	$ export KF_DIR=${BASE_DIR}/${KF_NAME}
+	$ mkdir -p ${KF_DIR}
+	$ cd ${KF_DIR}
+	```
 
 ## Step 2. Kustomize 리소스 생성
 * 목적 : `Kubeflow는 Kubernetes 리소스 배포 툴인 Kustomize를 통해 설치된다. 이를 위해 Kubeflow를 설치하는 Kustomize 리소스를 생성한다.`
 * 생성 순서 : 
     * 아래 명령어를 수행하여 Kustomize 리소스를 생성한다.
     * 정상적으로 완료되면 kustomize라는 디렉토리가 생성된다.
-    ```bash
-    $ export CONFIG_URI="https://raw.githubusercontent.com/tmax-cloud/kubeflow-manifests/kubeflow-manifests-v1.0.2/kfctl_hypercloud_kubeflow.v1.0.2.yaml"
-    $ kfctl build -V -f ${CONFIG_URI}
-    ```
+	```bash
+	$ export CONFIG_URI="https://raw.githubusercontent.com/tmax-cloud/kubeflow-manifests/kubeflow-manifests-v1.0.2/kfctl_hypercloud_kubeflow.v1.0.2.yaml"
+	$ kfctl build -V -f ${CONFIG_URI}
+	```
 * 비고 : 
     * 폐쇄망 환경일 경우 설치 디렉토리에 미리 다운로드받은 sed.sh, kustomize-apply.sh, kustomize.tar.gz 파일을 옮긴다.
     * 아래 명령어를 통해 Kustomize 리소스의 압축을 풀고 yaml 파일들에서 이미지들을 pull 받을 registry를 바꿔준다.
-    ```bash
-    $ tar xvfz kustomize.tar.gz
-    $ chmod +x ./sed.sh
-    $ ./sed.sh <<REGISTRY_ADDRESS>> ${KF_DIR}/kustomize
-    ```
+	```bash
+	$ tar xvfz kustomize.tar.gz
+	$ chmod +x ./sed.sh
+	$ ./sed.sh <<REGISTRY_ADDRESS>> ${KF_DIR}/kustomize
+	```
 
 ## Step 3. Kubeflow 배포
 * 목적 : `Kustomize 리소스를 apply하여 Kubeflow를 배포한다.`
 * 생성 순서 : 
     * 아래 명령어를 수행하여 Kubeflow를 배포한다.
     * 설치에는 약 10분 정도가 소요된다.
-    ```bash
-    $ export CONFIG_FILE=${KF_DIR}/kfctl_hypercloud_kubeflow.v1.0.2.yaml
-    $ kfctl apply -V -f ${CONFIG_FILE}
-    ```
+	```bash
+	$ export CONFIG_FILE=${KF_DIR}/kfctl_hypercloud_kubeflow.v1.0.2.yaml
+	$ kfctl apply -V -f ${CONFIG_FILE}
+	```
 * 비고 :
     * 기존 Kubeflow에서 수정된 점
         * Istio 1.5.1 호환을 위해 KFServing의 controller 수정
         * Workflow template을 사용하기 위한 argo controller 버전 업
     * 폐쇄망 환경일 경우 kfctl 대신 아래 명령어를 통해 Kubeflow를 배포한다.
-    ```bash
-    $ chmod +x ./kustomize-apply.sh
-    $ ./kustomize-apply.sh ${KF_DIR}/kustomize
-    ```
+	```bash
+	$ chmod +x ./kustomize-apply.sh
+	$ ./kustomize-apply.sh ${KF_DIR}/kustomize
+	```
 
 ## Step 4. 배포 확인 및 기타 작업
 * 목적 : `Kubeflow 배포를 확인하고 문제가 있을 경우 정상화한다.`
 * 생성 순서 : 
     * 아래 명령어를 수행하여 kubeflow namespace의 모든 pod가 정상적인지 확인한다.
-    ```bash
-    $ kubectl get pod -n kubeflow
-    ```
+	```bash
+	$ kubectl get pod -n kubeflow
+	```
     * 만약 아래 두 pod가 Running 상태가 아니라면 katib-mysql이라는 PVC의 mount에 문제가 있는 것이다.
         * katib-db-manager-...
         * katib-mysql-...
     * 아래 명령어 수행하여 PVC를 재생성한다.
-    ```bash
-    $ VOLUME_NAME=$(kubectl get pvc katib-mysql -n kubeflow -o yaml |grep volumeName |cut -c 15-)
-    $ kubectl delete pvc katib-mysql -n kubeflow
-    $ cat > katib-mysql.yaml <<EOF
-	apiVersion: v1
-	kind: PersistentVolumeClaim
-	metadata:
-	labels:
-	app.kubernetes.io/component: katib
-	app.kubernetes.io/instance: katib-controller-0.8.0
-	app.kubernetes.io/managed-by: kfctl
-	app.kubernetes.io/name: katib-controller
-	app.kubernetes.io/part-of: kubeflow
-	app.kubernetes.io/version: 0.8.0
-	name: katib-mysql
-	namespace: kubeflow
-	spec:
-	accessModes:
-	- ReadWriteOnce
-	resources:
-	requests:
-	  storage: 10Gi
-	storageClassName: csi-cephfs-sc
-	volumeMode: Filesystem
-	volumeName: ${VOLUME_NAME}
-	EOF
-    $ kubectl apply -f katib-mysql.yaml
-    ```
+	```bash
+	$ VOLUME_NAME=$(kubectl get pvc katib-mysql -n kubeflow -o yaml |grep volumeName |cut -c 15-)
+	$ kubectl delete pvc katib-mysql -n kubeflow
+	$ cat > katib-mysql.yaml <<EOF
+		apiVersion: v1
+		kind: PersistentVolumeClaim
+		metadata:
+		labels:
+		app.kubernetes.io/component: katib
+		app.kubernetes.io/instance: katib-controller-0.8.0
+		app.kubernetes.io/managed-by: kfctl
+		app.kubernetes.io/name: katib-controller
+		app.kubernetes.io/part-of: kubeflow
+		app.kubernetes.io/version: 0.8.0
+		name: katib-mysql
+		namespace: kubeflow
+		spec:
+		accessModes:
+		- ReadWriteOnce
+		resources:
+		requests:
+		  storage: 10Gi
+		storageClassName: csi-cephfs-sc
+		volumeMode: Filesystem
+		volumeName: ${VOLUME_NAME}
+		EOF
+	$ kubectl apply -f katib-mysql.yaml
+	```
     * 모든 pod의 상태가 정상이라면 KFServing과 Istio 1.5.1과의 호환을 위해 아래 명령어를 수행하여 Istio의 mTLS 기능을 disable한다.
-    ```bash
-    $ echo '{"apiVersion":"security.istio.io/v1beta1","kind":"PeerAuthentication","metadata":{"annotations":{},"name":"default","namespace":"istio-system"},"spec":{"mtls":{"mode":"DISABLE"}}}' |cat > disable-mtls.json
-    $ kubectl apply -f disable-mtls.json
-    ```
+	```bash
+	$ echo '{"apiVersion":"security.istio.io/v1beta1","kind":"PeerAuthentication","metadata":{"annotations":{},"name":"default","namespace":"istio-system"},"spec":{"mtls":{"mode":"DISABLE"}}}' |cat > disable-mtls.json
+	$ kubectl apply -f disable-mtls.json
+	```

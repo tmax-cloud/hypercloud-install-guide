@@ -22,7 +22,7 @@
 	hostnamectl set-hostname k8s-node
 	```
     * hostname과 ip를 등록한다. 
-       * vi /etc/hosts
+      * vi /etc/hosts
 	```bash
 	127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
 	::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
@@ -38,7 +38,8 @@
 	```bash
 	swapoff -a
 	```
-    * 스왑 메모리 비활성화 영구설정.(/etc/fstap)
+    * 스왑 메모리 비활성화 영구설정.
+      * vi /etc/fstap
 	```bash
 	swap 관련 부분 주석처리
 	# /dev/mapper/centos-swap swap                    swap    defaults        0

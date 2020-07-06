@@ -78,7 +78,10 @@
     $ docker push ${REGISTRY}/k8s.gcr.io/pause:3.1
     ```
     ![image](figure/push.PNG)
-    
+    ```bash
+    $ docker images
+    ```    
+    ![image](figure/check.PNG)
 ## Install Steps
 0. [환경 설정](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/K8S_Master#step0-%ED%99%98%EA%B2%BD-%EC%84%A4%EC%A0%95)
 1. [cri-o 설치](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/K8S_Master#step-1-cri-o-%EC%84%A4%EC%B9%98)

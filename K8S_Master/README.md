@@ -101,7 +101,8 @@
 	```bash
 	swapoff -a
 	```
-    * 스왑 메모리 비활성화 영구설정(/etc/fstap). 
+    * 스왑 메모리 비활성화 영구설정
+      * vi /etc/fstap 
 	```bash
 	swap 관련 부분 주석처리
 	# /dev/mapper/centos-swap swap                    swap    defaults        0
@@ -132,7 +133,8 @@
 	rm -rf  /etc/cni/net.d/100-crio-bridge
  	rm -rf  /etc/cni/net.d/200-loopback
 	``` 
-    * 폐쇄망 환경에서 private registry 접근을 위해 crio.conf 내용을 수정한다. (/etc/crio/crio.conf)
+    * 폐쇄망 환경에서 private registry 접근을 위해 crio.conf 내용을 수정한다. 
+        * vi /etc/crio/crio.conf
 	```bash
 	insecure_registry 와 registries에 image_docker_registries_ip:port 추가
 	registries = [“172.22.5.2:5000(레지스트리 주소:포트)”,”docker.io”]

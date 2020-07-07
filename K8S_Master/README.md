@@ -129,11 +129,24 @@
 * 목적 : `k8s container runtime 설치`
 * 순서 :
     * cri-o를 설치한다.
+      * (폐쇄망) 아래 주소를 참조하여 패키지 레포를 등록한다.
+          * https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Package#step-1-local-repository-%EA%B5%AC%EC%B6%95
 	```bash
 	sudo yum -y install cri-o
 	systemctl enable crio
 	systemctl start crio
 	```
+      * (외부망) crio 버전 지정 및 레포를 등록 후 crio를 설치 한다.
+      	```bash
+	VERSION=1.17
+	sudo curl -L -o /etc/yum.repos.d/devel:kubic:libcontainers:stable.repo https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable/CentOS_7/devel:kubic:libcontainers:stable.repo
+	sudo curl -L -o /etc/yum.repos.d/devel:kubic:libcontainers:stable:cri-o:${VERSION}.repo https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable:cri-o:${VERSION}/CentOS_7/devel:kubic:libcontainers:stable:cri-o:${VERSION}.repo
+	```	
+	```bash
+	sudo yum -y install cri-o
+	systemctl enable crio
+	systemctl start crio
+	```	
     * cri-o 설치를 확인한다.
 	```bash
 	systemctl status crio

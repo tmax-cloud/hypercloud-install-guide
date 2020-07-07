@@ -70,12 +70,14 @@
 
 
 ## Install Steps
-0. [calico.yaml 수정](.##step0.-calico-yaml-수정)
+0. [calico.yaml 수정](#step0 "step0")
 1. [calico 설치]
 2. [calicoctl 설치]
 
+<h2 id="step0">
+Step0. calico yaml 수정
+</h2>
 
-## Step0. calico yaml 수정
 * 목적 : `calico yaml에 이미지 registry, 버전 정보, pod 대역, IPIP모드 여부를 수정`
 * 생성 순서 : 
     * 아래의 command를 수정하여 사용하고자 하는 image 버전 정보를 수정한다.

@@ -1,5 +1,5 @@
 
-# {OS 설치 & package repo 구축} 가이드
+# OS 설치 & package repo 구축 가이드
 
 ## 구성 요소 및 버전
 * HyperCloud 패키지(ck-ftp@192.168.1.150:/home/ck-ftp/k8s_pl/install/offline/archive_20.07.01)

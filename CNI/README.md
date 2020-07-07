@@ -70,12 +70,14 @@
 
 
 ## Install Steps
-0. [calico.yaml 수정]
-1. [calico 설치]
-2. [calicoctl 설치]
+0. [calico.yaml 수정](#step0 "step0")
+1. [calico 설치](#step1 "step1")
+2. [calicoctl 설치](#step2 "step2")
 
+<h2 id="step0">
+Step0. calico yaml 수정
+</h2>
 
-## Step0. calico yaml 수정
 * 목적 : `calico yaml에 이미지 registry, 버전 정보, pod 대역, IPIP모드 여부를 수정`
 * 생성 순서 : 
     * 아래의 command를 수정하여 사용하고자 하는 image 버전 정보를 수정한다.
@@ -95,16 +97,21 @@
 	```bash
 	////////$ sed -i 's/quay.io\/kiali\/kiali/'${REGISTRY}'\/kiali\/kiali/g' 2.kiali.yaml
 	```
+	
+<h2 id="step1">
+Step 1. calico 설치
+</h2>
 
-## Step 1. calico 설치
 * 목적 : `calico 설치`
 * 생성 순서: calico.yaml 설치  `ex) kubectl apply -f calico.yaml`
 * 비고 :
     * calico-kube-controllers-xxxxxxxxxx-xxxxx (1개의 pod)
     * calico-node-xxxxx (모든 노드에 pod)
 
+<h2 id="step2">
+Step 2. calicoctl 설치
+</h2>
 
-## Step 2. calicoctl 설치
 * 목적 : `calicoctl 설치`
 * 생성 순서: calicoctl.yaml 설치  `ex) kubectl apply -f calicoctl.yaml`
 * 비고 :

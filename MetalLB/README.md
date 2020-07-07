@@ -48,12 +48,12 @@
     ```
 
 ## Install Steps
-0. [metallb.yaml 수정]
-1. [metallb 설치]
-2. [metallb 대역 설정]
+0. [metallb.yaml 수정](#step0 "step0")
+1. [metallb 설치](#step1 "step1")
+2. [metallb 대역 설정](#step2 "step2")
 
+<h2 id="step0"> Step0. metallb yaml 수정 </h2>
 
-## Step0. metallb yaml 수정
 * 목적 : `metallb yaml에 이미지 registry, 버전 정보 수정`
 * 생성 순서 : 
     * 아래의 command를 수정하여 사용하고자 하는 image 버전 정보를 수정한다.
@@ -67,8 +67,8 @@
 
 	```
 
+<h2 id="step1"> Step 1. metallb </h2>
 
-## Step 1. metallb 설치
 * 목적 : `metallb 설치`
 * 생성 순서: metallb.yaml 설치  `ex) kubectl apply -f metallb.yaml`
 * 비고 : 
@@ -77,7 +77,9 @@
     * speaker-xxxxx (모든 노드에 pod)
 
 
-## Step 2. metallb 대역 설정
+
+<h2 id="step2"> Step 2. metallb 대역 설정 </h2>
+
 * 목적 : `metallb에서 사용할 대역 설정 (호스트와 동일한 대역 사용)`
 * 생성 순서: metallb_cidr.yaml 적용  `ex) kubectl apply -f metallb_cidr.yaml`
 * 비고 :

@@ -184,10 +184,24 @@
 * 목적 : `Kubernetes 구성을 위한 kubeadm, kubelet, kubectl 설치한다.`
 * 순서:
     * CRI-O 메이저와 마이너 버전은 쿠버네티스 메이저와 마이너 버전이 일치해야 한다.
-    * kubeadm, kubectl, kubelet 설치 (v1.17.6)
+    * (폐쇄망) kubeadm, kubectl, kubelet 설치 (v1.17.6)
 	```bash
 	yum install -y kubeadm-1.17.6-0 kubelet-1.17.6-0 kubectl-1.17.6-0
 	```  	
+    * (외부망) 레포 등록 후 kubeadm, kubectl, kubelet 설치 (v1.17.6)
+	```bash
+	cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+	[kubernetes]
+	name=Kubernetes
+	baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+	enabled=1
+	gpgcheck=1
+	repo_gpgcheck=1
+	gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+	EOF
+
+	yum install -y kubeadm-1.17.6-0 kubelet-1.17.6-0 kubectl-1.17.6-0
+	```  
 
 ## Step 3. kubernetes cluster 구성
 * 목적 : `kubernetes master를 구축한다.`

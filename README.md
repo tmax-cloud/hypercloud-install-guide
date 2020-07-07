@@ -3,7 +3,10 @@
 ### Module (Required)
 | Module | Version | Guide | 진행률(O/△/X) |
 | ------ | ------ | ------ | ------ |
-| Kubernetes | | [installation guide](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Kubernetes/README.md) | △ |
+| OS 설치 & package repo |  |  | △ |
+| Image registry |  |  | △ |
+| K8s Master |  |  | △ |
+| K8s Worker |  |  | △ |
 | CNI | | https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/CNI | O |
 | Rook Ceph | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Rook%20Ceph/README.md | O |
 | HyperCloud Operator | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/README.md | O |
@@ -42,8 +45,3 @@
 * infra 설치
 - k8s : https://docs.google.com/document/d/1bWnmyP7RPUtJQKCRdojoDj1miuLKom9WBoCfbFpI_9M/edit
 - plugin : https://docs.google.com/document/d/1djT5_AvczsncN1xBq0foxXZkuTf53nAkbT2VYjc5AwI/edit
-
-* OS 설치 & package repo    R
-* Image registry            R (updating)
-* K8s Master                R (updating)
-* K8s Worker    R (updating)

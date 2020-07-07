@@ -1,5 +1,5 @@
 
-# k8s-master 설치 가이드
+# kubevirt 설치 가이드
 
 ## 구성 요소 및 버전
 * docker.io/tmaxcloudck/alpine-container-disk-demo:v0.27.0
@@ -24,7 +24,10 @@
 * virtctl (v0.27.0)
 
 ## Prerequisites
-1. git clone https://github.com/tmax-cloud/kubevirt-installer.git
+1. 아래의 명령어를 통해 project를 다운로드하여 kubernetes의 master node에 옮깁니다.
+   ```bash
+   git clone https://github.com/tmax-cloud/kubevirt-installer.git
+   ```
 2. **폐쇄망에서 설치하는 경우** 아래 가이드를 참고 하여 image registry를 먼저 구축한다.
     * https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Image_Registry
 

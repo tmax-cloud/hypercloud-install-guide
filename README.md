@@ -3,19 +3,19 @@
 ### Module (Required)
 | Module | Version | Guide | 진행률(O/△/X) |
 | ------ | ------ | ------ | ------ |
-| OS 설치 & package repo |  |  | △ |
-| Image registry |  |  | △ |
-| K8s Master |  |  | △ |
-| K8s Worker |  |  | △ |
+| OS 설치 & package repo |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Package/README.md | O |
+| Image registry |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Image_Registry/README.md | O |
+| K8s Master |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/K8S_Master/README.md | O |
+| K8s Worker |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/K8S_Worker/README.md | O |
 | CNI | | https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/CNI | O |
 | Rook Ceph | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Rook%20Ceph/README.md | O |
 | HyperCloud Operator | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/README.md | O |
 | HyperCloud Webhook | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Webhook/README.md | O |
 | Console | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Console/README.md | O |
 | Prometheus | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Prometheus/README.md | O |
-| Teckton |  |  | X |
-| TemplateServiceBroker |  |  | X |
-| SecretWatcher |  |  | X |
+| Teckton |  | https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Tekton_CI_CD | O |
+| TemplateServiceBroker |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/TemplateServiceBroker/README.md | O |
+| SecretWatcher |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/SecretWatcher/README.md | O |
 
 ### Module (Optional)
 | Module | Version | Guide | 진행률(O/△/X) |
@@ -27,9 +27,9 @@
 | Kubeflow | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Kubeflow/README.md | O |
 | EFK | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/EFK/README.md | O |
 | Multicloud-console |  |  | X |
-| Capi provider |  |  | X |
+| Capi provider |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Capi/README.md | O |
 | nginx-ingress controller |  |  | X |
-| kubefed |  |  | X |
+| kubefed |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Fed/README.md | O |
 
 ### VM_Module (Optional)
 | Module | Version | Guide | 진행률(O/△/X) |
@@ -40,7 +40,6 @@
 | FailoverController | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/VM_KubeVirt/Failover%20Controller/README.md | △ |
 | Exporter | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/VM_KubeVirt/Exporter/README.md | △ |
 | GPU Plugin | | https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/VM_KubeVirt/GPU%20plugin | △ |
-
 
 * infra 설치
 - k8s : https://docs.google.com/document/d/1bWnmyP7RPUtJQKCRdojoDj1miuLKom9WBoCfbFpI_9M/edit

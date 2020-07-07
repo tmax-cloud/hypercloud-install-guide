@@ -23,7 +23,7 @@
 | ------ | ------ | ------ | ------ |
 | MetalLB |  | https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/MetalLB | X |
 | NetworkAgent |  | https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/NetworkAgent | X |
-| Pod_GPU plugin | | <ul><li>https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Pod_GPU%20plugin</li><li> NVIDIA Device Plugin : https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Pod_GPU%20plugin/nvidia-device-plugin/README.md</li><li> NVIDIA Pod GPU Metrics Exporter : https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Pod_GPU%20plugin/nvidia-pod-gpu-metrics-exporter/README.md</li></ul> | △ |
+| Pod_GPU plugin | | <ul><li>https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Pod_GPU%20plugin</li><li> NVIDIA Device Plugin : https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Pod_GPU%20plugin/nvidia-device-plugin/README.md</li><li> NVIDIA Pod GPU Metrics Exporter : https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Pod_GPU%20plugin/nvidia-pod-gpu-metrics-exporter/README.md</li></ul> | O |
 | Istio | | [installation guide](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Istio/README.md) | O |
 | Kubeflow | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Kubeflow/README.md | O |
 | EFK | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/EFK/README.md | O |
@@ -35,12 +35,12 @@
 ### VM_Module (Optional)
 | Module | Version | Guide | 진행률(O/△/X) |
 | ------ | ------ | ------ | ------ |
-| KubeVirt | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/KubeVirt/README.md | △ |
+| KubeVirt | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/KubeVirt/README.md | O |
 | CDI | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/VM_KubeVirt/CDI/README.md | △ |
 | ImageController | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/VM_KubeVirt/Image%20Controller/README.md | △ |
-| FailoverController | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/VM_KubeVirt/Failover%20Controller/README.md | △ |
+| FailoverController | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/VM_KubeVirt/Failover%20Controller/README.md | O |
 | Exporter | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/VM_KubeVirt/Exporter/README.md | △ |
-| GPU Plugin | | https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/VM_KubeVirt/GPU%20plugin | △ |
+| GPU Plugin | | https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/VM_KubeVirt/GPU%20plugin | O |
 
 * infra 설치
 - k8s : https://docs.google.com/document/d/1bWnmyP7RPUtJQKCRdojoDj1miuLKom9WBoCfbFpI_9M/edit

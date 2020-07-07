@@ -3,6 +3,7 @@
 
 ## 구성 요소
 * hypercloud-console ([tmaxcloudck/hypercloud-console](https://hub.docker.com/r/tmaxcloudck/hypercloud-console/tags))
+* 가이드 작성 시점(2020/07/07) 최신 버전은 1.1.34.0 입니다.
 
 ## Prerequisites
 * Kubernetes, HyperCloud4 Operator, Grafana, Istio(Kiali, Jaeger), Prometheus가 설치되어 있어야 합니다.
@@ -61,13 +62,18 @@
     
     * `kubectl create -f 3.deployment-pod.yaml` 을 실행합니다.
 * 비고
-    * HCDC 모드로 설치할 경우 DNS 서버 세팅이 필요하고, console과 portal이 같은 도메인의 서브도메인을 사용해야 합니다. (포트는 둘 다 https 기본 포트인 443 사용)
-
+    * HCDC 모드로 설치할 경우
+	    * DNS 서버 세팅이 필요하고, console과 portal이 같은 도메인의 서브도메인을 사용해야 합니다. (포트는 둘 다 https 기본 포트인 443 사용)
+    * Multicluster console을 설치할 경우
+	    * image로 `tmaxcloudck/hypercloud-console:1.1.x.x` 대신, `tmaxcloudck/hypercloud-multicluster-console:0.0.x.x` 을 사용합니다.
+		    * [tmaxcloudck/hypercloud-multicluster-console](https://hub.docker.com/r/tmaxcloudck/hypercloud-multicluster-console/tags)
+		    * 가이드 작성 시점(2020/07/07) 최신 버전은 0.0.14.0 입니다. 
+	    * `@@KIALI@@`와 `@@JAEGER@@`를 입력하지 않고, 해당 행을 삭제합니다.
 
 ## Step 5. 동작 확인
 * 목적 : console이 정상 동작하는지 확인한다.
 * 순서 : 
-    1. `kubectl get po -n console-system(Step 1에서 @@NAME_NS@@ 대신 기입한 이름)` 을 실행하여 pod가 running 중인지 확인합니다.
+    1. `kubectl get po -n console-system(Step 1에서 @@NAME_NS@@ 대신 기입한 이름)` 을 실행하여 pod가 running 상태인지 확인합니다.
     2. `kubectl get svc -n console-system(Step 1에서 @@NAME_NS@@ 대신 기입한 이름)` 을 실행하여 EXTERNAL-IP를 확인합니다.
     3. `https://EXTERNAL-IP` 로 접속하여 동작을 확인합니다.
-	    * 단, HCDC 모드에서 테스트하려 하는 경우에는 IP가 아니라 Domain Name을 통해 접속해야 합니다.
+	    * 단, HCDC 모드인 경우에는 IP가 아니라 Domain Name을 통해 접속해야 합니다.

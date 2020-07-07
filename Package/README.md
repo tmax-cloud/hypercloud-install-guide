@@ -17,8 +17,8 @@
 	    * HyperCloud 설치 시 필요한 패키지들로 yum Reposiroty 구축		*  
 
 ## Install Steps
-0. [Install OS](https://https://github.com/tmax-cloud/hypercloud-install-guide/edit/master/Package/README.md#step-0-Install-OS)
-1. [Create Local Repository](https://https://github.com/tmax-cloud/hypercloud-install-guide/edit/master/Package/README.md#step-1-Local-Repository-구축)
+0. [Install OS](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Package/README.md#step-0-install-os)
+1. [Create Local Repository](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Package/README.md#step-1-local-repository-%EA%B5%AC%EC%B6%95)
 
 
 ## Step 0. Install OS

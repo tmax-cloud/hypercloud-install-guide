@@ -158,7 +158,7 @@ spec:
                     values:
       containers:
         - name: kubevirt-node-fail-controller
-          image: kubevirt-node-fail-controller:%VERSION%
+          image: kubevirt-node-fail-controller:$FAILOVER_VERSION
           env:
           - name: CALICO_DATASTORE_TYPE
             value: kubernetes

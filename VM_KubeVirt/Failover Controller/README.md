@@ -1,106 +1,6 @@
-# KubeVirt Node Fail Controller
+## Failover Controller 설치 가이드
 
-This controller is a simple controller for KubeVirt Failover.
-
-This documentation contains information about **`the controller binary`** and **`how to install controller to k8s cluster`**.
-
-## About
-
-KubeVirt controller dosen't recreate virt-launcher before the virt-launcher pod on the failed node is deleted completely.
-
-So, we can use this controller to make virt-controller to recovery VMI and virt-launcher container on the failed node.
-
-Watching virt-launcher pods status, it detects pods having Terminating status and **`'tmax/virt-auto-failover="true"'`** label. And it checks Node and VMI ready status are unknown/false. It means that nodes failed, and the virt-launcher pod was evicted. So this controller deletes the VMI forcingly connected the virt-launcher pod.
-
-## How to set your VM to be auto-recreated on node fail situation
-
-If you want your virt-launcher pods and VMIs to be recreate on node fail situation automatically, you must
-1. only use PVC having `"Access Modes:ReadWriteMany"`.
-2. add the label below to your VM description.
-3. add live-restore configuration to docker configuration.
-
-
-**Label**: If you want your virt-launcher pods and VMIs to be recreate on node fail situation automatically, you must add
-
-    tmax/virt-auto-failover="true"
-
-**Label Location Example**: put the given label into `"spec.template.metadata.labels"`
-
-```apiVersion: kubevirt.io/v1alpha3
-kind: VirtualMachine
-metadata:
-  name: testvm
-spec:
-  running: false
-  template:
-    metadata:
-      labels:
-        kubevirt.io/size: small
-        kubevirt.io/domain: testvm
-        tmax/virt-auto-failover: "true" # this is it!!!
-```
-## How to add live-restore on docker Config
-
-**path**:
-
-  /etc/docker/daemon.json
-
-**Contents**:
-
-```
-{
-  "live-restore": true
-}
-```
-
-**Apply**:
-
-  systemctl reload docker
-
-
-## About Calico User-set IP
-
-If you set calico user-set IP, this controller release it from the failed virt-launcher pod, before delete VMI to make a new virt-launcher pod can use the same user-set IP.
-
-**`Only one IP is surported.`**
-
-**Calico User-set IP Setting Example**
-
-```
-apiVersion: kubevirt.io/v1alpha3
-kind: VirtualMachine
-metadata:
-  name: vm-sample
-  annotations:
-    cni.projectcalico.org/ipAddrs: "[\"10.244.235.169\"]" # this is it!!!
-```
-
-## How to download install files including image, k8s controller install yaml
-
-You can download docker image having this controller binary by version from 192.168.1.150 sftp server.
-
-**path**:
-
-    /home/ck-ftp/binary/ck3-hypercloud/kubevirt/kubevirt-node-fail-controller/kubevirt-node-fail-controller-${version number}
-
-**files**:
-
-    kubevirt-node-fail-controller.tar  # docker image tar file
-    kubevirt-node-fail-controller.yaml  # k8s cluster install yaml
-    README.md
-
-**Important**: kubevirt-node-fail-controller.yaml include a specific image version
-
-## How to import docker image using tar file
-
-Use the command below. You must use load command.
-
-```sh
-sudo docker load -i kubevirt-node-fail-controller.tar
-```
-
-## How to install this controller to k8s cluster
-**Component & Version**:
+**구성 요소 및 버전**:
 
 * failover-controller([tmaxcloudck/kube-failover-controller:v1.0](https://hub.docker.com/layers/tmaxcloudck/kube-failover-controller/v1.0/images/sha256-537c04aa66e99fff283151a2de6afba1f17810cfef14e4ff21e785da9de93da2?context=repo))
 
@@ -111,53 +11,52 @@ sudo docker load -i kubevirt-node-fail-controller.tar
 3. import controller docker image before kubectl apply
 4. This yaml is used for 'root' user
 
-## Environment
+
+## 폐쇄망 설치 가이드:
+
+1. 폐쇄망에서 설치하는 경우
+
+  *  작업 디렉토리 생성 및 환경 설정
+  ```sh
+  $ mkdir -p ~/failover-controller
+  $ export FAILOVER_VERSION=v1.0
+  $ export DOCKER_REGISTRY=${docker_registry}
+  $ export FAILOVER_HOME=~/failover-controller
+  $ cd $FAILOVER_HOME
+  ```
+
+  * failover-controller.tar를 Master 환경에 다운로드 한다.
+    * 배포 서버에서 failover-controller download
+
+  * failover-controller.tar를 docker-registry에 배포 한다.
+  ```sh
+  $ docker load -i failover-controller.tar 
+  $ docker tag kubevirt-node-fail-controller:${FAILOVER_VERSION} ${DOCKER_REGISTRY}/kubevirt-node-fail-controller:${FAILOVER_VERSION}
+  $ docker push ${DOCKER_REGISTRY}/kubevirt-node-fail-controller:${FAILOVER_VERSION}
+  % sed -i "s/kubevirt-node-fail-controller:$FAILOVER_VERSION/$DOCKER_REGISTRY\/kubevirt-node-fail-controller:$FAILOVER_VERSION/g" kubevirt-node-fail-controller.yaml
+  ```
+  
+## Install Step:
+
+1. [Controller 배포](#step-1)
+2. [Controller 확인](#step-2)
+
+# Step 1. Controller 배포:
+
+* k8s cluster 환경에서 failover controller를 배포한다. 
 
 ```sh
-$ export FAILOVER_VERSION=v1.0
-$ export DOCKER_REGISTRY=${docker_registry}
+$ kubectl apply -f kubevirt-node-fail-controller.yaml
 ```
+# Step 2. Controller 확인:
 
-## Closed Network Installation:
-
-1. [Build image]()
-2. [Deploy the image to docker registry]()
-3. [Apply the Failover Controller]()
-
-## Build binary & image
+* k8s cluster의 master node에 controller가 정상적으로 배포되었는지 확인한다.(status Running 확인)
 
 ```sh
-# change working directory having main.go
-cd src/controller/
-
-# build
-go build
-
-cd src/controller/
-
-docker build --tag kubevirt-node-fail-controller:${FAILOVER_VERSION} .
-
+$ kubectl get pods -n kubevirt-system
 ```
+![image](figure/controller.PNG)
 
-## Deploy the image to docker registry
-
-```sh
-docker tag kubevirt-node-fail-controller:${FAILOVER_VERSION} ${DOCKER_REGISTRY}/kubevirt-node-fail-controller:${FAILOVER_VERSION}
-
-docker push ${DOCKER_REGISTRY}/kubevirt-node-fail-controller:${FAILOVER_VERSION}
-
-```
-
-## Apply the Failover Controller
-
-```sh
-
-cd ../../manifests/
-
-sed -i "s/kubevirt-node-fail-controller:%VERSION%/$DOCKER_REGISTRY\/kubevirt-node-fail-controller:$FAILOVER_VERSION/g" kubevirt-node-fail-controller.yaml
-
-kubectl apply -f kubevirt-node-fail-controller.yaml
-```
 
 ## Cleanup
 

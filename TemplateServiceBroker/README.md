@@ -27,7 +27,7 @@ TemplateServiceBroker 설치 전, Hypercloud operator 및 catalog controller mod
 
    ```bash
    # TEMPLATE SERVICE BROKER 이미지 Pull
-   docker pull tmaxcloudck/template-service-broker:b\${TSB_VERSION}
+   docker pull tmaxcloudck/template-service-broker:b${TSB_VERSION}
 
    # 이미지 Save
    docker save tmaxcloudck/template-service-broker:b${TSB_VERSION} > template-service-broker_b${TSB_VERSION}.tar
@@ -42,10 +42,10 @@ TemplateServiceBroker 설치 전, Hypercloud operator 및 catalog controller mod
    REGISTRY=[IP:PORT]
 
    # 이미지 Load
-   docker load < template-service-broker_b\${TSB_VERSION}.tar
+   docker load < template-service-broker_b${TSB_VERSION}.tar
 
    # 이미지 Tag
-   docker tag tmaxcloudck/template-service-broker:b${TSB_VERSION} ${REGISTRY}tmaxcloudck/template-service-broker:b\${TSB_VERSION}
+   docker tag tmaxcloudck/template-service-broker:b${TSB_VERSION} ${REGISTRY}tmaxcloudck/template-service-broker:b${TSB_VERSION}
 
    # 이미지 Push
    docker push ${REGISTRY}/tmaxcloudck/template-service-broker:b${TSB_VERSION}

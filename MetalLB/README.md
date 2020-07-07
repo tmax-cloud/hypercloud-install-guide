@@ -48,7 +48,7 @@
     ```
 
 ## Install Steps
-0. [metallb.yaml 수정](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/MetalLB#step0-metallb-yaml-%EC%88%98%EC%A0%95)
+0. [metallb.yaml 수정]
 1. [metallb 설치]
 2. [metallb 대역 설정]
 

@@ -15,7 +15,7 @@
 5. [동작 확인](#step-5-동작-확인)
 
 ## Step 1. Namespace, ResourceQuota, ServiceAccount, ClusterRole, ClusterRoleBinding 생성
-* 목적 : console에서 사용할 Namespace, ResourceQuota, ServiceAccount, ClusterRole, ClusterRoleBinding을 생성한다.
+* 목적 : console에 필요한 Namespace, ResourceQuota, ServiceAccount, ClusterRole, ClusterRoleBinding을 생성한다.
 * 순서 : 
     1. 작업 폴더에 [1.initialization.yaml](https://raw.githubusercontent.com/tmax-cloud/hypercloud-console/hc-dev/install-yaml/1.initialization.yaml) 파일을 생성하고, `@@NAME_NS@@`들을 모두 원하는 문자열로 교체합니다.
 	    * 이 과정에서 `@@NAME_NS@@` 대신 기입하는 문자열은 console이 설치될 namespace의 이름이 됩니다.

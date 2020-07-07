@@ -70,7 +70,7 @@
 
 
 ## Install Steps
-0. [calico.yaml 수정]
+0. [calico.yaml 수정](.#step0.-calico-yaml-수정)
 1. [calico 설치]
 2. [calicoctl 설치]
 

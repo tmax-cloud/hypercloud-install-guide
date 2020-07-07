@@ -2,6 +2,8 @@
 # k8s-master 설치 가이드
 
 ## 구성 요소 및 버전
+* cri-o (v1.17.4)
+* kubeadm, kubelet, kubectl (v1.17.6)
 * k8s.gcr.io/kube-apiserver:v1.17.6
 * k8s.gcr.io/kube-proxy:v1.17.6
 * k8s.gcr.io/kube-scheduler:v1.17.6
@@ -9,8 +11,6 @@
 * k8s.gcr.io/etcd:3.4.3-0
 * k8s.gcr.io/pause:3.1
 * k8s.gcr.io/coredns:1.6.5
-* cri-o (v1.17.4)
-* kubeadm, kubelet, kubectl (v1.17.6)
 
 ## Prerequisites
 

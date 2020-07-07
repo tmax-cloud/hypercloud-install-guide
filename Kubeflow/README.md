@@ -28,7 +28,10 @@
 2. Istio
     * v1.5.1
         * https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio
-3. GPU plug-in (Optional)
+3. Prometheus
+    * kubeflow의 모니터링 정보를 제공하기 위해 필요하다.
+        * http://192.168.1.150:10080/hypercloud/hypercloud/wikis/Prometheus-InstallerGuide
+4. GPU plug-in (Optional)
     * Kubernetes cluster 내 node에 GPU가 탑재되어 있으며 AI DevOps 기능을 사용할 때 GPU가 요구될 경우에 필요하다.
         * https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Pod_GPU%20plugin
 

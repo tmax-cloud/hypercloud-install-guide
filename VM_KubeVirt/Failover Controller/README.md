@@ -25,15 +25,19 @@
   $ cd $FAILOVER_HOME
   ```
 
-  * failover-controller.tar를 Master 환경에 다운로드 한다.
-    * 배포 서버에서 failover-controller download
+  * 외부 통신이 가능한 환경에서 필요한 이미지 및 yaml 파일을 다운받고 해당 파일을 Master의 $FAILOVER_HOME으로 이동시킨다.
+  ```sh
+  $ docker pull tmaxcloudck/kube-failover-controller:$FAILOVER_VERSION
+  $ docker save tmaxcloudck/kube-failover-controller:$FAILOVER_VERSION > failover-controller.tar
+  $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/VM_KubeVirt/Failover%20Controller/yaml/failover-controller.yaml
+  ```
 
   * failover-controller.tar를 docker-registry에 배포 한다.
   ```sh
   $ docker load -i failover-controller.tar 
   $ docker tag kubevirt-node-fail-controller:${FAILOVER_VERSION} ${DOCKER_REGISTRY}/kubevirt-node-fail-controller:${FAILOVER_VERSION}
   $ docker push ${DOCKER_REGISTRY}/kubevirt-node-fail-controller:${FAILOVER_VERSION}
-  % sed -i "s/kubevirt-node-fail-controller:$FAILOVER_VERSION/$DOCKER_REGISTRY\/kubevirt-node-fail-controller:$FAILOVER_VERSION/g" kubevirt-node-fail-controller.yaml
+  $ sed -i "s/kubevirt-node-fail-controller:$FAILOVER_VERSION/$DOCKER_REGISTRY\/kubevirt-node-fail-controller:$FAILOVER_VERSION/g" $FAILOVER_HOME/yaml/kubevirt-node-fail-controller.yaml
   ```
   
 ## Install Step:
@@ -46,6 +50,7 @@
 * k8s cluster 환경에서 failover controller를 배포한다. 
 
 ```sh
+
 $ kubectl apply -f kubevirt-node-fail-controller.yaml
 ```
 # Step 2. Controller 확인:

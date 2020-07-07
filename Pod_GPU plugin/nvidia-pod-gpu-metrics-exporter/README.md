@@ -5,9 +5,9 @@
 
 ## Prerequisites
 1. NVIDIA driver가 설치되어있어야 합니다.
-    * [NVIDIA Device Plugin 가이드 참고](../NVIDIA%20Device%20Plugin/README.md#step-0-nvidia-driver-설치)
+    * [NVIDIA Device Plugin 가이드 참고](../nvidia-device-plugin/README.md#step-0-nvidia-driver-설치)
 2. nvidia-docker가 설치되어있어야 합니다.
-	* [NVIDIA Device Plugin 가이드 참고](../NVIDIA%20Device%20Plugin/README.md#step-1-nvidia-docker2-설치)
+	* [NVIDIA Device Plugin 가이드 참고](../nvidia-device-plugin/README.md#step-1-nvidia-docker2-설치)
 3. Prometheus가 설치되어있어야 합니다.
 	* [Prometheus 가이드 참고](../../Prometheus/README.md)
 4. 필요한 yaml을 미리 다운로드합니다.
@@ -19,9 +19,9 @@
         ```
 	* 필요한 yaml을 다운로드 합니다.
 		```bash
-		$ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/Pod_GPU%20plugin/NVIDIA%20Pod%20GPU%20Metrics%20Exporter/pod-gpu-metrics-exporter-daemonset.yaml
-		$ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/Pod_GPU%20plugin/NVIDIA%20Pod%20GPU%20Metrics%20Exporter/pod-gpu-metrics-exporter-service.yaml
-		$ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/Pod_GPU%20plugin/NVIDIA%20Pod%20GPU%20Metrics%20Exporter/pod-gpu-metrics-exporter-servicemonitor.yaml
+		$ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/Pod_GPU%20plugin/nvidia-pod-gpu-metrics-exporter/pod-gpu-metrics-exporter-daemonset.yaml
+		$ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/Pod_GPU%20plugin/nvidia-pod-gpu-metrics-exporter/pod-gpu-metrics-exporter-service.yaml
+		$ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/Pod_GPU%20plugin/Nnvidia-pod-gpu-metrics-exporter/pod-gpu-metrics-exporter-servicemonitor.yaml
 		```
 
 ## 폐쇄망 설치 가이드

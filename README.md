@@ -8,7 +8,7 @@
 | K8s Master |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/K8S_Master/README.md | O |
 | K8s Worker |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/K8S_Worker/README.md | O |
 | CNI | | https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/CNI | O |
-| Rook Ceph | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Rook%20Ceph/README.md | O |
+| Rook Ceph | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Rook%20Ceph/README.md | X |
 | HyperCloud Operator | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/README.md | O |
 | HyperCloud Webhook | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Webhook/README.md | O |
 | Console | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Console/README.md | O |

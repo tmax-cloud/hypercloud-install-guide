@@ -35,7 +35,7 @@
 ### VM_Module (Optional)
 | Module | Version | Guide | 진행률(O/△/X) |
 | ------ | ------ | ------ | ------ |
-| KubeVirt | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/KubeVirt/README.md | O |
+| KubeVirt | | https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/VM_KubeVirt | O |
 | CDI | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/VM_KubeVirt/CDI/README.md | △ |
 | ImageController | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/VM_KubeVirt/Image%20Controller/README.md | △ |
 | FailoverController | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/VM_KubeVirt/Failover%20Controller/README.md | O |

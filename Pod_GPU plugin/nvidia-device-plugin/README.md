@@ -18,7 +18,7 @@
         ```
     * 필요한 tar파일 다운로드 및 아카이브 해제
         ```bash
-        $ wget -O nvidia-installer.tar https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/Pod_GPU%20plugin/NVIDIA%20Device%20Plugin/k8s-gpu-installer-${OS_RELEASE}-v${GPU_INSTALLER_VERSION}.tar
+        $ wget -O nvidia-installer.tar https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/Pod_GPU%20plugin/nvidia-device-plugin/k8s-gpu-installer-${OS_RELEASE}-v${GPU_INSTALLER_VERSION}.tar
         $ tar -xzvf nvidia-installer.tar
         ```
 

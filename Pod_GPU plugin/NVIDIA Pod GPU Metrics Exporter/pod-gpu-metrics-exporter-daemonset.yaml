@@ -13,8 +13,15 @@ spec:
         app: pod-gpu-metrics-exporter
       name: pod-gpu-metrics-exporter
     spec:
-      nodeSelector:
-        hardware-type: NVIDIAGPU
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: tmax/gpudriver
+                operator: In
+                values:
+                - 'nvidia'
       containers:
       - image: nvidia/pod-gpu-metrics-exporter:v1.0.0-alpha
         name: pod-nvidia-gpu-metrics-exporter

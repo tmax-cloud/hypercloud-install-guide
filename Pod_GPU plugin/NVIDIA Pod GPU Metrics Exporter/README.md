@@ -56,7 +56,7 @@
 * 생성 순서 : 
     * NVIDIA GPU node에 label 추가
 	    ```bash
-		$ kubectl label nodes ${node-name} hardware-type=NVIDIAGPU
+		$ kubectl label nodes {GPU node name} tmax/gpudriver=nvidia
 		```
 
 ## Step 1. GPU Metrics Exporter DaemonSet 배포

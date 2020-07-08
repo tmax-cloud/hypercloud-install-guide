@@ -48,7 +48,7 @@
     $ sudo docker tag istio/pilot:${ISTIO_VERSION} ${REGISTRY}/istio/pilot:${ISTIO_VERSION}
     $ sudo docker tag istio/proxyv2:${ISTIO_VERSION} ${REGISTRY}/istio/proxyv2:${ISTIO_VERSION}
     $ sudo docker tag jaegertracing/all-in-one:${JAEGER_VERSION} ${REGISTRY}/jaegertracing/all-in-one:${JAEGER_VERSION}
-    $ sudo docker tag quay.io/kiali/kiali:${KIALI_VERSION} ${REGISTRY}/quay.io/kiali/kiali:${KIALI_VERSION}
+    $ sudo docker tag quay.io/kiali/kiali:${KIALI_VERSION} ${REGISTRY}/kiali/kiali:${KIALI_VERSION}
     
     $ sudo docker push ${REGISTRY}/istio/pilot:${ISTIO_VERSION}
     $ sudo docker push ${REGISTRY}/istio/proxyv2:${ISTIO_VERSION}
@@ -142,7 +142,7 @@
 * 생성 순서 : [6.istio-metric.yaml](yaml/6.istio-metric.yaml) 실행
 * 비고 : 
     * http://$PROMETHEUS_URL/graph 에 접속해 'envoy_'로 시작하는 istio 관련 metric이 수집되었는지 확인한다.
-    * 만약 istio 관련 metric이 수집되지 않을 경우, Prometheus의 권한설정 문제일 수 있다. [prometheus-clusterRole.yaml](../Prometheus/manifests/prometheus-clusterRole.yaml)을 적용하거나 Prometheus를 최신 버전으로 설치한다.
+    * 만약 istio 관련 metric이 수집되지 않을 경우, Prometheus의 권한설정 문제일 수 있다. [prometheus-clusterRole.yaml](../Prometheus/yaml/manifests/prometheus-clusterRole.yaml)을 적용하거나 Prometheus를 최신 버전으로 설치한다.
 
 
 

@@ -98,9 +98,12 @@
 * 생성 순서: [2.kiali.yaml](yaml/2.kiali.yaml) 실행
 * 비고 :
     * kiali에 접속하기 위한 서비스를 [원하는 타입](yaml/2.kiali.yaml#L346)으로 변경할 수 있다.
-    * kiali에 접속하기 위한 방식을 [strategy](yaml/2.kiali.yaml#L184)를 configmap을 수정해 변경할 수 있다.(token: service account token)
+    * kiali에 접속하기 위한 방식을 [strategy](yaml/2.kiali.yaml#L184)를 configmap을 수정해 변경할 수 있다.
+    * kiali에서 token을 strategy를 default로 제공하려고 하고 있다.(token: service account token)
     * login 옵션의 경우 kiali에 접속하기 위한 [id/password](yaml/2.kiali.yaml#L215)를 configmap을 수정해 변경할 수 있다.(default: admin/admin)
+    * login 옵션은 추후 kiali에서 없어질 수 있다.
     * kilai pod가 running임을 확인한 뒤 http://$KIALI_URL/api/kiali 에 접속해 정상 동작을 확인한다.
+    * hypercloud console 과 연동을 위해 kiali default web_root를 수정하였다.
 	
 ![image](figure/kiali-ui.png)
 
@@ -112,6 +115,7 @@
 * 비고 : 
     * jaeger ui에 접속하기 위한 서비스를 [원하는 타입](yaml/3.istio-tracing.yaml#L245)으로 변경할 수 있다.
     * istio-tracing pod가 running임을 확인한 뒤 http://$JAEGER_URL/api/jaeger/search 에 접속해 정상 동작을 확인한다.
+    * hypercloud console 과 연동을 위해 jeager default QUERY_BASE_PATH를 수정하였다.
 	
 ![image](figure/jaeger-ui.png)
 

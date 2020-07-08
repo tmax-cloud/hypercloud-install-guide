@@ -3,8 +3,8 @@
     * https://metallb.universe.tf/
 
 ## 구성 요소 및 버전
-* metallb/controller ([metallb/controller:v0.8.3](https://hub.docker.com/layers/metallb/controller/v0.8.3/images/sha256-c9e34d739a8911ffc15bc40d2318d4d96c9c9638e3d1ef4e365276206c1e991c?context=explore))
-* metallb/speaker ([metallb/speaker:v0.8.3](https://hub.docker.com/layers/metallb/speaker/v0.8.3/images/sha256-7dc1824672e4b00de3a781cf915a7c5b591ebb7102dacfaa5909529b8eb476b3?context=explore))
+* metallb/controller ([metallb/controller:v0.8.2](https://hub.docker.com/layers/metallb/controller/v0.8.2/images/sha256-d1fe971bdb986915cafe339444329d8ef64cb59b11aaf7b22aeb167fdbd67aad?context=explore))
+* metallb/speaker ([metallb/speaker:v0.8.2](https://hub.docker.com/layers/metallb/speaker/v0.8.2/images/sha256-a9c822e640fa5aed6f244a47bf7a66e5d1dac765479af44b954f4ae86072943d?context=explore))
 
 ## Prerequisites
 
@@ -16,7 +16,7 @@
     ```bash
     $ mkdir -p ~/metallb-install
     $ export METALLB_HOME=~/metallb-install
-    $ export METALLB_VERSION=v0.8.3
+    $ export METALLB_VERSION=v0.8.2
     $ cd $METALLB_HOME
     ```
 
@@ -30,7 +30,7 @@
 
     * metallb yaml을 다운로드한다. 
     ```bash
-    $ curl -O -I https://raw.githubusercontent.com/google/metallb/v0.8.3/manifests/metallb.yaml
+    $ curl -O -I https://raw.githubusercontent.com/google/metallb/v0.8.2/manifests/metallb.yaml
     $ curl -O -I metallb_cidr.yaml (링크 수정하기)
     ```
 
@@ -48,12 +48,12 @@
     ```
 
 ## Install Steps
-0. [metallb.yaml 수정](#step0 "step0")
-1. [metallb 설치](#step1 "step1")
-2. [metallb 대역 설정](#step2 "step2")
+0. [metallb.yaml 수정]
+1. [metallb 설치]
+2. [metallb 대역 설정]
 
-<h2 id="step0"> Step0. metallb yaml 수정 </h2>
 
+## Step0. metallb yaml 수정
 * 목적 : `metallb yaml에 이미지 registry, 버전 정보 수정`
 * 생성 순서 : 
     * 아래의 command를 수정하여 사용하고자 하는 image 버전 정보를 수정한다.
@@ -67,8 +67,8 @@
 
 	```
 
-<h2 id="step1"> Step 1. metallb </h2>
 
+## Step 1. metallb 설치
 * 목적 : `metallb 설치`
 * 생성 순서: metallb.yaml 설치  `ex) kubectl apply -f metallb.yaml`
 * 비고 : 
@@ -77,9 +77,7 @@
     * speaker-xxxxx (모든 노드에 pod)
 
 
-
-<h2 id="step2"> Step 2. metallb 대역 설정 </h2>
-
+## Step 2. metallb 대역 설정
 * 목적 : `metallb에서 사용할 대역 설정 (호스트와 동일한 대역 사용)`
 * 생성 순서: metallb_cidr.yaml 적용  `ex) kubectl apply -f metallb_cidr.yaml`
 * 비고 :
@@ -98,18 +96,6 @@
         - 172.22.8.160-172.22.8.180
 
 ```
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

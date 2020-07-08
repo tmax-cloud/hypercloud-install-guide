@@ -44,8 +44,8 @@
 
 
 ## Install Steps
-0. [deploy yaml 수정](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio#step0-istio-yaml-%EC%88%98%EC%A0%95)
-1. [Nginx Ingress Controller 배포](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio#step-1-istio-namespace-%EB%B0%8F-customresourcedefinition-%EC%83%9D%EC%84%B1)
+0. [deploy yaml 수정](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/IngressNginx#step0-deploy-yaml-%EC%88%98%EC%A0%95)
+1. [Nginx Ingress Controller 배포](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/IngressNginx#step-1-nginx-ingress-controller-%EB%B0%B0%ED%8F%AC)
 
 
 ## Step0. deploy yaml 수정

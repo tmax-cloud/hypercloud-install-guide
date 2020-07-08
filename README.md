@@ -29,7 +29,7 @@
 | EFK | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/EFK/README.md | O |
 | Multicloud-console |  |  | X |
 | Capi provider |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Capi/README.md | O |
-| nginx-ingress controller |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/IngressNginx/README.md | O |
+| NGINX Ingress Controller | 0.33.0 | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/IngressNginx/README.md | O |
 | kubefed |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Fed/README.md | O |
 | Grafana |  |  | X |
 

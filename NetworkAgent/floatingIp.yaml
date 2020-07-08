@@ -1,0 +1,7 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: natips
+  namespace: kube-system
+data:
+  NatIpList: ["10.10.0.6", "10.10.0.7", "10.10.0.8"]

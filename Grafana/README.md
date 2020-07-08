@@ -2,9 +2,9 @@
 # Grafana 설정 가이드
 
 ## Install Steps
-1. [ConfigMap에 Grafana config 생성](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Prometheus#step-1-prometheus-namespace-%EB%B0%8F-crd-%EC%83%9D%EC%84%B1)
-2. [Deployment에 Grafana config 적용](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Prometheus#step-2-prometheus-%EB%AA%A8%EB%93%88%EB%93%A4%EC%97%90-%EB%8C%80%ED%95%9C-deploy-%EB%B0%8F-rbac-%EC%83%9D%EC%84%B1)
-3. [시연 대시보드 UID 및 설정 변경](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Prometheus#step-3-kube-scheduler-%EC%99%80-kube-controller-manager-%EC%84%A4%EC%A0%95)
+1. [ConfigMap에 Grafana config 생성](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Grafana/README.md#step-1-configmap%EC%97%90-grafana-config-%EC%83%9D%EC%84%B1)
+2. [Deployment에 Grafana config 적용](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Grafana/README.md#step-2-deployment%EC%97%90-grafana-config-%EC%A0%81%EC%9A%A9)
+3. [시연 대시보드 UID 및 설정 변경](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Grafana/README.md#step-3-%EC%8B%9C%EC%97%B0-%EB%8C%80%EC%8B%9C%EB%B3%B4%EB%93%9C-uid-%EB%B0%8F-%EC%84%A4%EC%A0%95-%EB%B3%80%EA%B2%BD)
 	
 
 
@@ -18,7 +18,7 @@
 
 ## Step 2. Deployment에 Grafana config 적용
 * 목적 : 변경한 설정값을 그라파나 Deployment에 적용함
-* monitoring 네임스페이스의 grafana Deployment를 다음 yaml로 변경한다([manifests](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Grafana/yaml/grafana.yaml))
+* monitoring 네임스페이스의 grafana Deployment를 다음 yaml로 변경한다([deployment](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Grafana/yaml/grafana.yaml))
 * 비고
 	* 기존 Deployment의 내용에서 volumes와 volumeMounts에 grafana-config를 추가한 것이다
 
@@ -26,7 +26,7 @@
 
 ## Step 3. 시연 대시보드 UID 및 설정 변경
 * 목적 : 대시보드 설정 변경
-* monitoring 네임스페이스의 grafana-dashboard-k8s-resources-namespace ConfigMaps를 다음 yaml로 변경한다([manifests](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Grafana/yaml/grafana-dashboard-k8s-resources-namespace.yaml))
+* monitoring 네임스페이스의 grafana-dashboard-k8s-resources-namespace ConfigMaps를 다음 yaml로 변경한다([dashboard](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Grafana/yaml/grafana-dashboard-k8s-resources-namespace.yaml))
 * 비고
 	* 기존 ConfigMaps의 내용에서 uid와 변수의 hide값을 변경한 것이다
 

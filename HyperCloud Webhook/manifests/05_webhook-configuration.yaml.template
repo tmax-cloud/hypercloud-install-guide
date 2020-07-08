@@ -26,33 +26,3 @@ webhooks:
         operator: In
         values: ["true"]
     failurePolicy: Fail
----
-apiVersion: admissionregistration.k8s.io/${ADM_VERSION}
-kind: ValidatingWebhookConfiguration
-metadata:
-  name: hypercloud4-validator
-webhooks:
-  - name: hypercloud4-webhook-svc.hypercloud4-system.svc
-    clientConfig:
-      service:
-        name: hypercloud4-webhook-svc
-        namespace: hypercloud4-system
-        path: "/validate"
-        port: 443
-      caBundle: ${HYPERCLOUD4_CA_CERT}
-    rules:
-      - operations: ["CREATE","UPDATE"]
-        apiGroups: [""]
-        apiVersions: ["v1"]
-        resources: ["configmaps"]
-        scope: "Namespaced"
-    sideEffects: None
-    admissionReviewVersions: ${ADM_VERSION2}
-    timeoutSeconds: 10
-    namespaceSelector:
-      matchExpressions:
-      - key: webhook
-        operator: In
-        values: ["true"]
-    failurePolicy: Fail
-

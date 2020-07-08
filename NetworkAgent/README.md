@@ -40,6 +40,7 @@
 <h2 id="step0">
 Step 0. IPPool 설정(Static IP 전용. Static IP를 사용하지 않을 경우 Skip)
 </h2>
+
 * 목적 : `Static IP 사용을 위한 Public 대역 IP Pool 설정`
 * 생성 순서 : 
     * Default IPPool 설정
@@ -66,6 +67,7 @@ Step 0. IPPool 설정(Static IP 전용. Static IP를 사용하지 않을 경우 
 <h2 id="step1">
 Step 1. IPPool 설정(Floating IP 전용. Floating IP를 사용하지 않을 경우 Skip)
 </h2>
+
 * 목적 : `Floating IP 사용을 위한 Public 대역 IP Pool 설정`
 * 생성 순서 : 
     * ConfigMap 생성
@@ -80,6 +82,7 @@ Step 1. IPPool 설정(Floating IP 전용. Floating IP를 사용하지 않을 경
 <h2 id="step2">
 Step 2. Hypernet-Local-Agent 설치
 </h2>
+
 * 목적 : `Hypernet-Local-Agent 설치`
 * 생성 순서 : 
     *  hypernet-local-agent.yaml 설정

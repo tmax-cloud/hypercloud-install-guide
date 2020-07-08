@@ -50,18 +50,37 @@
 4. 설치에 필요한 crd를 생성 합니다.
 - kubectl apply -f crds/ ([폴더](./yaml_install/crds))
 
-5. 설치에 필요한 yaml을 적용 합니다.
-- kubectl apply -f cleaner-job.yaml ([파일](./yaml_install/cleaner-job.yaml))
-- kubectl apply -f controller-manager-deployment.yaml ([파일](./yaml_install/controller-manager-deployment.yaml))
-- kubectl apply -f controller-manager-service.yaml ([파일](./yaml_install/controller-manager-service.yaml))
-- kubectl apply -f migration-job ([파일](./yaml_install/migration-job.yaml))
-- kubectl apply -f pre-migration-job.yaml ([파일](./yaml_install/pre-migration-job.yaml))
-- kubectl apply -f rbac.yaml ([파일](./yaml_install/rbac.yaml))
+5. catalog controller namespace 및 servcice account를 생성 합니다.
+- kubectl create namespace catalog
+- kubectl config set-context --current --namespace=catalog
 - kubectl apply -f serviceaccounts.yaml ([파일](./yaml_install/serviceaccounts.yaml))
-- kubectl apply -f webhook-deployment.yaml ([파일](./yaml_install/webhook-deployment.yaml))
+- kubectl apply -f rbac.yaml ([파일](./yaml_install/rbac.yaml))
+
+6. catalog-manager를 생성합니다.
+- kubectl apply -f controller-manager-deployment.yaml ([파일](./yaml_install/controller-manager-deployment.yaml))
+    - 비고: 각 파일에 image 항목이 있는 경우, registry주소의 이미지를 사용해야 합니다. (${REGISTRY}/quay.io/kubernetes-service-catalog/service-catalog:v${CATALOG_VERSION})
+- kubectl apply -f controller-manager-service.yaml ([파일](./yaml_install/controller-manager-service.yaml))
+
+7. webhook 인증에 필요한 키를 생성 합니다.
+- openssl genrsa -out rootca.key 2048
+- openssl req -x509 -new -nodes -key rootca.key -sha256 -days 3650 -subj /C=KO/ST=None/L=None/O=None/CN=catalog-catalog-webhook -out rootca.crt
+    - 비고: .rnd 파일이 없어서 해당 명령어 실행이 안되는 경우, /etc/ssl/openssl.cnf 파일의  "RANDFILE = $ENV::HOME/.rnd" 부분을 주석처리 합니다.
+- v3.ext 파일 생성 ([파일](./ca/v3.ext))
+- openssl req -new -newkey rsa:2048 -sha256 -nodes -keyout server.key -subj /C=KO/ST=None/L=None/O=None/CN=catalog-catalog-webhook -out server.csr
+- openssl x509 -req -in server.csr -CA rootca.crt -CAkey rootca.key -CAcreateserial -out server.crt -days 3650 -sha256 -extfile ./v3.ext
+- openssl base64 -in rootca.crt -out key0
+- openssl base64 -in server.crt -out cert
+- openssl base64 -in server.key -out key
+
+8. catalog-webhook을 생성 합니다.
 - kubectl apply -f webhook-register.yaml ([파일](./yaml_install/webhook-register.yaml))
+    - 비고: 해당 파일의 변수를 7번에서 생성한 키로 대체 합니다. (단, 생성된 키 공백은 모두 지우셔야 합니다.)
+        - {{ b64enc $ca.Cert }} --> key0 로 대체
+        - {{ b64enc $cert.Cert }} --> cert 로 대체
+        - {{ b64enc $cert.Key }} --> key 로 대체
+- kubectl apply -f webhook-deployment.yaml ([파일](./yaml_install/webhook-deployment.yaml))
+    - 비고: 각 파일에 image 항목이 있는 경우, registry주소의 이미지를 사용해야 합니다. (${REGISTRY}/quay.io/kubernetes-service-catalog/service-catalog:v${CATALOG_VERSION})
 - kubectl apply -f webhook-service.yaml ([파일](./yaml_install/webhook-service.yaml))
-- 비고: 각 파일에 image 항목이 있는 경우, registry주소의 이미지를 사용해야 합니다. (${REGISTRY}/quay.io/kubernetes-service-catalog/service-catalog:v${CATALOG_VERSION})
 
 ## Install Steps
 1. [helm을 통한 CatalogController 설치](Step-1-helm을-통한-CatalogController-설치)
@@ -76,6 +95,7 @@
 
     - 지정된 버전으로 CatalogController chart 설치 합니다.
       ```bash
+      kubectl create namespace catalog
       helm search service-catalog
       helm install svc-cat/catalog --name catalog --version=<x.x.x> --namespace catalog
       ```

@@ -26,7 +26,6 @@ spec:
         heritage: "Tiller"
     spec:
       serviceAccountName: service-catalog-controller-manager
-      imagePullSecrets: []
       volumes:
         - name: run
           emptyDir: {}
@@ -72,3 +71,23 @@ spec:
           name: run
         ports:
         - containerPort: 8444
+        readinessProbe:
+          httpGet:
+            port: 8444
+            path: /healthz/ready
+            scheme: HTTPS
+          failureThreshold: 1
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        livenessProbe:
+          httpGet:
+            port: 8444
+            path: /healthz
+            scheme: HTTPS
+          failureThreshold: 3
+          initialDelaySeconds: 40
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5

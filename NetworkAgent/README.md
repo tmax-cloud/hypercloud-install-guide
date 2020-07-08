@@ -86,12 +86,12 @@ Step 2. Hypernet-Local-Agent 설치
 * 목적 : `Hypernet-Local-Agent 설치`
 * 생성 순서 : 
     *  hypernet-local-agent.yaml 설정
-            * `ex) kubectl apply -f calico.yaml`
+            * `ex) kubectl apply -f hypernet-local-agent.yaml`
             * Pod들이 사용하는 IP 대역의 Pool 이름 확인
 	    ```bash
 	    	kubectl get ippool
 	    ```
-            * 만약 Pod가 사용하는 IP Pool의 이름이 "default-ipv4-ippool"이 아니라면 Hypernet-Local-Agent.yaml에 환경변수로 넣어주어야함
+            * 만약 Pod가 사용하는 IP Pool의 이름이 "default-ipv4-ippool"이 아니라면 Hypernet-Local-Agent.yaml에 환경변수("POD_IPPOOL_NAME")로 넣어주어야함
     * Hypernet-Local-Agent 설치
 	    ```bash
 	        kubectl apply hypernet-local-agent.yaml

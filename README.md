@@ -31,7 +31,7 @@
 | Capi provider |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Capi/README.md | O |
 | NGINX Ingress Controller | 0.33.0 | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/IngressNginx/README.md | O |
 | kubefed |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Fed/README.md | O |
-| Grafana |  |  | X |
+| Grafana |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Grafana/README.md | O |
 
 ### VM_Module (Optional)
 | Module | Version | Guide | 진행률(O/△/X) |

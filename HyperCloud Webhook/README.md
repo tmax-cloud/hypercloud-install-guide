@@ -10,7 +10,8 @@
     * ([HyperCloud Operator](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/README.md))
     
 2. 설치 과정에 필요한 인증서 생성을 위해 JAVA 패키지 설치 필요
-    * ProLinux 7 기준 `ex) java-1.8.0-openjdk-devel.x86_64`
+    * ProLinux 7: `ex) java-1.8.0-openjdk-devel.x86_64`
+    * Ubuntu: `ex) openjdk-8-jre-headless`
 
 ## 폐쇄망 설치 가이드
 설치를 진행하기 전 아래의 과정을 통해 필요한 이미지 및 yaml 파일을 준비한다.

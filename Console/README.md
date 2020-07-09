@@ -3,7 +3,7 @@
 
 ## 구성 요소
 * hypercloud-console ([tmaxcloudck/hypercloud-console](https://hub.docker.com/r/tmaxcloudck/hypercloud-console/tags))
-* 가이드 작성 시점(2020/07/09) 최신 버전은 1.1.34.6 입니다.
+* 가이드 작성 시점(2020/07/09) 최신 버전은 1.1.34.7 입니다.
 
 ## Prerequisites
 * Kubernetes, HyperCloud4 Operator, Grafana, Istio(Kiali, Jaeger), Prometheus가 설치되어 있어야 합니다.

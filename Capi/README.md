@@ -13,7 +13,7 @@
 "Step 0. Capi/infraProvider -  _폐쇄망 작업_" 추가 실행.
 
 ## Install Steps
-0. [Capi/infraProvider 설정]
+0. [Capi/infraProvider 설정](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Capi#step-0-capiinfraprovider-%EC%84%A4%EC%A0%95)
 1. [Capi/infraProvider 구축](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Capi#step-1-capiinfraprovider-%EA%B5%AC%EC%B6%95)
 2. [CapiCluster 생성](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Capi#step-1-capiinfraprovider-%EA%B5%AC%EC%B6%95)
 

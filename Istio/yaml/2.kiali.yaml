@@ -194,7 +194,7 @@ data:
         url_service_version: http://istio-pilot.istio-system:8080/version
       tracing:
         url: 
-        in_cluster_url: http://tracing/jaeger
+        in_cluster_url: http://tracing/api/jaeger
       grafana:
         url: 
         in_cluster_url: http://grafana.monitoring:3000

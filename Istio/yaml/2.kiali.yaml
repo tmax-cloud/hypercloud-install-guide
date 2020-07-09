@@ -175,20 +175,20 @@ metadata:
 data:
   config.yaml: |
     istio_component_namespaces:
-      grafana: istio-system
+      grafana: monitoring
       tracing: istio-system
       pilot: istio-system
-      prometheus: istio-system
+      prometheus: monitoring
     istio_namespace: istio-system
     auth:
-      strategy: login
+      strategy: token
     deployment:
       accessible_namespaces: ['**']
     login_token:
       signing_key: "wl5oStULbP"
     server:
       port: 20001
-      web_root: /kiali
+      web_root: /api/kiali
     external_services:
       istio:
         url_service_version: http://istio-pilot.istio-system:8080/version
@@ -293,7 +293,7 @@ spec:
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
-            path: /kiali/healthz
+            path: /api/kiali/healthz
             port: 20001
             scheme: HTTP
           initialDelaySeconds: 5
@@ -301,7 +301,7 @@ spec:
         name: kiali
         readinessProbe:
           httpGet:
-            path: /kiali/healthz
+            path: /api/kiali/healthz
             port: 20001
             scheme: HTTP
           initialDelaySeconds: 5

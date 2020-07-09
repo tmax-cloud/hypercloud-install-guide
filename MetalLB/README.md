@@ -1,58 +1,104 @@
 
 # MetalLB 설치 가이드
+    * https://metallb.universe.tf/
 
 ## 구성 요소 및 버전
-* 구성 요소1([tmaxcloud/tmax/cafe:v2](https://hub.docker.com/cafe/tags))
-* 구성 요소2([tmaxcloud/tmax/gym:v2](https://hub.docker.com/gym/tags))
-* 구성 요소3
+* metallb/controller ([metallb/controller:v0.8.2](https://hub.docker.com/layers/metallb/controller/v0.8.2/images/sha256-d1fe971bdb986915cafe339444329d8ef64cb59b11aaf7b22aeb167fdbd67aad?context=explore))
+* metallb/speaker ([metallb/speaker:v0.8.2](https://hub.docker.com/layers/metallb/speaker/v0.8.2/images/sha256-a9c822e640fa5aed6f244a47bf7a66e5d1dac765479af44b954f4ae86072943d?context=explore))
 
 ## Prerequisites
-1. 구성 요소를 설치하기 전에 필요한 조건을 기술합니다.
-    * 조건에 대한 상세 설명을 기술합니다.
-	    * 상세 설명
-		    * 상세 설명
-2. 해당 모듈 설치 전 모듈1 이 설치되어 있어야 합니다.
 
 ## 폐쇄망 설치 가이드
-폐쇄망에서 설치를 진행해야 하는 경우 필요한 추가 작업에 대해 기술합니다.
-1. 첫번째 폐쇄망 설치 작업
-    * 작업에 대한 상세 설명 1
-	    * 상세 내역 1
-		* 상세 내역 2
-    * 작업에 대한 상세 설명 2
+설치를 진행하기 전 아래의 과정을 통해 필요한 이미지 및 yaml 파일을 준비한다.
+1. **폐쇄망에서 설치하는 경우** 사용하는 image repository에 metallb 설치 시 필요한 이미지를 push한다. 
 
-2. 두번째 폐쇄망 설치 작업
-    * 작업에 대한 상세 설명 
+    * 작업 디렉토리 생성 및 환경 설정
+    ```bash
+    $ mkdir -p ~/metallb-install
+    $ export METALLB_HOME=~/metallb-install
+    $ export METALLB_VERSION=v0.8.2
+    $ cd $METALLB_HOME
+    ```
+
+    * 외부 네트워크 통신이 가능한 환경에서 필요한 이미지를 다운받는다.
+    ```bash
+    $ sudo docker pull metallb/controller:${METALLB_VERSION}
+    $ sudo docker save metallb/controller:${METALLB_VERSION} > metallb-controller_${METALLB_VERSION}.tar
+    $ sudo docker pull metallb/speaker:${METALLB_VERSION}
+    $ sudo docker save metallb/speaker:${METALLB_VERSION} > metallb-speaker_${METALLB_VERSION}.tar
+    ```
+
+    * metallb yaml을 다운로드한다. 
+    ```bash
+    $ curl https://raw.githubusercontent.com/google/metallb/v0.8.2/manifests/metallb.yaml > metallb.yaml
+    $ curl https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/MetalLB/metallb_v0.8.2.yaml > metallb.yaml
+    ```
+
+    * metallb_cidr yaml을 다운로드한다.
+    ```bash
+    $ curl https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/MetalLB/metallb_cidr.yaml > metallb_cidr.yaml
+    ```
+
+2. 위의 과정에서 생성한 tar 파일들을 폐쇄망 환경으로 이동시킨 뒤 사용하려는 registry에 이미지를 push한다.
+    ```bash
+    $ sudo docker load < metallb-controller_${METALLB_VERSION}.tar
+    $ sudo docker load < calico-pod2daemon-flexvol_${CNI_VERSION}.tar
+
+    $ sudo docker tag metallb/controller:${METALLB_VERSION} ${REGISTRY}/metallb/controller:${METALLB_VERSION}
+    $ sudo docker tag metallb/speaker:${METALLB_VERSION} ${REGISTRY}/metallb/speaker:${METALLB_VERSION}
+
+    $ sudo docker push ${REGISTRY}/metallb/controller:${METALLB_VERSION}
+    $ sudo docker push ${REGISTRY}/metallb/speaker:${METALLB_VERSION}
+    ```
 
 ## Install Steps
-0. [스텝 0](https://스텝_0로_바로_가기_위한_링크)
-1. [스텝 1](https://스텝_1로_바로_가기_위한_링크)
-2. [스텝 2](https://스텝_2로_바로_가기_위한_링크)
+0. [metallb.yaml 수정](#step0 "step0")
+1. [metallb 설치](#step1 "step1")
+2. [metallb 대역 설정](#step2 "step2")
 
-## Step 0. 스텝 0
-* 목적 : `해당 step의 간단한 설명을 기술합니다.`
+<h2 id="step0"> Step0. metallb yaml 수정 </h2>
+
+* 목적 : `metallb yaml에 이미지 registry, 버전 정보 수정`
 * 생성 순서 : 
-    * step을 진행하기 위한 과정에 대해 기술합니다.
-	    * 상세 설명
-		    * 상세 설명
-* 비고 :
-    * 생성 순서에 기술한 내용 외에 추가 정보를 기술합니다.
-	    * 상세 설명
-		    * 상세 설명
+    * 아래의 command를 수정하여 사용하고자 하는 image 버전 정보를 수정한다. (기본 설정 버전은 v0.8.2)
+	```bash
+            sed -i 's/v0.8.2/'${METALLB_VERSION}'/g' metallb.yaml
+	```
 
-## Step 1. 스탭 1
-* 목적 : `스탭1을 수행하는 목적에 대해 기술합니다.`
-* 생성 순서 : 스탭의 과정이 간단한 경우 하위 분류를 진행하지 않아도 됩니다.
-
-## Step 2. 스탭 2
-* 목적 : `스탭2를 수행하는 목적에 대해 기술합니다.`
-* 생성 순서 : 
-    * a 작업을 수행합니다.
-	    * a작업을 위해 z를 수행합니다.
-    * b 작업을 수행합니다.
-	* c 작업을 수행합니다.
 * 비고 :
-    * a의 1번을 수정하면 b 기능을 수행할 수 있습니다.
-	    * b의 종류는 다음과 같습니다.
-		    * ...
+    * `폐쇄망에서 설치를 진행하여 별도의 image registry를 사용하는 경우 registry 정보를 추가로 설정해준다.`
+	```bash
+            image: metallb/speaker:v0.8.2 -> image: IP:5000/metallb/speaker:v0.8.2
+            image: metallb/controller:v0.8.2 -> image: IP:5000/metallb/controller:v0.8.2
+	```
+
+<h2 id="step1"> Step 1. metallb </h2>
+
+* 목적 : `metallb 설치`
+* 생성 순서: metallb.yaml 설치  `ex) kubectl apply -f metallb.yaml`
+* 비고 : 
+    * metallb-system 네임스페이스 사용
+    * controller-xxxxxxxxxx-xxxxx (1개의 pod)
+    * speaker-xxxxx (모든 노드에 pod)
+
+
+<h2 id="step2"> Step 2. metallb 대역 설정 </h2>
+
+* 목적 : `metallb에서 사용할 대역 설정 (호스트와 동일한 대역 사용)`
+* 생성 순서: metallb_cidr.yaml 적용  `ex) kubectl apply -f metallb_cidr.yaml`
+* 비고 :
+    ```bash
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      namespace: metallb-system
+      name: config
+    data:
+      config: |
+        address-pools:
+        - name: default
+        protocol: layer2
+        addresses:
+        - 172.22.8.160-172.22.8.180
+    ```
 

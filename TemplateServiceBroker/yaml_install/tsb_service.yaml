@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: template-service-broker-service
+  namespace: tsb-ns
+spec:
+  ports:
+  - name: "port1"
+    port: 28677
+    protocol: TCP
+    targetPort: 28677
+  selector:
+    hypercloud4: template-service-broker
+  type: LoadBalancer

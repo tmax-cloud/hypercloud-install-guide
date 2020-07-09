@@ -2,15 +2,19 @@
 # Capi 설치 가이드
 
 ## 구성 요소 및 버전
-* Cluster Api([github.com/kubernetes-sigs/cluster-api/v0.3.6](https://github.com/kubernetes-sigs/cluster-api/releases/tag/v0.3.6))
-* InfrastructureProvider-AWS ([https://github.com/kubernetes-sigs/cluster-api-provider-aws/releases/tag/v0.5.5-alpha.0](https://github.com/kubernetes-sigs/cluster-api/releases/tag/v0.5.5-alpha.0))
+* Cluster Api([github.com/kubernetes-sigs/cluster-api/latest](https://github.com/kubernetes-sigs/cluster-api/releases/latest))
+* InfrastructureProvider-AWS ([https://github.com/kubernetes-sigs/cluster-api-provider-aws/releases/latest](https://github.com/kubernetes-sigs/cluster-api-provider-aws/releases/latest))
+
+**주의**
+<br>_1. Capi는 public cloud와 원활한 통신을 위해 가급적 **최신 버전을 유지**해야 합니다. 최신 버전 확인은 위 링크를 통해 확인 바랍니다_
+<br>_2. 버전 관리 문제로 default yaml을 upload 하지 않았으나, install guide 단계 중 yaml download하는 과정이 있습니다_ 
 
 ## Prerequisites
 * kubernetes version >= 1.16
-* AWS IAM 정보.
+* AWS IAM 정보
 
 ## 폐쇄망 설치 가이드
-"Step 0. Capi/infraProvider -  _폐쇄망 작업_" 추가 실행.
+"Step 0. Capi/infraProvider -  _폐쇄망 작업_" 추가 실행
 
 ## Install Steps
 0. [Capi/infraProvider 설정](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Capi#step-0-capiinfraprovider-%EC%84%A4%EC%A0%95)
@@ -18,7 +22,7 @@
 2. [CapiCluster 생성](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Capi#step-1-capiinfraprovider-%EA%B5%AC%EC%B6%95)
 
 ## Step 0. Capi/infraProvider 설정
-* 목적 : Capi/infraProvider 구축 전 설정.
+* 목적 : Capi/infraProvider 구축 전 설정
 * 생성 순서 :
     * script 실행 권한 부여
     ```bash

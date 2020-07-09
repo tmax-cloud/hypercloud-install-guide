@@ -5,7 +5,7 @@
 * istiod ([docker.io/istio/pilot:1.5.1](https://hub.docker.com/layers/istio/pilot/1.5.1/images/sha256-818aecc1c73c53af9091ac1d4f500d9d7cec6d135d372d03cffab1addaff4ec0?context=explore))
 * istio-ingressgateway ([docker.io/istio/proxyv2:1.5.1](https://hub.docker.com/layers/istio/proxyv2/1.5.1/images/sha256-3ad9ee2b43b299e5e6d97aaea5ed47dbf3da9293733607d9b52f358313e852ae?context=explore))
 * istio-tracing ([docker.io/jaegertracing/all-in-one:1.16](https://hub.docker.com/layers/jaegertracing/all-in-one/1.16/images/sha256-738442983b772a5d413c8a2c44a5563956adaff224e5b38f52a959124dafc119?context=explore))
-* kiali ([quay.io/kiali/kiali:v1.19](https://quay.io/repository/kiali/kiali?tab=tags))
+* kiali ([quay.io/kiali/kiali:v1.20](https://quay.io/repository/kiali/kiali?tab=tags))
 
 ## Prerequisites
 
@@ -19,7 +19,7 @@
     $ export ISTIO_HOME=~/istio-install
     $ export ISTIO_VERSION=1.5.1
     $ export JAEGER_VERSION=1.16
-    $ export KIALI_VERSION=v1.19
+    $ export KIALI_VERSION=v1.20
     $ cd $ISTIO_HOME
     ```
     * 외부 네트워크 통신이 가능한 환경에서 필요한 이미지를 다운받는다.

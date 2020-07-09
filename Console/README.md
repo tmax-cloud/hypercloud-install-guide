@@ -3,7 +3,7 @@
 
 ## 구성 요소
 * hypercloud-console ([tmaxcloudck/hypercloud-console](https://hub.docker.com/r/tmaxcloudck/hypercloud-console/tags))
-* 가이드 작성 시점(2020/07/07) 최신 버전은 1.1.34.0 입니다.
+* 가이드 작성 시점(2020/07/09) 최신 버전은 1.1.34.6 입니다.
 
 ## Prerequisites
 * Kubernetes, HyperCloud4 Operator, Grafana, Istio(Kiali, Jaeger), Prometheus가 설치되어 있어야 합니다.
@@ -69,7 +69,7 @@
     * Multicluster Console을 설치하는 경우
 	    * image로 `tmaxcloudck/hypercloud-console:1.1.x.x` 대신, `tmaxcloudck/hypercloud-multicluster-console:0.0.x.x` 을 사용합니다.
 		    * [tmaxcloudck/hypercloud-multicluster-console](https://hub.docker.com/r/tmaxcloudck/hypercloud-multicluster-console/tags)
-		    * 가이드 작성 시점(2020/07/07) 최신 버전은 0.0.14.0 입니다.
+		    * 가이드 작성 시점(2020/07/09) 최신 버전은 0.0.14.0 입니다.
 	    * `@@KIALI@@`와 `@@JAEGER@@`를 입력하지 않고, 해당 행을 삭제합니다.
 
 ## Step 5. 동작 확인

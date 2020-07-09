@@ -3,7 +3,8 @@
 
 ## 구성 요소 및 버전
 * Network Agent([tmaxcloudck/hypernet-local-agent:v0.4.2](https://hub.docker.com/repository/docker/tmaxcloudck/hypernet-local-agent))
-
+### Upgrade
+* [기존 Version에서 새로운 Version으로의 Upgrade는 이 링크를 참고해주세요.](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/NetworkAgent/UPGRADE.md)
 ## Prerequisites
 1. Kubernetest ( 1.15.0 <= )
 2. Calico ( 3.13.4 <= )

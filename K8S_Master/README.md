@@ -14,10 +14,9 @@
 
 ## Prerequisites
 
-## 폐쇄망 설치 가이드
+## 폐쇄망 설치 가이드 (마스터 다중화 시 마스터 1개에서만 진행)
 1. **폐쇄망에서 설치하는 경우** 아래 가이드를 참고 하여 image registry를 먼저 구축한다.
-    * https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Image_Registry
-
+    * https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Image_Registry   
 2. 사용하는 image repository에 k8s 설치 시 필요한 이미지를 push한다. 
     * 작업 디렉토리 생성 및 환경 설정
     ```bash

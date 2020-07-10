@@ -236,7 +236,7 @@
       * imageRepository : "${registry} / docker hub name"
       * cgroupDriver: systemd cgroup driver 사용
 
-    * kubeadm init 
+    * kubeadm init (2개 이상 마스터 구축시에는 아래 가이드 참조)
 	```bash
 	sudo kubeadm init --config=kubeadm-config.yaml
 	```

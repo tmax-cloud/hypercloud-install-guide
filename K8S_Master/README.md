@@ -186,7 +186,7 @@
     * CRI-O 메이저와 마이너 버전은 쿠버네티스 메이저와 마이너 버전이 일치해야 한다.
     * (폐쇄망) kubeadm, kubectl, kubelet 설치 (v1.17.6)
 	```bash
-	yum install -y kubeadm-1.17.6-0 kubelet-1.17.6-0 kubectl-1.17.6-0
+	sudo yum install -y kubeadm-1.17.6-0 kubelet-1.17.6-0 kubectl-1.17.6-0
 	```  	
     * (외부망) 레포 등록 후 kubeadm, kubectl, kubelet 설치 (v1.17.6)
 	```bash
@@ -200,7 +200,7 @@
 	gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
 	EOF
 
-	yum install -y kubeadm-1.17.6-0 kubelet-1.17.6-0 kubectl-1.17.6-0
+	sudo yum install -y kubeadm-1.17.6-0 kubelet-1.17.6-0 kubectl-1.17.6-0
 	```  
 
 ## Step 3. kubernetes cluster 구성
@@ -239,7 +239,7 @@
 
     * kubeadm init 
 	```bash
-	kubeadm init --config=kubeadm-config.yaml
+	sudo kubeadm init --config=kubeadm-config.yaml
 	```
      * 마스터 다중화 진행시 아래 마스터 다중화 가이드로 설치를 진행한다. 
        * [마스터 다중화 가이드](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/K8S_Master#step-3-1-kubernetes-cluster-%EB%8B%A4%EC%A4%91%ED%99%94-%EA%B5%AC%EC%84%B1%EC%9D%84-%EC%9C%84%ED%95%9C-keepalived-%EC%84%A4%EC%B9%98)	
@@ -254,7 +254,7 @@
 	![image](figure/success.PNG)
     * 확인
 	```bash
-	kubectl get nodes
+	sudo kubectl get nodes
 	```
 	![image](figure/nodes.PNG)
 	```bash

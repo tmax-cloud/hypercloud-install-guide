@@ -169,7 +169,7 @@
 	modprobe overlay
 	modprobe br_netfilter
 	
-	cat > /etc/sysctl.d/99-kubernetes-cri.conf <<EOF
+	sudo cat << "EOF" | sudo tee -a /etc/sysctl.d/99-kubernetes-cri.conf
 	net.bridge.bridge-nf-call-iptables  = 1
 	net.ipv4.ip_forward                 = 1
 	net.bridge.bridge-nf-call-ip6tables = 1
@@ -189,7 +189,7 @@
 	```  	
     * (외부망) 레포 등록 후 kubeadm, kubectl, kubelet 설치 (v1.17.6)
 	```bash
-	cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+	sudo cat << "EOF" | sudo tee -a /etc/yum.repos.d/kubernetes.repo
 	[kubernetes]
 	name=Kubernetes
 	baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64

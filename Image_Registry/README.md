@@ -9,8 +9,7 @@
     * 작업 디렉토리 생성 및 환경 설정
     ```bash
     $ mkdir -p ~/registry-install
-    $ export REGISTRY_HOME=~/registry-install
-    $ cd $REGISTRY_HOME
+    $ cd ~/registry-install
     ```
     * run-registry.sh, docker-registry.tar를 Master 환경에 다운로드한다.
        * https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Image_Registry/installer

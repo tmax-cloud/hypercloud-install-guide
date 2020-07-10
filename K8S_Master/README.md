@@ -13,7 +13,7 @@
 * k8s.gcr.io/coredns:1.6.5
 
 ## Prerequisites
-
+    * 이 가이드의 모든 명령은 root로 실행해야 한다. 예를 들어, sudo로 접두사를 붙이거나, root 사용자가 되어 명령을 실행한다.
 ## 폐쇄망 설치 가이드 
 * 마스터 다중화 시 마스터 1개에서만 진행
 1. **폐쇄망에서 설치하는 경우** 아래 가이드를 참고 하여 image registry를 먼저 구축한다.
@@ -91,7 +91,6 @@
 ## Step0. 환경 설정
 * 목적 : `k8s 설치 진행을 위한 os 환경 설정`
 * 순서 : 
-    * 이 가이드의 모든 명령은 root로 실행해야 한다. 예를 들어, sudo로 접두사를 붙이거나, root 사용자가 되어 명령을 실행한다.
     * os hostname을 설정한다.
 	```bash
 	sudo hostnamectl set-hostname k8s-master

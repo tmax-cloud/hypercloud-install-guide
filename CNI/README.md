@@ -8,9 +8,9 @@
 ## 구성 요소 및 버전
 * calico/node ([calico/node:v3.13.4](https://hub.docker.com/layers/calico/node/v3.13.4/images/sha256-2656efc741e90750282ad89b9ec078588b98909e5cd0b8d1256f2059466e1717?context=explore))
 * calico/pod2daemon-flexvol ([calico/pod2daemon-flexvol:v3.13.4](https://hub.docker.com/layers/calico/pod2daemon-flexvol/v3.13.4/images/sha256-3a12c023e964104ebf8af330bc74fa25831e961c871f8024bd6917c1357a57a6?context=explore))
-* calico/cni ([calico/cni:v.3.13.4](https://hub.docker.com/layers/calico/cni/v3.13.4/images/sha256-20a74b0c29e57b7e0a3bfd4474e98d3968f3f0edb1f307c9c789b8ed339971db?context=explore))
-* calico/kube-controllers ([calico/kube-controllers:v.3.13.4](https://hub.docker.com/layers/calico/kube-controllers/v3.13.4/images/sha256-49404c910b50bdd93003315d1774c18f445589b1059b24eae2ebaa056c565e8c?context=explore))
-* calico/ctl ([calico/ctl:v.3.15.0](https://registry.hub.docker.com/layers/calico/ctl/v3.15.0/images/sha256-09a08c8ef2ef637aadb3d2cc46965b8ba73e0e4cf863c836ad114cc3292822aa?context=explore))
+* calico/cni ([calico/cni:v3.13.4](https://hub.docker.com/layers/calico/cni/v3.13.4/images/sha256-20a74b0c29e57b7e0a3bfd4474e98d3968f3f0edb1f307c9c789b8ed339971db?context=explore))
+* calico/kube-controllers ([calico/kube-controllers:v3.13.4](https://hub.docker.com/layers/calico/kube-controllers/v3.13.4/images/sha256-49404c910b50bdd93003315d1774c18f445589b1059b24eae2ebaa056c565e8c?context=explore))
+* calico/ctl ([calico/ctl:v3.15.0](https://registry.hub.docker.com/layers/calico/ctl/v3.15.0/images/sha256-09a08c8ef2ef637aadb3d2cc46965b8ba73e0e4cf863c836ad114cc3292822aa?context=explore))
 
 ## Prerequisites
 
@@ -42,8 +42,12 @@
 
     * calico yaml을 다운로드한다. (대역 설정을 위함)
     ```bash
-    $ curl -O -I https://docs.projectcalico.org/v3.13/manifests/calico.yaml
-    $ curl -O -I https://docs.projectcalico.org/manifests/calicoctl.yaml
+    $ curl https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/CNI/calico_3.13.4.yaml > calico.yaml
+    ```
+
+    * calicoctl yaml을 다운로드한다.
+    ```bash
+    $ curl https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/CNI/calicoctl_3.15.0.yaml > calicoctl.yaml
     ```
 
 
@@ -56,7 +60,7 @@
     $ sudo docker load < calico-ctl_v3.15.0.tar
     
     $ sudo docker tag calico/node:${CNI_VERSION} ${REGISTRY}/calico/node:${CNI_VERSION}
-    $ sudo docker tag calico/calico/pod2daemon-flexvol:${CNI_VERSION} ${REGISTRY}/calico/pod2daemon-flexvol:${CNI_VERSION}
+    $ sudo docker tag calico/pod2daemon-flexvol:${CNI_VERSION} ${REGISTRY}/calico/pod2daemon-flexvol:${CNI_VERSION}
     $ sudo docker tag calico/cni:${CNI_VERSION} ${REGISTRY}/calico/cni:${CNI_VERSION}
     $ sudo docker tag calico/kube-controllers:${CNI_VERSION} ${REGISTRY}/calico/kube-controllers:${CNI_VERSION}
     $ sudo docker tag calico/ctl:v3.15.0 ${REGISTRY}/calico/ctl:v3.15.0
@@ -74,16 +78,16 @@
 1. [calico 설치](#step1 "step1")
 2. [calicoctl 설치](#step2 "step2")
 
-<h2 id="step0">
-Step0. calico yaml 수정
-</h2>
+
+<h2 id="step0"> Step0. calico yaml 수정 </h2>
 
 * 목적 : `calico yaml에 이미지 registry, 버전 정보, pod 대역, IPIP모드 여부를 수정`
 * 생성 순서 : 
-    * 아래의 command를 수정하여 사용하고자 하는 image 버전 정보를 수정한다.
+    * 아래의 command를 수정하여 사용하고자 하는 image 버전 정보를 수정한다. (기본 설정 버전은 v3.13.4)
 	```bash
-            ////////$ sed -i 's/{kiali_version}/'${KIALI_VERSION}'/g' 2.kiali.yaml
+            sed -i 's/v3.13.4/'${CNI_VERSION}'/g' calico.yaml
 	```
+
     * pod 대역과 IPIP 모드를 아래와 같이 수정한다. pod 대역은 kubernetes 설치할때 사용했던 kubeadm-config.yaml의 podSubnet 대역과 동일해야 한다. (다를 경우 문제 발생)
 	```bash
             - name: CALICO_IPV4_IPPOOL_IPIP
@@ -92,15 +96,34 @@ Step0. calico yaml 수정
             value: "10.0.0.0/16" 
 	```         
 
+    * master 노드에만 calico-kube-controllers를 띄우기 위해서는 아래와 같은 스케쥴링 옵션을 추가한다. (calico_v.3.13.4_master.yaml 파일 참고)
+	```bash
+            spec:
+              tolerations:
+                - key: node-role.kubernetes.io/master
+                  effect: NoSchedule
+              affinity:
+                nodeAffinity:
+                  requiredDuringSchedulingIgnoredDuringExecution:
+                    nodeSelectorTerms:
+                    - matchExpressions:
+                      - key: node-role.kubernetes.io/master
+                        operator: Exists
+                        values:
+	```         
+ 
 * 비고 :
     * `폐쇄망에서 설치를 진행하여 별도의 image registry를 사용하는 경우 registry 정보를 추가로 설정해준다.`
 	```bash
-	////////$ sed -i 's/quay.io\/kiali\/kiali/'${REGISTRY}'\/kiali\/kiali/g' 2.kiali.yaml
+	image: calico/cni:v3.13.4 -> image: IP:5000/metallb/speaker:v0.8.2
+	image: calico/cni:v3.13.4 -> image: IP:5000/calico/cni:v3.13.4
+	image: calico/pod2daemon-flexvol:v3.13.4 -> image: IP:5000/calico/pod2daemon-flexvol:v3.13.4
+	image: calico/node:v3.13.4 -> image: IP:5000/calico/node:v3.13.4
+	image: calico/kube-controllers:v3.13.4 -> image: IP:5000/calico/kube-controllers:v3.13.4
+	image: calico/ctl:v3.15.0 -> image: IP:5000/calico/ctl:v3.15.0
 	```
-	
-<h2 id="step1">
-Step 1. calico 설치
-</h2>
+
+<h2 id="step1"> Step 1. calico 설치 </h2>
 
 * 목적 : `calico 설치`
 * 생성 순서: calico.yaml 설치  `ex) kubectl apply -f calico.yaml`
@@ -108,13 +131,13 @@ Step 1. calico 설치
     * calico-kube-controllers-xxxxxxxxxx-xxxxx (1개의 pod)
     * calico-node-xxxxx (모든 노드에 pod)
 
-<h2 id="step2">
-Step 2. calicoctl 설치
-</h2>
+
+<h2 id="step1"> Step 2. calicoctl 설치 </h2>
 
 * 목적 : `calicoctl 설치`
 * 생성 순서: calicoctl.yaml 설치  `ex) kubectl apply -f calicoctl.yaml`
 * 비고 :
+    * kube-system 네임스페이스 사용
     * calicoctl (1개의 pod)
     * alias calicoctl="kubectl exec -i -n kube-system calicoctl /calicoctl -- "
 

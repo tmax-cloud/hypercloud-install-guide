@@ -68,13 +68,13 @@
     ```
     ![image](figure/tag.PNG)
     ```bash
-    $ docker push ${REGISTRY}/k8s.gcr.io/kube-apiserver:v1.17.6
-    $ docker push ${REGISTRY}/k8s.gcr.io/kube-proxy:v1.17.6
-    $ docker push ${REGISTRY}/k8s.gcr.io/kube-controller-manager:v1.17.6
-    $ docker push ${REGISTRY}/k8s.gcr.io/etcd:3.4.3-0
-    $ docker push ${REGISTRY}/k8s.gcr.io/coredns:1.6.5
-    $ docker push ${REGISTRY}/k8s.gcr.io/kube-scheduler:v1.17.6
-    $ docker push ${REGISTRY}/k8s.gcr.io/pause:3.1
+    $ sudo docker push ${REGISTRY}/k8s.gcr.io/kube-apiserver:v1.17.6
+    $ sudo docker push ${REGISTRY}/k8s.gcr.io/kube-proxy:v1.17.6
+    $ sudo docker push ${REGISTRY}/k8s.gcr.io/kube-controller-manager:v1.17.6
+    $ sudo docker push ${REGISTRY}/k8s.gcr.io/etcd:3.4.3-0
+    $ sudo docker push ${REGISTRY}/k8s.gcr.io/coredns:1.6.5
+    $ sudo docker push ${REGISTRY}/k8s.gcr.io/kube-scheduler:v1.17.6
+    $ sudo docker push ${REGISTRY}/k8s.gcr.io/pause:3.1
     ```
     ![image](figure/push.PNG)
     ```bash
@@ -93,7 +93,7 @@
 * 순서 : 
     * os hostname을 설정한다.
 	```bash
-	hostnamectl set-hostname k8s-master
+	sudo hostnamectl set-hostname k8s-master
 	```
     * /etc/hosts에 hostname과 ip를 등록한다. 
 	```bash
@@ -104,15 +104,15 @@
 	```
     * 방화벽(firewall)을 해제한다. 
 	```bash
-	systemctl stop firewalld
-	systemctl disable firewalld
+	sudo systemctl stop firewalld
+	sudo systemctl disable firewalld
 	```	
     * 스왑 메모리를 비활성화 한다. 
 	```bash
-	swapoff -a
+	sudo swapoff -a
 	```
     * 스왑 메모리 비활성화 영구설정
-      * vi /etc/fstap 
+      * sudo vi /etc/fstap 
 	```bash
 	swap 관련 부분 주석처리
 	# /dev/mapper/centos-swap swap                    swap    defaults        0
@@ -120,8 +120,8 @@
     ![image](figure/fstab.PNG)
     * SELinux 설정을 해제한다. 
 	```bash
-	setenforce 0
-	sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
+	sudo setenforce 0
+	sudo sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 	```
 
 ## Step 1. cri-o 설치

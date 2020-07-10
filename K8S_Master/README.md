@@ -253,7 +253,7 @@
 	![image](figure/success.PNG)
     * 확인
 	```bash
-	sudo kubectl get nodes
+	kubectl get nodes
 	```
 	![image](figure/nodes.PNG)
 	```bash

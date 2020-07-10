@@ -22,8 +22,7 @@
     * 작업 디렉토리 생성 및 환경 설정
     ```bash
     $ mkdir -p ~/k8s-install
-    $ export K8S_HOME=~/k8s-install
-    $ cd $K8S_HOME
+    $ cd ~/k8s-install
     ```
     * 외부 네트워크 통신이 가능한 환경에서 필요한 이미지를 다운받는다.
     ```bash
@@ -237,10 +236,12 @@
       * imageRepository : "${registry} / docker hub name"
       * cgroupDriver: systemd cgroup driver 사용
 	
-    * kubeadm init
+    * kubeadm init  
 	```bash
 	kubeadm init --config=kubeadm-config.yaml
 	```
+	* 마스터 다중화 진행시 아래 스텝으로 진행합니다.
+	* 0. [마스터 다중화](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/K8S_Master#step0-%ED%99%98%EA%B2%BD-%EC%84%A4%EC%A0%95)
 	![image](figure/init.PNG)
     * kubernetes config 
 	```bash
@@ -315,9 +316,9 @@
 	* inet {VIP}/32 scope global eno1
 
 ## Step 3-2. kubernetes cluster 다중화 구성 설정
-* 목적 : `K8S cluster의 Master 다중화 구성을 위함`
+* 목적 : `K8S cluster의 Master 다중화를 구성한다`
 * 순서 : 
-    * kubeadm-config.yaml 파일로 kubeadm 명령어 실행.
+    * kubeadm-config.yaml 파일로 kubeadm 명령어 실행한다.
         * Master 다중구성시 --upload-certs 옵션은 반드시 필요.
 	    ```bash
 	    kubeadm init --config=kubeadm-config.yaml --upload-certs

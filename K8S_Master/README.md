@@ -91,6 +91,7 @@
 ## Step0. 환경 설정
 * 목적 : `k8s 설치 진행을 위한 os 환경 설정`
 * 순서 : 
+    * 이 가이드의 모든 명령은 root로 실행해야 한다. 예를 들어, sudo로 접두사를 붙이거나, root 사용자가 되어 명령을 실행한다.
     * os hostname을 설정한다.
 	```bash
 	sudo hostnamectl set-hostname k8s-master
@@ -132,8 +133,8 @@
           * https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Package#step-1-local-repository-%EA%B5%AC%EC%B6%95
 	```bash
 	sudo yum -y install cri-o
-	systemctl enable crio
-	systemctl start crio
+	sudo systemctl enable crio
+	sudo systemctl start crio
 	```
      * (외부망) crio 버전 지정 및 레포를 등록 후 crio를 설치한다.
 	```bash
@@ -142,24 +143,24 @@
 	sudo curl -L -o /etc/yum.repos.d/devel:kubic:libcontainers:stable:cri-o:${VERSION}.repo https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable:cri-o:${VERSION}/CentOS_7/devel:kubic:libcontainers:stable:cri-o:${VERSION}.repo
   
 	sudo yum -y install cri-o
-	systemctl enable crio
-	systemctl start crio
+	sudo systemctl enable crio
+	sudo systemctl start crio
 	```	
     * cri-o 설치를 확인한다.
 	```bash
-	systemctl status crio
+	sudo systemctl status crio
 	rpm -qi cri-o
 	```
     ![image](figure/crio.PNG)
 * 비고 :
     * 추후 설치예정인 network plugin과 crio의 가상 인터페이스 충돌을 막기위해 cri-o의 default 인터페이스 설정을 제거한다.
 	```bash
-	rm -rf  /etc/cni/net.d/100-crio-bridge
- 	rm -rf  /etc/cni/net.d/200-loopback
+	sudo rm -rf  /etc/cni/net.d/100-crio-bridge
+ 	sudo rm -rf  /etc/cni/net.d/200-loopback
 	``` 
     * 폐쇄망 환경에서 private registry 접근을 위해 crio.conf 내용을 수정한다.
     * insecure_registry, registries, plugin_dirs 내용을 수정한다.
-      * vi /etc/crio/crio.conf
+      * sudo vi /etc/crio/crio.conf
          * registries = ["{registry}:{port}" , "docker.io"]
          * insecure_registries = ["{registry}:{port}"]
          * plugin_dirs : "/opt/cni/bin" 추가
@@ -177,7 +178,7 @@
 	```	
     * cri-o를 재시작 한다.
 	```bash
-	systemctl restart crio
+	sudo systemctl restart crio
 	``` 	
 ## Step 2. kubeadm, kubelet, kubectl 설치
 * 목적 : `Kubernetes 구성을 위한 kubeadm, kubelet, kubectl 설치한다.`

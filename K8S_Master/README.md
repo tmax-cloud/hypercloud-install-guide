@@ -78,7 +78,7 @@
     ```
     ![image](figure/push.PNG)
     ```bash
-    $ docker images
+    $ sudo docker images
     ```    
     ![image](figure/check.PNG)
 ## Install Steps
@@ -272,7 +272,7 @@
 * 순서 : 
     * Keepalived 설치
     ```bash
-    yum install -y keepalived
+    sudo yum install -y keepalived
     ```
 
     * Keepalived 설정
@@ -304,8 +304,8 @@
 	
     * keepalived 재시작 및 상태 확인
     ```bash
-    systemctl restart keepalived
-    systemctl status keepalived
+    sudo systemctl restart keepalived
+    sudo systemctl status keepalived
     ```
 	
     * network interface 확인
@@ -322,7 +322,7 @@
     * kubeadm-config.yaml 파일로 kubeadm 명령어 실행한다.
         * Master 다중구성시 --upload-certs 옵션은 반드시 필요.
 	    ```bash
-	    kubeadm init --config=kubeadm-config.yaml --upload-certs
+	    sudo kubeadm init --config=kubeadm-config.yaml --upload-certs
 	    kubeadm join {IP}:{PORT} --token ~~ --control-plane --certificate-key ~~   (1)
 	    kubeadm join {IP}:{PORT} --token ~~   (2)
 	    ```

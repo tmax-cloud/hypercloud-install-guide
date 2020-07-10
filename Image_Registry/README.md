@@ -25,7 +25,7 @@
     $ sudo yum install -y docker-ce
     ```
     * docker damon에 insecure-registries를 등록한다.
-      * vi /etc/docker/daemon.json
+      * sudo vi /etc/docker/daemon.json
     ```bash
     {
         "insecure-registries": ["{IP}:5000"]
@@ -34,9 +34,9 @@
     ![image](figure/docker_registry.PNG)
     * docker를 재실행하고 status를 확인한다.
     ```bash
-    $  systemctl enable docker 
-    $  systemctl restart docker
-    $  systemctl status docker
+    $  sudo systemctl enable docker 
+    $  sudo systemctl restart docker
+    $  sudo systemctl status docker
     ```    
     
 ## Step 1. registry 실행

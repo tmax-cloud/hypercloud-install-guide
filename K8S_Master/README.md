@@ -240,8 +240,7 @@
 	```bash
 	kubeadm init --config=kubeadm-config.yaml
 	```
-	* 마스터 다중화 진행시 아래 스텝으로 진행합니다.
-	* [마스터 다중화](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/K8S_Master#step-3-1-kubernetes-cluster-%EB%8B%A4%EC%A4%91%ED%99%94-%EA%B5%AC%EC%84%B1%EC%9D%84-%EC%9C%84%ED%95%9C-keepalived-%EC%84%A4%EC%B9%98)
+	* 마스터 다중화 진행시 마스터 다중화 가이드로 설치를 진행한다. [마스터 다중화 가이드](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/K8S_Master#step-3-1-kubernetes-cluster-%EB%8B%A4%EC%A4%91%ED%99%94-%EA%B5%AC%EC%84%B1%EC%9D%84-%EC%9C%84%ED%95%9C-keepalived-%EC%84%A4%EC%B9%98)
 	![image](figure/init.PNG)
     * kubernetes config 
 	```bash

@@ -37,13 +37,13 @@
     ![image](figure/pull.PNG)
     * docker image를 tar로 저장한다.
     ```bash
-    $ docker save -o kube-proxy.tar k8s.gcr.io/kube-proxy:v1.17.6
-    $ docker save -o kube-controller-manager.tar k8s.gcr.io/kube-controller-manager:v1.17.6
-    $ docker save -o etcd.tar k8s.gcr.io/etcd:3.4.3-0
-    $ docker save -o coredns.tar k8s.gcr.io/coredns:1.6.5
-    $ docker save -o kube-scheduler.tar k8s.gcr.io/kube-scheduler:v1.17.6
-    $ docker save -o kube-apiserver.tar k8s.gcr.io/kube-apiserver:v1.17.6
-    $ docker save -o pause.tar k8s.gcr.io/pause:3.1
+    $ sudo docker save -o kube-proxy.tar k8s.gcr.io/kube-proxy:v1.17.6
+    $ sudo docker save -o kube-controller-manager.tar k8s.gcr.io/kube-controller-manager:v1.17.6
+    $ sudo docker save -o etcd.tar k8s.gcr.io/etcd:3.4.3-0
+    $ sudo docker save -o coredns.tar k8s.gcr.io/coredns:1.6.5
+    $ sudo docker save -o kube-scheduler.tar k8s.gcr.io/kube-scheduler:v1.17.6
+    $ sudo docker save -o kube-apiserver.tar k8s.gcr.io/kube-apiserver:v1.17.6
+    $ sudo docker save -o pause.tar k8s.gcr.io/pause:3.1
     ```
     ![image](figure/save.PNG)
 3. 위의 과정에서 생성한 tar 파일들을 폐쇄망 환경으로 이동시킨 뒤 사용하려는 registry에 이미지를 push한다.
@@ -58,13 +58,13 @@
     ```
     ![image](figure/load.PNG)
     ```bash
-    $ docker tag k8s.gcr.io/kube-apiserver:v1.17.6 ${REGISTRY}/k8s.gcr.io/kube-apiserver:v1.17.6
-    $ docker tag k8s.gcr.io/kube-proxy:v1.17.6 ${REGISTRY}/k8s.gcr.io/kube-proxy:v1.17.6
-    $ docker tag k8s.gcr.io/kube-controller-manager:v1.17.6 ${REGISTRY}/k8s.gcr.io/kube-controller-manager:v1.17.6
-    $ docker tag k8s.gcr.io/etcd:3.4.3-0 ${REGISTRY}/k8s.gcr.io/etcd:3.4.3-0
-    $ docker tag k8s.gcr.io/coredns:1.6.5 ${REGISTRY}/k8s.gcr.io/coredns:1.6.5
-    $ docker tag k8s.gcr.io/kube-scheduler:v1.17.6 ${REGISTRY}/k8s.gcr.io/kube-scheduler:v1.17.6
-    $ docker tag k8s.gcr.io/pause:3.1 ${REGISTRY}/k8s.gcr.io/pause:3.1
+    $ sudo docker tag k8s.gcr.io/kube-apiserver:v1.17.6 ${REGISTRY}/k8s.gcr.io/kube-apiserver:v1.17.6
+    $ sudo docker tag k8s.gcr.io/kube-proxy:v1.17.6 ${REGISTRY}/k8s.gcr.io/kube-proxy:v1.17.6
+    $ sudo docker tag k8s.gcr.io/kube-controller-manager:v1.17.6 ${REGISTRY}/k8s.gcr.io/kube-controller-manager:v1.17.6
+    $ sudo docker tag k8s.gcr.io/etcd:3.4.3-0 ${REGISTRY}/k8s.gcr.io/etcd:3.4.3-0
+    $ sudo docker tag k8s.gcr.io/coredns:1.6.5 ${REGISTRY}/k8s.gcr.io/coredns:1.6.5
+    $ sudo docker tag k8s.gcr.io/kube-scheduler:v1.17.6 ${REGISTRY}/k8s.gcr.io/kube-scheduler:v1.17.6
+    $ sudo docker tag k8s.gcr.io/pause:3.1 ${REGISTRY}/k8s.gcr.io/pause:3.1
     ```
     ![image](figure/tag.PNG)
     ```bash

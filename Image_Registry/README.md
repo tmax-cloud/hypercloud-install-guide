@@ -28,6 +28,8 @@
     * docker를 설치한다.
     ```bash
     $ sudo yum install -y docker-ce
+    $ sudo systemctl start docker
+    $ sudo systemctl enable docker
     ```
     * docker damon에 insecure-registries를 등록한다.
       * sudo vi /etc/docker/daemon.json
@@ -39,7 +41,6 @@
     ![image](figure/docker_registry.PNG)
     * docker를 재실행하고 status를 확인한다.
     ```bash
-    $  sudo systemctl enable docker 
     $  sudo systemctl restart docker
     $  sudo systemctl status docker
     ```    
@@ -51,7 +52,7 @@
     	 * run-registry.sh, docker-registry.tar 파일이 같은 디렉토리({PWD})에 있어야 한다.
     ```bash
     $ sudo ./run-registry.sh {PWD} {IP}:5000
-    ex ) sudo ./run-registry.sh ~/registry-install/hypercloud-install-guide/Image_Registry/installer 172.22.5.2
+    ex ) sudo ./run-registry.sh ~/registry-install/hypercloud-install-guide/Image_Registry/installer 172.22.5.2:5000
     ```
     ![image](figure/registry.PNG)
 

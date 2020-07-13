@@ -6,7 +6,7 @@
 ## Prerequisites
 ## 폐쇄망 설치 가이드
 
-    * 작업 디렉토리 생성 및 환경 설정
+  * 작업 디렉토리 생성 및 환경 설정
     ```bash
     $ mkdir -p ~/registry-install
     $ cd ~/registry-install

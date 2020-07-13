@@ -45,7 +45,7 @@
     $ sudo docker save -o kube-apiserver.tar k8s.gcr.io/kube-apiserver:v1.17.6
     $ sudo docker save -o pause.tar k8s.gcr.io/pause:3.1
     ```
-    ![image](figure/save.PNG)
+    ![image](figure/dockersave.PNG)
 3. 위의 과정에서 생성한 tar 파일들을 폐쇄망 환경으로 이동시킨 뒤 사용하려는 registry에 이미지를 push한다.
     ```bash
     $ sudo docker load -i kube-apiserver.tar
@@ -56,7 +56,7 @@
     $ sudo docker load -i coredns.tar
     $ sudo docker load -i pause.tar
     ```
-    ![image](figure/load.PNG)
+    ![image](figure/dockerload.PNG)
     ```bash
     $ sudo docker tag k8s.gcr.io/kube-apiserver:v1.17.6 ${REGISTRY}/k8s.gcr.io/kube-apiserver:v1.17.6
     $ sudo docker tag k8s.gcr.io/kube-proxy:v1.17.6 ${REGISTRY}/k8s.gcr.io/kube-proxy:v1.17.6
@@ -151,7 +151,7 @@
 	sudo systemctl status crio
 	rpm -qi cri-o
 	```
-    ![image](figure/crio.PNG)
+    ![image](figure/rpm.PNG)
 * 비고 :
     * 추후 설치예정인 network plugin과 crio의 가상 인터페이스 충돌을 막기위해 cri-o의 default 인터페이스 설정을 제거한다.
 	```bash

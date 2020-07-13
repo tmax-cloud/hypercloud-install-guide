@@ -277,7 +277,7 @@
 
     * Keepalived 설정
     ```bash
-	vi /etc/keepalived/keepalived.conf
+	sudo vi /etc/keepalived/keepalived.conf
 	
 	vrrp_instance VI_1 {    
 	state MASTER    

@@ -44,16 +44,16 @@
 * 목적 : `폐쇄망일 때 yum repository 구축`
 * 생성 순서 : 
     * 패키지 가져오기
-      * $ scp -r ck-ftp@192.168.1.150:/home/ck-ftp/k8s_pl/install/offline/archive_20.07.10 .
-      * $ cp -rT ./archive_20.07.10 /tmp/localrepo
+      * scp -r ck-ftp@192.168.1.150:/home/ck-ftp/k8s_pl/install/offline/archive_20.07.10 .
+      * cp -rT ./archive_20.07.10 /tmp/localrepo
     * CentOS Repository 비활성화
-      * $ vi /etc/yum.repos.d/CentOS-Base.repo
+      * sudo vi /etc/yum.repos.d/CentOS-Base.repo
       * [base], [updates], [extra] repo config 에 enabled=0 추가
       * ![repo-config1](https://user-images.githubusercontent.com/45585638/86690147-9f3a6400-c042-11ea-85a6-b9df49c76e66.png)
     * Yum Repository 구축
-      * $ yum install -y /tmp/localrepo/createrepo/*.rpm
-      * $ createrepo /tmp/localrepo
-      * $ cat << EOF > /etc/yum.repos.d/localrepo.repo
+      * sudo yum install -y /tmp/localrepo/createrepo/*.rpm
+      * sudo createrepo /tmp/localrepo
+      * sudo cat << EOF > /etc/yum.repos.d/localrepo.repo
       * [localrepo]
       * name=localrepo
       * baseurl=file:///tmp/localrepo/
@@ -61,6 +61,6 @@
       * gpgcheck=0
       * EOF
     * 확인
-      * yum clean all && yum repolist
+      * sudo yum clean all && yum repolist
       * 다음과 같이 나오면 완료.
       * ![repo-config2](https://user-images.githubusercontent.com/45585638/86690566-ffc9a100-c042-11ea-9b6d-984eafa20592.png)

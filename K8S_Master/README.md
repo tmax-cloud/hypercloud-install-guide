@@ -151,7 +151,7 @@
 	sudo systemctl status crio
 	rpm -qi cri-o
 	```
-    ![image](figure/rpm.PNG)
+       ![image](figure/rpm.PNG)
 * 비고 :
     * 추후 설치예정인 network plugin과 crio의 가상 인터페이스 충돌을 막기위해 cri-o의 default 인터페이스 설정을 제거한다.
 	```bash

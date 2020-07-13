@@ -48,9 +48,10 @@
 * 목적 : `폐쇄망 환경에서 docker hub에 접속할 수 없을 때, docker registry를 이용해 image 사용을 위한 registry를 구축한다.`
 * 생성 순서 : 
     * run-registry.sh를 실행한다.
-    	 * run-registry.sh, docker-registry.tar 파일이 같은 $REGISTRY_HOME 디렉토리에 있어야 한다.
+    	 * run-registry.sh, docker-registry.tar 파일이 같은 디렉토리({PWD})에 있어야 한다.
     ```bash
-    $ sudo ./run-registry.sh ~/registry-install {IP}:5000
+    $ sudo ./run-registry.sh {PWD} {IP}:5000
+    ex ) sudo ./run-registry.sh ~/registry-install/hypercloud-install-guide/Image_Registry/installer 172.22.5.2
     ```
     ![image](figure/registry.PNG)
 

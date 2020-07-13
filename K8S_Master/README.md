@@ -95,7 +95,8 @@
 	```bash
 	sudo hostnamectl set-hostname k8s-master
 	```
-    * /etc/hosts에 hostname과 ip를 등록한다. 
+    * hostname과 ip를 등록한다.
+      * sudo vi /etc/hosts
 	```bash
 	127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
 	::1         localhost localhost.localdomain localhost6 localhost6.localdomain6

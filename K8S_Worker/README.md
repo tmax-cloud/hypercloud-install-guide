@@ -93,7 +93,7 @@
          * plugin_dirs : "/opt/cni/bin" 추가
 	 ![image](figure/crio_config.PNG)
     * crio 사용 전 환경 설정
-	```bash
+        ```bash
 	modprobe overlay
 	modprobe br_netfilter
 	

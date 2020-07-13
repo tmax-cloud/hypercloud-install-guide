@@ -93,14 +93,14 @@
          * plugin_dirs : "/opt/cni/bin" 추가
 	 ![image](figure/crio_config.PNG)
     * crio 사용 전 환경 설정
-        ```bash
+	```bash
 	modprobe overlay
 	modprobe br_netfilter
 	
 	sudo cat << "EOF" | sudo tee -a /etc/sysctl.d/99-kubernetes-cri.conf
- 	 net.bridge.bridge-nf-call-iptables  = 1
- 	 net.ipv4.ip_forward                 = 1
- 	 net.bridge.bridge-nf-call-ip6tables = 1
+	net.bridge.bridge-nf-call-iptables  = 1
+	net.ipv4.ip_forward                 = 1
+	net.bridge.bridge-nf-call-ip6tables = 1
 	EOF
 	```	
     * cri-o를 재시작 한다.

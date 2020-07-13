@@ -13,10 +13,7 @@
     ```
     * run-registry.sh, docker-registry.tar를 Master 환경에 다운로드한다.
         * https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Image_Registry/installer
-    ```bash
-    $ git clone https://github.com/tmax-cloud/hypercloud-install-guide.git
-    $ cd ~/registry-install/hypercloud-install-guide/Image_Registry/installer 
-    ```
+
 ## Install Steps
 0. [docker 설치](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Image_Registry/README.md#step-0-docker-%EC%84%A4%EC%B9%98)
 1. [registry 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Image_Registry/README.md#step-1-registry-%EC%8B%A4%ED%96%89)

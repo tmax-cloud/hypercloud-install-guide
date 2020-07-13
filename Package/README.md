@@ -63,4 +63,4 @@
     * 확인
       * sudo yum clean all && yum repolist
       * 다음과 같이 나오면 완료.
-      * ![repo-config2](https://user-images.githubusercontent.com/45585638/86690566-ffc9a100-c042-11ea-9b6d-984eafa20592.png)
+      * ![repo-config3](https://user-images.githubusercontent.com/45585638/87265534-fedeb680-c4fd-11ea-80f8-2bb74fa530f1.png)

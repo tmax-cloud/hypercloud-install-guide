@@ -175,6 +175,8 @@
 	net.ipv4.ip_forward                 = 1
 	net.bridge.bridge-nf-call-ip6tables = 1
 	EOF
+	
+	sysctl --system
 	```	
     * cri-o를 재시작 한다.
 	```bash

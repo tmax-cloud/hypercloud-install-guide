@@ -40,7 +40,7 @@
 	sudo swapoff -a
 	```
     * 스왑 메모리 비활성화 영구설정.
-      * sudo vi /etc/fstap
+      * sudo vi /etc/fstab
 	```bash
 	swap 관련 부분 주석처리
 	# /dev/mapper/centos-swap swap                    swap    defaults        0

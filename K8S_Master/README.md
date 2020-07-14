@@ -225,7 +225,7 @@
 	apiVersion: kubeadm.k8s.io/v1beta2
 	kind: InitConfiguration
 	localAPIEndpoint:
-  		advertiseAddress: {master IP}
+  		advertiseAddress: {virtual IP}
   		bindPort: 6443
 	nodeRegistration:
   		criSocket: /var/run/crio/crio.sock
@@ -233,7 +233,7 @@
 	apiVersion: kubeadm.k8s.io/v1beta2
 	kind: ClusterConfiguration
 	kubernetesVersion: v1.17.6
-	controlPlaneEndpoint: {master IP}:6443
+	controlPlaneEndpoint: {virtual IP}:6443
 	imageRepository: {registry}/k8s.gcr.io
 	networking:
  		serviceSubnet: 10.96.0.0/16
@@ -245,6 +245,8 @@
 	```
       * kubernetesVersion : kubernetes version
       * advertiseAddress : API server IP (virtual IP)
+        * virtual IP 
+      * controlPlaneEndpoint : endpoint ip (virtual IP), port는 반드시 6443으로 설정
       * serviceSubnet : "${SERVICE_IP_POOL}/${CIDR}"
       * podSubnet : "${POD_IP_POOL}/${CIDR}"
       * imageRepository : "${registry} / docker hub name"
@@ -294,10 +296,10 @@
 	sudo vi /etc/keepalived/keepalived.conf
 	
 	vrrp_instance VI_1 {    
-	state MASTER    
-	interface enp0s8    
-	virtual_router_id 50    
-	priority 100    
+	state {MASTER or BACKUP}   
+	interface {enp0s8}    
+	virtual_router_id {50}    
+	priority {100}    
 	advert_int 1    
 	nopreempt    
 	authentication {        
@@ -305,21 +307,24 @@
 		auth_pass $ place secure password here.   
 		}   
 	virtual_ipaddress {        
-		VIP  
+		{VIP}  
 		} 
 	}
     ```
 	
-	* interface : network interface 이름 확인
+	* interface : network interface 이름 확인 (ip a 명령어로 확인)
+	* state : master or backup으로 설정, 하나의 master에만 master를 설정하고 나머지 master에는 backup으로 설정
 	* priority : Master 우선순위
 	    * priority 값이 높으면 최우선적으로 Master 역할 수행
 	    * 각 Master마다 다른 priority 값으로 수정.
-	* virtual_ipaddress : VIP를 입력. Master IP 아님!
+	* virtual_ipaddress : virtual ip(VIP) 설정
 	
     * keepalived 재시작 및 상태 확인
     ```bash
     sudo systemctl restart keepalived
+    sudo systemctl enable keepalived
     sudo systemctl status keepalived
+   
     ```
 	
     * network interface 확인

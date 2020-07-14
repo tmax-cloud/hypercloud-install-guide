@@ -244,7 +244,7 @@
 	cgroupDriver: systemd
 	```
       * kubernetesVersion : kubernetes version
-      * advertiseAddress : API server IP (master IP)
+      * advertiseAddress : API server IP (virtual IP)
       * serviceSubnet : "${SERVICE_IP_POOL}/${CIDR}"
       * podSubnet : "${POD_IP_POOL}/${CIDR}"
       * imageRepository : "${registry} / docker hub name"

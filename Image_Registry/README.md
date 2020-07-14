@@ -6,17 +6,13 @@
 ## Prerequisites
 ## 폐쇄망 설치 가이드
 
-  * 작업 디렉토리 생성 및 환경 설정
-    ```bash
-    $ mkdir -p ~/registry-install
-    $ cd ~/registry-install
-    ```
+  * 환경 설정
     * run-registry.sh, docker-registry.tar를 Master 환경에 다운로드한다.
         * https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Image_Registry/installer
         * git이 설치되어 있는 경우 clone
            ```bash
            $ git clone https://github.com/tmax-cloud/hypercloud-install-guide.git
-           $ cd ~/registry-install/hypercloud-install-guide/Image_Registry/installer
+           $ cd hypercloud-install-guide/Image_Registry/installer
            ```
 ## Install Steps
 0. [docker 설치](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Image_Registry/README.md#step-0-docker-%EC%84%A4%EC%B9%98)
@@ -52,7 +48,7 @@
     	 * run-registry.sh, docker-registry.tar 파일이 같은 디렉토리({PWD})에 있어야 한다.
     ```bash
     $ sudo ./run-registry.sh {PWD} {IP}:5000
-    ex ) sudo ./run-registry.sh ~/registry-install/hypercloud-install-guide/Image_Registry/installer 172.22.5.2:5000
+    ex ) sudo ./run-registry.sh ~/hypercloud-install-guide/Image_Registry/installer 172.22.5.2:5000
     ```
     ![image](figure/registry.PNG)
 

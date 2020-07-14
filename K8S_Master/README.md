@@ -78,7 +78,7 @@
     ```
     ![image](figure/push.PNG)
     ```bash
-    $ sudo docker images
+    $ curl ${REGISTRY}/v2/_catalog
     ```    
     ![image](figure/check.PNG)
 ## Install Steps

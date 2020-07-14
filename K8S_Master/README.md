@@ -365,8 +365,8 @@
         * Master 다중구성시 --upload-certs 옵션은 반드시 필요.
 	    ```bash
 	    sudo kubeadm init --config=kubeadm-config.yaml --upload-certs 
-	    sudo kubeadm join {IP}:{PORT} --token ~~ --control-plane --certificate-key ~~ (1) --cri-socket=/var/run/crio/crio.sock (3)
-	    sudo kubeadm join {IP}:{PORT} --token ~~   (2)
+	    sudo kubeadm join {IP}:{PORT} --token ~~ discovery-token-ca-cert-hash --control-plane --certificate-key ~~ (1) --cri-socket=/var/run/crio/crio.sock (3)
+	    sudo kubeadm join {IP}:{PORT} --token ~~ discovery-token-ca-cert-hash  (2)
 	    ```
 	* 해당 옵션은 certificates를 control-plane으로 upload하는 옵션
 	* 해당 옵션을 설정하지 않을 경우, 모든 Master 노드에서 key를 복사해야 함
@@ -381,5 +381,3 @@
 	    sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 	    sudo chown $(id -u):$(id -g) $HOME/.kube/config
 	    ```
-* 비고 : 
-    * 각 마스터에 

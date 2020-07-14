@@ -62,7 +62,7 @@
 	net.bridge.bridge-nf-call-ip6tables = 1
 	EOF
 	
-	sysctl --system
+	sudo sysctl --system
 	```
 ## Step 1. cri-o 설치
 * 목적 : `k8s container runtime 설치`

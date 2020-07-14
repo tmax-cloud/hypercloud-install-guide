@@ -234,10 +234,10 @@
 	kind: ClusterConfiguration
 	kubernetesVersion: v1.17.6
 	controlPlaneEndpoint: {master IP}:6443
-	imageRepository: "{registry}/k8s.gcr.io"
+	imageRepository: {registry}/k8s.gcr.io
 	networking:
  		serviceSubnet: 10.96.0.0/16
-  		podSubnet: "10.244.0.0/16"
+  		podSubnet: 10.244.0.0/16
 	---
 	apiVersion: kubelet.config.k8s.io/v1beta1
 	kind: KubeletConfiguration

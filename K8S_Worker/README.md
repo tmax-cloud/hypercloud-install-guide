@@ -116,6 +116,8 @@
     * (폐쇄망) kubeadm, kubectl, kubelet 설치 (v1.17.6)
 	```bash
 	sudo yum install -y kubeadm-1.17.6-0 kubelet-1.17.6-0 kubectl-1.17.6-0
+	
+	sudo systemctl enable kubelet
 	```  	
     * (외부망) 레포 등록 후 kubeadm, kubectl, kubelet 설치 (v1.17.6)
 	```bash

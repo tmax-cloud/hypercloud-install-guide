@@ -103,8 +103,8 @@
          * registries = ["{registry}:{port}" , "docker.io"]
          * insecure_registries = ["{registry}:{port}"]
          * plugin_dirs : "/opt/cni/bin" 추가
-	 * pause_image : "k8s.gcr.io/pause:3.1" 을 "{registry}:{port}/k8s.gcr.io/pause:3.1" 로 변경
-	 ![image](figure/crio_config.PNG)
+         * pause_image : "k8s.gcr.io/pause:3.1" 을 "{registry}:{port}/k8s.gcr.io/pause:3.1" 로 변경	 
+	![image](figure/crio_config.PNG)
 	
     * cri-o를 재시작 한다.
 	```bash

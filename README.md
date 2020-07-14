@@ -5,8 +5,8 @@
 | ------ | ------ | ------ | ------ |
 | OS 설치 & package repo |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Package/README.md | O |
 | Image registry |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Image_Registry/README.md | O |
-| K8s Master |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/K8S_Master/README.md | O |
-| K8s Worker |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/K8S_Worker/README.md | O |
+| K8s Master | v1.17.6  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/K8S_Master/README.md | O |
+| K8s Worker | v1.17.6 | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/K8S_Worker/README.md | O |
 | CNI | | https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/CNI | O |
 | Rook Ceph | v1.3.6 | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/rook-ceph/README.md | O |
 | HyperCloud Operator | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/README.md | O |
@@ -36,7 +36,7 @@
 ### VM_Module (Optional)
 | Module | Version | Guide | 진행률(O/△/X) |
 | ------ | ------ | ------ | ------ |
-| KubeVirt | | https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/VM_KubeVirt | O |
+| KubeVirt | v0.27.0 | https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/VM_KubeVirt | O |
 | CDI | v1.18.0 | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/VM_KubeVirt/cdi/README.md | O |
 | ImageController | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/VM_KubeVirt/Image%20Controller/README.md | △ |
 | FailoverController | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/VM_KubeVirt/Failover%20Controller/README.md | O |

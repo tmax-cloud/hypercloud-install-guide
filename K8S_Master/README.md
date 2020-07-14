@@ -203,6 +203,8 @@
 	EOF
 
 	sudo yum install -y kubeadm-1.17.6-0 kubelet-1.17.6-0 kubectl-1.17.6-0
+	
+	sudo systemctl enable kubelet
 	```  
 
 ## Step 3. kubernetes cluster 구성

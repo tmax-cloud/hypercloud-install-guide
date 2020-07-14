@@ -15,7 +15,7 @@
 ## Prerequisites
  * 이 가이드의 모든 명령은 root로 실행해야 한다. 예를 들어, sudo로 접두사를 붙이거나, root 사용자가 되어 명령을 실행한다.
 ## 폐쇄망 설치 가이드 
-* 2개이상 마스터 구축시 마스터 1개에서만 진행
+
 1. **폐쇄망에서 설치하는 경우** 아래 가이드를 참고 하여 image registry를 먼저 구축한다.
     * https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Image_Registry   
 2. 사용하는 image repository에 k8s 설치 시 필요한 이미지를 push한다. 
@@ -81,6 +81,8 @@
     $ curl ${REGISTRY}/v2/_catalog
     ```    
     ![image](figure/check.PNG)
+* 비고 :
+    * 위 내용은 2개이상의 마스터 구축시 마스터 1개에서만 진행한다.    
 ## Install Steps
 0. [환경 설정](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/K8S_Master#step0-%ED%99%98%EA%B2%BD-%EC%84%A4%EC%A0%95)
 1. [cri-o 설치](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/K8S_Master#step-1-cri-o-%EC%84%A4%EC%B9%98)

@@ -124,7 +124,19 @@
 	sudo setenforce 0
 	sudo sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 	```
-
+    * crio 사용 전 환경 설정
+	```bash
+	modprobe overlay
+	modprobe br_netfilter
+	
+	sudo cat << "EOF" | sudo tee -a /etc/sysctl.d/99-kubernetes-cri.conf
+	net.bridge.bridge-nf-call-iptables  = 1
+	net.ipv4.ip_forward                 = 1
+	net.bridge.bridge-nf-call-ip6tables = 1
+	EOF
+	
+	sysctl --system
+	```
 ## Step 1. cri-o 설치
 * 목적 : `k8s container runtime 설치`
 * 순서 :
@@ -165,19 +177,7 @@
          * insecure_registries = ["{registry}:{port}"]
          * plugin_dirs : "/opt/cni/bin" 추가
 	 ![image](figure/crio_config.PNG)
-    * crio 사용 전 환경 설정
-	```bash
-	modprobe overlay
-	modprobe br_netfilter
-	
-	sudo cat << "EOF" | sudo tee -a /etc/sysctl.d/99-kubernetes-cri.conf
-	net.bridge.bridge-nf-call-iptables  = 1
-	net.ipv4.ip_forward                 = 1
-	net.bridge.bridge-nf-call-ip6tables = 1
-	EOF
-	
-	sysctl --system
-	```	
+	 
     * cri-o를 재시작 한다.
 	```bash
 	sudo systemctl restart crio

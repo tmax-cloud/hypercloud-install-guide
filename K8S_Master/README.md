@@ -126,8 +126,8 @@
 	```
     * crio 사용 전 환경 설정
 	```bash
-	modprobe overlay
-	modprobe br_netfilter
+	sudo modprobe overlay
+	sudo modprobe br_netfilter
 	
 	sudo cat << "EOF" | sudo tee -a /etc/sysctl.d/99-kubernetes-cri.conf
 	net.bridge.bridge-nf-call-iptables  = 1

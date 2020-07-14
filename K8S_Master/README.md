@@ -338,7 +338,6 @@
         "insecure-registries": ["{IP}:5000"]
     }
     ```
-    ![image](figure/docker_registry.PNG)
     * docker를 재실행하고 status를 확인한다.
     ```bash
     $  sudo systemctl restart docker

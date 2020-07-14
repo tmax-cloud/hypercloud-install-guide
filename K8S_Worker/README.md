@@ -93,8 +93,8 @@
 * 비고 :
     * 추후 설치예정인 network plugin과 crio의 가상 인터페이스 충돌을 막기위해 cri-o의 default 인터페이스 설정을 제거한다.
 	```bash
-	 sudo rm -rf  /etc/cni/net.d/100-crio-bridge
- 	 sudo rm -rf  /etc/cni/net.d/200-loopback
+	 sudo rm -rf  /etc/cni/net.d/100-crio-bridge.conf
+ 	 sudo rm -rf  /etc/cni/net.d/200-loopback.conf
 	``` 
     * 폐쇄망 환경에서 private registry 접근을 위해 crio.conf 내용을 수정한다.
     * insecure_registry, registries, plugin_dirs 내용을 수정한다.

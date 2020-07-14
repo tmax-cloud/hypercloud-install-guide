@@ -321,22 +321,46 @@
 	
 	* 설정한 VIP 확인 가능, 여러 마스터 중 하나만 보임.
 	* inet {VIP}/32 scope global eno1
-
-## Step 3-2. kubernetes cluster 다중화 구성 설정
+	
+## Step 3-2. docker 설치 및 설정
+* 목적 : `구성한 docker registry에 접근을 위해 docker를 설치한다.`
+* 생성 순서 : 
+    * 다른 구성하는 마스터에 docker를 설치한다.
+    ```bash
+    $ sudo yum install -y docker-ce
+    $ sudo systemctl start docker
+    $ sudo systemctl enable docker
+    ```
+    * docker damon에 insecure-registries를 등록한다.
+      * sudo vi /etc/docker/daemon.json
+    ```bash
+    {
+        "insecure-registries": ["{IP}:5000"]
+    }
+    ```
+    ![image](figure/docker_registry.PNG)
+    * docker를 재실행하고 status를 확인한다.
+    ```bash
+    $  sudo systemctl restart docker
+    $  sudo systemctl status docker
+    ```  
+    
+## Step 3-3. kubernetes cluster 다중화 구성 설정
 * 목적 : `K8S cluster의 Master 다중화를 구성한다`
 * 순서 : 
     * kubeadm-config.yaml 파일로 kubeadm 명령어 실행한다.
         * Master 다중구성시 --upload-certs 옵션은 반드시 필요.
 	    ```bash
-	    sudo kubeadm init --config=kubeadm-config.yaml --upload-certs
-	    kubeadm join {IP}:{PORT} --token ~~ --control-plane --certificate-key ~~   (1)
-	    kubeadm join {IP}:{PORT} --token ~~   (2)
+	    sudo kubeadm init --config=kubeadm-config.yaml --upload-certs 
+	    sudo kubeadm join {IP}:{PORT} --token ~~ --control-plane --certificate-key ~~ (1) --cri-socket=/var/run/crio/crio.sock (3)
+	    sudo kubeadm join {IP}:{PORT} --token ~~   (2)
 	    ```
 	* 해당 옵션은 certificates를 control-plane으로 upload하는 옵션
 	* 해당 옵션을 설정하지 않을 경우, 모든 Master 노드에서 key를 복사해야 함
 	* Master 단일구성과는 다르게, --control-plane --certificate-key 옵션이 추가된 명령어가 출력됨
 	* (1)처럼 Master 다중구성을 위한 hash 값을 포함한 kubeadm join 명령어가 출력되므로 해당 명령어를 복사하여 다중구성에 포함시킬 다른 Master에서 실행
 	* (2)처럼 Worker의 join을 위한 명령어도 출력되므로 Worker 노드 join시 사용
+	* (3)처럼 crio 사용시 --cri-socket 옵션 추가
 	
 	* kubernetes config 
 	    ```bash
@@ -344,3 +368,5 @@
 	    sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 	    sudo chown $(id -u):$(id -g) $HOME/.kube/config
 	    ```
+* 비고 : 
+    * 각 마스터에 

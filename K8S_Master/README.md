@@ -178,8 +178,14 @@
          * plugin_dirs : "/opt/cni/bin" 추가
          * (폐쇄망) pause_image : "k8s.gcr.io/pause:3.1" 을 "{registry}:{port}/k8s.gcr.io/pause:3.1" 로 변경
 	![image](figure/crio_config.PNG)
-	 
-    * cri-o를 재시작 한다.
+ 
+    * registries.conf 내용을 수정한다.
+      * sudo vi /etc/containers/registries.conf
+	```bash
+	unqualified-search-registries = ['registry.fedoraproject.org', 'registry.access.redhat.com', 'registry.centos.org', 'docker.io', '{registry}:{port}']
+	ex) unqualified-search-registries = ['registry.fedoraproject.org', 'registry.access.redhat.com', 'registry.centos.org', 'docker.io', '172.22.5.2:5000']
+	``` 	      
+    * crio를 재시작 한다.
 	```bash
 	sudo systemctl restart crio
 	``` 	

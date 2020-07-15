@@ -53,7 +53,7 @@
     * Yum Repository 구축
       * sudo yum install -y /tmp/localrepo/createrepo/*.rpm
       * sudo createrepo /tmp/localrepo
-      * sudo cat << EOF > /etc/yum.repos.d/localrepo.repo
+      * sudo cat << "EOF" | sudo tee -a /etc/yum.repos.d/localrepo.repo
       * [localrepo]
       * name=localrepo
       * baseurl=file:///tmp/localrepo/

@@ -8,6 +8,7 @@
 | K8s Master | v1.17.6  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/K8S_Master/README.md | O |
 | K8s Worker | v1.17.6 | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/K8S_Worker/README.md | O |
 | CNI | | https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/CNI | O |
+| MetalLB |  | https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/MetalLB | O |
 | Rook Ceph | v1.3.6 | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/rook-ceph/README.md | O |
 | HyperCloud Operator | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/README.md | O |
 | HyperCloud Webhook | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Webhook/README.md | O |
@@ -21,7 +22,6 @@
 ### Module (Optional)
 | Module | Version | Guide | 진행률(O/△/X) |
 | ------ | ------ | ------ | ------ |
-| MetalLB |  | https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/MetalLB | △ |
 | NetworkAgent |  | https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/NetworkAgent | O |
 | Pod_GPU plugin | | <ul><li>https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Pod_GPU%20plugin</li><li> NVIDIA Device Plugin : https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Pod_GPU%20plugin/nvidia-device-plugin/README.md</li><li> NVIDIA Pod GPU Metrics Exporter : https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Pod_GPU%20plugin/nvidia-pod-gpu-metrics-exporter/README.md</li></ul> | O |
 | Istio | | [installation guide](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Istio/README.md) | O |

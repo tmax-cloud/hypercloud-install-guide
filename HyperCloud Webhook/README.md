@@ -42,6 +42,20 @@
     
     $ sudo docker push ${REGISTRY}/hypercloud-webhook:${WEBHOOK_VERSION}
     ```
+    
+3. 해당 환경에 JAVA가 설치되어 있지 않을 경우, 첨부된 JAVA 파일을 활용하여 JAVA 기반 cli - keytool을 설치한다. ([java](pkg/jre1.8.0_251))
+    ```bash
+    $ sudo mkdir /usr/local/java
+    
+    $ sudo mv jre1.8.0_251 /usr/local/java/
+    
+    $ sudo echo 'export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")' >> /etc/profile
+    
+    $ sudo update-alternatives --install "/usr/bin/keytool" "keytool" "/usr/local/java/jre1.8.0_251/bin/keytool" 1;
+    
+    $ sudo update-alternatives --set keytool /usr/local/java/jre1.8.0_251/bin/keytool;
+    ```    
+    
 
 ## Install Steps
 0. [hypercloud-webhook yaml 수정](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/HyperCloud%20Webhook#step-0-hypercloud-webhook-yaml-%EC%88%98%EC%A0%95)

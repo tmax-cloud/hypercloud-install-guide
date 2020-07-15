@@ -23,7 +23,7 @@
     * 외부 네트워크 통신이 가능한 환경에서 필요한 이미지를 다운받는다.
     ```bash
     $ sudo docker pull tmaxcloudck/hypernet-local-agent:${HYPERNET_LOCAL_AGENT_VERSION}
-    $ sudo docker save tmaxcloudck/hypernet-local-agent:${HYPERNET_LOCAL_AGENT_VERSION} > tmaxcloudck_hypernet-local-agent_${HYPERNET_LOCAL_AGENT_VERSION}.tar
+    $ sudo docker save tmaxcloudck/hypernet-local-agent:${HYPERNET_LOCAL_AGENT_VERSION} > hypernet-local-agent_${HYPERNET_LOCAL_AGENT_VERSION}.tar
     ```
 
 2. 위의 과정에서 생성한 tar 파일들을 폐쇄망 환경으로 이동시킨 뒤 사용하려는 registry에 이미지를 push한다.

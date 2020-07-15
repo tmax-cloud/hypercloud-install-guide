@@ -140,8 +140,9 @@
 * 순서 :
     * kubernetes master 구축시 생성된 join token을 worker node에서 실행한다.
     * kubeadm join
+      * --cri-socket=/var/run/crio/crio.sock 옵션을 token 뒤에 추가하여 실행한다.
 	```bash
-	kubeadm join 172.22.5.2:6443 --token r5ks9p.q0ifuz5pcphqvc14 \ --discovery-token-ca-cert-hash sha256:90751da5966ad69a49f2454c20a7b97cdca7f125b8980cf25250a6ee6c804d88
+	kubeadm join 172.22.5.2:6443 --token r5ks9p.q0ifuz5pcphqvc14 \ --discovery-token-ca-cert-hash sha256:90751da5966ad69a49f2454c20a7b97cdca7f125b8980cf25250a6ee6c804d88 --cri-socket=/var/run/crio/crio.sock
 	```
     ![image](figure/noding.PNG)
 * 비고 : 

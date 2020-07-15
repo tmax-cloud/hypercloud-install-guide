@@ -180,12 +180,11 @@ $ sudo docker push ${REGISTRY}/k8scsi/csi-attacher:${ATTACHER_VERSION}
   ```
 - 비고 :
   - 폐쇄망에서 설치를 진행하여 별도의 image registry를 사용하는 경우 registry 정보를 추가로 설정해줍니다.
-  - 본 프로젝트의 yaml 파일은 storage 관련 pod 들의 docker image 를 받아올 registry 를 적지 않은 상태로 제공됩니다. docker image 가 등록된 private registry 정보를 적용 하셔야 하고, 폐쇄망 설치가 아닐경우, 별도의 hcsctl 바이너리 파일을 안내 받으셔야 합니다. 
-
   ``` shell
-  $ sed -i 's/{registry_endpoint}/'${REGISTRY}'/g' $inventory_name/cdi/*.yaml # cdi 설치도 함께하는 경우
   $ sed -i 's/{registry_endpoint}/'${REGISTRY}'/g'  $inventory_name/rook/*.yaml
+  $ sed -i 's/{registry_endpoint}/'${REGISTRY}'/g' $inventory_name/cdi/*.yaml # cdi 설치도 함께하는 경우
   ```
+  - 본 프로젝트의 yaml 파일은 storage 관련 pod 들의 docker image 를 받아올 registry 를 적지 않은 상태로 제공됩니다. docker image 가 등록된 private registry 정보를 적용 하셔야 하고, 폐쇄망 설치가 아닐경우, 별도의 hcsctl 바이너리 파일을 안내 받으셔야 합니다. 
 
 ## Step 2. rook yaml 설치 정보 수정
 
@@ -208,6 +207,9 @@ $ sudo docker push ${REGISTRY}/k8scsi/csi-attacher:${ATTACHER_VERSION}
 - 비고 :
   - CDI도 설치가 필요한 경우, [CDI 가이드](../VM_KubeVirt/cdi/README.md) 도 참고하여 준비된 CDI 이미지 정보 수정을 진행한 뒤에 위 명령어로 설치진행 해주시길 바랍니다.
   - 정상 설치가 완료되면 Block Storage와 Shared Filesystem을 사용할 수 있습니다.
+- 트러블슈팅:
+  - 해당 명령어는 `hcsctl` 바이너리와 inventory directory가 존재하는 path에서 실행되어야 합니다. 에러 발생시에는 yaml 파일 수정후에, 작업중인 working directory를 먼저 확인 해주세요. 
+  - `panic: NOT FOUND 'CephCluster'` 에러가 발생했을 때는 yaml 파일 내 image registry 와 image version 정보들이 모두 치환되었는지 확인 필요합니다. 
 
 ## Step 4. rook 설치 확인
 

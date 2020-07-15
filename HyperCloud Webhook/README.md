@@ -10,7 +10,7 @@
     * ([HyperCloud Operator](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/README.md))
     
 2. 설치 과정에 필요한 인증서 생성을 위해 JAVA 패키지 설치 필요
-    * ProLinux 7: `ex) java-1.8.0-openjdk-devel.x86_64`
+    * ProLinux 7, CentOS 7: `ex) java-1.8.0-openjdk-devel.x86_64`([test]pkg/jre1.8.0_251)
     * Ubuntu: `ex) openjdk-8-jre-headless`
 
 ## 폐쇄망 설치 가이드
@@ -55,7 +55,7 @@
 ## Step 0. hypercloud-webhook yaml 수정
 * 목적 : `hypercloud-webhook yaml에 이미지 registry, 버전 및 마스터 노드 정보를 수정`
 * 생성 순서 : 
-    * 아래의 command를 사용하여 사용하고자 하는 image 버전  수정한다.
+    * 아래의 command를 사용하여 사용하고자 하는 image 버전을 수정한다.
 	```bash
 	$ sed -i 's/{webhook_version}/'${WEBHOOK_VERSION}'/g' 03_webhook-deployment.yaml
 	$ sed -i 's/{hostname}/'${HOSTNAME}'/g' 03_webhook-deployment.yaml

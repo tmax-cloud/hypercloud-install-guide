@@ -46,7 +46,7 @@
    ```
 
 ## Install Steps
-1. [helm repository 생성](Step-1-helm-repository-생성)
+1. [helm repository 생성](#Step-1-helm-repository-생성)
 
 ## Step 1. helm repository 생성
 - 목적 : `helm repository 생성`

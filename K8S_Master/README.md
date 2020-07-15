@@ -363,10 +363,11 @@
 * 순서 : 
     * kubeadm-config.yaml 파일로 kubeadm 명령어 실행한다.
         * Master 다중구성시 --upload-certs 옵션은 반드시 필요.
+        * join 시에 --cri-socket=/var/run/crio/crio.sock 옵션을 추가하여 실행한다.
 	    ```bash
 	    sudo kubeadm init --config=kubeadm-config.yaml --upload-certs 
 	    sudo kubeadm join {IP}:{PORT} --token ~~ discovery-token-ca-cert-hash --control-plane --certificate-key ~~ (1) --cri-socket=/var/run/crio/crio.sock (3)
-	    sudo kubeadm join {IP}:{PORT} --token ~~ discovery-token-ca-cert-hash  (2)
+	    sudo kubeadm join {IP}:{PORT} --token ~~ discovery-token-ca-cert-hash --cri-socket=/var/run/crio/crio.sock (2)
 	    ```
 	* 해당 옵션은 certificates를 control-plane으로 upload하는 옵션
 	* 해당 옵션을 설정하지 않을 경우, 모든 Master 노드에서 key를 복사해야 함

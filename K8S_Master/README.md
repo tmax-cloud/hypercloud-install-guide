@@ -251,7 +251,7 @@
       * serviceSubnet : "${SERVICE_IP_POOL}/${CIDR}"
       * podSubnet : "${POD_IP_POOL}/${CIDR}"
       * imageRepository : "${registry} / docker hub name"
-      * cgroupDriver: systemd cgroup driver 사용
+      * cgroupDriver: docker cgroup driver systemd 변경
 
     * kubeadm init (2개 이상 마스터 구축시에는 아래 가이드 참조)
 	```bash

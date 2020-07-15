@@ -12,8 +12,8 @@
 | Rook Ceph | v1.3.6 | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/rook-ceph/README.md | O |
 | HyperCloud Operator | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/README.md | O |
 | HyperCloud Webhook | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Webhook/README.md | O |
-| Console | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Console/README.md | O |
 | Prometheus | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Prometheus/README.md | O |
+| Console | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Console/README.md | O |
 | Teckton |  | https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Tekton_CI_CD | O |
 | Catalog Controller |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/CatalogController/README.md | O |
 | TemplateServiceBroker |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/TemplateServiceBroker/README.md | O |

@@ -1,3 +1,4 @@
+
 # hypercloud-operator 설치 가이드
 
 ## 구성 요소
@@ -84,15 +85,7 @@
 	#		spec.template.spec.containers.image: 192.168.6.110:5000/mysql:5.6
 	$ vi ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/3.mysql-create.yaml
 	
-	# 6.hypercloud4-operator.yaml 내용 수정
-	#	<REGISTRY> 입력값: 폐쇄망 registry의 IP:PORT 
-	#	<tag> 입력값: load한 이미지의 tag 
-	#	spec.template.spec.containers.image: <REGISTRY>/tmaxcloudck/hypercloud-operator:<tag>
-	#	spec.template.spec.containers.env.name: PROAUTH_EXIST**의 value를 “0”으로 수정**
-	#	Example:
-	# 		spec.template.spec.containers.image: 192.168.6.110:5000/tmaxcloudck/hypercloud-operator:b4.1.0.35
-	#		spec.template.spec.containers.env.value: “0” <-- PROAUTH_EXIST의 value
-	$ vi ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/6.hypercloud4-operator.yaml
+
     ```
 
 
@@ -152,7 +145,36 @@
 
 
 ## Step 5. 6.hypercloud4-operator.yaml 실행
-* 목적 : `hypercloud-operator deployment, svc 생성`
+* 목적: `hypercloud-operator deployment, svc 생성`
+* 준비: 
+	* 폐쇄망의 경우
+		* 6.hypercloud4-operator.yaml 내용 수정
+			spec.template.spec.containers.image: `<REGISTRY>`/tmaxcloudck/hypercloud-operator:`<tag>`
+			spec.template.spec.containers.env.name: PROAUTH_EXIST**의 value를 “0”으로 수정**
+			Example:
+		 		spec.template.spec.containers.image: 192.168.6.110:5000/tmaxcloudck/hypercloud-operator:b4.1.0.35
+				spec.template.spec.containers.env.value: “0” <-- PROAUTH_EXIST의 value
+				
+		`<REGISTRY>` 입력값: 폐쇄망 registry의 IP:PORT 
+		`<tag>` 입력값: load한 이미지의 tag 
+	```bash								 
+	$ vi ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/6.hypercloud4-operator.yaml
+	```
+	* 폐쇄망 아닌 경우
+		* 6.hypercloud4-operator.yaml 내용 수정
+			spec.template.spec.containers.image: `<REGISTRY>`/tmaxcloudck/hypercloud-operator:`<tag>`
+			spec.template.spec.containers.env.name: PROAUTH_EXIST**의 value를 “0”으로 수정**
+			Example:
+	 			spec.template.spec.containers.image: tmaxcloudck/hypercloud-operator:b4.1.0.35
+				spec.template.spec.containers.env.value: “0” <-- PROAUTH_EXIST의 value	
+				
+		`<REGISTRY>` 입력값: 폐쇄망 registry의 IP:PORT 
+		`<tag>` 입력값: load한 이미지의 tag 						 
+	```bash
+	$ vi ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/6.hypercloud4-operator.yaml
+	```
+	* 주의 
+		*  spec.template.spec.containers.image 값에서 이미지 이름이 tmaxcloudck/`hypercloud-operator4`가 아닌 tmaxcloudck/`hypercloud-operator` 인것에 주의
 * 실행: 
 	```bash
 	$ kubectl apply -f ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/6.hypercloud4-operator.yaml

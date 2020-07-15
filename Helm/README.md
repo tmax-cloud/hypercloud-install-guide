@@ -74,7 +74,7 @@ helm repository server
 
 9. helm repository 설정을 합니다.
    - helm init --client-only --stable-repo-url {helm_repo_url}
-   - 비고: helm_repo_url은 폐쇄망에서 구축한 helm repository 주소 입니다. (ex.192.168.6.76:8080)
+   - 비고: helm_repo_url은 폐쇄망에서 구축한 helm repository 주소 입니다. (ex.http://192.168.6.76:8080)
 
 ## Install Steps
 1. [helm 바이너리 다운 및 설치](Step-1-helm-바이너리-다운-및-설치)

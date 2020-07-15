@@ -32,6 +32,8 @@
 | NGINX Ingress Controller | 0.33.0 | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/IngressNginx/README.md | O |
 | kubefed |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Fed/README.md | O |
 | Grafana |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Grafana/README.md | O |
+| Helm |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Helm/README.md | O |
+| HelmRepository |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HelmRepository/README.md | O |
 
 ### VM_Module (Optional)
 | Module | Version | Guide | 진행률(O/△/X) |

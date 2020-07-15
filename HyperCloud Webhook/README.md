@@ -40,7 +40,7 @@
     
     $ sudo docker tag tmaxcloudck/hypercloud-webhook:${WEBHOOK_VERSION} ${REGISTRY}/hypercloud-webhook:${WEBHOOK_VERSION}
     
-    $ sudo docker push ${REGISTRY}/tmaxcloudck/hypercloud-webhook:${WEBHOOK_VERSION}
+    $ sudo docker push ${REGISTRY}/hypercloud-webhook:${WEBHOOK_VERSION}
     ```
 
 ## Install Steps

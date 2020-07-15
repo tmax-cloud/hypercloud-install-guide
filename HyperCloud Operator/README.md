@@ -149,27 +149,29 @@
 * 준비: 
 	* 폐쇄망의 경우
 		* 6.hypercloud4-operator.yaml 내용 수정
-			spec.template.spec.containers.image: `<REGISTRY>`/tmaxcloudck/hypercloud-operator:`<tag>`
-			spec.template.spec.containers.env.name: PROAUTH_EXIST**의 value를 “0”으로 수정**
-			Example:
-		 		spec.template.spec.containers.image: 192.168.6.110:5000/tmaxcloudck/hypercloud-operator:b4.1.0.35
-				spec.template.spec.containers.env.value: “0” <-- PROAUTH_EXIST의 value
-				
-		`<REGISTRY>` 입력값: 폐쇄망 registry의 IP:PORT 
-		`<tag>` 입력값: load한 이미지의 tag 
+			* spec.template.spec.containers.image: `<REGISTRY>`/tmaxcloudck/hypercloud-operator:`<tag>`
+			* spec.template.spec.containers.env.name: PROAUTH_EXIST**의 value를 “0”으로 수정**
+			
+		* Example
+		 	* spec.template.spec.containers.image: 192.168.6.110:5000/tmaxcloudck/hypercloud-operator:b4.1.0.35
+			* spec.template.spec.containers.env.value: “0” <-- PROAUTH_EXIST의 value
+		* 비고 
+			* `<REGISTRY>` 입력값: 폐쇄망 registry의 IP:PORT 
+			* `<tag>` 입력값: load한 이미지의 tag 
 	```bash								 
 	$ vi ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/6.hypercloud4-operator.yaml
 	```
 	* 폐쇄망 아닌 경우
 		* 6.hypercloud4-operator.yaml 내용 수정
-			spec.template.spec.containers.image: `<REGISTRY>`/tmaxcloudck/hypercloud-operator:`<tag>`
-			spec.template.spec.containers.env.name: PROAUTH_EXIST**의 value를 “0”으로 수정**
-			Example:
-	 			spec.template.spec.containers.image: tmaxcloudck/hypercloud-operator:b4.1.0.35
-				spec.template.spec.containers.env.value: “0” <-- PROAUTH_EXIST의 value	
-				
-		`<REGISTRY>` 입력값: 폐쇄망 registry의 IP:PORT 
-		`<tag>` 입력값: load한 이미지의 tag 						 
+			 * spec.template.spec.containers.image: `<REGISTRY>`/tmaxcloudck/hypercloud-operator:`<tag>`
+			 * spec.template.spec.containers.env.name: PROAUTH_EXIST**의 value를 “0”으로 수정**
+			
+		* Example
+	 		* spec.template.spec.containers.image: tmaxcloudck/hypercloud-operator:b4.1.0.35
+			* spec.template.spec.containers.env.value: “0” <-- PROAUTH_EXIST의 value	
+		* 비고
+			* `<REGISTRY>` 입력값: 폐쇄망 registry의 IP:PORT 
+			* `<tag>` 입력값: load한 이미지의 tag 						 
 	```bash
 	$ vi ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/6.hypercloud4-operator.yaml
 	```

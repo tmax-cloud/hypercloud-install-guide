@@ -17,6 +17,7 @@
     $ mkdir -p ~/metallb-install
     $ export METALLB_HOME=~/metallb-install
     $ export METALLB_VERSION=v0.8.2
+    $ export REGISTRY=172.22.8.106:5000
     $ cd $METALLB_HOME
     ```
 
@@ -31,6 +32,10 @@
     * metallb yaml을 다운로드한다. 
     ```bash
     $ curl https://raw.githubusercontent.com/google/metallb/v0.8.2/manifests/metallb.yaml > metallb.yaml
+    ```
+
+    * metallb yaml을 공식 홈페이지에서 다운로드가 불가능한 경우 아래의 링크를 이용한다.
+    ```bash
     $ curl https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/MetalLB/metallb_v0.8.2.yaml > metallb.yaml
     ```
 
@@ -42,7 +47,7 @@
 2. 위의 과정에서 생성한 tar 파일들을 폐쇄망 환경으로 이동시킨 뒤 사용하려는 registry에 이미지를 push한다.
     ```bash
     $ sudo docker load < metallb-controller_${METALLB_VERSION}.tar
-    $ sudo docker load < calico-pod2daemon-flexvol_${CNI_VERSION}.tar
+    $ sudo docker load < metallb-speaker_${METALLB_VERSION}.tar
 
     $ sudo docker tag metallb/controller:${METALLB_VERSION} ${REGISTRY}/metallb/controller:${METALLB_VERSION}
     $ sudo docker tag metallb/speaker:${METALLB_VERSION} ${REGISTRY}/metallb/speaker:${METALLB_VERSION}
@@ -68,8 +73,8 @@
 * 비고 :
     * `폐쇄망에서 설치를 진행하여 별도의 image registry를 사용하는 경우 registry 정보를 추가로 설정해준다.`
 	```bash
-            image: metallb/speaker:v0.8.2 -> image: IP:5000/metallb/speaker:v0.8.2
-            image: metallb/controller:v0.8.2 -> image: IP:5000/metallb/controller:v0.8.2
+            sed -i 's/metallb\/speaker/'${REGISTRY}'\/metallb\/speaker/g' metallb.yaml 
+            sed -i 's/metallb\/controller/'${REGISTRY}'\/metallb\/controller/g' metallb.yaml 
 	```
 
 <h2 id="step1"> Step 1. metallb </h2>
@@ -97,8 +102,11 @@
       config: |
         address-pools:
         - name: default
-        protocol: layer2
-        addresses:
-        - 172.22.8.160-172.22.8.180
+          protocol: layer2
+          addresses:
+          - 172.22.8.160-172.22.8.180
     ```
+    
+    
+
 

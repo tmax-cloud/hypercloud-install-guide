@@ -59,7 +59,7 @@
     $ sudo docker push ${REGISTRY}/istio/pilot:${ISTIO_VERSION}
     $ sudo docker push ${REGISTRY}/istio/proxyv2:${ISTIO_VERSION}
     $ sudo docker push ${REGISTRY}/jaegertracing/all-in-one:${JAEGER_VERSION}
-    $ sudo docker push ${REGISTRY}/quay.io/kiali/kiali:${KIALI_VERSION}
+    $ sudo docker push ${REGISTRY}/kiali/kiali:${KIALI_VERSION}
     ```
 
 

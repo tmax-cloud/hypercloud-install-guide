@@ -94,7 +94,7 @@
     ```
 	* yaml파일에 version정보를 추가한다.
 	* manifests 폴더에 들어가서 아래의 명령어들을 실행한다.
-	
+	```
 	$ sed -i 's/quay.io\/kiali\/kiali/'${REGISTRY}'\/kiali\/kiali/g' 2.kiali.yaml
 	$ sed -i 's/docker.io\/jaegertracing\/all-in-one/'${REGISTRY}'\/jaegertracing\/all-in-one/g' 3.istio-tracing.yaml
 	$ sed -i 's/docker.io\/istio\/pilot/'${REGISTRY}'\/istio\/pilot/g' 4.istio-core.yaml
@@ -120,14 +120,14 @@
 
 	$ sed -i 's/{PROMETHEUS_VERSION}/'${PROMETHEUS_VERSION}'/g' prometheus-prometheus.yaml
 	$ sed -i 's/{REGISTRY}/'${REGISTRY}'/g' prometheus-prometheus.yaml
-	
+	```
 	* setup 폴더에 들어가서 아래의 명령어들을 실행한다.
-	
+	```
 	$ sed -i 's/{PROMETHEUS_OPERATOR_VERSION}/'${PROMETHEUS_OPERATOR_VERSION}'/g' prometheus-operator-deployment.yaml
 	$ sed -i 's/{CONFIGMAP_RELOADER_VERSION}/'${CONFIGMAP_RELOADER_VERSION}'/g' prometheus-operator-deployment.yaml
 	$ sed -i 's/{CONFIGMAP_RELOAD_VERSION}/'${CONFIGMAP_RELOAD_VERSION}'/g' prometheus-operator-deployment.yaml
 	$ sed -i 's/{REGISTRY}/'${REGISTRY}'/g' prometheus-operator-deployment.yaml
-
+	```
 
 ## Install Steps
 1. [prometheus namespace 및 crd 생성](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Prometheus#step-1-prometheus-namespace-%EB%B0%8F-crd-%EC%83%9D%EC%84%B1)

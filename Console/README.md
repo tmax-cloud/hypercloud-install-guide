@@ -10,6 +10,30 @@
 * Kubernetes에 Public IP 여유분이 최소한 1개 있어야 합니다.
 * HCDC 모드로 설치하려는 경우, portal과 동일한 도메인을 사용할 수 있도록 DNS가 세팅되어 있어야 합니다.
 
+## 폐쇄망 설치 가이드
+폐쇄망에서는 Docker Hub의 이미지를 사용할 수 없으므로, 아래의 과정을 통해 이미지를 준비하여야 한다.
+
+* 사용하는 image repository에 Console 설치 시 필요한 이미지를 push한다. 
+
+    * 작업 디렉토리 생성 및 환경 설정
+	  ```bash
+	  mkdir -p ~/console-install
+	  export CONSOLE_VERSION=1.1.34.7
+	  ```
+	  
+    * 외부 네트워크 통신이 가능한 환경에서 이미지 다운로드
+	  ```bash
+	  sudo docker pull  tmaxcloudck/hypercloud-console:${CONSOLE_VERSION}
+	  sudo docker save tmaxcloudck/hypercloud-console:${CONSOLE_VERSION} > console_${CONSOLE_VERSION}.tar
+	  ```
+	  
+    * tar 파일을 폐쇄망 환경으로 이동시킨 후, registry에 이미지 push
+	  ```bash
+	  sudo docker load < console_${CONSOLE_VERSION}.tar
+	  sudo docker tag tmaxcloudck/hypercloud-console:${CONSOLE_VERSION} ${REGISTRY}/tmaxcloudck/hypercloud-console:${CONSOLE_VERSION}
+	  sudo docker push ${REGISTRY}/tmaxcloudck/hypercloud-console:${CONSOLE_VERSION}
+	  ```
+
 ## Install Steps
 1. [Namespace, ResourceQuota, ServiceAccount, ClusterRole, ClusterRoleBinding 생성](#step-1-namespace-resourcequota-serviceaccount-clusterrole-clusterrolebinding-생성)
 2. [Secret (TLS) 생성](#step-2-secret-tls-생성)

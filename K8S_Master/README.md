@@ -226,7 +226,7 @@
 	apiVersion: kubeadm.k8s.io/v1beta2
 	kind: InitConfiguration
 	localAPIEndpoint:
-  		advertiseAddress: {virtual IP}
+  		advertiseAddress: {api server IP}
   		bindPort: 6443
 	nodeRegistration:
   		criSocket: /var/run/crio/crio.sock
@@ -234,7 +234,7 @@
 	apiVersion: kubeadm.k8s.io/v1beta2
 	kind: ClusterConfiguration
 	kubernetesVersion: v1.17.6
-	controlPlaneEndpoint: {virtual IP}:6443
+	controlPlaneEndpoint: {endpoint IP}:6443
 	imageRepository: {registry}/k8s.gcr.io
 	networking:
  		serviceSubnet: 10.96.0.0/16
@@ -245,13 +245,14 @@
 	cgroupDriver: systemd
 	```
       * kubernetesVersion : kubernetes version
-      * advertiseAddress : API server IP (virtual IP)
-        * virtual IP 
-      * controlPlaneEndpoint : endpoint ip (virtual IP), port는 반드시 6443으로 설정
+      * advertiseAddress : API server IP ( master IP or virtual IP)
+        * 1개의 마스터 : master IP , 2개 이상의 마스터 구축시 : virtual IP
+      * controlPlaneEndpoint : endpoint IP ( master IP or virtual IP) , port는 반드시 6443으로 설정
+        * 1개의 마스터 : master IP , 2개 이상의 마스터 구축시 : virtual IP
       * serviceSubnet : "${SERVICE_IP_POOL}/${CIDR}"
       * podSubnet : "${POD_IP_POOL}/${CIDR}"
       * imageRepository : "${registry} / docker hub name"
-      * cgroupDriver: docker cgroup driver systemd 변경
+      * cgroupDriver: cgroup driver systemd 변경
 
     * kubeadm init (2개 이상 마스터 구축시에는 아래 가이드 참조)
 	```bash
@@ -278,7 +279,7 @@
 	```
 	![image](figure/pods.PNG)	
 * 비고 : 
-    * single node cluster 구성시 master taint를 제거한다
+    * master에도 pod 스케줄을 가능하게 하려면 master taint를 제거한다
 	```bash
 	kubectl taint node [master hostname] node-role.kubernetes.io/master:NoSchedule-
 	ex) kubectl taint node k8s- node-role.kubernetes.io/master:NoSchedule- 
@@ -298,9 +299,9 @@
 	
 	vrrp_instance VI_1 {    
 	state {MASTER or BACKUP}   
-	interface {enp0s8}    
-	virtual_router_id {50}    
-	priority {100}    
+	interface {network interface}    
+	virtual_router_id {virtual router id}    
+	priority {priority}    
 	advert_int 1    
 	nopreempt    
 	authentication {        
@@ -311,14 +312,15 @@
 		{VIP}  
 		} 
 	}
-    ```
-	
-	* interface : network interface 이름 확인 (ip a 명령어로 확인)
+    ```	
+	* interface : network interface 이름 확인 (ip a 명령어로 확인) ex) enp0s8
 	* state : master or backup으로 설정, 하나의 master에만 master를 설정하고 나머지 master에는 backup으로 설정
-	* priority : Master 우선순위
+	* priority : Master 우선순위  
 	    * priority 값이 높으면 최우선적으로 Master 역할 수행
-	    * 각 Master마다 다른 priority 값으로 수정.
+	    * 각 Master마다 다른 priority 값으로 수정
+	    * ex) master1 priority 100, master2 priority 99, master3 priority 98 
 	* virtual_ipaddress : virtual ip(VIP) 설정
+	* virtual_router_id : vritual router id ex) 50
 	
     * keepalived 재시작 및 상태 확인
     ```bash

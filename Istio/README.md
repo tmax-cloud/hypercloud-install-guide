@@ -35,7 +35,13 @@
     ```
     * install yaml을 다운로드한다.
     ```bash
-    $ wget -O hypercloud-install.tar.gz https://github.com/tmax-cloud/hypercloud-install-guide/archive/v${INSTALL_GUIDE_VERSION}.tar.gz
+    $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/Istio/yaml/1.istio-base.yaml
+    $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/Istio/yaml/2.kiali.yaml
+    $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/Istio/yaml/3.istio-tracing.yaml
+    $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/Istio/yaml/4.istio-core.yaml
+    $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/Istio/yaml/5.istio-ingressgateway.yaml
+    $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/Istio/yaml/6.istio-metric.yaml
+    $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/Istio/yaml/bookinfo.yaml
     ```
   
 2. 위의 과정에서 생성한 tar 파일들을 폐쇄망 환경으로 이동시킨 뒤 사용하려는 registry에 이미지를 push한다.

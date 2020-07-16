@@ -313,6 +313,7 @@
 		} 
 	}
     ```	
+    ![image](figure/keepalived.PNG)
 	* interface : network interface 이름 확인 (ip a 명령어로 확인) ex) enp0s8
 	* state : master or backup으로 설정, 하나의 master에만 master를 설정하고 나머지 master에는 backup으로 설정
 	* priority : Master 우선순위  
@@ -337,6 +338,7 @@
 	
 	* 설정한 VIP 확인 가능, 여러 마스터 중 하나만 보임.
 	* inet {VIP}/32 scope global eno1
+	![image](figure/ipa.PNG)
 	
 ## Step 3-2. docker 설치 및 설정
 * 목적 : `구성한 docker registry에 접근을 위해 docker를 설치한다.`
@@ -371,6 +373,7 @@
 	    sudo kubeadm join {IP}:{PORT} --token ~~ discovery-token-ca-cert-hash --control-plane --certificate-key ~~ (1) --cri-socket=/var/run/crio/crio.sock
 	    sudo kubeadm join {IP}:{PORT} --token ~~ discovery-token-ca-cert-hash --cri-socket=/var/run/crio/crio.sock (2)
 	    ```
+	![image](figure/master2.PNG)    
 	* 해당 옵션은 certificates를 control-plane으로 upload하는 옵션
 	* 해당 옵션을 설정하지 않을 경우, 모든 Master 노드에서 key를 복사해야 함
 	* Master 단일구성과는 다르게, --control-plane --certificate-key 옵션이 추가된 명령어가 출력됨

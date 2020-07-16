@@ -92,6 +92,41 @@
 	$ sudo docker push ${REGISTRY}/quay.io/prometheus/alertmanager:${ALERTMANAGER_VERSION}
 	
     ```
+	* yaml파일에 version정보를 추가한다.
+	* manifests 폴더에 들어가서 아래의 명령어들을 실행한다.
+	
+	$ sed -i 's/quay.io\/kiali\/kiali/'${REGISTRY}'\/kiali\/kiali/g' 2.kiali.yaml
+	$ sed -i 's/docker.io\/jaegertracing\/all-in-one/'${REGISTRY}'\/jaegertracing\/all-in-one/g' 3.istio-tracing.yaml
+	$ sed -i 's/docker.io\/istio\/pilot/'${REGISTRY}'\/istio\/pilot/g' 4.istio-core.yaml
+	$ sed -i 's/docker.io\/istio\/proxyv2/'${REGISTRY}'\/istio\/proxyv2/g' 5.istio-ingressgateway.yaml
+
+	$ sed -i 's/{ALERTMANAGER_VERSION}/'${ALERTMANAGER_VERSION}'/g' alertmanager-alertmanager.yaml
+	$ sed -i 's/{REGISTRY}/'${REGISTRY}'/g' alertmanager-alertmanager.yaml
+
+	$ sed -i 's/{GRAFANA_VERSION}}/'${GRAFANA_VERSION}'/g' grafana-deployment.yaml
+	$ sed -i 's/{REGISTRY}/'${REGISTRY}'/g' grafana-deployment.yaml
+
+	$ sed -i 's/{KUBE_RBAC_PROXY_VERSION}/'${KUBE_RBAC_PROXY_VERSION}'/g' kube-state-metrics-deployment.yaml
+	$ sed -i 's/{REGISTRY}/'${REGISTRY}'/g' kube-state-metrics-deployment.yaml
+	$ sed -i 's/{KUBE_STATE_METRICS_VERSION}/'${KUBE_STATE_METRICS_VERSION}'/g' kube-state-metrics-deployment.yaml
+
+	$ sed -i 's/{NODE_EXPORTER_VERSION}/'${NODE_EXPORTER_VERSION}'/g' node-exporter-daemonset.yaml
+	$ sed -i 's/{REGISTRY}/'${REGISTRY}'/g' node-exporter-daemonset.yaml
+	$ sed -i 's/{KUBE_RBAC_PROXY_VERSION}/'${KUBE_RBAC_PROXY_VERSION}'/g' node-exporter-daemonset.yaml
+
+	$ sed -i 's/{PROMETHEUS_ADAPTER_VERSION}/'${PROMETHEUS_ADAPTER_VERSION}'/g' prometheus-adapter-deployment.yaml
+	$ sed -i 's/{REGISTRY}/'${REGISTRY}'/g' prometheus-adapter-deployment.yaml
+
+
+	$ sed -i 's/{PROMETHEUS_VERSION}/'${PROMETHEUS_VERSION}'/g' prometheus-prometheus.yaml
+	$ sed -i 's/{REGISTRY}/'${REGISTRY}'/g' prometheus-prometheus.yaml
+	
+	* setup 폴더에 들어가서 아래의 명령어들을 실행한다.
+	
+	$ sed -i 's/{PROMETHEUS_OPERATOR_VERSION}/'${PROMETHEUS_OPERATOR_VERSION}'/g' prometheus-operator-deployment.yaml
+	$ sed -i 's/{CONFIGMAP_RELOADER_VERSION}/'${CONFIGMAP_RELOADER_VERSION}'/g' prometheus-operator-deployment.yaml
+	$ sed -i 's/{CONFIGMAP_RELOAD_VERSION}/'${CONFIGMAP_RELOAD_VERSION}'/g' prometheus-operator-deployment.yaml
+	$ sed -i 's/{REGISTRY}/'${REGISTRY}'/g' prometheus-operator-deployment.yaml
 
 
 ## Install Steps

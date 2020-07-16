@@ -36,7 +36,7 @@
     $ sudo docker load < kube-webhook-certgen_${KUBE_WEBHOOK_CERTGEN_VERSION}.tar
     
     $ sudo docker tag quay.io/kubernetes-ingress-controller/nginx-ingress-controller:${NGINX_INGRESS_VERSION} ${REGISTRY}/kubernetes-ingress-controller/nginx-ingress-controller:${NGINX_INGRESS_VERSION}
-    $ sudo docker tag jettech/kube-webhook-certgen:${KUBE_WEBHOOK_CERTGEN_VERSION} ${REGISTRY}/istio/proxyv2:${KUBE_WEBHOOK_CERTGEN_VERSION}
+    $ sudo docker tag jettech/kube-webhook-certgen:${KUBE_WEBHOOK_CERTGEN_VERSION} ${REGISTRY}/jettech/kube-webhook-certgen:${KUBE_WEBHOOK_CERTGEN_VERSION}
     
     $ sudo docker push ${REGISTRY}/kubernetes-ingress-controller/nginx-ingress-controller:${NGINX_INGRESS_VERSION}
     $ sudo docker push ${REGISTRY}/jettech/kube-webhook-certgen:${KUBE_WEBHOOK_CERTGEN_VERSION}

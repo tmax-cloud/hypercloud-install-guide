@@ -27,7 +27,7 @@
    docker pull quay.io/kubernetes-service-catalog/service-catalog:v${CATALOG_VERSION}
 
    # 이미지 Save
-   docker save quay.io/kubernetes-service-catalog/service-catalog:v${CATALOG_VERSION} > service-catalog_v${TSB_VERSION}.tar
+   docker save quay.io/kubernetes-service-catalog/service-catalog:v${CATALOG_VERSION} > service-catalog_v${CATALOG_VERSION}.tar
    ```
 
 2. 폐쇄망으로 이미지 파일(.tar)을 옮깁니다.
@@ -39,7 +39,7 @@
    REGISTRY=[IP:PORT]
 
    # 이미지 Load
-   docker load < service-catalog_v${TSB_VERSION}.tar
+   docker load < service-catalog_v${CATALOG_VERSION}.tar
 
    # 이미지 Tag
    docker tag quay.io/kubernetes-service-catalog/service-catalog:v${CATALOG_VERSION} ${REGISTRY}/quay.io/kubernetes-service-catalog/service-catalog:v${CATALOG_VERSION}
@@ -84,7 +84,7 @@
 - kubectl apply -f webhook-service.yaml ([파일](./yaml_install/webhook-service.yaml))
 
 ## Install Steps
-1. [helm을 통한 CatalogController 설치](Step-1-helm을-통한-CatalogController-설치)
+1. [helm을 통한 CatalogController 설치](#Step-1-helm을-통한-CatalogController-설치)
 
 ## Step 1. helm을 통한 CatalogController 설치
 - 목적 : `CatalogController 설치`

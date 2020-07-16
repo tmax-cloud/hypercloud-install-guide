@@ -52,8 +52,6 @@
 
 5. catalog controller namespace 및 servcice account를 생성 합니다.
 - kubectl create namespace catalog
-- kubectl config set-context --current --namespace=catalog
-    - 비고: 해당 명령어는 default namespace를 변경하는 명령어 입니다. 이전 namespace로 변경하고 싶으신 경우, catalog controller 설치 뒤에, kubectl config set-context --current --namespace={name} 으로 변경하시면 됩니다.
 - kubectl apply -f serviceaccounts.yaml ([파일](./yaml_install/serviceaccounts.yaml))
 - kubectl apply -f rbac.yaml ([파일](./yaml_install/rbac.yaml))
 

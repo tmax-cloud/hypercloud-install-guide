@@ -70,27 +70,27 @@
 	$ sudo docker load < prometheus-adapter_${PROMETHEUS_ADAPTER_VERSION}.tar
 	$ sudo docker load < alertmanager_${ALERTMANAGER_VERSION}.tar
     
-    $ sudo docker tag quay.io/prometheus/prometheus:${PROMETHEUS_VERSION} ${REGISTRY}/quay.io/prometheus/prometheus:${PROMETHEUS_VERSION}
-    $ sudo docker tag quay.io/coreos/prometheus-operator:${PROMETHEUS_OPERATOR_VERSION} ${REGISTRY}/quay.io/coreos/prometheus-operator:${PROMETHEUS_OPERATOR_VERSION}
-    $ sudo docker tag quay.io/prometheus/node-exporter:${NODE_EXPORTER_VERSION} ${REGISTRY}/quay.io/prometheus/node-exporter:${NODE_EXPORTER_VERSION}
-    $ sudo docker tag grafana/grafana:${GRAFANA_VERSION} ${REGISTRY}/grafana/grafana:${GRAFANA_VERSION}
-	$ sudo docker tag quay.io/coreos/kube-state-metrics:${KUBE_STATE_METRICS_VERSION} ${REGISTRY}/quay.io/coreos/kube-state-metrics:${KUBE_STATE_METRICS_VERSION}
-	$ sudo docker tag quay.io/coreos/prometheus-config-reloader:${CONFIGMAP_RELOADER_VERSION} ${REGISTRY}/quay.io/coreos/prometheus-config-reloader:${CONFIGMAP_RELOADER_VERSION}
-	$ sudo docker tag quay.io/coreos/configmap-reload:${CONFIGMAP_RELOAD_VERSION} ${REGISTRY}/quay.io/coreos/configmap-reload:${CONFIGMAP_RELOAD_VERSION}
-	$ sudo docker tag quay.io/coreos/kube-rbac-proxy:${KUBE_RBAC_PROXY_VERSION} ${REGISTRY}/quay.io/coreos/kube-rbac-proxy:${KUBE_RBAC_PROXY_VERSION}
-	$ sudo docker tag quay.io/coreos/k8s-prometheus-adapter-amd64:${PROMETHEUS_ADAPTER_VERSION} ${REGISTRY}/quay.io/coreos/k8s-prometheus-adapter-amd64:${PROMETHEUS_ADAPTER_VERSION}
-	$ sudo docker tag quay.io/prometheus/alertmanager:${ALERTMANAGER_VERSION} ${REGISTRY}/quay.io/prometheus/alertmanager:${ALERTMANAGER_VERSION}
+    $ sudo docker tag quay.io/prometheus/prometheus:${PROMETHEUS_VERSION} ${REGISTRY}/prometheus/prometheus:${PROMETHEUS_VERSION}
+    $ sudo docker tag quay.io/coreos/prometheus-operator:${PROMETHEUS_OPERATOR_VERSION} ${REGISTRY}/coreos/prometheus-operator:${PROMETHEUS_OPERATOR_VERSION}
+    $ sudo docker tag quay.io/prometheus/node-exporter:${NODE_EXPORTER_VERSION} ${REGISTRY}/prometheus/node-exporter:${NODE_EXPORTER_VERSION}
+    $ sudo docker tag grafana/grafana:${GRAFANA_VERSION} ${REGISTRY}/grafana:${GRAFANA_VERSION}
+	$ sudo docker tag quay.io/coreos/kube-state-metrics:${KUBE_STATE_METRICS_VERSION} ${REGISTRY}/coreos/kube-state-metrics:${KUBE_STATE_METRICS_VERSION}
+	$ sudo docker tag quay.io/coreos/prometheus-config-reloader:${CONFIGMAP_RELOADER_VERSION} ${REGISTRY}/coreos/prometheus-config-reloader:${CONFIGMAP_RELOADER_VERSION}
+	$ sudo docker tag quay.io/coreos/configmap-reload:${CONFIGMAP_RELOAD_VERSION} ${REGISTRY}/coreos/configmap-reload:${CONFIGMAP_RELOAD_VERSION}
+	$ sudo docker tag quay.io/coreos/kube-rbac-proxy:${KUBE_RBAC_PROXY_VERSION} ${REGISTRY}/coreos/kube-rbac-proxy:${KUBE_RBAC_PROXY_VERSION}
+	$ sudo docker tag quay.io/coreos/k8s-prometheus-adapter-amd64:${PROMETHEUS_ADAPTER_VERSION} ${REGISTRY}/coreos/k8s-prometheus-adapter-amd64:${PROMETHEUS_ADAPTER_VERSION}
+	$ sudo docker tag quay.io/prometheus/alertmanager:${ALERTMANAGER_VERSION} ${REGISTRY}/prometheus/alertmanager:${ALERTMANAGER_VERSION}
     
-    $ sudo docker push ${REGISTRY}/quay.io/prometheus/prometheus:${PROMETHEUS_VERSION}
-    $ sudo docker push ${REGISTRY}/quay.io/coreos/prometheus-operator:${PROMETHEUS_OPERATOR_VERSION}
-    $ sudo docker push ${REGISTRY}/quay.io/prometheus/node-exporter:${NODE_EXPORTER_VERSION}
-    $ sudo docker push ${REGISTRY}/grafana/grafana:${GRAFANA_VERSION}
-	$ sudo docker push ${REGISTRY}/quay.io/coreos/kube-state-metrics:${KUBE_STATE_METRICS_VERSION}
-	$ sudo docker push ${REGISTRY}/quay.io/coreos/prometheus-config-reloader:${CONFIGMAP_RELOADER_VERSION}
-	$ sudo docker push ${REGISTRY}/quay.io/coreos/configmap-reload:${CONFIGMAP_RELOAD_VERSION}
-	$ sudo docker push ${REGISTRY}/quay.io/coreos/kube-rbac-proxy:${KUBE_RBAC_PROXY_VERSION}
-	$ sudo docker push ${REGISTRY}/quay.io/coreos/k8s-prometheus-adapter-amd64:${PROMETHEUS_ADAPTER_VERSION}
-	$ sudo docker push ${REGISTRY}/quay.io/prometheus/alertmanager:${ALERTMANAGER_VERSION}
+    $ sudo docker push ${REGISTRY}/prometheus/prometheus:${PROMETHEUS_VERSION}
+    $ sudo docker push ${REGISTRY}/coreos/prometheus-operator:${PROMETHEUS_OPERATOR_VERSION}
+    $ sudo docker push ${REGISTRY}/prometheus/node-exporter:${NODE_EXPORTER_VERSION}
+    $ sudo docker push ${REGISTRY}/grafana:${GRAFANA_VERSION}
+	$ sudo docker push ${REGISTRY}/coreos/kube-state-metrics:${KUBE_STATE_METRICS_VERSION}
+	$ sudo docker push ${REGISTRY}/coreos/prometheus-config-reloader:${CONFIGMAP_RELOADER_VERSION}
+	$ sudo docker push ${REGISTRY}/coreos/configmap-reload:${CONFIGMAP_RELOAD_VERSION}
+	$ sudo docker push ${REGISTRY}/coreos/kube-rbac-proxy:${KUBE_RBAC_PROXY_VERSION}
+	$ sudo docker push ${REGISTRY}/coreos/k8s-prometheus-adapter-amd64:${PROMETHEUS_ADAPTER_VERSION}
+	$ sudo docker push ${REGISTRY}/prometheus/alertmanager:${ALERTMANAGER_VERSION}
 	
     ```
 	* yaml파일에 version정보를 추가한다.
@@ -98,16 +98,11 @@
 	```
 	$ sed -i 's/{ALERTMANAGER_VERSION}/'${ALERTMANAGER_VERSION}'/g' alertmanager-alertmanager.yaml
 	$ sed -i 's/{GRAFANA_VERSION}/'${GRAFANA_VERSION}'/g' grafana-deployment.yaml
-	
-
 	$ sed -i 's/{KUBE_RBAC_PROXY_VERSION}/'${KUBE_RBAC_PROXY_VERSION}'/g' kube-state-metrics-deployment.yaml
 	$ sed -i 's/{KUBE_STATE_METRICS_VERSION}/'${KUBE_STATE_METRICS_VERSION}'/g' kube-state-metrics-deployment.yaml
-
 	$ sed -i 's/{NODE_EXPORTER_VERSION}/'${NODE_EXPORTER_VERSION}'/g' node-exporter-daemonset.yaml
 	$ sed -i 's/{KUBE_RBAC_PROXY_VERSION}/'${KUBE_RBAC_PROXY_VERSION}'/g' node-exporter-daemonset.yaml
-
 	$ sed -i 's/{PROMETHEUS_ADAPTER_VERSION}/'${PROMETHEUS_ADAPTER_VERSION}'/g' prometheus-adapter-deployment.yaml
-
 	$ sed -i 's/{PROMETHEUS_VERSION}/'${PROMETHEUS_VERSION}'/g' prometheus-prometheus.yaml
 	```
 	* setup 폴더에 들어가서 아래의 명령어들을 실행한다.
@@ -116,20 +111,21 @@
 	$ sed -i 's/{CONFIGMAP_RELOADER_VERSION}/'${CONFIGMAP_RELOADER_VERSION}'/g' prometheus-operator-deployment.yaml
 	$ sed -i 's/{CONFIGMAP_RELOAD_VERSION}/'${CONFIGMAP_RELOAD_VERSION}'/g' prometheus-operator-deployment.yaml
 	
+	
+:Q!	* 폐쇄망에서 설치를 진행하여 별도의 image registry를 사용하는 경우 registry 정보를 추가로 설정해준다.
 	```
-	* 폐쇄망에서 설치를 진행하여 별도의 image registry를 사용하는 경우 registry 정보를 추가로 설정해준다.
-	```
-	$ sed -i 's/quay.io\/prometheus\/prometheus/'${REGISTRY}\/prometheus\/prometheus'/g' alertmanager-alertmanager.yaml
-	$ sed -i 's/grafana\/grafana/'${REGISTRY}\/grafana'/g' grafana-deployment.yaml
-	$ sed -i 's/quay.io\/coreos\/kube-rbac-proxy/'${REGISTRY}\/coreos\/kube-rbac-proxy'/g' kube-state-metrics-deployment.yaml
-	$ sed -i 's/quay.io\/coreos\/kube-state-metrics/'${REGISTRY}\/coreos\/kube-state-metrics'/g' kube-state-metrics-deployment.yaml
-	$ sed -i 's/quay.io\/prometheus\/node-exporter/'${REGISTRY}\/prometheus\/node-exporter'/g' node-exporter-daemonset.yaml
-	$ sed -i 's/quay.io\/coreos\/kube-rbac-proxy/'${REGISTRY}\/coreos\/kube-rbac-proxy'/g' node-exporter-daemonset.yaml
-	$ sed -i 's/quay.io\/coreos\/k8s-prometheus-adapter-amd64/'${REGISTRY}\/coreos\/k8s-prometheus-adapter-amd64'/g' prometheus-adapter-deployment.yaml
-	$ sed -i 's/quay.io\/prometheus\/prometheus/'${REGISTRY}\/prometheus\/prometheus'/g' prometheus-prometheus.yaml
-	$ sed -i 's/quay.io\/coreos\/configmap-reload/'${REGISTRY}\/coreos\/configmap-reload/'/g' prometheus-operator-deployment.yaml
-	$ sed -i 's/quay.io\/coreos\/prometheus-config-reloader/'${REGISTRY}\/coreos\/prometheus-config-reloader'/g' prometheus-operator-deployment.yaml
-	$ sed -i 's/quay.io\/coreos\/prometheus-operator/'${REGISTRY}\/coreos\/prometheus-operator'/g' prometheus-operator-deployment.yaml
+	$ sed -i "s/quay.io\/prometheus\/prometheus/${REGISTRY}\/prometheus\/prometheus/g" alertmanager-alertmanager.yaml
+	$ sed -i "s/grafana\/grafana/${REGISTRY}\/grafana/g" grafana-deployment.yaml
+	$ sed -i "s/quay.io\/coreos\/kube-rbac-proxy/${REGISTRY}\/coreos\/kube-rbac-proxy/g" kube-state-metrics-deployment.yaml
+	$ sed -i "s/quay.io\/coreos\/kube-state-metrics/${REGISTRY}\/coreos\/kube-state-metrics/g" kube-state-metrics-deployment.yaml
+	$ sed -i "s/quay.io\/prometheus\/node-exporter/${REGISTRY}\/prometheus\/node-exporter/g" node-exporter-daemonset.yaml
+	$ sed -i "s/quay.io\/coreos\/kube-rbac-proxy/${REGISTRY}\/coreos\/kube-rbac-proxy/g" node-exporter-daemonset.yaml
+	$ sed -i "s/quay.io\/coreos\/k8s-prometheus-adapter-amd64/${REGISTRY}\/coreos\/k8s-prometheus-adapter-amd64'/g" prometheus-adapter-deployment.yaml
+	$ sed -i "s/quay.io\/prometheus\/prometheus/${REGISTRY}\/prometheus\/prometheus/g" prometheus-prometheus.yaml
+	$ sed -i "s/quay.io\/coreos\/configmap-reload/${REGISTRY}\/coreos\/configmap-reload//g" prometheus-operator-deployment.yaml
+	$ sed -i "s/quay.io\/coreos\/prometheus-config-reloader/${REGISTRY}\/coreos\/prometheus-config-reloader/g" prometheus-operator-deployment.yaml
+	$ sed -i "s/quay.io\/coreos\/prometheus-operator/${REGISTRY}\/coreos\/prometheus-operator/g" prometheus-operator-deployment.yaml
+	         
 	```
 	
 	

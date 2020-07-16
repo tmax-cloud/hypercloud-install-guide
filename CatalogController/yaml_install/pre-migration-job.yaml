@@ -18,6 +18,7 @@ kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:
   name: pre-migration-job-account
+  namespace: catalog
   labels:
     migration-job: "true"
     app: catalog-catalog-pre-migration-job
@@ -77,6 +78,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: catalog-catalog-migration-storage
+  namespace: catalog
   labels:
     migration-job: "true"
     app: catalog-catalog-pre-migration-job
@@ -98,6 +100,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: catalog-catalog-pre-migration-job
+  namespace: catalog
   labels:
     migration-job: "true"
     app: catalog-catalog-pre-migration-job

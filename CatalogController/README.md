@@ -27,7 +27,7 @@
    docker pull quay.io/kubernetes-service-catalog/service-catalog:v${CATALOG_VERSION}
 
    # 이미지 Save
-   docker save quay.io/kubernetes-service-catalog/service-catalog:v${CATALOG_VERSION} > service-catalog_v${TSB_VERSION}.tar
+   docker save quay.io/kubernetes-service-catalog/service-catalog:v${CATALOG_VERSION} > service-catalog_v${CATALOG_VERSION}.tar
    ```
 
 2. 폐쇄망으로 이미지 파일(.tar)을 옮깁니다.
@@ -39,7 +39,7 @@
    REGISTRY=[IP:PORT]
 
    # 이미지 Load
-   docker load < service-catalog_v${TSB_VERSION}.tar
+   docker load < service-catalog_v${CATALOG_VERSION}.tar
 
    # 이미지 Tag
    docker tag quay.io/kubernetes-service-catalog/service-catalog:v${CATALOG_VERSION} ${REGISTRY}/quay.io/kubernetes-service-catalog/service-catalog:v${CATALOG_VERSION}
@@ -52,8 +52,6 @@
 
 5. catalog controller namespace 및 servcice account를 생성 합니다.
 - kubectl create namespace catalog
-- kubectl config set-context --current --namespace=catalog
-    - 비고: 해당 명령어는 default namespace를 변경하는 명령어 입니다. 이전 namespace로 변경하고 싶으신 경우, catalog controller 설치 뒤에, kubectl config set-context --current --namespace={name} 으로 변경하시면 됩니다.
 - kubectl apply -f serviceaccounts.yaml ([파일](./yaml_install/serviceaccounts.yaml))
 - kubectl apply -f rbac.yaml ([파일](./yaml_install/rbac.yaml))
 
@@ -84,7 +82,7 @@
 - kubectl apply -f webhook-service.yaml ([파일](./yaml_install/webhook-service.yaml))
 
 ## Install Steps
-1. [helm을 통한 CatalogController 설치](Step-1-helm을-통한-CatalogController-설치)
+1. [helm을 통한 CatalogController 설치](#Step-1-helm을-통한-CatalogController-설치)
 
 ## Step 1. helm을 통한 CatalogController 설치
 - 목적 : `CatalogController 설치`

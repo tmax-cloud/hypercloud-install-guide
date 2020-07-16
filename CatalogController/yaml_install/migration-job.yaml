@@ -92,6 +92,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: catalog-migration-job
+  namespace: catalog
   labels:
     app: catalog-migration-job
     chart: "catalog-0.3.0-beta.2"

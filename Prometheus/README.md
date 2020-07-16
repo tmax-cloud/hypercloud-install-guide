@@ -113,7 +113,6 @@
 	$ sed -i 's/{PROMETHEUS_ADAPTER_VERSION}/'${PROMETHEUS_ADAPTER_VERSION}'/g' prometheus-adapter-deployment.yaml
 	$ sed -i 's/{REGISTRY}/'${REGISTRY}'/g' prometheus-adapter-deployment.yaml
 
-
 	$ sed -i 's/{PROMETHEUS_VERSION}/'${PROMETHEUS_VERSION}'/g' prometheus-prometheus.yaml
 	$ sed -i 's/{REGISTRY}/'${REGISTRY}'/g' prometheus-prometheus.yaml
 	```

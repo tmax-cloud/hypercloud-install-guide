@@ -1,5 +1,6 @@
 
 
+
   
 # secret-watcher 설치 가이드
 
@@ -60,15 +61,17 @@
     ```
     * yaml의 내용을 일부 수정한다.
     ```bash
-    $ cd ${HPCD_SW_HOME}
+    	$ cd ${HPCD_SW_HOME}
 	$ tar -xvzf secret-watcher.tar.gz
 
-	# 7.secret-watcher.yaml 내용 수정
-	#	<REGISTRY> 입력값: 폐쇄망 registry의 IP:PORT 
-	#	<tag> 입력값: load한 이미지의 tag 
-	# 	spec.template.spec.containers.image: <REGISTRY>/tmaxcloudck/hypercloud4-secret-watcher:<tag>
+	# hypercloud-secret-watcher-daemonset.yaml 내용 수정
+	# 	spec.template.spec.containers.image: tmaxcloudck/hypercloud4-secret-watcher:latest 값을 
+	# 		<REGISTRY>/tmaxcloudck/hypercloud4-secret-watcher:<tag> 으로 수정
 	#	Example:
 	#		spec.template.spec.containers.image: 192.168.6.110:5000/tmaxcloudck/hypercloud4-secret-watcher:b4.1.0.8
+	#
+	#	<REGISTRY>: 폐쇄망 registry의 IP:PORT 
+	#	<tag>: load한 이미지의 tag 
 	$ vi ${HPCD_SW_HOME}/secret-watcher-${HPCD_SW_VERSION}/k8s-install/hypercloud-secret-watcher-daemonset.yaml
     ```
 
@@ -79,6 +82,13 @@
 
 ## Step 1. hypercloud-secret-watcher-daemonset.yaml 실행
 * 목적 : `secret-watcher daemonset 생성`
+* 준비: 
+	* hypercloud-secret-watcher-daemonset.yaml 내용 수정
+		* namespace 수정
+		* metadata.namespace의 값을 `hypercloud-system`이 아닌 `hypercloud4-system`으로 수정
+		```bash
+		$ vi ${HPCD_SW_HOME}/secret-watcher-${HPCD_SW_VERSION}/k8s-install/hypercloud-secret-watcher-daemonset.yaml
+		```
 * 실행: 
 	```bash
 	$ kubectl apply -f ${HPCD_SW_HOME}/secret-watcher-${HPCD_SW_VERSION}/k8s-install/hypercloud-secret-watcher-daemonset.yaml

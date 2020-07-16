@@ -31,6 +31,7 @@
 	$ export KUBE_RBAC_PROXY_VERSION=v0.4.1
 	$ export PROMETHEUS_ADAPTER_VERSION=v0.5.0
 	$ export ALERTMANAGER_VERSION=v0.20.0
+	$ export REGISTRY=registryip:port
 	$ cd $PROMETHEUS_HOME
     ```
     * 외부 네트워크 통신이 가능한 환경에서 필요한 이미지를 다운받는다.

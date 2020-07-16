@@ -226,7 +226,7 @@
 	apiVersion: kubeadm.k8s.io/v1beta2
 	kind: InitConfiguration
 	localAPIEndpoint:
-  		advertiseAddress: {virtual IP}
+  		advertiseAddress: {api server IP}
   		bindPort: 6443
 	nodeRegistration:
   		criSocket: /var/run/crio/crio.sock
@@ -234,7 +234,7 @@
 	apiVersion: kubeadm.k8s.io/v1beta2
 	kind: ClusterConfiguration
 	kubernetesVersion: v1.17.6
-	controlPlaneEndpoint: {virtual IP}:6443
+	controlPlaneEndpoint: {endpoint IP}:6443
 	imageRepository: {registry}/k8s.gcr.io
 	networking:
  		serviceSubnet: 10.96.0.0/16
@@ -245,13 +245,14 @@
 	cgroupDriver: systemd
 	```
       * kubernetesVersion : kubernetes version
-      * advertiseAddress : API server IP (virtual IP)
-        * virtual IP 
-      * controlPlaneEndpoint : endpoint ip (virtual IP), port는 반드시 6443으로 설정
+      * advertiseAddress : API server IP ( master IP or virtual IP)
+        * 1개의 마스터 : master IP , 2개 이상의 마스터 구축시 : virtual IP
+      * controlPlaneEndpoint : endpoint IP ( master IP or virtual IP) , port는 반드시 6443으로 설정
+        * 1개의 마스터 : master IP , 2개 이상의 마스터 구축시 : virtual IP
       * serviceSubnet : "${SERVICE_IP_POOL}/${CIDR}"
       * podSubnet : "${POD_IP_POOL}/${CIDR}"
       * imageRepository : "${registry} / docker hub name"
-      * cgroupDriver: docker cgroup driver systemd 변경
+      * cgroupDriver: cgroup driver systemd 변경
 
     * kubeadm init (2개 이상 마스터 구축시에는 아래 가이드 참조)
 	```bash
@@ -278,7 +279,7 @@
 	```
 	![image](figure/pods.PNG)	
 * 비고 : 
-    * single node cluster 구성시 master taint를 제거한다
+    * master에도 pod 스케줄을 가능하게 하려면 master taint를 제거한다
 	```bash
 	kubectl taint node [master hostname] node-role.kubernetes.io/master:NoSchedule-
 	ex) kubectl taint node k8s- node-role.kubernetes.io/master:NoSchedule- 
@@ -298,9 +299,9 @@
 	
 	vrrp_instance VI_1 {    
 	state {MASTER or BACKUP}   
-	interface {enp0s8}    
-	virtual_router_id {50}    
-	priority {100}    
+	interface {network interface}    
+	virtual_router_id {virtual router id}    
+	priority {priority}    
 	advert_int 1    
 	nopreempt    
 	authentication {        
@@ -311,14 +312,16 @@
 		{VIP}  
 		} 
 	}
-    ```
-	
-	* interface : network interface 이름 확인 (ip a 명령어로 확인)
+    ```	
+    ![image](figure/keepalived.PNG)
+	* interface : network interface 이름 확인 (ip a 명령어로 확인) ex) enp0s8
 	* state : master or backup으로 설정, 하나의 master에만 master를 설정하고 나머지 master에는 backup으로 설정
-	* priority : Master 우선순위
+	* priority : Master 우선순위  
 	    * priority 값이 높으면 최우선적으로 Master 역할 수행
-	    * 각 Master마다 다른 priority 값으로 수정.
+	    * 각 Master마다 다른 priority 값으로 수정
+	    * ex) master1 priority 100, master2 priority 99, master3 priority 98 
 	* virtual_ipaddress : virtual ip(VIP) 설정
+	* virtual_router_id : vritual router id ex) 50
 	
     * keepalived 재시작 및 상태 확인
     ```bash
@@ -335,6 +338,7 @@
 	
 	* 설정한 VIP 확인 가능, 여러 마스터 중 하나만 보임.
 	* inet {VIP}/32 scope global eno1
+	![image](figure/ipa.PNG)
 	
 ## Step 3-2. docker 설치 및 설정
 * 목적 : `구성한 docker registry에 접근을 위해 docker를 설치한다.`
@@ -366,16 +370,19 @@
         * join 시에 --cri-socket=/var/run/crio/crio.sock 옵션을 추가하여 실행한다.
 	    ```bash
 	    sudo kubeadm init --config=kubeadm-config.yaml --upload-certs 
-	    sudo kubeadm join {IP}:{PORT} --token ~~ discovery-token-ca-cert-hash --control-plane --certificate-key ~~ (1) --cri-socket=/var/run/crio/crio.sock (3)
+	    sudo kubeadm join {IP}:{PORT} --token ~~ discovery-token-ca-cert-hash --control-plane --certificate-key ~~ (1) --cri-socket=/var/run/crio/crio.sock
 	    sudo kubeadm join {IP}:{PORT} --token ~~ discovery-token-ca-cert-hash --cri-socket=/var/run/crio/crio.sock (2)
 	    ```
+	![image](figure/master2.PNG)    
 	* 해당 옵션은 certificates를 control-plane으로 upload하는 옵션
 	* 해당 옵션을 설정하지 않을 경우, 모든 Master 노드에서 key를 복사해야 함
 	* Master 단일구성과는 다르게, --control-plane --certificate-key 옵션이 추가된 명령어가 출력됨
 	* (1)처럼 Master 다중구성을 위한 hash 값을 포함한 kubeadm join 명령어가 출력되므로 해당 명령어를 복사하여 다중구성에 포함시킬 다른 Master에서 실행
-	* (2)처럼 Worker의 join을 위한 명령어도 출력되므로 Worker 노드 join시 사용
-	* (3)처럼 crio 사용시 --cri-socket 옵션 추가
-	
+	* (2)처럼 Worker의 join을 위한 명령어도 출력되므로 Worker 노드 join시 사용, crio 사용시 --cri-socket 옵션 추가
+	   ```bash
+	     sudo kubeadm join 172.22.5.2:6443 --token 2cks7n.yvojnnnq1lyz1qud \ --discovery-token-ca-cert-hash sha256:efba18bb4862cbcb54fb643a1b7f91c25e08cfc1640e5a6fffa6de83e4c76f07 \ --control-plane --certificate-key f822617fcbfde09dff35c10e388bc881904b5b6c4da28f3ea8891db2d0bd3a62 --cri-socket=/var/run/crio/crio.sock
+	   ```
+	   
 	* kubernetes config 
 	    ```bash
 	    mkdir -p $HOME/.kube

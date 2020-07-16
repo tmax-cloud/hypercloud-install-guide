@@ -1,6 +1,7 @@
 
 
 
+
   
 # secret-watcher 설치 가이드
 
@@ -83,8 +84,8 @@
 ## Step 1. hypercloud-secret-watcher-daemonset.yaml 실행
 * 목적 : `secret-watcher daemonset 생성`
 * 준비: 
-	* `hypercloud-secret-watcher-daemonset.yaml` 내용중 `namespace` 수정
-		* metadata.namespace의 값을 `hypercloud-system`이 아닌 `hypercloud4-system`으로 수정
+	* `hypercloud-secret-watcher-daemonset.yaml` 내용 `namespace`수정
+		* (b4.1.0.8 이하 버전인 경우) metadata.namespace의 값을 `hypercloud-system`이 아닌 `hypercloud4-system`으로 수정
 		```bash
 		$ vi ${HPCD_SW_HOME}/secret-watcher-${HPCD_SW_VERSION}/k8s-install/hypercloud-secret-watcher-daemonset.yaml
 		```

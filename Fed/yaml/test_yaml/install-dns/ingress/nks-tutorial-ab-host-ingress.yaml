@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ab-host-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: a.svc.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: a-svc
+          servicePort: 80
+  - host: b.svc.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: b-svc
+          servicePort: 80

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: external-dns
+  namespace: kube-system
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: external-dns
+  template:
+    metadata:
+      labels:
+        app: external-dns
+    spec:
+      containers:
+      - name: external-dns
+        image: registry.opensource.zalan.do/teapot/external-dns:latest
+        args:
+        - --source=ingress
+        - --provider=coredns
+        - --log-level=debug # debug only
+        env:
+        - name: ETCD_URLS
+          value: http://10.108.186.199:2379

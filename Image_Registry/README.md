@@ -1,57 +1,59 @@
 # Image Registry 설치 가이드
 
 ## 구성 요소 및 버전
-* docker
-* 구성 요소2([tmaxcloud/tmax/gym:v2](https://hub.docker.com/gym/tags))
-* 구성 요소3
+* docker-ce(v18.09.7)
 
 ## Prerequisites
-1. 구성 요소를 설치하기 전에 필요한 조건을 기술합니다.
-    * 조건에 대한 상세 설명을 기술합니다.
-	    * 상세 설명
-		    * 상세 설명
-2. 해당 모듈 설치 전 모듈1 이 설치되어 있어야 합니다.
-
 ## 폐쇄망 설치 가이드
-폐쇄망에서 설치를 진행해야 하는 경우 필요한 추가 작업에 대해 기술합니다.
-1. 첫번째 폐쇄망 설치 작업
-    * 작업에 대한 상세 설명 1
-	    * 상세 내역 1
-		* 상세 내역 2
-    * 작업에 대한 상세 설명 2
-
-2. 두번째 폐쇄망 설치 작업
-    * 작업에 대한 상세 설명 
-
+  * image registry는 노드 1개(master)에서만 진행한다. 
+  * 환경 설정
+    * run-registry.sh, docker-registry.tar를 Master 환경에 다운로드한다.
+        * https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Image_Registry/installer
+        * git이 설치되어 있는 경우 clone
+           ```bash
+           $ git clone https://github.com/tmax-cloud/hypercloud-install-guide.git
+           $ cd hypercloud-install-guide/Image_Registry/installer
+           ```
 ## Install Steps
-0. [스텝 0](https://스텝_0로_바로_가기_위한_링크)
-1. [스텝 1](https://스텝_1로_바로_가기_위한_링크)
-2. [스텝 2](https://스텝_2로_바로_가기_위한_링크)
+0. [docker 설치](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Image_Registry/README.md#step-0-docker-%EC%84%A4%EC%B9%98)
+1. [registry 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Image_Registry/README.md#step-1-registry-%EC%8B%A4%ED%96%89)
 
-## Step 0. 스텝 0
-* 목적 : 폐쇄망 환경에서 docker hub에 접속할 수 없을 때, docker registry를 이용해 이미지 pull을 위한 설정
+## Step 0. docker 설치
+* 목적 : `docker registry를 구축하기 위해 docker를 설치한다.`
 * 생성 순서 : 
-    * step을 진행하기 위한 과정에 대해 기술합니다.
-	    * 상세 설명
-		    * 상세 설명
-* 비고 :
-    * 생성 순서에 기술한 내용 외에 추가 정보를 기술합니다.
-	    * 상세 설명
-		    * 상세 설명
-
-## Step 1. 스탭 1
-* 목적 : `스탭1을 수행하는 목적에 대해 기술합니다.`
-* 생성 순서 : 스탭의 과정이 간단한 경우 하위 분류를 진행하지 않아도 됩니다.
-
-## Step 2. 스탭 2
-* 목적 : `스탭2를 수행하는 목적에 대해 기술합니다.`
+    * docker를 설치한다.
+    ```bash
+    $ sudo yum install -y docker-ce
+    $ sudo systemctl start docker
+    $ sudo systemctl enable docker
+    ```
+    * docker damon에 insecure-registries를 등록한다.
+      * sudo vi /etc/docker/daemon.json
+    ```bash
+    {
+        "insecure-registries": ["{IP}:5000"]
+    }
+    ```
+    ![image](figure/docker_registry.PNG)
+    * docker를 재실행하고 status를 확인한다.
+    ```bash
+    $  sudo systemctl restart docker
+    $  sudo systemctl status docker
+    ```    
+    
+## Step 1. registry 실행
+* 목적 : `폐쇄망 환경에서 docker hub에 접속할 수 없을 때, docker registry를 이용해 image 사용을 위한 registry를 구축한다.`
 * 생성 순서 : 
-    * a 작업을 수행합니다.
-	    * a작업을 위해 z를 수행합니다.
-    * b 작업을 수행합니다.
-	* c 작업을 수행합니다.
-* 비고 :
-    * a의 1번을 수정하면 b 기능을 수행할 수 있습니다.
-	    * b의 종류는 다음과 같습니다.
-		    * ...
+    * run-registry.sh를 실행한다.
+    	 * run-registry.sh, docker-registry.tar 파일이 같은 디렉토리({PWD})에 있어야 한다.
+    ```bash
+    $ sudo ./run-registry.sh {PWD} {IP}:5000
+    ex ) sudo ./run-registry.sh ~/hypercloud-install-guide/Image_Registry/installer 172.22.5.2:5000
+    ```
+    ![image](figure/registry.PNG)
 
+    * 확인
+    ```bash
+    $ curl {IP}:5000/v2/_catalog
+    ```
+    ![image](figure/catalog.PNG)

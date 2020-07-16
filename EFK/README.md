@@ -51,9 +51,11 @@
     ```
 
 ## Install Steps
-0. [스텝 0](https://스텝_0로_바로_가기_위한_링크)
-1. [스텝 1](https://스텝_1로_바로_가기_위한_링크)
-2. [스텝 2](https://스텝_2로_바로_가기_위한_링크)
+0. [efk yaml 수정](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/EFK#step-0-efk-yaml-%EC%88%98%EC%A0%95)
+1. [PersistentVolume 생성](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/EFK#step-1-persistentvolume-%EC%83%9D%EC%84%B1)
+2. [ElasticSearch 설치](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/EFK#step-2-elasticsearch-%EC%84%A4%EC%B9%98)
+3. [kibana 설치](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/EFK#step-3-kibana-%EC%84%A4%EC%B9%98)
+4. [fluentd 설치](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/EFK#step-4-fluentd-%EC%84%A4%EC%B9%98)
 
 ## Step 0. efk yaml 수정
 * 목적 : `efk yaml에 이미지 registry, 버전 및 노드 정보를 수정`
@@ -74,23 +76,28 @@
 	$ sed -i 's/docker.elastic.co\/elasticsearch\/elasticsearch/'${REGISTRY}'\/elasticsearch\/elasticsearch/g' 02_elasticsearch.yaml
 	$ sed -i 's/docker.elastic.co\/kibana\/kibana/'${REGISTRY}'\/kibana\/kibana/g' 03_kibana.yaml
 	$ sed -i 's/fluent\/fluentd-kubernetes-daemonset/'${REGISTRY}'\/fluentd-kubernetes-daemonset/g' 04_fluentd.yaml
-
+	```
 ## Step 1. PersistentVolume 생성
 * 목적 : `ElasticSearch에서 사용할 PV를 생성한다.`
 * 생성 순서 :
-    * PV를 생성할 PATH를 생성한다.
+    * 앞서 설정한 PV가 생성되는 노드에 접속하여 PV가 위치할 PATH Directory를 생성한다
+	```bash
+	$ mkdir /mnt/efk/data
+	``` 
+    * [01_pv.yaml](yaml/01_pv.yaml) 실행 `ex) kubectl apply -f 01_pv.yaml`
     
     
-    
-## Step 2. 스탭 2
-* 목적 : `스탭2를 수행하는 목적에 대해 기술합니다.`
-* 생성 순서 : 
-    * a 작업을 수행합니다.
-	    * a작업을 위해 z를 수행합니다.
-    * b 작업을 수행합니다.
-	* c 작업을 수행합니다.
-* 비고 :
-    * a의 1번을 수정하면 b 기능을 수행할 수 있습니다.
-	    * b의 종류는 다음과 같습니다.
-		    * ...
+## Step 2. ElasticSearch 설치
+* 목적 : `ElasticSearch 설치`
+* 생성 순서 : [02_elasticsearch.yaml](yaml/02_elasticsearch.yaml) 실행 `ex) kubectl apply -f 02_elasticsearch.yaml`
 
+## Step 3. kibana 설치
+* 목적 : `EFK의 UI 모듈인 kibana를 설치`
+* 생성 순서 : [03_kibana.yaml](yaml/03_kibana.yaml) 실행 `ex) kubectl apply -f 03_kibana.yaml`
+* 비고 :
+    * kibana pod가 running임을 확인한 뒤 http://$KIBANA_URL에 접속해 정상 동작을 확인한다.
+![image](figure/kibana-ui.png)   
+
+## Step 4. fluentd 설치
+* 목적 : `EFK의 agent daemon 역할을 수행하는 fluentd를 설치`
+* 생성 순서 : [04_fluentd.yaml](yaml/04_fluentd.yaml) 실행 `ex) kubectl apply -f 04_fluentd.yaml`

@@ -5,7 +5,7 @@
 * istiod ([docker.io/istio/pilot:1.5.1](https://hub.docker.com/layers/istio/pilot/1.5.1/images/sha256-818aecc1c73c53af9091ac1d4f500d9d7cec6d135d372d03cffab1addaff4ec0?context=explore))
 * istio-ingressgateway ([docker.io/istio/proxyv2:1.5.1](https://hub.docker.com/layers/istio/proxyv2/1.5.1/images/sha256-3ad9ee2b43b299e5e6d97aaea5ed47dbf3da9293733607d9b52f358313e852ae?context=explore))
 * istio-tracing ([docker.io/jaegertracing/all-in-one:1.16](https://hub.docker.com/layers/jaegertracing/all-in-one/1.16/images/sha256-738442983b772a5d413c8a2c44a5563956adaff224e5b38f52a959124dafc119?context=explore))
-* kiali ([quay.io/kiali/kiali:v1.19](https://quay.io/repository/kiali/kiali?tab=tags))
+* kiali ([quay.io/kiali/kiali:v1.20](https://quay.io/repository/kiali/kiali?tab=tags))
 
 ## Prerequisites
 
@@ -19,7 +19,7 @@
     $ export ISTIO_HOME=~/istio-install
     $ export ISTIO_VERSION=1.5.1
     $ export JAEGER_VERSION=1.16
-    $ export KIALI_VERSION=v1.19
+    $ export KIALI_VERSION=v1.20
     $ cd $ISTIO_HOME
     ```
     * 외부 네트워크 통신이 가능한 환경에서 필요한 이미지를 다운받는다.
@@ -48,7 +48,7 @@
     $ sudo docker tag istio/pilot:${ISTIO_VERSION} ${REGISTRY}/istio/pilot:${ISTIO_VERSION}
     $ sudo docker tag istio/proxyv2:${ISTIO_VERSION} ${REGISTRY}/istio/proxyv2:${ISTIO_VERSION}
     $ sudo docker tag jaegertracing/all-in-one:${JAEGER_VERSION} ${REGISTRY}/jaegertracing/all-in-one:${JAEGER_VERSION}
-    $ sudo docker tag quay.io/kiali/kiali:${KIALI_VERSION} ${REGISTRY}/quay.io/kiali/kiali:${KIALI_VERSION}
+    $ sudo docker tag quay.io/kiali/kiali:${KIALI_VERSION} ${REGISTRY}/kiali/kiali:${KIALI_VERSION}
     
     $ sudo docker push ${REGISTRY}/istio/pilot:${ISTIO_VERSION}
     $ sudo docker push ${REGISTRY}/istio/proxyv2:${ISTIO_VERSION}
@@ -98,8 +98,14 @@
 * 생성 순서: [2.kiali.yaml](yaml/2.kiali.yaml) 실행
 * 비고 :
     * kiali에 접속하기 위한 서비스를 [원하는 타입](yaml/2.kiali.yaml#L346)으로 변경할 수 있다.
-    * kiali에 접속하기 위한 [id/password](yaml/2.kiali.yaml#L215)를 configmap을 수정해 변경할 수 있다.(default: admin/admin)
-    * kilai pod가 running임을 확인한 뒤 http://$KIALI_URL/kiali 에 접속해 정상 동작을 확인한다.
+    * kiali에 접속하기 위한 방식을 [strategy](yaml/2.kiali.yaml#L184)를 configmap을 수정해 변경할 수 있다.
+    * kiali에서 token을 strategy를 default로 제공하려고 하고 있다.(token: service account token)
+    * service account token 은 secret에서 확인 가능하다.
+    * hypercloud accessToken 으로도 login 가능하며, 브라우져의 개발자도구 콘솔창에서 확인 가능하다.
+    * login 옵션의 경우 kiali에 접속하기 위한 [id/password](yaml/2.kiali.yaml#L215)를 configmap을 수정해 변경할 수 있다.(default: admin/admin)
+    * login 옵션은 추후 kiali에서 없어질 수 있다.
+    * kilai pod가 running임을 확인한 뒤 http://$KIALI_URL/api/kiali 에 접속해 정상 동작을 확인한다.
+    * hypercloud console 과 연동을 위해 kiali default web_root를 수정하였다.
 	
 ![image](figure/kiali-ui.png)
 
@@ -110,7 +116,8 @@
 * 생성 순서 : [3.istio-tracing.yaml](yaml/3.istio-tracing.yaml) 실행
 * 비고 : 
     * jaeger ui에 접속하기 위한 서비스를 [원하는 타입](yaml/3.istio-tracing.yaml#L245)으로 변경할 수 있다.
-    * istio-tracing pod가 running임을 확인한 뒤 http://$JAEGER_URL/jaeger/search 에 접속해 정상 동작을 확인한다.
+    * istio-tracing pod가 running임을 확인한 뒤 http://$JAEGER_URL/api/jaeger/search 에 접속해 정상 동작을 확인한다.
+    * hypercloud console 과 연동을 위해 jeager default QUERY_BASE_PATH를 수정하였다.
 	
 ![image](figure/jaeger-ui.png)
 
@@ -141,7 +148,7 @@
 * 생성 순서 : [6.istio-metric.yaml](yaml/6.istio-metric.yaml) 실행
 * 비고 : 
     * http://$PROMETHEUS_URL/graph 에 접속해 'envoy_'로 시작하는 istio 관련 metric이 수집되었는지 확인한다.
-    * 만약 istio 관련 metric이 수집되지 않을 경우, Prometheus의 권한설정 문제일 수 있다. [prometheus-clusterRole.yaml](../Prometheus/manifests/prometheus-clusterRole.yaml)을 적용하거나 Prometheus를 최신 버전으로 설치한다.
+    * 만약 istio 관련 metric이 수집되지 않을 경우, Prometheus의 권한설정 문제일 수 있다. [prometheus-clusterRole.yaml](../Prometheus/yaml/manifests/prometheus-clusterRole.yaml)을 적용하거나 Prometheus를 최신 버전으로 설치한다.
 
 
 

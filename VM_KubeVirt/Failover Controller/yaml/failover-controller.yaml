@@ -1,0 +1,178 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app: kubevirt-node-fail-controller
+  name: kubevirt-system
+---
+apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
+metadata:
+  labels:
+    app: kubevirt-node-fail-controller
+  name: virtnodefailcontroller
+  namespace: kubevirt-system
+spec:
+  privileged: true
+  allowPrivilegeEscalation: true
+  allowedCapabilities:
+    - "*"
+  #  - NET_ADMIN
+  #  - NET_RAW
+  #  - SYS_ADMIN
+  fsGroup:
+    rule: RunAsAny
+  hostNetwork: true
+  runAsUser:
+    rule: RunAsAny
+  seLinux:
+    rule: RunAsAny
+  supplementalGroups:
+    rule: RunAsAny
+  volumes:
+    - "*"
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app: kubevirt-node-fail-controller
+  name: virtnodefailcontroller
+  namespace: kubevirt-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app: kubevirt-node-fail-controller
+  name: kubevirt-system:controller:virt-node-fail-controller
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - pods/log
+      - pods
+      - services
+      - endpoints
+      - events
+      - nodes
+    verbs:
+      - get
+      - update
+      - create
+      - delete
+      - list
+      - watch
+  - apiGroups:
+      - "kubevirt.io"
+    resources:
+      - virtualmachineinstances
+    verbs:
+      - get
+      - update
+      - create
+      - delete
+      - list
+      - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  labels:
+    app: kubevirt-node-fail-controller
+  name: config-watcher
+  namespace: kubevirt-system
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - configmaps
+      - events
+    verbs:
+      - get
+      - update
+      - create
+      - delete
+      - list
+      - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    app: kubevirt-node-fail-controller
+  name: kubevirt-system:controller:virt-node-fail-controller
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: kubevirt-system:controller:virt-node-fail-controller
+subjects:
+  - kind: ServiceAccount
+    name: virtnodefailcontroller
+    namespace: kubevirt-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  labels:
+    app: kubevirt-node-fail-controller
+  name: config-watcher
+  namespace: kubevirt-system
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: config-watcher
+subjects:
+  - kind: ServiceAccount
+    name: virtnodefailcontroller
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: kubevirt-node-fail-controller
+    component: virtnodefailcontroller
+  name: kubevirt-node-fail-controller
+  namespace: kubevirt-system
+spec:
+  selector:
+    matchLabels:
+      app: kubevirt-node-fail-controller
+      component: virtnodefailcontroller
+  template:
+    metadata:
+      labels:
+        app: kubevirt-node-fail-controller
+        component: virtnodefailcontroller
+    spec:
+      tolerations:
+        - key: node-role.kubernetes.io/master
+          effect: NoSchedule
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: node-role.kubernetes.io/master
+                    operator: Exists
+                    values:
+      containers:
+        - name: kubevirt-node-fail-controller
+          image: kubevirt-node-fail-controller:$FAILOVER_VERSION
+          env:
+          - name: CALICO_DATASTORE_TYPE
+            value: kubernetes
+          - name: CALICO_KUBECONFIG
+            value: /root/.kube/config
+          volumeMounts:
+          - mountPath: /root/.kube
+            name: kube-config
+          securityContext:
+            privileged: true
+      volumes:
+      - name: kube-config
+        hostPath:
+          path: /root/.kube
+          type: Directory
+      serviceAccountName: virtnodefailcontroller
+      hostNetwork: true

@@ -1,0 +1,154 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app: hypernet-local-agent
+  name: hypernet-local-agent-system
+---
+apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
+metadata:
+  labels:
+    app: hypernet-local-agent
+  name: agent
+  namespace: hypernet-local-agent-system
+spec:
+  privileged: true
+  allowPrivilegeEscalation: true
+  allowedCapabilities:
+  - '*'
+#  - NET_ADMIN
+#  - NET_RAW
+#  - SYS_ADMIN
+  fsGroup:
+    rule: RunAsAny
+  hostNetwork: true
+  runAsUser:
+    rule: RunAsAny
+  seLinux:
+    rule: RunAsAny
+  supplementalGroups:
+    rule: RunAsAny
+  volumes:
+  - '*'
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app: hypernet-local-agent
+  name: agent
+  namespace: hypernet-local-agent-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app: hypernet-local-agent
+  name: hypernet-local-agent-system:agent
+rules:
+- apiGroups:
+  - ''
+  resources:
+  - pods
+  - services
+  - endpoints
+  - nodes
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups: ["crd.projectcalico.org"]
+  resources:
+  - ippools
+  verbs:
+  - list
+  - get
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  labels:
+    app: hypernet-local-agent
+  name: config-watcher
+  namespace: hypernet-local-agent-system
+rules:
+- apiGroups:
+  - ''
+  resources:
+  - configmaps
+  verbs:
+  - get
+  - list
+  - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    app: hypernet-local-agent
+  name: hypernet-local-agent-system:agent
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: hypernet-local-agent-system:agent
+subjects:
+- kind: ServiceAccount
+  name: agent
+  namespace: hypernet-local-agent-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  labels:
+    app: hypernet-local-agent
+  name: config-watcher
+  namespace: hypernet-local-agent-system
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: config-watcher
+subjects:
+- kind: ServiceAccount
+  name: agent
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: hypernet-local-agent
+    component: agent
+  name: agent
+  namespace: hypernet-local-agent-system
+spec:
+  selector:
+    matchLabels:
+      app: hypernet-local-agent
+      component: agent
+  template:
+    metadata:
+      labels:
+        app: hypernet-local-agent
+        component: agent
+    spec:
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        effect: NoSchedule
+      containers:
+      - name: my-hypernet-local-agent
+        image: tmaxcloudck/hypernet-local-agent:0.4.2
+        securityContext:
+          privileged: true
+        env:
+        - name: HYPERNET_LOCAL_AGENT_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: HYPERNET_LOCAL_AGENT_HOST
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
+#        - name: POD_IPPOOL_NAME
+#          value: "default-ipv4-ippool"
+      serviceAccountName: agent
+      hostNetwork: true

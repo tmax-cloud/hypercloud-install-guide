@@ -97,32 +97,42 @@
 	* manifests 폴더에 들어가서 아래의 명령어들을 실행한다.
 	```
 	$ sed -i 's/{ALERTMANAGER_VERSION}/'${ALERTMANAGER_VERSION}'/g' alertmanager-alertmanager.yaml
-	$ sed -i 's/{REGISTRY}/'${REGISTRY}'/g' alertmanager-alertmanager.yaml
-
 	$ sed -i 's/{GRAFANA_VERSION}/'${GRAFANA_VERSION}'/g' grafana-deployment.yaml
-	$ sed -i 's/{REGISTRY}/'${REGISTRY}'/g' grafana-deployment.yaml
+	
 
 	$ sed -i 's/{KUBE_RBAC_PROXY_VERSION}/'${KUBE_RBAC_PROXY_VERSION}'/g' kube-state-metrics-deployment.yaml
-	$ sed -i 's/{REGISTRY}/'${REGISTRY}'/g' kube-state-metrics-deployment.yaml
 	$ sed -i 's/{KUBE_STATE_METRICS_VERSION}/'${KUBE_STATE_METRICS_VERSION}'/g' kube-state-metrics-deployment.yaml
 
 	$ sed -i 's/{NODE_EXPORTER_VERSION}/'${NODE_EXPORTER_VERSION}'/g' node-exporter-daemonset.yaml
-	$ sed -i 's/{REGISTRY}/'${REGISTRY}'/g' node-exporter-daemonset.yaml
 	$ sed -i 's/{KUBE_RBAC_PROXY_VERSION}/'${KUBE_RBAC_PROXY_VERSION}'/g' node-exporter-daemonset.yaml
 
 	$ sed -i 's/{PROMETHEUS_ADAPTER_VERSION}/'${PROMETHEUS_ADAPTER_VERSION}'/g' prometheus-adapter-deployment.yaml
-	$ sed -i 's/{REGISTRY}/'${REGISTRY}'/g' prometheus-adapter-deployment.yaml
 
 	$ sed -i 's/{PROMETHEUS_VERSION}/'${PROMETHEUS_VERSION}'/g' prometheus-prometheus.yaml
-	$ sed -i 's/{REGISTRY}/'${REGISTRY}'/g' prometheus-prometheus.yaml
 	```
 	* setup 폴더에 들어가서 아래의 명령어들을 실행한다.
 	```
 	$ sed -i 's/{PROMETHEUS_OPERATOR_VERSION}/'${PROMETHEUS_OPERATOR_VERSION}'/g' prometheus-operator-deployment.yaml
 	$ sed -i 's/{CONFIGMAP_RELOADER_VERSION}/'${CONFIGMAP_RELOADER_VERSION}'/g' prometheus-operator-deployment.yaml
 	$ sed -i 's/{CONFIGMAP_RELOAD_VERSION}/'${CONFIGMAP_RELOAD_VERSION}'/g' prometheus-operator-deployment.yaml
-	$ sed -i 's/{REGISTRY}/'${REGISTRY}'/g' prometheus-operator-deployment.yaml
+	
 	```
+	* 폐쇄망에서 설치를 진행하여 별도의 image registry를 사용하는 경우 registry 정보를 추가로 설정해준다.
+	```
+	$ sed -i 's/quay.io\/prometheus\/prometheus/'${REGISTRY}\/prometheus\/prometheus'/g' alertmanager-alertmanager.yaml
+	$ sed -i 's/grafana\/grafana/'${REGISTRY}\/grafana'/g' grafana-deployment.yaml
+	$ sed -i 's/quay.io\/coreos\/kube-rbac-proxy/'${REGISTRY}\/coreos\/kube-rbac-proxy'/g' kube-state-metrics-deployment.yaml
+	$ sed -i 's/quay.io\/coreos\/kube-state-metrics/'${REGISTRY}\/coreos\/kube-state-metrics'/g' kube-state-metrics-deployment.yaml
+	$ sed -i 's/quay.io\/prometheus\/node-exporter/'${REGISTRY}\/prometheus\/node-exporter'/g' node-exporter-daemonset.yaml
+	$ sed -i 's/quay.io\/coreos\/kube-rbac-proxy/'${REGISTRY}\/coreos\/kube-rbac-proxy'/g' node-exporter-daemonset.yaml
+	$ sed -i 's/quay.io\/coreos\/k8s-prometheus-adapter-amd64/'${REGISTRY}\/coreos\/k8s-prometheus-adapter-amd64'/g' prometheus-adapter-deployment.yaml
+	$ sed -i 's/quay.io\/prometheus\/prometheus/'${REGISTRY}\/prometheus\/prometheus'/g' prometheus-prometheus.yaml
+	$ sed -i 's/quay.io\/coreos\/configmap-reload/'${REGISTRY}\/coreos\/configmap-reload/'/g' prometheus-operator-deployment.yaml
+	$ sed -i 's/quay.io\/coreos\/prometheus-config-reloader/'${REGISTRY}\/coreos\/prometheus-config-reloader'/g' prometheus-operator-deployment.yaml
+	$ sed -i 's/quay.io\/coreos\/prometheus-operator/'${REGISTRY}\/coreos\/prometheus-operator'/g' prometheus-operator-deployment.yaml
+	```
+	
+	
 
 ## Install Steps
 1. [prometheus namespace 및 crd 생성](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Prometheus#step-1-prometheus-namespace-%EB%B0%8F-crd-%EC%83%9D%EC%84%B1)

@@ -51,7 +51,7 @@
     $ sudo docker save istio/examples-bookinfo-ratings-v1:1.15.0 > ratings.tar
     $ sudo docker save istio/examples-bookinfo-reviews-v1:1.15.0 > reviews-v1.tar
     $ sudo docker save istio/examples-bookinfo-reviews-v2:1.15.0 > reviews-v2.tar
-    $ sudo docker save istio/examples-bookinfo-reviews-v2:1.15.0 > reviews-v3.tar
+    $ sudo docker save istio/examples-bookinfo-reviews-v3:1.15.0 > reviews-v3.tar
     ```
     * install yaml을 다운로드한다.
     ```bash

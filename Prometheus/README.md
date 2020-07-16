@@ -20,7 +20,7 @@
     * 작업 디렉토리 생성 및 환경 설정
     ```
     $ mkdir -p ~/prometheus-install
-    $ export PROMETHEUS_HOME=~/istio-install
+    $ export PROMETHEUS_HOME=~/prometheus-install
     $ export PROMETHEUS_VERSION=v2.11.0
     $ export PROMETHEUS_OPERATOR_VERSION=v0.34.0
     $ export NODE_EXPORTER_VERSION=v0.18.1

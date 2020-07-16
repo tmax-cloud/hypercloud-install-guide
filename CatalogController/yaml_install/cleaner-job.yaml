@@ -68,6 +68,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: catalog-catalog-pre-delete-clean-job
+  namespace: catalog
   labels:
     app: catalog-catalog
     chart: "catalog-0.3.0-beta.2"

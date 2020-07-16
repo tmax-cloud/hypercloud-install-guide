@@ -761,12 +761,22 @@ spec:
 
       affinity:
         nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            preference:
+              matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                  - kube4
+
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
               - matchExpressions:
                   - key: node-role.kubernetes.io/master
                     operator: Exists
-                    values:
+
+
 
       serviceAccountName: calico-kube-controllers
       priorityClassName: system-cluster-critical
@@ -800,4 +810,5 @@ metadata:
 
 ---
 # Source: calico/templates/configure-canal.yaml
+
 

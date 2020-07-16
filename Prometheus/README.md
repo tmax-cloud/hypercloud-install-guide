@@ -99,7 +99,7 @@
 	$ sed -i 's/{ALERTMANAGER_VERSION}/'${ALERTMANAGER_VERSION}'/g' alertmanager-alertmanager.yaml
 	$ sed -i 's/{REGISTRY}/'${REGISTRY}'/g' alertmanager-alertmanager.yaml
 
-	$ sed -i 's/{GRAFANA_VERSION}}/'${GRAFANA_VERSION}'/g' grafana-deployment.yaml
+	$ sed -i 's/{GRAFANA_VERSION}/'${GRAFANA_VERSION}'/g' grafana-deployment.yaml
 	$ sed -i 's/{REGISTRY}/'${REGISTRY}'/g' grafana-deployment.yaml
 
 	$ sed -i 's/{KUBE_RBAC_PROXY_VERSION}/'${KUBE_RBAC_PROXY_VERSION}'/g' kube-state-metrics-deployment.yaml

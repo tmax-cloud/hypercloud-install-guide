@@ -55,20 +55,20 @@ Step 0. IPPool 설정(Static IP 전용. Static IP를 사용하지 않을 경우 
 		cat tmp.yaml | awk '/^spec/,EOF' >> default-ipv4-ippool.yaml
 		sed -i 's/crd.projectcalico.org\/v1/projectcalico.org\/v3/' default-ipv4-ippool.yaml
 	    ```
-	    	* 아래의 command를 이용해 natOutgoing 값이 존재하는지 확인
-	    	```bash
-	    		awk '/natOutgoing/' default-ipv4-ippool.yaml
-	   		```
-	    	* Command의 결과로 아래와 같이 "natOutgoing: "을 포함한 문자열이 출력되는 경우 아래 Command 실행
-			![image](figure/natoutgoing.PNG)
-			```bash
-				sed -i '/natOutgoing/d' default-ipv4-ippool.yaml
-				echo '  natOutgoing: false' >> default-ipv4-ippool.yaml
-			```
-			* 어떠한 문자열도 출력이 되지 않을 경우 아래 Command 실행
-			```bash
-				echo '  natOutgoing: false' >> default-ipv4-ippool.yaml
-			```
+		* 아래의 command를 이용해 natOutgoing 값이 존재하는지 확인
+		```bash
+			awk '/natOutgoing/' default-ipv4-ippool.yaml
+		```
+		* Command의 결과로 아래와 같이 "natOutgoing: "을 포함한 문자열이 출력되는 경우 아래 Command 실행
+		![image](figure/natoutgoing.PNG)
+		```bash
+			sed -i '/natOutgoing/d' default-ipv4-ippool.yaml
+			echo '  natOutgoing: false' >> default-ipv4-ippool.yaml
+		```
+		* 어떠한 문자열도 출력이 되지 않을 경우 아래 Command 실행
+		```bash
+			echo '  natOutgoing: false' >> default-ipv4-ippool.yaml
+		```
 
 		* 위 과정을 통해 생성한 default-ipv4-ippool.yaml을 적용
 		```bash

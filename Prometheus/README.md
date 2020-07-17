@@ -113,16 +113,20 @@
     ```
 	
 	* 폐쇄망에서 설치를 진행하여 별도의 image registry를 사용하는 경우 registry 정보를 추가로 설정해준다.
+	* (manifests 폴더)
 	```
-	$ sed -i "s/quay.io\/prometheus\/prometheus/${REGISTRY}\/prometheus\/prometheus/g" alertmanager-alertmanager.yaml
+	$ sed -i "s/quay.io\/prometheus\/alertmanager/${REGISTRY}\/prometheus\/alertmanager/g" alertmanager-alertmanager.yaml
 	$ sed -i "s/grafana\/grafana/${REGISTRY}\/grafana/g" grafana-deployment.yaml
 	$ sed -i "s/quay.io\/coreos\/kube-rbac-proxy/${REGISTRY}\/coreos\/kube-rbac-proxy/g" kube-state-metrics-deployment.yaml
 	$ sed -i "s/quay.io\/coreos\/kube-state-metrics/${REGISTRY}\/coreos\/kube-state-metrics/g" kube-state-metrics-deployment.yaml
 	$ sed -i "s/quay.io\/prometheus\/node-exporter/${REGISTRY}\/prometheus\/node-exporter/g" node-exporter-daemonset.yaml
 	$ sed -i "s/quay.io\/coreos\/kube-rbac-proxy/${REGISTRY}\/coreos\/kube-rbac-proxy/g" node-exporter-daemonset.yaml
-	$ sed -i "s/quay.io\/coreos\/k8s-prometheus-adapter-amd64/${REGISTRY}\/coreos\/k8s-prometheus-adapter-amd64'/g" prometheus-adapter-deployment.yaml
+	$ sed -i "s/quay.io\/coreos\/k8s-prometheus-adapter-amd64/${REGISTRY}\/coreos\/k8s-prometheus-adapter-amd64/g" prometheus-adapter-deployment.yaml
 	$ sed -i "s/quay.io\/prometheus\/prometheus/${REGISTRY}\/prometheus\/prometheus/g" prometheus-prometheus.yaml
-	$ sed -i "s/quay.io\/coreos\/configmap-reload/${REGISTRY}\/coreos\/configmap-reload//g" prometheus-operator-deployment.yaml
+	```
+	* (setup 폴더)
+	```
+	$ sed -i "s/quay.io\/coreos\/configmap-reload/${REGISTRY}\/coreos\/configmap-reload/g" prometheus-operator-deployment.yaml
 	$ sed -i "s/quay.io\/coreos\/prometheus-config-reloader/${REGISTRY}\/coreos\/prometheus-config-reloader/g" prometheus-operator-deployment.yaml
 	$ sed -i "s/quay.io\/coreos\/prometheus-operator/${REGISTRY}\/coreos\/prometheus-operator/g" prometheus-operator-deployment.yaml
 	         

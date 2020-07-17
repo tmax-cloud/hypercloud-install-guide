@@ -18,7 +18,7 @@ spec:
     - name: alertmanager-main
       namespace: monitoring
       port: web
-  baseImage: quay.io/prometheus/prometheus:{PROMETHEUS_VERSION}
+  image: quay.io/prometheus/prometheus:{PROMETHEUS_VERSION}
   nodeSelector:
     kubernetes.io/os: linux
   podMonitorSelector: {}

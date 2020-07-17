@@ -23,7 +23,7 @@
     $ mkdir -p ~/cni-install
     $ export CNI_HOME=~/cni-install
     $ export CNI_VERSION=v3.13.4
-    $ export CTL_VERSION=v.3.15.0
+    $ export CTL_VERSION=v3.15.0
     $ export REGISTRY=172.22.8.106:5000
     $ cd $CNI_HOME
     ```
@@ -59,7 +59,7 @@
     $ sudo docker load < calico-pod2daemon-flexvol_${CNI_VERSION}.tar
     $ sudo docker load < calico-cni_${CNI_VERSION}.tar
     $ sudo docker load < calico-kube-controllers_${CNI_VERSION}.tar
-    $ sudo docker load < calico-ctl_v3.15.0.tar
+    $ sudo docker load < calico-ctl_${CTL_VERSION}.tar
     
     $ sudo docker tag calico/node:${CNI_VERSION} ${REGISTRY}/calico/node:${CNI_VERSION}
     $ sudo docker tag calico/pod2daemon-flexvol:${CNI_VERSION} ${REGISTRY}/calico/pod2daemon-flexvol:${CNI_VERSION}
@@ -99,6 +99,7 @@
 	```         
 
     * master 노드에만 calico-kube-controllers를 띄우기 위해서는 아래와 같은 스케쥴링 옵션을 추가한다. (calico_v.3.13.4_master.yaml 파일 참고)
+        * 주의) matchExpressions의 key(kubernetes.io/hostname)의 values에 master 노드의 이름으로 수정
 	```bash
         - key: node-role.kubernetes.io/master
           effect: NoSchedule

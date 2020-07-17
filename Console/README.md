@@ -87,6 +87,8 @@
     
     * `kubectl create -f 3.deployment-pod.yaml` 을 실행합니다.
 * 비고
+    * 폐쇄망에서 설치하는 경우
+	    * image로 `tmaxcloudck/hypercloud-console:1.1.x.x` 대신, `${REGISTRY}/tmaxcloudck/hypercloud-console:1.1.x.x` 을 사용합니다.
     * HCDC 모드로 설치하는 경우
 	    * DNS 서버 세팅이 필요하고, console과 portal이 같은 도메인의 서브도메인을 사용해야 합니다. (포트는 둘 다 https 기본 포트인 443 사용)
     * Multicluster Console을 설치하는 경우

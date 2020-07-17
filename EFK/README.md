@@ -96,6 +96,7 @@
 * 생성 순서 : [03_kibana.yaml](yaml/03_kibana.yaml) 실행 `ex) kubectl apply -f 03_kibana.yaml`
 * 비고 :
     * kibana pod가 running임을 확인한 뒤 http://$KIBANA_URL에 접속해 정상 동작을 확인한다.
+    * $KIBANA_URL은 `kubectl get svc -n kube-logging | grep kibana`를 통해 조회 가능
 ![image](figure/kibana-ui.png)   
 
 ## Step 4. fluentd 설치

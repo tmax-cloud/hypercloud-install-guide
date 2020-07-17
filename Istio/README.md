@@ -27,6 +27,7 @@
     $ export ISTIO_VERSION=1.5.1
     $ export JAEGER_VERSION=1.16
     $ export KIALI_VERSION=v1.20
+    $ export REGISTRY=[IP:PORT]
     $ cd $ISTIO_HOME
     ```
     * 외부 네트워크 통신이 가능한 환경에서 필요한 이미지를 다운받는다.

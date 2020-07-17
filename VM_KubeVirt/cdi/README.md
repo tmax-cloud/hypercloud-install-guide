@@ -31,7 +31,7 @@
   $ mkdir -p ~/cdi-install
   $ export CDI_HOME=~/cdi-install
   $ export CDI_VERSION=v1.18.0
-  $ cd $CDI_VERSION
+  $ cd $CDI_HOME
   ```
 
   - 외부 네트워크 통신이 가능한 환경에서 필요한 이미지를 다운로드 합니다.

@@ -23,6 +23,8 @@
     $ mkdir -p ~/cni-install
     $ export CNI_HOME=~/cni-install
     $ export CNI_VERSION=v3.13.4
+    $ export CTL_VERSION=v.3.15.0
+    $ export REGISTRY=172.22.8.106:5000
     $ cd $CNI_HOME
     ```
 
@@ -36,8 +38,8 @@
     $ sudo docker save calico/cni:${CNI_VERSION} > calico-cni_${CNI_VERSION}.tar
     $ sudo docker pull calico/kube-controllers:${CNI_VERSION}
     $ sudo docker save calico/kube-controllers:${CNI_VERSION} > calico-kube-controllers_${CNI_VERSION}.tar
-    $ sudo docker pull calico/ctl:v3.15.0
-    $ sudo docker save calico/ctl:v3.15.0 > calico-ctl_v3.15.0.tar
+    $ sudo docker pull calico/ctl:${CTL_VERSION}
+    $ sudo docker save calico/ctl:${CTL_VERSION} > calico-ctl_${CTL_VERSION}.tar
     ```
 
     * calico yaml을 다운로드한다. (대역 설정을 위함)
@@ -63,13 +65,13 @@
     $ sudo docker tag calico/pod2daemon-flexvol:${CNI_VERSION} ${REGISTRY}/calico/pod2daemon-flexvol:${CNI_VERSION}
     $ sudo docker tag calico/cni:${CNI_VERSION} ${REGISTRY}/calico/cni:${CNI_VERSION}
     $ sudo docker tag calico/kube-controllers:${CNI_VERSION} ${REGISTRY}/calico/kube-controllers:${CNI_VERSION}
-    $ sudo docker tag calico/ctl:v3.15.0 ${REGISTRY}/calico/ctl:v3.15.0
+    $ sudo docker tag calico/ctl:${CTL_VERSION} ${REGISTRY}/calico/ctl:${CTL_VERSION}
    
     $ sudo docker push ${REGISTRY}/calico/node:${CNI_VERSION}
     $ sudo docker push ${REGISTRY}/calico/pod2daemon-flexvol:${CNI_VERSION}
     $ sudo docker push ${REGISTRY}/calico/cni:${CNI_VERSION}
     $ sudo docker push ${REGISTRY}/calico/kube-controllers:${CNI_VERSION}
-    $ sudo docker push ${REGISTRY}/calico/ctl:v3.15.0
+    $ sudo docker push ${REGISTRY}/calico/ctl:${CTL_VERSION}
     ```
 
 
@@ -98,29 +100,35 @@
 
     * master 노드에만 calico-kube-controllers를 띄우기 위해서는 아래와 같은 스케쥴링 옵션을 추가한다. (calico_v.3.13.4_master.yaml 파일 참고)
 	```bash
-            spec:
-              tolerations:
-                - key: node-role.kubernetes.io/master
-                  effect: NoSchedule
-              affinity:
-                nodeAffinity:
-                  requiredDuringSchedulingIgnoredDuringExecution:
-                    nodeSelectorTerms:
-                    - matchExpressions:
-                      - key: node-role.kubernetes.io/master
-                        operator: Exists
-                        values:
+        - key: node-role.kubernetes.io/master
+          effect: NoSchedule
+
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            preference:
+              matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                  - kube4
+
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: node-role.kubernetes.io/master
+                    operator: Exists
 	```         
  
 * 비고 :
     * `폐쇄망에서 설치를 진행하여 별도의 image registry를 사용하는 경우 registry 정보를 추가로 설정해준다.`
 	```bash
-	image: calico/cni:v3.13.4 -> image: IP:5000/metallb/speaker:v0.8.2
-	image: calico/cni:v3.13.4 -> image: IP:5000/calico/cni:v3.13.4
-	image: calico/pod2daemon-flexvol:v3.13.4 -> image: IP:5000/calico/pod2daemon-flexvol:v3.13.4
-	image: calico/node:v3.13.4 -> image: IP:5000/calico/node:v3.13.4
-	image: calico/kube-controllers:v3.13.4 -> image: IP:5000/calico/kube-controllers:v3.13.4
-	image: calico/ctl:v3.15.0 -> image: IP:5000/calico/ctl:v3.15.0
+            sed -i 's/calico\/cni/'${REGISTRY}'\/calico\/cni/g' calico.yaml
+            sed -i 's/calico\/pod2daemon-flexvol/'${REGISTRY}'\/calico\/pod2daemon-flexvol/g' calico.yaml
+            sed -i 's/calico\/node/'${REGISTRY}'\/calico\/node/g' calico.yaml
+            sed -i 's/calico\/kube-controllers/'${REGISTRY}'\/calico\/kube-controllers/g' calico.yaml
+            sed -i 's/calico\/ctl/'${REGISTRY}'\/calico\/ctl/g' calicoctl.yaml
 	```
 
 <h2 id="step1"> Step 1. calico 설치 </h2>

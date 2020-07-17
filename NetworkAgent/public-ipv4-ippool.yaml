@@ -3,7 +3,7 @@ kind: IPPool
 metadata:
   name: public-ipv4-ippool
 spec:
-  cidr: 10.0.0.192/26
-  blockSize: 28
+  cidr: CIDR
+  blockSize: BLOCKSIZE
   ipipMode: Never
   natOutgoing: false

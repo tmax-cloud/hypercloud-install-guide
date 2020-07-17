@@ -158,7 +158,7 @@ spec:
                     values:
       containers:
         - name: kube-failover-controller
-          image: kube-failover-controller:$FAILOVER_VERSION
+          image: tmaxcloudck/kube-failover-controller:%FAILOVER_VERSION%
           env:
           - name: CALICO_DATASTORE_TYPE
             value: kubernetes

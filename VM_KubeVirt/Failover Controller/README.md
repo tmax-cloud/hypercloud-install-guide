@@ -35,9 +35,9 @@
   * failover-controller.tar를 docker-registry에 배포 한다.
   ```sh
   $ docker load -i failover-controller.tar 
-  $ docker tag kube-failover-controller:${FAILOVER_VERSION} ${DOCKER_REGISTRY}/kube-failover-controller:${FAILOVER_VERSION}
-  $ docker push ${DOCKER_REGISTRY}/kube-failover-controller:${FAILOVER_VERSION}
-  $ sed -i "s/kube-failover-controller:$FAILOVER_VERSION/$DOCKER_REGISTRY\/kube-failover-controller:$FAILOVER_VERSION/g" $FAILOVER_HOME/yaml/failover-controller.yaml
+  $ docker tag tmaxcloudck/kube-failover-controller:${FAILOVER_VERSION} ${DOCKER_REGISTRY}/tmaxcloudck/kube-failover-controller:${FAILOVER_VERSION}
+  $ docker push ${DOCKER_REGISTRY}/tmaxcloudck/kube-failover-controller:${FAILOVER_VERSION}
+  $ sed -i "s/tmaxcloudck\/kube-failover-controller:%FAILOVER_VERSION%/${DOCKER_REGISTRY}\/tmaxcloudck\/kube-failover-controller:${FAILOVER_VERSION}/g" ${FAILOVER_HOME}/yaml/failover-controller.yaml
   ```
   
 ## Install Step:

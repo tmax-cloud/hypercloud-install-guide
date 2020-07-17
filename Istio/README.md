@@ -27,6 +27,7 @@
     $ export ISTIO_VERSION=1.5.1
     $ export JAEGER_VERSION=1.16
     $ export KIALI_VERSION=v1.20
+    $ export REGISTRY=[IP:PORT]
     $ cd $ISTIO_HOME
     ```
     * 외부 네트워크 통신이 가능한 환경에서 필요한 이미지를 다운받는다.
@@ -127,7 +128,7 @@
 	```bash
 	$ sed -i 's/quay.io\/kiali\/kiali/'${REGISTRY}'\/kiali\/kiali/g' 2.kiali.yaml
 	$ sed -i 's/docker.io\/jaegertracing\/all-in-one/'${REGISTRY}'\/jaegertracing\/all-in-one/g' 3.istio-tracing.yaml
-	$ sed -i 's/docker.io\/istio\/pilot/'${REGISTRY}'\/istio\/pilot/g' 4.istio-core.yaml
+	$ sed -i 's/docker.io\/istio/'${REGISTRY}'\/istio/g' 4.istio-core.yaml
 	$ sed -i 's/docker.io\/istio\/proxyv2/'${REGISTRY}'\/istio\/proxyv2/g' 5.istio-ingressgateway.yaml
 	$ sed -i 's/docker.io/'${REGISTRY}'/g' bookinfo.yaml
 	```

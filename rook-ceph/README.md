@@ -88,18 +88,19 @@
 
   - hcsctl binary를 다운로드 합니다.
   ``` shell
-  $ wget https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/rook-ceph/hcsctl # 임시 url, github 으로 hyper-cloud storage 프로젝트 이전 후 업데이트 될 예정입니다.
+  $ wget https://github.com/tmax-cloud/hypercloud-install-guide/raw/master/rook-ceph/hcsctl # 임시 url, github 으로 hyper-cloud storage 프로젝트 이전 후 업데이트 될 예정입니다.
   ```
 
   - `cluster.yaml` [설정 안내 파일](https://github.com/tmax-cloud/hypercloud-storage/blob/master/docs/ceph-cluster-setting.md)을 다운로드 합니다.
   - `block_pool.yaml`, `block_sc.yaml` [설정 안내 파일](https://github.com/tmax-cloud/hypercloud-storage/blob/master/docs/block.md)을 다운로드 합니다.
   - `file_system.yaml`, `file_sc.yaml` [설정 안내 파일](https://github.com/tmax-cloud/hypercloud-storage/blob/master/docs/file.md)을 다운로드 합니다.
   - 메타데이터 바이스 분리 요건이 있는 경우, `cluster.yaml` 설정시 참고할 [안내 파일](https://github.com/tmax-cloud/hypercloud-storage/blob/master/docs/cluster-tuning.md)을 다운로드 합니다.
+  - 설정이 필요한 해당 yaml 파일들은 hcsctl 사용하여 inventory create 시에 생성 되며, `$inventory_name/rook/` 경로에서 찾으실 수 있습니다.
   ``` shell
-  $ wget https://github.com/tmax-cloud/hypercloud-storage/blob/master/docs/ceph-cluster-setting.md
-  $ wget https://github.com/tmax-cloud/hypercloud-storage/blob/master/docs/block.md
-  $ wget https://github.com/tmax-cloud/hypercloud-storage/blob/master/docs/file.md
-  $ wget https://github.com/tmax-cloud/hypercloud-storage/blob/master/docs/cluster-tuning.md
+  $ wget https://github.com/tmax-cloud/hypercloud-storage/raw/master/docs/ceph-cluster-setting.md
+  $ wget https://github.com/tmax-cloud/hypercloud-storage/raw/master/docs/block.md
+  $ wget https://github.com/tmax-cloud/hypercloud-storage/raw/master/docs/file.md
+  $ wget https://github.com/tmax-cloud/hypercloud-storage/raw/master/docs/cluster-tuning.md
   ```
 
 2. 위의 과정에서 생성한 tar 파일들을 폐쇄망 환경으로 이동시킨 뒤 사용하려는 registry에 이미지를 push 합니다.

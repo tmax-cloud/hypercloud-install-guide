@@ -60,7 +60,7 @@ Step 0. IPPool 설정(Static IP 전용. Static IP를 사용하지 않을 경우 
 	    		awk '/natOutgoing/' default-ipv4-ippool.yaml
 	   		```
 	    	* Command의 결과로 아래와 같이 "natOutgoing: "을 포함한 문자열이 출력되는 경우 아래 Command 실행
-			![image](figure/dockerimages.PNG)
+			![image](figure/natoutgoing.PNG)
 			```bash
 				sed -i '/natOutgoing/d' default-ipv4-ippool.yaml
 				echo '  natOutgoing: false' >> default-ipv4-ippool.yaml

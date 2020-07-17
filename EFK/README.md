@@ -89,8 +89,12 @@
     
 ## Step 2. ElasticSearch 설치
 * 목적 : `ElasticSearch 설치`
-* 생성 순서 : [02_elasticsearch.yaml](yaml/02_elasticsearch.yaml) 실행 `ex) kubectl apply -f 02_elasticsearch.yaml`
-
+* 생성 순서 : 
+    * EFK를 설치할 Namespace를 생성한다.
+	```bash
+	$ kubectl create ns kube-logging
+	```     
+    * [02_elasticsearch.yaml](yaml/02_elasticsearch.yaml) 실행 `ex) kubectl apply -f 02_elasticsearch.yaml`
 ## Step 3. kibana 설치
 * 목적 : `EFK의 UI 모듈인 kibana를 설치`
 * 생성 순서 : [03_kibana.yaml](yaml/03_kibana.yaml) 실행 `ex) kubectl apply -f 03_kibana.yaml`

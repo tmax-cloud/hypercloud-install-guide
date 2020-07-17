@@ -127,7 +127,7 @@
 	```bash
 	$ sed -i 's/quay.io\/kiali\/kiali/'${REGISTRY}'\/kiali\/kiali/g' 2.kiali.yaml
 	$ sed -i 's/docker.io\/jaegertracing\/all-in-one/'${REGISTRY}'\/jaegertracing\/all-in-one/g' 3.istio-tracing.yaml
-	$ sed -i 's/docker.io\/istio\/pilot/'${REGISTRY}'\/istio\/pilot/g' 4.istio-core.yaml
+	$ sed -i 's/docker.io\/istio/'${REGISTRY}'\/istio/g' 4.istio-core.yaml
 	$ sed -i 's/docker.io\/istio\/proxyv2/'${REGISTRY}'\/istio\/proxyv2/g' 5.istio-ingressgateway.yaml
 	$ sed -i 's/docker.io/'${REGISTRY}'/g' bookinfo.yaml
 	```

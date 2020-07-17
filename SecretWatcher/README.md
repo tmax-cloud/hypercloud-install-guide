@@ -89,9 +89,9 @@
 * 준비: 
 	* (폐쇄망 아닌 경우) `hypercloud-secret-watcher-daemonset.yaml` 내용 수정
 		*  image version 수정
-		```bash
-		$ sed -i 's/tmaxcloudck\/hypercloud4-secret-watcher:latest/tmaxcloudck\/hypercloud4-secret-watcher:'${HPCD_SW_VERSION}'/g' ${HPCD_SW_HOME}/secret-watcher-${HPCD_SW_VERSION}/k8s-install/hypercloud-secret-watcher-daemonset.yaml
-	```
+			```bash
+			$ sed -i 's/tmaxcloudck\/hypercloud4-secret-watcher:latest/tmaxcloudck\/hypercloud4-secret-watcher:'${HPCD_SW_VERSION}'/g' ${HPCD_SW_HOME}/secret-watcher-${HPCD_SW_VERSION}/k8s-install/hypercloud-secret-watcher-daemonset.yaml
+			```
 		* (b4.1.0.8 이하 버전인 경우) metadata.namespace의 값을 `hypercloud-system`이 아닌 `hypercloud4-system`으로 수정
 		```bash
 		$ vi ${HPCD_SW_HOME}/secret-watcher-${HPCD_SW_VERSION}/k8s-install/hypercloud-secret-watcher-daemonset.yaml

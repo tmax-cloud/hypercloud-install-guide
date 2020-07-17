@@ -163,16 +163,16 @@ spec:
           - name: CALICO_DATASTORE_TYPE
             value: kubernetes
           - name: CALICO_KUBECONFIG
-            value: /root/.kube/config
+            value: ${HOME}/.kube/config
           volumeMounts:
-          - mountPath: /root/.kube
+          - mountPath: ${HOME}/.kube
             name: kube-config
           securityContext:
             privileged: true
       volumes:
       - name: kube-config
         hostPath:
-          path: /root/.kube
+          path: ${HOME}/.kube
           type: Directory
       serviceAccountName: virtnodefailcontroller
       hostNetwork: true

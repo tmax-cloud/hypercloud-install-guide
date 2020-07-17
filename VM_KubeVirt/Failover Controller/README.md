@@ -38,6 +38,7 @@
   $ docker tag tmaxcloudck/kube-failover-controller:${FAILOVER_VERSION} ${DOCKER_REGISTRY}/tmaxcloudck/kube-failover-controller:${FAILOVER_VERSION}
   $ docker push ${DOCKER_REGISTRY}/tmaxcloudck/kube-failover-controller:${FAILOVER_VERSION}
   $ sed -i "s/tmaxcloudck\/kube-failover-controller:%FAILOVER_VERSION%/${DOCKER_REGISTRY}\/tmaxcloudck\/kube-failover-controller:${FAILOVER_VERSION}/g" ${FAILOVER_HOME}/yaml/failover-controller.yaml
+  $ sed -i "s@%HOME%@${HOME}@g" ${FAILOVER_HOME}/yaml/failover-controller.yaml
   ```
   
 ## Install Step:

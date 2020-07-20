@@ -1,0 +1,67 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: network-hook-deployment
+  labels:
+    app: network-hook
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: network-hook
+  template:
+    metadata:
+      labels:
+        app: network-hook
+    spec:
+      containers:
+        - name: network-hook
+          image: tmaxcloudck/network-hook:0.1.1
+          imagePullPolicy: Always
+          args:
+          - -tlsCertFile=/etc/webhook/certs/cert.pem
+          - -tlsKeyFile=/etc/webhook/certs/key.pem
+          volumeMounts:
+          - name: webhook-certs
+            mountPath: /etc/webhook/certs
+            readOnly: true
+      volumes:
+      - name: webhook-certs
+        secret:
+          secretName: network-hook-certs
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: network-hook-svc
+  labels:
+    app: network-hook
+spec:
+  ports:
+  - port: 443
+    targetPort: 8443
+  selector:
+    app: network-hook
+
+---
+apiVersion: admissionregistration.k8s.io/v1beta1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: network-hook-webhook-cfg
+  labels:
+    app: network-hook
+webhooks:
+- name: network-hook.default.svc.cluster.local
+  clientConfig:
+    service:
+      name: network-hook-svc
+      namespace: default
+      path: "/mutate"
+    caBundle: <CA_BUNDLE>
+  rules:
+  - operations: ["CREATE", "UPDATE"]
+    apiGroups: [""]
+    apiVersions: ["v1"]
+    resources: ["pods"]

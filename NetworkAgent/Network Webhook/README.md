@@ -9,7 +9,7 @@
 1. **폐쇄망에서 설치하는 경우** 사용하는 image repository에 Agent 설치 시 필요한 이미지를 push한다.     
     * 작업 디렉토리 생성 및 환경 설정
     ```bash
-    $ export NETWORK_HOOK_VERSION=0.4.2
+    $ export NETWORK_HOOK_VERSION=0.1.1
     ```
 
     * 외부 네트워크 통신이 가능한 환경에서 필요한 이미지를 다운받는다.
@@ -20,7 +20,7 @@
 
 2. 위의 과정에서 생성한 tar 파일들을 폐쇄망 환경으로 이동시킨 뒤 사용하려는 registry에 이미지를 push한다.
     ```bash
-    $ sudo docker load < tmaxcloudck_network-hook_${NETWORK_HOOK_VERSION}.tar
+    $ sudo docker load < network-hook_${NETWORK_HOOK_VERSION}.tar
     $ sudo docker tag tmaxcloudck/network-hook:${NETWORK_HOOK_VERSION} ${REGISTRY}/tmaxcloudck/network-hook:${NETWORK_HOOK_VERSION}   
     $ sudo docker push ${REGISTRY}/tmaxcloudck/network-hook:${NETWORK_HOOK_VERSION}  
     ```

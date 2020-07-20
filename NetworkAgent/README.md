@@ -3,6 +3,7 @@
 
 ## 구성 요소 및 버전
 * Hypernet-Local-Agent([tmaxcloudck/hypernet-local-agent:v0.4.2](https://hub.docker.com/repository/docker/tmaxcloudck/hypernet-local-agent))
+* Network Webhook
 ### Upgrade
 * [기존 Version에서 새로운 Version으로의 Upgrade는 이 링크를 참고해주세요.](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/NetworkAgent/UPGRADE.md)
 ## Prerequisites
@@ -11,6 +12,8 @@
     * Agent가 동작하기 위해선 Calico CNI가 설치 되어 있어야합니다.
     * 현재 Calico 이외의 CNI는 지원하지 않습니다.
 3. Calicoctl ( 3.15.0 <= )
+4. Network Webhook (0.1.1 <= )
+    * 시스템 Pod들이 Static IP Pool Resource로 부터 자동 할당받지 않기 위해서 필요한 Component입니다.
 
 ## 폐쇄망 설치 가이드
 설치를 진행하기 전 아래의 과정을 통해 필요한 이미지 및 yaml 파일을 준비한다.

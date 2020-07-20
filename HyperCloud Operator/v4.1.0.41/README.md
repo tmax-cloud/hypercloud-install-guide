@@ -19,7 +19,7 @@
 	$ cd ${HPCD_HOME}
 
 	* <tag1>에는 설치할 hypercloud-operator 버전 명시
-		예시: $ export HPCD_VERSION=4.1.0.35
+		예시: $ export HPCD_VERSION=4.1.0.41
     ```
     * 외부 네트워크 통신이 가능한 환경에서 필요한 이미지를 다운받는다.
     ```bash
@@ -50,7 +50,7 @@
 	$ cd ${HPCD_HOME}
 
 	* <tag1>에는 설치할 hypercloud-operator 버전 명시
-		예시: $ export HPCD_VERSION=4.1.0.35
+		예시: $ export HPCD_VERSION=4.1.0.41
 	* <REGISTRY_IP_PORT>에는 폐쇄망 Docker Registry IP:PORT명시
 		예시: $ export REGISTRY=192.168.6.110:5000
 	```

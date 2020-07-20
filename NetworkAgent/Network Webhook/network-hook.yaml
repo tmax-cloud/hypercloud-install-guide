@@ -3,6 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: network-hook-deployment
+  namespace: hypernet-local-agent-system
   labels:
     app: network-hook
 spec:
@@ -18,7 +19,6 @@ spec:
       containers:
         - name: network-hook
           image: tmaxcloudck/network-hook:0.1.1
-          imagePullPolicy: Always
           args:
           - -tlsCertFile=/etc/webhook/certs/cert.pem
           - -tlsKeyFile=/etc/webhook/certs/key.pem
@@ -36,6 +36,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: network-hook-svc
+  namespace: hypernet-local-agent-system
   labels:
     app: network-hook
 spec:
@@ -53,11 +54,11 @@ metadata:
   labels:
     app: network-hook
 webhooks:
-- name: network-hook.default.svc.cluster.local
+- name: network-hook.hypernet-local-agent-system.svc.cluster.local
   clientConfig:
     service:
       name: network-hook-svc
-      namespace: default
+      namespace: hypernet-local-agent-system
       path: "/mutate"
     caBundle: <CA_BUNDLE>
   rules:

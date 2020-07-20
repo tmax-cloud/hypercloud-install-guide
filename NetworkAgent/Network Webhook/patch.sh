@@ -43,7 +43,7 @@ done
 
 [ -z ${service} ] && service=network-hook-svc
 [ -z ${secret} ] && secret=network-hook-certs
-[ -z ${namespace} ] && namespace=default
+[ -z ${namespace} ] && namespace=hypernet-local-agent-system
 
 if [ ! -x "$(command -v openssl)" ]; then
     echo "openssl not found"

@@ -19,15 +19,19 @@
 ## 폐쇄망 설치 가이드
 설치를 진행하기 전 아래의 과정을 통해 필요한 이미지 및 yaml 파일을 준비한다.
 1. **폐쇄망에서 설치하는 경우** 사용하는 image repository에 Agent 설치 시 필요한 이미지를 push한다.     
-    * 작업 디렉토리 생성 및 환경 설정
+    * 작업 디렉토리 생성 및 환경 설정(REGISTRY에는 각 환경에 맞는 IP:PORT 입력)
     ```bash
     $ export HYPERNET_LOCAL_AGENT_VERSION=0.4.2
+	$ export REGISTRY=172.22.8.106:5000
     ```
 
-    * 외부 네트워크 통신이 가능한 환경에서 필요한 이미지를 다운받는다.
+    * 외부 네트워크 통신이 가능한 환경에서 필요한 이미지 및 yaml 파일을 다운받는다.
     ```bash
     $ sudo docker pull tmaxcloudck/hypernet-local-agent:${HYPERNET_LOCAL_AGENT_VERSION}
     $ sudo docker save tmaxcloudck/hypernet-local-agent:${HYPERNET_LOCAL_AGENT_VERSION} > hypernet-local-agent_${HYPERNET_LOCAL_AGENT_VERSION}.tar
+	$ curl https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/NetworkAgent/public-ipv4-ippool.yaml > public-ipv4-ippool.yaml
+	$ curl https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/NetworkAgent/floatingIp.yaml > floatingIp.yaml
+	$ curl https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/NetworkAgent/hypernet-local-agent.yaml > hypernet-local-agent.yaml
     ```
 
 2. 위의 과정에서 생성한 tar 파일들을 폐쇄망 환경으로 이동시킨 뒤 사용하려는 registry에 이미지를 push한다.
@@ -36,7 +40,11 @@
     $ sudo docker tag tmaxcloudck/hypernet-local-agent:${HYPERNET_LOCAL_AGENT_VERSION} ${REGISTRY}/tmaxcloudck/hypernet-local-agent:${HYPERNET_LOCAL_AGENT_VERSION}   
     $ sudo docker push ${REGISTRY}/tmaxcloudck/hypernet-local-agent:${HYPERNET_LOCAL_AGENT_VERSION}  
     ```
-    
+3. hypernet-local-agent.yaml의 Registry 정보 추가
+	```bash
+	$ sed -i 's/tmaxcloudck\/hypernet-local-agent/'${REGISTRY}'\/tmaxcloudck\/hypernet-local-agent/g' hypernet-local-agent.yaml
+	```
+	
 ## Install Steps
 0. [Static IP 사용을 위한 IPPool 설정](#step0 "step0")
 1. [Floating IP 사용을 위한 IPPool 설정](#step1 "step1")

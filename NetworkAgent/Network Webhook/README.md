@@ -4,8 +4,6 @@
 ## 구성 요소 및 버전
 * Network Webhook([tmaxcloudck/network-hook:v0.1.1](https://hub.docker.com/repository/docker/tmaxcloudck/network-hook))
 
-### Upgrade
-* [기존 Version에서 새로운 Version으로의 Upgrade는 이 링크를 참고해주세요.](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/NetworkAgent/UPGRADE.md)
 ## Prerequisites
 1. Kubernetest ( 1.15.0 <= )
 2. Calico ( 3.13.4 <= )

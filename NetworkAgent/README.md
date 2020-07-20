@@ -36,7 +36,7 @@
 
 2. 위의 과정에서 생성한 tar 파일들을 폐쇄망 환경으로 이동시킨 뒤 사용하려는 registry에 이미지를 push한다.
     ```bash
-    $ sudo docker load < tmaxcloudck_hypernet-local-agent_${HYPERNET_LOCAL_AGENT_VERSION}.tar
+    $ sudo docker load < hypernet-local-agent_${HYPERNET_LOCAL_AGENT_VERSION}.tar
     $ sudo docker tag tmaxcloudck/hypernet-local-agent:${HYPERNET_LOCAL_AGENT_VERSION} ${REGISTRY}/tmaxcloudck/hypernet-local-agent:${HYPERNET_LOCAL_AGENT_VERSION}   
     $ sudo docker push ${REGISTRY}/tmaxcloudck/hypernet-local-agent:${HYPERNET_LOCAL_AGENT_VERSION}  
     ```
@@ -143,7 +143,7 @@ Step 1. IPPool 설정(Floating IP 전용. Floating IP를 사용하지 않을 경
 	    
             * floatingIp.yaml의 내용을 아래 커맨드를 통해 K8S에 적용
 	   		```bash
-	    		kubectl apply floatingIp.yaml
+	    		kubectl apply -f floatingIp.yaml
 	    	```
 	    
 <h2 id="step2">
@@ -161,7 +161,7 @@ Step 2. Hypernet-Local-Agent 설치
             * 만약 Pod가 사용하는 IP Pool의 이름이 "default-ipv4-ippool"이 아니라면 Hypernet-Local-Agent.yaml에 환경변수("POD_IPPOOL_NAME")로 넣어주어야함
     * Hypernet-Local-Agent 설치
 	    ```bash
-	        kubectl apply hypernet-local-agent.yaml
+	        kubectl apply -f hypernet-local-agent.yaml
 	    ```
 	
 

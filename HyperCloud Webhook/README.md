@@ -50,7 +50,7 @@
     
     $ sudo mv jre1.8.0_251 /usr/local/java/
     
-    $ sudo echo 'export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")' >> /etc/profile
+    $ sudo /bin/su -c "echo 'export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")' >> /etc/profile"
     
     $ sudo update-alternatives --install "/usr/bin/keytool" "keytool" "/usr/local/java/jre1.8.0_251/bin/keytool" 1;
     

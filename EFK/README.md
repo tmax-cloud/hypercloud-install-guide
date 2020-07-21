@@ -5,7 +5,7 @@
 * elasticsearch ([docker.elastic.co/elasticsearch/elasticsearch:7.2.0](https://www.docker.elastic.co/r/elasticsearch/elasticsearch:7.2.0))
 * kibana ([docker.elastic.co/kibana/kibana:7.2.0](https://www.docker.elastic.co/r/kibana/kibana?limit=50&offset=0&show_snapshots=false))
 * fluentd ([fluent/fluentd-kubernetes-daemonset:v1.4.2-debian-elasticsearch-1.1](https://hub.docker.com/layers/fluent/fluentd-kubernetes-daemonset/v1.4.2-debian-elasticsearch-1.1/images/sha256-ce4885865850d3940f5e5318066897b8502c0b955066392de7fd4ef6f1fd4275?context=explore))
-
+* busybox ([busybox:1.32.0](https://hub.docker.com/layers/busybox/library/busybox/1.32.0/images/sha256-414aeb860595d7078cbe87abaeed05157d6b44907fbd7db30e1cfba9b6902448?context=explore))
 ## Prerequisites
 
 ## 폐쇄망 설치 가이드
@@ -19,6 +19,7 @@
     $ export ES_VERSION=7.2.0
     $ export KIBANA_VERSION=7.2.0
     $ export FLUENTD_VERSION=v1.4.2-debian-elasticsearch-1.1
+    $ export BUSYBOX_VERSION=1.32.0
     $ cd $EFK_HOME
     ```
     * 외부 네트워크 통신이 가능한 환경에서 필요한 이미지를 다운받는다.
@@ -28,7 +29,9 @@
     $ sudo docker pull docker.elastic.co/kibana/kibana:${KIBANA_VERSION}
     $ sudo docker save docker.elastic.co/kibana/kibana:${KIBANA_VERSION} > kibana_${KIBANA_VERSION}.tar
     $ sudo docker pull fluent/fluentd-kubernetes-daemonset:${FLUENTD_VERSION}
-    $ sudo docker save fluent/fluentd-kubernetes-daemonset:${FLUENTD_VERSION} > fluentd_${${FLUENTD_VERSION}}.tar
+    $ sudo docker save fluent/fluentd-kubernetes-daemonset:${FLUENTD_VERSION} > fluentd_${FLUENTD_VERSION}.tar
+    $ sudo docker pull busybox:${BUSYBOX_VERSION}
+    $ sudo docker save busybox:${BUSYBOX_VERSION} > busybox_${BUSYBOX_VERSION}.tar
     ```
     * install yaml을 다운로드한다.
     ```bash
@@ -40,14 +43,17 @@
     $ sudo docker load < elasticsearch_${ES_VERSION}.tar
     $ sudo docker load < kibana_${KIBANA_VERSION}.tar
     $ sudo docker load < fluentd_${FLUENTD_VERSION}.tar
+    $ sudo docker load < busybox_${BUSYBOX_VERSION}.tar
     
     $ sudo docker tag docker.elastic.co/elasticsearch/elasticsearch:${ES_VERSION} ${REGISTRY}/elasticsearch/elasticsearch:${ES_VERSION}
     $ sudo docker tag docker.elastic.co/kibana/kibana:${KIBANA_VERSION} ${REGISTRY}/kibana/kibana:${KIBANA_VERSION}
     $ sudo docker tag fluent/fluentd-kubernetes-daemonset:${FLUENTD_VERSION} ${REGISTRY}/fluentd-kubernetes-daemonset:${FLUENTD_VERSION}
+    $ sudo docker tag busybox:${BUSYBOX_VERSION} ${REGISTRY}/busybox:${BUSYBOX_VERSION}
     
     $ sudo docker push ${REGISTRY}/elasticsearch/elasticsearch:${ES_VERSION}
     $ sudo docker push ${REGISTRY}/kibana/kibana:${KIBANA_VERSION}
     $ sudo docker push ${REGISTRY}/fluentd-kubernetes-daemonset:${FLUENTD_VERSION}
+    $ sudo docker push ${REGISTRY}/busybox:${BUSYBOX_VERSION}
     ```
 
 ## Install Steps
@@ -106,3 +112,6 @@
 ## Step 4. fluentd 설치
 * 목적 : `EFK의 agent daemon 역할을 수행하는 fluentd를 설치`
 * 생성 순서 : [04_fluentd.yaml](yaml/04_fluentd.yaml) 실행 `ex) kubectl apply -f 04_fluentd.yaml`
+* 비고 :
+    * 만약 해당 Kube 환경의 Container Runtime이 Docker가 아니라 CRI-O를 사용할 경우, [04_fluentd_cri-o.yaml](yaml/04_fluentd_cri-o.yaml) 실행 `ex) kubectl apply -f 04_fluentd_cri-o.yaml`
+

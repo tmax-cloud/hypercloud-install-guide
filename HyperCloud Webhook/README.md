@@ -69,12 +69,11 @@
 
 ## Step 0. hypercloud-webhook yaml 수정
 * 목적 : `hypercloud-webhook yaml에 이미지 registry, 버전 및 마스터 노드 정보를 수정`
-* 생성 순서 : 
-    * 아래의 command를 사용하여 사용하고자 하는 image 버전을 수정한다.
-	```bash
-	$ sed -i 's/{webhook_version}/'${WEBHOOK_VERSION}'/g' 03_webhook-deployment.yaml
-	$ sed -i 's/{hostname}/'${HOSTNAME}'/g' 03_webhook-deployment.yaml
-	```
+* 생성 순서 : 아래의 command를 실행하여 사용하고자 하는 image 버전을 수정한다. ([03_webhook-deployment.yaml](manifests/03_webhook-deployment.yaml)
+    ```bash
+    $ sed -i 's/{webhook_version}/'${WEBHOOK_VERSION}'/g' 03_webhook-deployment.yaml
+    $ sed -i 's/{hostname}/'${HOSTNAME}'/g' 03_webhook-deployment.yaml
+    ```
 * 비고 :tmaxcloudck/hypercloud-webhook
     * `폐쇄망에서 설치를 진행하여 별도의 image registry를 사용하는 경우 registry 정보를 추가로 설정해준다.`
 	```bash
@@ -85,14 +84,14 @@
 * 생성 순서 : 아래의 command를 실행하여 CA 인증서를 생성한다. ([01_gen_certs.sh](manifests/01_gen_certs.sh))
     ```bash
     $ mkdir ./pki
-    $ ./01_gen_certs.sh
+    $ sh 01_gen_certs.sh
     $ openssl pkcs12 -export -in ./pki/hypercloud4-webhook.crt -inkey ./pki/hypercloud4-webhook.key -out ./pki/hypercloud4-webhook.p12 (Export Password: tmax@23)
     $ keytool -importkeystore -deststorepass tmax@23 -destkeypass tmax@23 -destkeystore ./pki/hypercloud4-webhook.jks -srckeystore ./pki/hypercloud4-webhook.p12 -srcstoretype PKCS12 -srcstorepass tmax@23
     ```
 
 ## Step 2. Secret 생성
 * 목적 : `Step 1을 통해 생성한 인증서를 Secret으로 변환합니다`
-* 생성 순서 : [02_create_secret.sh](manifests/02_create_secret.sh) 실행 `ex) ./02_create_secret.sh`
+* 생성 순서 : [02_create_secret.sh](manifests/02_create_secret.sh) 실행 `ex) sh 02_create_secret.sh`
 
 
 ## Step 3. HyperCloud Webhook Server 설치
@@ -105,7 +104,7 @@
 * 생성 순서 : 아래의 command를 실행하여 Webhook Config를 생성한다. ([04_gen-webhook-config.sh](manifests/04_gen-webhook-config.sh))
     ```bash
     $ export ADM_VERSION="v1/v1beta1" (Kuberntes 버전이 v1.16 이상이면 v1, v1.16 미만이면 v1beta1 정의)
-    $ ./04_gen-webhook-config.sh
+    $ sh 04_gen-webhook-config.sh
     ```
 
 

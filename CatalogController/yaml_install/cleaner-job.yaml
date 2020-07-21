@@ -6,7 +6,7 @@ metadata:
   labels:
     clean-job: "true"
     app: catalog-catalog
-    chart: "catalog-0.3.0-beta.2"
+    chart: "catalog-0.3.0"
     release: "catalog"
     heritage: "Tiller"
 
@@ -18,7 +18,7 @@ metadata:
   labels:
     clean-job: "true"
     app: catalog-catalog
-    chart: "catalog-0.3.0-beta.2"
+    chart: "catalog-0.3.0"
     release: "catalog"
     heritage: "Tiller"
 rules:
@@ -51,7 +51,7 @@ metadata:
   labels:
     clean-job: "true"
     app: catalog-catalog
-    chart: "catalog-0.3.0-beta.2"
+    chart: "catalog-0.3.0"
     release: "catalog"
     heritage: "Tiller"
 subjects:
@@ -71,7 +71,7 @@ metadata:
   namespace: catalog
   labels:
     app: catalog-catalog
-    chart: "catalog-0.3.0-beta.2"
+    chart: "catalog-0.3.0"
     release: "catalog"
     heritage: "Tiller"
   annotations:
@@ -84,7 +84,7 @@ spec:
       labels:
         cleaner-job: "true"
         app: catalog-catalog-clean-job
-        chart: "catalog-0.3.0-beta.2"
+        chart: "catalog-0.3.0"
         release: "catalog"
         heritage: "Tiller"
     spec:

@@ -266,7 +266,7 @@ metadata:
   namespace: "catalog"
   labels:
     app: catalog-catalog-webhook
-    chart: "catalog-0.3.0-beta.2"
+    chart: "catalog-0.3.0"
     release: "catalog"
     heritage: "Tiller"
 type: Opaque

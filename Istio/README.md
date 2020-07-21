@@ -6,6 +6,13 @@
 * istio-ingressgateway ([docker.io/istio/proxyv2:1.5.1](https://hub.docker.com/layers/istio/proxyv2/1.5.1/images/sha256-3ad9ee2b43b299e5e6d97aaea5ed47dbf3da9293733607d9b52f358313e852ae?context=explore))
 * istio-tracing ([docker.io/jaegertracing/all-in-one:1.16](https://hub.docker.com/layers/jaegertracing/all-in-one/1.16/images/sha256-738442983b772a5d413c8a2c44a5563956adaff224e5b38f52a959124dafc119?context=explore))
 * kiali ([quay.io/kiali/kiali:v1.20](https://quay.io/repository/kiali/kiali?tab=tags))
+* bookinfo example
+    * productpage([docker.io/istio/examples-bookinfo-productpage-v1:1.15.0](https://hub.docker.com/layers/istio/examples-bookinfo-productpage-v1/1.15.0/images/sha256-0a5eb4795952372251d51f72834bccb7ea01a67cb72fd9b58b757cca103b7524?context=explore))
+    * details([docker.io/istio/examples-bookinfo-details-v1:1.15.0](https://hub.docker.com/layers/istio/examples-bookinfo-details-v1/1.15.0/images/sha256-fce0bcbff0bed09116dacffca15695cd345e0c3788c15b0114a05f654ddecc17?context=explore))
+    * ratings([docker.io/istio/examples-bookinfo-ratings-v1:1.15.0](https://hub.docker.com/layers/istio/examples-bookinfo-ratings-v1/1.15.0/images/sha256-09b9d6958a13ad1a97377b7d5c2aa9e0372c008cdf5a44ce3e72fbd9660936cf?context=explore))
+    * reviews-v1([docker.io/istio/examples-bookinfo-reviews-v1:1.15.0](https://hub.docker.com/layers/istio/examples-bookinfo-reviews-v1/1.15.0/images/sha256-40e8aba77c1b46f37e820a60aa6948485d39e6f55f1492fa1f17383efd95511c?context=explore))
+    * reviews-v2([docker.io/istio/examples-bookinfo-reviews-v2:1.15.0](https://hub.docker.com/layers/istio/examples-bookinfo-reviews-v2/1.15.0/images/sha256-e86d247b7ac275eb681a7e9c869325762686ccf0b5cfb6bde100ff2c1f01ae2b?context=explore))
+    * reviews-v3([docker.io/istio/examples-bookinfo-reviews-v3:1.15.0](https://hub.docker.com/layers/istio/examples-bookinfo-reviews-v3/1.15.0/images/sha256-e454cab754cf9234e8b41d7c5e30f53a4c125d7d9443cb3ef2b2eb1c4bd1ec14?context=explore))
 
 ## Prerequisites
 
@@ -20,6 +27,7 @@
     $ export ISTIO_VERSION=1.5.1
     $ export JAEGER_VERSION=1.16
     $ export KIALI_VERSION=v1.20
+    $ export REGISTRY=[IP:PORT]
     $ cd $ISTIO_HOME
     ```
     * 외부 네트워크 통신이 가능한 환경에서 필요한 이미지를 다운받는다.
@@ -32,10 +40,29 @@
     $ sudo docker save jaegertracing/all-in-one:${JAEGER_VERSION} > jaeger_${JAEGER_VERSION}.tar
     $ sudo docker pull quay.io/kiali/kiali:${KIALI_VERSION}
     $ sudo docker save quay.io/kiali/kiali:${KIALI_VERSION} > kiali_${KIALI_VERSION}.tar
+    // bookinfo example images
+    $ sudo docker pull istio/examples-bookinfo-productpage-v1:1.15.0
+    $ sudo docker pull istio/examples-bookinfo-details-v1:1.15.0
+    $ sudo docker pull istio/examples-bookinfo-ratings-v1:1.15.0
+    $ sudo docker pull istio/examples-bookinfo-reviews-v1:1.15.0
+    $ sudo docker pull istio/examples-bookinfo-reviews-v2:1.15.0
+    $ sudo docker pull istio/examples-bookinfo-reviews-v3:1.15.0
+    $ sudo docker save istio/examples-bookinfo-productpage-v1:1.15.0 > productpage.tar
+    $ sudo docker save istio/examples-bookinfo-details-v1:1.15.0 > details.tar
+    $ sudo docker save istio/examples-bookinfo-ratings-v1:1.15.0 > ratings.tar
+    $ sudo docker save istio/examples-bookinfo-reviews-v1:1.15.0 > reviews-v1.tar
+    $ sudo docker save istio/examples-bookinfo-reviews-v2:1.15.0 > reviews-v2.tar
+    $ sudo docker save istio/examples-bookinfo-reviews-v3:1.15.0 > reviews-v3.tar
     ```
     * install yaml을 다운로드한다.
     ```bash
-    $ wget -O hypercloud-install.tar.gz https://github.com/tmax-cloud/hypercloud-install-guide/archive/v${INSTALL_GUIDE_VERSION}.tar.gz
+    $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/Istio/yaml/1.istio-base.yaml
+    $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/Istio/yaml/2.kiali.yaml
+    $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/Istio/yaml/3.istio-tracing.yaml
+    $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/Istio/yaml/4.istio-core.yaml
+    $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/Istio/yaml/5.istio-ingressgateway.yaml
+    $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/Istio/yaml/6.istio-metric.yaml
+    $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/Istio/yaml/bookinfo.yaml
     ```
   
 2. 위의 과정에서 생성한 tar 파일들을 폐쇄망 환경으로 이동시킨 뒤 사용하려는 registry에 이미지를 push한다.
@@ -44,16 +71,34 @@
     $ sudo docker load < istio-proxyv2_${ISTIO_VERSION}.tar
     $ sudo docker load < jaeger_${JAEGER_VERSION}.tar
     $ sudo docker load < kiali_${KIALI_VERSION}.tar
+    $ sudo docker load < productpage.tar
+    $ sudo docker load < details.tar
+    $ sudo docker load < ratings.tar
+    $ sudo docker load < reviews-v1.tar
+    $ sudo docker load < reviews-v2.tar
+    $ sudo docker load < reviews-v3.tar
     
     $ sudo docker tag istio/pilot:${ISTIO_VERSION} ${REGISTRY}/istio/pilot:${ISTIO_VERSION}
     $ sudo docker tag istio/proxyv2:${ISTIO_VERSION} ${REGISTRY}/istio/proxyv2:${ISTIO_VERSION}
     $ sudo docker tag jaegertracing/all-in-one:${JAEGER_VERSION} ${REGISTRY}/jaegertracing/all-in-one:${JAEGER_VERSION}
     $ sudo docker tag quay.io/kiali/kiali:${KIALI_VERSION} ${REGISTRY}/kiali/kiali:${KIALI_VERSION}
+    $ sudo docker tag istio/examples-bookinfo-productpage-v1:1.15.0 ${REGISTRY}/istio/examples-bookinfo-productpage-v1:1.15.0
+    $ sudo docker tag istio/examples-bookinfo-details-v1:1.15.0 ${REGISTRY}/istio/examples-bookinfo-details-v1:1.15.0
+    $ sudo docker tag istio/examples-bookinfo-ratings-v1:1.15.0 ${REGISTRY}/istio/examples-bookinfo-ratings-v1:1.15.0
+    $ sudo docker tag istio/examples-bookinfo-reviews-v1:1.15.0 ${REGISTRY}/istio/examples-bookinfo-reviews-v1:1.15.0
+    $ sudo docker tag istio/examples-bookinfo-reviews-v2:1.15.0 ${REGISTRY}/istio/examples-bookinfo-reviews-v2:1.15.0
+    $ sudo docker tag istio/examples-bookinfo-reviews-v3:1.15.0 ${REGISTRY}/istio/examples-bookinfo-reviews-v3:1.15.0
     
     $ sudo docker push ${REGISTRY}/istio/pilot:${ISTIO_VERSION}
     $ sudo docker push ${REGISTRY}/istio/proxyv2:${ISTIO_VERSION}
     $ sudo docker push ${REGISTRY}/jaegertracing/all-in-one:${JAEGER_VERSION}
-    $ sudo docker push ${REGISTRY}/quay.io/kiali/kiali:${KIALI_VERSION}
+    $ sudo docker push ${REGISTRY}/kiali/kiali:${KIALI_VERSION}
+    $ sudo docker push ${REGISTRY}/istio/examples-bookinfo-productpage-v1:1.15.0
+    $ sudo docker push ${REGISTRY}/istio/examples-bookinfo-details-v1:1.15.0
+    $ sudo docker push ${REGISTRY}/istio/examples-bookinfo-ratings-v1:1.15.0
+    $ sudo docker push ${REGISTRY}/istio/examples-bookinfo-reviews-v1:1.15.0
+    $ sudo docker push ${REGISTRY}/istio/examples-bookinfo-reviews-v2:1.15.0
+    $ sudo docker push ${REGISTRY}/istio/examples-bookinfo-reviews-v3:1.15.0
     ```
 
 
@@ -83,8 +128,9 @@
 	```bash
 	$ sed -i 's/quay.io\/kiali\/kiali/'${REGISTRY}'\/kiali\/kiali/g' 2.kiali.yaml
 	$ sed -i 's/docker.io\/jaegertracing\/all-in-one/'${REGISTRY}'\/jaegertracing\/all-in-one/g' 3.istio-tracing.yaml
-	$ sed -i 's/docker.io\/istio\/pilot/'${REGISTRY}'\/istio\/pilot/g' 4.istio-core.yaml
+	$ sed -i 's/docker.io\/istio/'${REGISTRY}'\/istio/g' 4.istio-core.yaml
 	$ sed -i 's/docker.io\/istio\/proxyv2/'${REGISTRY}'\/istio\/proxyv2/g' 5.istio-ingressgateway.yaml
+	$ sed -i 's/docker.io/'${REGISTRY}'/g' bookinfo.yaml
 	```
 
 ## Step 1. istio namespace 및 customresourcedefinition 생성

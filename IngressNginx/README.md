@@ -27,7 +27,7 @@
     ```
     * install yaml을 다운로드한다.
     ```bash
-    $ wget -O hypercloud-install.tar.gz https://github.com/tmax-cloud/hypercloud-install-guide/archive/v${INSTALL_GUIDE_VERSION}.tar.gz
+    $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/IngressNginx/yaml/deploy.yaml
     ```
   
 2. 위의 과정에서 생성한 tar 파일들을 폐쇄망 환경으로 이동시킨 뒤 사용하려는 registry에 이미지를 push한다.
@@ -36,7 +36,7 @@
     $ sudo docker load < kube-webhook-certgen_${KUBE_WEBHOOK_CERTGEN_VERSION}.tar
     
     $ sudo docker tag quay.io/kubernetes-ingress-controller/nginx-ingress-controller:${NGINX_INGRESS_VERSION} ${REGISTRY}/kubernetes-ingress-controller/nginx-ingress-controller:${NGINX_INGRESS_VERSION}
-    $ sudo docker tag jettech/kube-webhook-certgen:${KUBE_WEBHOOK_CERTGEN_VERSION} ${REGISTRY}/istio/proxyv2:${KUBE_WEBHOOK_CERTGEN_VERSION}
+    $ sudo docker tag jettech/kube-webhook-certgen:${KUBE_WEBHOOK_CERTGEN_VERSION} ${REGISTRY}/jettech/kube-webhook-certgen:${KUBE_WEBHOOK_CERTGEN_VERSION}
     
     $ sudo docker push ${REGISTRY}/kubernetes-ingress-controller/nginx-ingress-controller:${NGINX_INGRESS_VERSION}
     $ sudo docker push ${REGISTRY}/jettech/kube-webhook-certgen:${KUBE_WEBHOOK_CERTGEN_VERSION}

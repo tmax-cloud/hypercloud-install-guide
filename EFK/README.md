@@ -10,7 +10,7 @@
 
 ## 폐쇄망 설치 가이드
 설치를 진행하기 전 아래의 과정을 통해 필요한 이미지 및 yaml 파일을 준비한다.
-1. **폐쇄망에서 설치하는 경우** 사용하는 image repository에 istio 설치 시 필요한 이미지를 push한다. 
+1. **폐쇄망에서 설치하는 경우** 사용하는 image repository에 EFK 설치 시 필요한 이미지를 push한다. 
 
     * 작업 디렉토리 생성 및 환경 설정
     ```bash
@@ -19,7 +19,7 @@
     $ export ES_VERSION=7.2.0
     $ export KIBANA_VERSION=7.2.0
     $ export FLUENTD_VERSION=v1.4.2-debian-elasticsearch-1.1
-    $ cd $ISTIO_HOME
+    $ cd $EFK_HOME
     ```
     * 외부 네트워크 통신이 가능한 환경에서 필요한 이미지를 다운받는다.
     ```bash
@@ -39,7 +39,7 @@
     ```bash
     $ sudo docker load < elasticsearch_${ES_VERSION}.tar
     $ sudo docker load < kibana_${KIBANA_VERSION}.tar
-    $ sudo docker load < fluentd_${${FLUENTD_VERSION}}.tar
+    $ sudo docker load < fluentd_${FLUENTD_VERSION}.tar
     
     $ sudo docker tag docker.elastic.co/elasticsearch/elasticsearch:${ES_VERSION} ${REGISTRY}/elasticsearch/elasticsearch:${ES_VERSION}
     $ sudo docker tag docker.elastic.co/kibana/kibana:${KIBANA_VERSION} ${REGISTRY}/kibana/kibana:${KIBANA_VERSION}
@@ -89,13 +89,18 @@
     
 ## Step 2. ElasticSearch 설치
 * 목적 : `ElasticSearch 설치`
-* 생성 순서 : [02_elasticsearch.yaml](yaml/02_elasticsearch.yaml) 실행 `ex) kubectl apply -f 02_elasticsearch.yaml`
-
+* 생성 순서 : 
+    * EFK를 설치할 Namespace를 생성한다.
+	```bash
+	$ kubectl create ns kube-logging
+	```     
+    * [02_elasticsearch.yaml](yaml/02_elasticsearch.yaml) 실행 `ex) kubectl apply -f 02_elasticsearch.yaml`
 ## Step 3. kibana 설치
 * 목적 : `EFK의 UI 모듈인 kibana를 설치`
 * 생성 순서 : [03_kibana.yaml](yaml/03_kibana.yaml) 실행 `ex) kubectl apply -f 03_kibana.yaml`
 * 비고 :
     * kibana pod가 running임을 확인한 뒤 http://$KIBANA_URL에 접속해 정상 동작을 확인한다.
+    * $KIBANA_URL은 `kubectl get svc -n kube-logging | grep kibana`를 통해 조회 가능
 ![image](figure/kibana-ui.png)   
 
 ## Step 4. fluentd 설치

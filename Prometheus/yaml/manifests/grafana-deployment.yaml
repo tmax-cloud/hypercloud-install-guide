@@ -16,7 +16,7 @@ spec:
         app: grafana
     spec:
       containers:
-      - image: ${REGISTRY}/grafana/grafana:${GRAFANA_VERSION}
+      - image: grafana/grafana:{GRAFANA_VERSION}
         name: grafana
         ports:
         - containerPort: 3000

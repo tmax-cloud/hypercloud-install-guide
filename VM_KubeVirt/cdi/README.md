@@ -31,7 +31,7 @@
   $ mkdir -p ~/cdi-install
   $ export CDI_HOME=~/cdi-install
   $ export CDI_VERSION=v1.18.0
-  $ cd $CDI_VERSION
+  $ cd $CDI_HOME
   ```
 
   - 외부 네트워크 통신이 가능한 환경에서 필요한 이미지를 다운로드 합니다.
@@ -56,7 +56,7 @@
   - hcsctl binary를 다운로드 합니다.
     - rook 설치 과정에서 이미 다운로드 했다면, 필요하지 않습니다.
   ``` shell
-  $ wget https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/rook-ceph/hcsctl # 임시 url, github 으로 hyper-cloud storage 프로젝트 이전 후 업데이트 될 예정입니다.
+  $ wget https://github.com/tmax-cloud/hypercloud-install-guide/raw/master/rook-ceph/hcsctl # 임시 url, github 으로 hyper-cloud storage 프로젝트 이전 후 업데이트 될 예정입니다.
   ```
 
 2. 위의 과정에서 생성한 tar 파일들을 폐쇄망 환경으로 이동시킨 뒤 사용하려는 registry에 이미지를 push 합니다.

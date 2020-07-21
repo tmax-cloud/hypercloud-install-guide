@@ -7,7 +7,7 @@ metadata:
   namespace: monitoring
 spec:
   storage:
-    volumeclaimTemplate:
+    volumeClaimTemplate:
       spec:
         resources:
           requests:
@@ -18,7 +18,7 @@ spec:
     - name: alertmanager-main
       namespace: monitoring
       port: web
-  baseImage: ${REGISTRY}/quay.io/prometheus/prometheus:${PROMETHEUS_VERSION}
+  image: quay.io/prometheus/prometheus:{PROMETHEUS_VERSION}
   nodeSelector:
     kubernetes.io/os: linux
   podMonitorSelector: {}
@@ -37,4 +37,4 @@ spec:
   serviceAccountName: prometheus-k8s
   serviceMonitorNamespaceSelector: {}
   serviceMonitorSelector: {}
-  version: v2.11.0
+  version: {PROMETHEUS_VERSION}

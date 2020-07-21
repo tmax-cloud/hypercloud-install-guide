@@ -2,6 +2,7 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: catalog-catalog-controller-manager
+  namespace: catalog
   labels:
     app: catalog-catalog
     chart: "catalog-0.3.0-beta.2"

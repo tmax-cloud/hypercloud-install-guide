@@ -35,9 +35,10 @@
   * failover-controller.tar를 docker-registry에 배포 한다.
   ```sh
   $ docker load -i failover-controller.tar 
-  $ docker tag kubevirt-node-fail-controller:${FAILOVER_VERSION} ${DOCKER_REGISTRY}/kubevirt-node-fail-controller:${FAILOVER_VERSION}
-  $ docker push ${DOCKER_REGISTRY}/kubevirt-node-fail-controller:${FAILOVER_VERSION}
-  $ sed -i "s/kubevirt-node-fail-controller:$FAILOVER_VERSION/$DOCKER_REGISTRY\/kubevirt-node-fail-controller:$FAILOVER_VERSION/g" $FAILOVER_HOME/yaml/kubevirt-node-fail-controller.yaml
+  $ docker tag tmaxcloudck/kube-failover-controller:${FAILOVER_VERSION} ${DOCKER_REGISTRY}/tmaxcloudck/kube-failover-controller:${FAILOVER_VERSION}
+  $ docker push ${DOCKER_REGISTRY}/tmaxcloudck/kube-failover-controller:${FAILOVER_VERSION}
+  $ sed -i "s/tmaxcloudck\/kube-failover-controller:%FAILOVER_VERSION%/${DOCKER_REGISTRY}\/tmaxcloudck\/kube-failover-controller:${FAILOVER_VERSION}/g" ${FAILOVER_HOME}/yaml/failover-controller.yaml
+  $ sed -i "s@%HOME%@${HOME}@g" ${FAILOVER_HOME}/yaml/failover-controller.yaml
   ```
   
 ## Install Step:
@@ -51,7 +52,7 @@
 
 ```sh
 
-$ kubectl apply -f kubevirt-node-fail-controller.yaml
+$ kubectl apply -f failover-controller.yaml
 ```
 # Step 2. Controller 확인:
 
@@ -67,7 +68,7 @@ $ kubectl get pods -n kubevirt-system
 
 You can clean up the created Controller with:
 
-    kubectl delete -f manifests/kubevirt-node-fail-controller.yaml
+    kubectl delete -f manifests/failover-controller.yaml
 
 ## Contact
 

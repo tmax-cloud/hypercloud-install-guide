@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: catalog-catalog-webhook
+  namespace: "catalog"
   labels:
     app: catalog-catalog-webhook
     chart: "catalog-0.3.0-beta.2"

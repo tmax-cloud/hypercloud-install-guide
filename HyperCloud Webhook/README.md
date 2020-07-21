@@ -10,7 +10,7 @@
     * ([HyperCloud Operator](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/README.md))
     
 2. 설치 과정에 필요한 인증서 생성을 위해 JAVA 패키지 설치 필요
-    * ProLinux 7: `ex) java-1.8.0-openjdk-devel.x86_64`
+    * ProLinux 7, CentOS 7: `ex) java-1.8.0-openjdk-devel.x86_64`
     * Ubuntu: `ex) openjdk-8-jre-headless`
 
 ## 폐쇄망 설치 가이드
@@ -32,6 +32,7 @@
     * install yaml을 다운로드한다.
     ```bash
     $ git clone https://github.com/tmax-cloud/hypercloud-install-guide.git
+    $ cd hypercloud-install-guide/HyperCloud Webhook/manifests
     ```
   
 2. 위의 과정에서 생성한 tar 파일들을 폐쇄망 환경으로 이동시킨 뒤 사용하려는 registry에 이미지를 push한다.
@@ -42,6 +43,20 @@
     
     $ sudo docker push ${REGISTRY}/hypercloud-webhook:${WEBHOOK_VERSION}
     ```
+    
+3. 해당 환경에 JAVA가 설치되어 있지 않을 경우, 첨부된 JAVA 파일을 활용하여 JAVA 기반 cli - keytool을 설치한다. ([java](pkg/jre1.8.0_251))
+    ```bash
+    $ sudo mkdir /usr/local/java
+    
+    $ sudo mv jre1.8.0_251 /usr/local/java/
+    
+    $ sudo echo 'export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")' >> /etc/profile
+    
+    $ sudo update-alternatives --install "/usr/bin/keytool" "keytool" "/usr/local/java/jre1.8.0_251/bin/keytool" 1;
+    
+    $ sudo update-alternatives --set keytool /usr/local/java/jre1.8.0_251/bin/keytool;
+    ```    
+    
 
 ## Install Steps
 0. [hypercloud-webhook yaml 수정](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/HyperCloud%20Webhook#step-0-hypercloud-webhook-yaml-%EC%88%98%EC%A0%95)
@@ -55,7 +70,7 @@
 ## Step 0. hypercloud-webhook yaml 수정
 * 목적 : `hypercloud-webhook yaml에 이미지 registry, 버전 및 마스터 노드 정보를 수정`
 * 생성 순서 : 
-    * 아래의 command를 사용하여 사용하고자 하는 image 버전  수정한다.
+    * 아래의 command를 사용하여 사용하고자 하는 image 버전을 수정한다.
 	```bash
 	$ sed -i 's/{webhook_version}/'${WEBHOOK_VERSION}'/g' 03_webhook-deployment.yaml
 	$ sed -i 's/{hostname}/'${HOSTNAME}'/g' 03_webhook-deployment.yaml

@@ -259,17 +259,17 @@ $ sudo docker push ${REGISTRY}/k8scsi/csi-attacher:${ATTACHER_VERSION}
   - ./hcsctl uninstall {$inventory_name}
 	- hcsctl 로 설치시 사용한 inventory 이름을 명시하여 hypercloud-storage 를 제거합니다.
   - 제거 완료 후 출력되는 메시지를 확인하여 디바이스 초기화를 위해 다음 작업들을 수행해야 될 수 있습니다.
-	- rm -rf /var/lib/rook
+	- sudo rm -rf /var/lib/rook
 	  - k8s Cluster의 모든 노드에서 /var/lib/rook directory를 삭제합니다.
 	- 모든 osd의 backend directory 혹은 device를 삭제합니다.
 	  - osd의 backend가 directory인 경우 (backend directory 경로 예시: /mnt/cephdir)
-	    - rm -rf /mnt/cephdir
+	    - sudo rm -rf /mnt/cephdir
 	  - osd의 backend가 device인 경우 (backend device 예시: sdb)
 		- device의 파티션 정보 제거
-		  - sgdisk --zap-all /dev/sdb
+		  - sudo sgdisk --zap-all /dev/sdb
 		- device mapper에 남아있는 ceph-volume 정보 제거 (각 노드당 한 번씩만 수행하면 됨)
-		  - ls /dev/mapper/ceph-* | xargs -I% -- dmsetup remove %
+		  - sudo ls /dev/mapper/ceph-* | sudo xargs -I% -- dmsetup remove %
 		- /dev에 남아있는 찌꺼기 파일 제거
-		  - rm -rf /dev/ceph-*
+		  - sudo rm -rf /dev/ceph-*
 - 비고 :
   - 재설치시에도 디바이스 초기화를 위해 위의 작업들이 반드시 수행되어야 합니다.

@@ -74,7 +74,7 @@
     $ sed -i 's/{webhook_version}/'${WEBHOOK_VERSION}'/g' 03_webhook-deployment.yaml
     $ sed -i 's/{hostname}/'${HOSTNAME}'/g' 03_webhook-deployment.yaml
     ```
-* 비고 :tmaxcloudck/hypercloud-webhook
+* 비고 :
     * `폐쇄망에서 설치를 진행하여 별도의 image registry를 사용하는 경우 registry 정보를 추가로 설정해준다.`
 	```bash
 	$ sed -i 's/tmaxcloudck\/hypercloud-webhook/'${REGISTRY}'\/hypercloud-webhook/g' 03_webhook-deployment.yaml

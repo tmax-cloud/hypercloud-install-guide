@@ -118,21 +118,29 @@ echo ${serverCert} | openssl base64 -d -A -out ${tmpdir}/server-cert.pem
 
 
 # create the secret with CA cert and server cert/key
-if kubectl create secret generic ${secret} \
-        --from-file=key.pem=${tmpdir}/server-key.pem \
-        --from-file=cert.pem=${tmpdir}/server-cert.pem \
-        --dry-run=client -o yaml |
-    kubectl -n ${namespace} apply -f - ; then
-    echo "Secret created"
+if kubectl create secret generic ${secret} --from-file=key.pem=${tmpdir}/server-key.pem --from-file=cert.pem=${tmpdir}/server-cert.pem --dry-run=client -o yaml | kubectl -n ${namespace} apply -f - > /dev/null 2>&1; then
+    echo "INFO: secret created"
 else
-    echo "--dry-run=client not working, instead using --dry-run=true..."
-    kubectl create secret generic ${secret} \
-        --from-file=key.pem=${tmpdir}/server-key.pem \
-        --from-file=cert.pem=${tmpdir}/server-cert.pem \
-        --dry-run=true -o yaml |
-    kubectl -n ${namespace} apply -f -
+    echo "INFO: --dry-run=client not working, instead using --dry-run=true..."
+    if kubectl create secret generic ${secret} --from-file=key.pem=${tmpdir}/server-key.pem --from-file=cert.pem=${tmpdir}/server-cert.pem --dry-run=true -o yaml | kubectl -n ${namespace} apply -f - > /dev/null 2>&1; then
+        echo "INFO: secret created (using --dry-run=true)"
+    else
+        echo "ERROR: Error occured while creating secret (did you create namespace hypernet-local-agent-system?)" >&2
+        exit 1
+    fi
 fi
+
 
 # patch network-hook.yaml
 ca=$(kubectl config view --raw --minify --flatten -o jsonpath='{.clusters[].cluster.certificate-authority-data}')
-sed -i "/caBundle/c\    caBundle: $ca" network-hook.yaml
+if [[ ${ca} == '' ]]; then
+    echo "ERROR: certificate-authority-data not exist" >&2
+    exit 1
+fi
+
+if ! sed -i "/caBundle/c\    caBundle: $ca" ./network-hook.yaml; then
+    echo "ERROR: patching network-hook.yaml failed"
+    exit 1
+fi
+
+echo "INFO: patch script has executed successfully"

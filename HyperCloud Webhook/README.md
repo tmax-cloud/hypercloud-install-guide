@@ -71,7 +71,7 @@
 
 ## Step 0. hypercloud-webhook yaml 수정
 * 목적 : `hypercloud-webhook yaml에 이미지 registry, 버전 및 마스터 노드 정보를 수정` ([manifests](manifests) 디렉토리 참고)
-* 생성 순서 : 아래의 command를 실행하여 사용하고자 하는 image 버전을 수정한다. [03_webhook-deployment.yaml](manifests/03_webhook-deployment.yaml)
+* 생성 순서 : 아래의 command를 실행하여 사용하고자 하는 image 버전을 수정한다. ([03_webhook-deployment.yaml](manifests/03_webhook-deployment.yaml))
     ```bash
     $ sed -i 's/{webhook_version}/'${WEBHOOK_VERSION}'/g' 03_webhook-deployment.yaml
     $ sed -i 's/{hostname}/'${HOSTNAME}'/g' 03_webhook-deployment.yaml

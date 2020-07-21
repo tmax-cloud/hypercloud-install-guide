@@ -75,9 +75,10 @@
     $ sed -i 's/{hostname}/'${HOSTNAME}'/g' 03_webhook-deployment.yaml
     ```
 * 비고 :
-    * `폐쇄망에서 설치를 진행하여 별도의 image registry를 사용하는 경우 registry 정보를 추가로 설정해준다.`
+    * 폐쇄망에서 설치를 진행하여 별도의 image registry를 사용하는 경우 registry 정보를 추가로 설정해준다.
 	```bash
 	$ sed -i 's/tmaxcloudck\/hypercloud-webhook/'${REGISTRY}'\/hypercloud-webhook/g' 03_webhook-deployment.yaml
+	```
 
 ## Step 1. 인증서 생성
 * 목적 : `HTTPS 활성화를 위한 CA 인증서를 생성`

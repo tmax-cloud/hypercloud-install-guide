@@ -113,5 +113,5 @@
 * 목적 : `EFK의 agent daemon 역할을 수행하는 fluentd를 설치`
 * 생성 순서 : [04_fluentd.yaml](yaml/04_fluentd.yaml) 실행 `ex) kubectl apply -f 04_fluentd.yaml`
 * 비고 :
-    * 만약 해당 Kube 환경의 Container Runtime이 Docker가 아니라 CRI-O를 사용할 경우, [04_fluentd_cri-o.yaml](yaml/04_fluentd_cri-o.yaml) 실행 `ex) kubectl apply -f 04_fluentd_cri-o.yaml`
+    * 만약 해당 Kube 환경의 Container Runtime이 Docker가 아니라 CRI-O일 경우, [04_fluentd_cri-o.yaml](yaml/04_fluentd_cri-o.yaml) 실행 `ex) kubectl apply -f 04_fluentd_cri-o.yaml`
 

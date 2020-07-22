@@ -16,6 +16,16 @@ spec:
       labels:
         app: network-hook
     spec:
+      tolerations:
+        - key: node-role.kubernetes.io/master
+          effect: NoSchedule
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: node-role.kubernetes.io/master
+                  operator: Exists
       containers:
         - name: network-hook
           image: tmaxcloudck/network-hook:0.1.1

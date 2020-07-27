@@ -2,6 +2,7 @@
 
 ## 구성 요소 및 버전
 * pod-gpu-metrics-exporter([docker.io/nvidia/pod-gpu-metrics-exporter:v1.0.0-alpha](https://hub.docker.com/layers/nvidia/pod-gpu-metrics-exporter/v1.0.0-alpha/images/sha256-9de3c81507277f7360829a3743760207a79af806b29890de72ab09d28f4db842?context=explore))
+* dcgm-exporter([docker.io/nvidia/dcgm-exporter:1.4.6](https://hub.docker.com/layers/nvidia/dcgm-exporter/1.4.6/images/sha256-1e207db6823484bb2c6746f42f20b7d819da90ab4ee45179726f87adca9d4f1e?context=explore))
 
 ## Prerequisites
 1. NVIDIA driver가 설치되어있어야 합니다.
@@ -21,7 +22,7 @@
 		```bash
 		$ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/Pod_GPU%20plugin/nvidia-pod-gpu-metrics-exporter/pod-gpu-metrics-exporter-daemonset.yaml
 		$ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/Pod_GPU%20plugin/nvidia-pod-gpu-metrics-exporter/pod-gpu-metrics-exporter-service.yaml
-		$ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/Pod_GPU%20plugin/Nnvidia-pod-gpu-metrics-exporter/pod-gpu-metrics-exporter-servicemonitor.yaml
+		$ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/Pod_GPU%20plugin/nvidia-pod-gpu-metrics-exporter/pod-gpu-metrics-exporter-servicemonitor.yaml
 		```
 
 ## 폐쇄망 설치 가이드
@@ -29,19 +30,25 @@
 1. **폐쇄망에서 설치하는 경우** 사용하는 image repository에 NVIDIA Pod GPU Metrics Exporter 설치 시 필요한 이미지를 push한다.
 	```bash
 	$ cd ${EXPORTER_HOME}
-	$ export DCGM_EXPORTER_VERSION=v1.0.0-alpha
-	$ docker pull nvidia/pod-gpu-metrics-exporter:${DCGM_EXPORTER_VERSION}
-	$ docker save nvidia/pod-gpu-metrics-exporter:${DCGM_EXPORTER_VERSION} > pod-gpu-metrics-exporter_${DCGM_EXPORTER_VERSION}.tar
+	$ export POD_GPU_METRICS_EXPORTER_VERSION=v1.0.0-alpha
+	$ export DCGM_EXPORTER_VERSION=1.4.6
+	$ docker pull nvidia/pod-gpu-metrics-exporter:${POD_GPU_METRICS_EXPORTER_VERSION}
+	$ docker save nvidia/pod-gpu-metrics-exporter:${POD_GPU_METRICS_EXPORTER_VERSION} > pod-gpu-metrics-exporter_${POD_GPU_METRICS_EXPORTER_VERSION}.tar
+	$ docker pull nvidia/dcgm-exporter:${DCGM_EXPORTER_VERSION}
+	$ docker save nvidia/dcgm-exporter:${DCGM_EXPORTER_VERSION} > dcgm-exporter_${DCGM_EXPORTER_VERSION}.tar
 	```
 
 2. 위의 과정에서 생성한 tar 파일들을 폐쇄망 환경으로 이동시킨 뒤 사용하려는 registry에 이미지를 push한다.
     ```bash
-    $ docker load < pod-gpu-metrics-exporter_${DCGM_EXPORTER_VERSION}.tar
+    $ docker load < pod-gpu-metrics-exporter_${POD_GPU_METRICS_EXPORTER_VERSION}.tar
+	$ docker load < dcgm-exporter_${DCGM_EXPORTER_VERSION}.tar
 
     # export REGISTRY={registry name}
-    $ docker tag nvidia/pod-gpu-metrics-exporter:${DCGM_EXPORTER_VERSION} ${REGISTRY}/pod-gpu-metrics-exporter:${DCGM_EXPORTER_VERSION}
+    $ docker tag nvidia/pod-gpu-metrics-exporter:${POD_GPU_METRICS_EXPORTER_VERSION} ${REGISTRY}/pod-gpu-metrics-exporter:${POD_GPU_METRICS_EXPORTER_VERSION}
+	$ docker tag nvidia/dcgm-exporter:${DCGM_EXPORTER_VERSION} ${REGISTRY}/dcgm-exporter:${DCGM_EXPORTER_VERSION}
 
-    $ docker push ${REGISTRY}/pod-gpu-metrics-exporter:${DCGM_EXPORTER_VERSION}
+    $ docker push ${REGISTRY}/pod-gpu-metrics-exporter:${POD_GPU_METRICS_EXPORTER_VERSION}
+	$ docker push ${REGISTRY}/dcgm-exporter:${DCGM_EXPORTER_VERSION}
     ```
 
 ## Install Steps

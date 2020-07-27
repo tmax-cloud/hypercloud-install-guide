@@ -44,6 +44,40 @@
   - 각 노드마다 OSD를 배포하도록 권장 (Taint 걸린 host 없는 걸 확인해야함)
   - 총 OSD 개수는 3개 이상으로 권장
   - CephFS 및 RBD pool 설정 시 Replication 개수 3개 권장
+5. ntp 패키지 설치 및 설정이 필요합니다.
+
+``` shell
+# ntp 설치
+$ yum install ntp
+# ntp 설정
+$ vi /etc/ntp.conf 
+  # 기존 서버 목록은 주석 처리
+  #server 0.rhel.pool.ntp.org iburst
+  #server 1.rhel.pool.ntp.org iburst
+  #server 2.rhel.pool.ntp.org iburst
+  #server 3.rhel.pool.ntp.org iburst
+  
+  # 한국 공용 타임서버 목록 설정
+  server 1.kr.pool.ntp.org
+  server 0.asia.pool.ntp.org
+  server 2.asia.pool.ntp.org
+  
+  # 폐쇄망인 경우, 노드 중 ntp 서버를 하나 지정하여 설정
+  # 내부 네트워크 대역에서 해당 서버를 타임서버로 참조하기 위한 설정
+  restrict 192.168.100.0 mask 255.255.255.0 nomodify notrap
+  server 127.127.1.0 # local clock
+  
+  # 폐쇄망인 경우, ntp client 설정
+  # client 서버들은 위의 지정된 서버 ip를 사용
+  server 192.168.100.120
+  
+# ntp 서비스 시작
+$ systemctl start ntpd
+# 노드 재부팅 후에도 자동으로 시작할 수 있도록 설정
+$ systemctl enable ntpd
+# ntp 작동 여부 확인
+$ ntpq -p
+```
 
 ## 폐쇄망 설치 가이드
 

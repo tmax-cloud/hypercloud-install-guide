@@ -41,5 +41,5 @@
     $ kubectl get pods -n olm
     $ kubectl get catalogsource -n olm
    ```
-  ![image](figure/olm_pods.JPG)
-  ![image](figure/olm_catalogsource.JPG)
+  ![image](figure/olm_pods.png)
+  ![image](figure/olm_catalogsource.png)

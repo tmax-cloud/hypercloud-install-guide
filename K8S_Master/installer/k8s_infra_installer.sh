@@ -172,19 +172,6 @@ function uninstall() {
 
 }
 
-function install_calico() {
-
-  #install calico
-  if [[ -z ${calicoVersion} ]]; then
-  	calicoVersion=3.13
-  	kubectl apply -f ${yaml_dir}/calico.yaml
-  else
-  	kubectl apply -f calico.yaml
-  fi
-
-
-}
-
 function main(){
   
   case "${1:-}" in
@@ -192,7 +179,6 @@ function main(){
     set_env
     install_crio
     install_kube
-    #install_calico
     ;;
   delete)
     uninstall

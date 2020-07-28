@@ -18,23 +18,17 @@
 ## Step0. k8s.config 설정
 * 목적 : `k8s 설치 진행을 위한 k8s config 설정`
 * 순서 : 
-
-#------------------------------------------------------------------
-# ex : imageRegistry={IP}:{PORT}
-# ex : crioVersion={crio version}
-# ex : k8sVersion={kubernetes version}
-# ex : apiServer={kubernetes API server ip}
-# ex : podSubnet={POD_IP_POOL}/{CIDR}
-# ex : calicoVersion={calico plugin version}
-#------------------------------------------------------------------
-#------------------------------------------------------------------
-# ex : imageRegistry=172.22.5.2:5000
-# ex : crioVersion=1.17
-# ex : k8sVersion=1.17.6
-# ex : apiServer=172.21.7.2
-# ex : podSubnet=10.244.0.0/16
-# ex : calicoVersion=3.13
-#------------------------------------------------------------------
+  * 환경에 맞는 config 내용을 작성합니다.
+     * imageRegistry={IP}:{PORT}
+       * ex : imageRegistry=172.22.5.2:5000
+     * crioVersion={crio version}
+       * ex : crioVersion=1.17
+     * k8sVersion={kubernetes version}
+       * ex : k8sVersion=1.17.6
+     * apiServer={kubernetes API server ip}
+       * ex : apiServer=172.21.7.2
+     * podSubnet={POD_IP_POOL}/{CIDR}
+       * ex : podSubnet=10.244.0.0/16
 
 ## Step1. installer 실행
 * 목적 : `k8s 설치 진행을 위한 shell script 실행`

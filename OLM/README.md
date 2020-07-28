@@ -5,6 +5,12 @@
 * Operator Registry: ([quay.io/operator-framework/configmap-operator-registry:v1.13.3](https://quay.io/repository/operator-framework/configmap-operator-registry/manifest/sha256:e8458dbd7cc7650f0e84bb55cb1f9f30937dd0b010377634ea75f6d9a4f6ee85))
 
 ## Prerequisites
+* git
+* go version v1.12+.
+* docker version 17.03+.
+  * Alternatively podman v1.2.0+ or buildah v1.7+
+* kubectl version v1.11.3+.
+* Access to a Kubernetes v1.11.3+ cluster.
 
 ## 폐쇄망 설치 가이드
     

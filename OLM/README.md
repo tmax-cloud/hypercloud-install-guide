@@ -28,15 +28,20 @@
     $ sed -i 's/{registry_version}/'${REGISTRY_VERSION}'/g' 02_olm.yaml
     ```
 
+
+
 ## Step 1. CRDs 생성
 * 목적 : `OLM 설치를 위해 필요한 Custorm Resource를 정의한다.`
 * 생성 순서 : [01_crds.yaml](yaml/01_crds.yaml) 실행 `ex) kubectl apply -f 01_crds.yaml`
+
+
 
 ## Step 2. OLM 설치
 * 목적 : `OLM 동작을 위해 필요한 리소스 (namespace, clusterrole, deployment 등)를 생성한다.`
 * 생성 순서
   * [02_olm.yaml](yaml/02_olm.yaml) 실행 `ex) kubectl apply -f 02_olm.yaml`
-  * OLM이 정상적으로 설치되었는지 확인
+  
+  * 아래의 명령어를 사용하여 OLM이 정상적으로 설치되었는지 확인한다.
   ```bash
     $ kubectl get pods -n olm
     $ kubectl get catalogsource -n olm

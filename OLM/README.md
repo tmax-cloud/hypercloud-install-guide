@@ -34,4 +34,12 @@
 
 ## Step 2. OLM 설치
 * 목적 : `OLM 동작을 위해 필요한 리소스 (namespace, clusterrole, deployment 등)를 생성한다.`
-* 생성 순서 : [02_olm.yaml](yaml/02_olm.yaml) 실행 `ex) kubectl apply -f 02_olm.yaml`
+* 생성 순서
+  * [02_olm.yaml](yaml/02_olm.yaml) 실행 `ex) kubectl apply -f 02_olm.yaml`
+  * OLM이 정상적으로 설치되었는지 확인
+  ```bash
+    $ kubectl get pods -n olm
+    $ kubectl get catalogsource -n olm
+   ```
+  ![image](figure/olm_pods.JPG)
+  ![image](figure/olm_catalogsource.JPG)

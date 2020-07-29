@@ -127,7 +127,7 @@ subjects:
     name: virtnodefailcontroller
 ---
 apiVersion: apps/v1
-kind: DaemonSet
+kind: Deployment
 metadata:
   labels:
     app: kube-failover-controller
@@ -135,6 +135,7 @@ metadata:
   name: kube-failover-controller
   namespace: kubevirt-system
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: kube-failover-controller

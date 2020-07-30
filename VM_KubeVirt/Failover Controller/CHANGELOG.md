@@ -1,0 +1,2 @@
+- v1.3
+    - when node fail, if vm pod has auto failover flag, this controller releases all type ip (including not static ip)

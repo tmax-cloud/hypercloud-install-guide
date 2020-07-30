@@ -2,7 +2,7 @@
 
 **구성 요소 및 버전**:
 
-* failover-controller([tmaxcloudck/kube-failover-controller:v1.0](https://hub.docker.com/layers/tmaxcloudck/kube-failover-controller/v1.0/images/sha256-537c04aa66e99fff283151a2de6afba1f17810cfef14e4ff21e785da9de93da2?context=repo))
+* failover-controller([tmaxcloudck/kube-failover-controller:v1.3](https://hub.docker.com/layers/tmaxcloudck/kube-failover-controller/v1.3/images/sha256-b0e4eef8bbce41c36f3607c15643a50ff7a8ce7d1413621d5da9bf1c9c41e229?context=repo))
 
 **Prerequisite**:
 

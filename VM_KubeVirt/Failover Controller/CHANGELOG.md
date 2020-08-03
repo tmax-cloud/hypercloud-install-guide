@@ -1,4 +1,4 @@
-- v1.3
+- v1.4
     - add leader election for HA
     - add fetch verb to Roles
     - (remember) this controller should be run on the master node, because calico ctl library use .kube/config file

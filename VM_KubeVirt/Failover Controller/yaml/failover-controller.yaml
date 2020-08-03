@@ -167,7 +167,7 @@ spec:
               - key: app
                 operator: In
                 values:
-                - kubevirt-node-fail-controller
+                - kube-failover-controller
             topologyKey: kubernetes.io/hostname
       containers:
         - name: kube-failover-controller

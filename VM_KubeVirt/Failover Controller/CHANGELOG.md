@@ -1,3 +1,5 @@
+- v1.5
+    - change controller name and endpoints name to 'kube-failover-controller' updated deployment name
 - v1.4
     - add leader election for HA
     - add fetch verb to Roles

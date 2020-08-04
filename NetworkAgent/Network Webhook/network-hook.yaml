@@ -28,7 +28,7 @@ spec:
                   operator: Exists
       containers:
         - name: network-hook
-          image: tmaxcloudck/network-hook:0.1.1
+          image: tmaxcloudck/network-hook:0.1.2
           args:
           - -tlsCertFile=/etc/webhook/certs/cert.pem
           - -tlsKeyFile=/etc/webhook/certs/key.pem

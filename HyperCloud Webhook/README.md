@@ -20,7 +20,7 @@
     ```bash
     $ mkdir -p ~/hypercloud-webhook-install
     $ export WEBHOOK_HOME=~/hypercloud-webhook-install
-    $ export WEBHOOK_VERSION=b4.1.0.x 
+    $ export WEBHOOK_VERSION=b4.1.0.14
     $ cd $WEBHOOK_HOME
     ```
     * 외부 네트워크 통신이 가능한 환경에서 필요한 이미지를 다운받는다.

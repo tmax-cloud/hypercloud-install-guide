@@ -2,8 +2,7 @@
 
 ## 구성 요소 및 버전
 * hypercloud-webhook 
-    * ([tmaxcloudck/hypercloud-webhook:b4.1.0.2](https://hub.docker.com/layers/tmaxcloudck/hypercloud-webhook/b4.1.0.2/images/sha256-ee1ae9fa79df947debf438c9be5b1e2d9204e7f6057fb40190be6be801d1d6d9?context=explore)) (Kuberntes v1.16 이상)
-    * ([tmaxcloudck/hypercloud-webhook:b4.1.0.6](https://hub.docker.com/layers/tmaxcloudck/hypercloud-webhook/b4.1.0.5/images/sha256-fca79244e3d460c0d8177e79cc6a35116e8db71f45178532ce7b697286afbf4b?context=explore)) (Kuberntes v1.16 미만)
+    * ([tmaxcloudck/hypercloud-webhook:b4.1.0.14](https://hub.docker.com/layers/tmaxcloudck/hypercloud-webhook/b4.1.0.14/images/sha256-a77b966925af32df7e31047bda599bfcf5fe91092a6feeb5802bf57ab8c0a083?context=explore)) 
 
 ## Prerequisites
 1. 해당 모듈 설치 전 HyperCloud Operator 모듈 설치 필요
@@ -88,8 +87,8 @@
     ```bash
     $ mkdir ./pki
     $ sh 01_gen_certs.sh
-    $ openssl pkcs12 -export -in ./pki/hypercloud4-webhook.crt -inkey ./pki/hypercloud4-webhook.key -out ./pki/hypercloud4-webhook.p12 (Export Password: tmax@23)
-    $ keytool -importkeystore -deststorepass tmax@23 -destkeypass tmax@23 -destkeystore ./pki/hypercloud4-webhook.jks -srckeystore ./pki/hypercloud4-webhook.p12 -srcstoretype PKCS12 -srcstorepass tmax@23
+    $ openssl pkcs12 -export -in ./pki/hypercloud4-webhook.crt -inkey ./pki/hypercloud4-webhook.key -out ./pki/hypercloud4-webhook.p12 (Export Password: webhook)
+    $ keytool -importkeystore -deststorepass webhook -destkeypass webhook -destkeystore ./pki/hypercloud4-webhook.jks -srckeystore ./pki/hypercloud4-webhook.p12 -srcstoretype PKCS12 -srcstorepass webhook
     ```
 
 ## Step 2. Secret 생성

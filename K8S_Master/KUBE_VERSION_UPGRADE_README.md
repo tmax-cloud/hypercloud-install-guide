@@ -13,7 +13,7 @@
 * ex) 1.15 버전에서 1.17 버전으로 한번에 업그레이드는 불가능 하다. 1.15 -> 1.16 -> 1.17 스텝을 진행 해야 한다.
 
 ## Steps
-0. [master upgrade](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/K8S_Worker#step0-%ED%99%98%EA%B2%BD-%EC%84%A4%EC%A0%95)
+0. [master upgrade](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/K8S_Master/KUBE_VERSION_UPGRADE_README.md#step0-kubernetes-master-upgrade)
 1. [node upgrade](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/K8S_Worker#step-1-cri-o-%EC%84%A4%EC%B9%98)
 
 ## Step0. kubernetes master upgrade

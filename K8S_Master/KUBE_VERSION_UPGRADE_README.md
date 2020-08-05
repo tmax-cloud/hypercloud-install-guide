@@ -14,7 +14,7 @@
 
 ## Steps
 0. [master upgrade](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/K8S_Master/KUBE_VERSION_UPGRADE_README.md#step0-kubernetes-master-upgrade)
-1. [node upgrade](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/K8S_Worker#step-1-cri-o-%EC%84%A4%EC%B9%98)
+1. [node upgrade](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/K8S_Master/KUBE_VERSION_UPGRADE_README.md#step1-kubernetes-node-upgrade)
 
 ## Step0. kubernetes master upgrade
 * master에서 kubeadm을 upgrade 한다.
@@ -138,3 +138,28 @@
 	``` 	
 	
 ## Step1. kubernetes node upgrade
+* 워커 노드의 업그레이드 절차는 워크로드를 실행하는 데 필요한 최소 용량을 보장하면서, 한 번에 하나의 노드 또는 한 번에 몇 개의 노드로 실행해야 한다.
+* 모든 worker node에서 kubeadm을 업그레이드한다.
+	```bash
+	yum install -y kubeadm-설치버전 --disableexcludes=kubernetes
+	ex) yum install -y kubeadm-1.17.6-0 --disableexcludes=kubernetes
+	```
+* 스케줄 불가능(unschedulable)으로 표시하고 워크로드를 축출하여 유지 보수할 노드를 준비한다.
+	```bash
+	kubectl drain <node name> --ignore-daemonsets
+	```
+* kubelet 구성 업그레이드
+	```bash
+	sudo kubeadm upgrade node
+	```
+* kubelet과 kubectl 업그레이드
+	```bash
+	yum install -y kubelet-1.18.x-0 kubectl-1.18.x-0 --disableexcludes=kubernetes
+	sudo systemctl daemon-reload
+	sudo systemctl restart kubelet	
+	```
+* 적용된 cordon을 해제한다.
+	```bash
+	kubectl uncordon <cp-node-name>
+	ex) kubectl uncordon k8s-node
+	```

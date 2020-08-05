@@ -115,5 +115,26 @@
 	[upgrade/successful] SUCCESS! Your cluster was upgraded to "v1.18.0". Enjoy!
 
 	[upgrade/kubelet] Now that your control plane is upgraded, please proceed with upgrading your kubelets if you haven't already done so.
-	```	
+	```
+* 적용된 cordon을 해제한다.
+	```bash
+	kubectl uncordon <cp-node-name>
+	ex) kubectl uncordon k8s-master
+	```
+* master와 node에 kubelet 및 kubectl을 업그레이드한다.
+	```bash
+	yum install -y kubelet-1.18.x-0 kubectl-1.18.x-0 --disableexcludes=kubernetes
+	```
+* kubelet을 재시작 한다.
+	```bash
+	sudo systemctl daemon-reload
+	sudo systemctl restart kubelet
+	```		
+* 비고 : 
+    * master 다중화 구성 클러스터 업그레이드 시에는 다음과 같은 명령어를 실행한다.
+	```bash
+	sudo kubeadm upgrade node
+	sudo kubeadm upgrade apply
+	``` 	
+	
 ## Step1. kubernetes node upgrade

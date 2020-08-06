@@ -125,16 +125,16 @@ $ ntpq -p
   $ wget https://github.com/tmax-cloud/hypercloud-install-guide/raw/master/rook-ceph/hcsctl # 임시 url, github 으로 hyper-cloud storage 프로젝트 이전 후 업데이트 될 예정입니다.
   ```
 
-  - `cluster.yaml` [설정 안내 파일](https://github.com/tmax-cloud/hypercloud-storage/blob/master/docs/ceph-cluster-setting.md)을 다운로드 합니다.
-  - `block_pool.yaml`, `block_sc.yaml` [설정 안내 파일](https://github.com/tmax-cloud/hypercloud-storage/blob/master/docs/block.md)을 다운로드 합니다.
-  - `file_system.yaml`, `file_sc.yaml` [설정 안내 파일](https://github.com/tmax-cloud/hypercloud-storage/blob/master/docs/file.md)을 다운로드 합니다.
-  - 메타데이터 바이스 분리 요건이 있는 경우, `cluster.yaml` 설정시 참고할 [안내 파일](https://github.com/tmax-cloud/hypercloud-storage/blob/master/docs/cluster-tuning.md)을 다운로드 합니다.
+  - `cluster.yaml` [설정 안내 파일](https://github.com/tmax-cloud/hypercloud-sds/blob/master/docs/ceph-cluster-setting.md)을 다운로드 합니다.
+  - `block_pool.yaml`, `block_sc.yaml` [설정 안내 파일](https://github.com/tmax-cloud/hypercloud-sds/blob/master/docs/block.md)을 다운로드 합니다.
+  - `file_system.yaml`, `file_sc.yaml` [설정 안내 파일](https://github.com/tmax-cloud/hypercloud-sds/blob/master/docs/file.md)을 다운로드 합니다.
+  - 메타데이터 바이스 분리 요건이 있는 경우, `cluster.yaml` 설정시 참고할 [안내 파일](https://github.com/tmax-cloud/hypercloud-sds/blob/master/docs/cluster-tuning.md)을 다운로드 합니다.
   - 설정이 필요한 해당 yaml 파일들은 hcsctl 사용하여 inventory create 시에 생성 되며, `$inventory_name/rook/` 경로에서 찾으실 수 있습니다.
   ``` shell
-  $ wget https://github.com/tmax-cloud/hypercloud-storage/raw/master/docs/ceph-cluster-setting.md
-  $ wget https://github.com/tmax-cloud/hypercloud-storage/raw/master/docs/block.md
-  $ wget https://github.com/tmax-cloud/hypercloud-storage/raw/master/docs/file.md
-  $ wget https://github.com/tmax-cloud/hypercloud-storage/raw/master/docs/cluster-tuning.md
+  $ wget https://github.com/tmax-cloud/hypercloud-sds/raw/master/docs/ceph-cluster-setting.md
+  $ wget https://github.com/tmax-cloud/hypercloud-sds/raw/master/docs/block.md
+  $ wget https://github.com/tmax-cloud/hypercloud-sds/raw/master/docs/file.md
+  $ wget https://github.com/tmax-cloud/hypercloud-sds/raw/master/docs/cluster-tuning.md
   ```
 
 2. 위의 과정에서 생성한 tar 파일들을 폐쇄망 환경으로 이동시킨 뒤 사용하려는 registry에 이미지를 push 합니다.
@@ -225,10 +225,10 @@ $ sudo docker push ${REGISTRY}/k8scsi/csi-attacher:${ATTACHER_VERSION}
 
 - 목적 : `설치 환경에 맞춰서 rook 폴더 밑의 yaml 파일 수정`
 - 순서 : 
-  - `cluster.yaml` [설정 안내 파일](https://github.com/tmax-cloud/hypercloud-storage/blob/master/docs/ceph-cluster-setting.md)을 참고하여 해당 yaml 파일 수정이 필요합니다.
-  - `block_pool.yaml`, `block_sc.yaml` [설정 안내 파일](https://github.com/tmax-cloud/hypercloud-storage/blob/master/docs/block.md)을 참고하여 해당 yaml 파일 수정이 필요합니다.
-  - `file_system.yaml`, `file_sc.yaml` [설정 안내 파일](https://github.com/tmax-cloud/hypercloud-storage/blob/master/docs/file.md)을 참고하여 해당 yaml 파일 수정이 필요합니다.
-  - 메타데이터 바이스 분리 요건이 있는 경우, 참고할 [설정 안내 파일](https://github.com/tmax-cloud/hypercloud-storage/blob/master/docs/cluster-tuning.md)을 바탕으로 `cluster.yaml` 설정이 필요합니다.
+  - `cluster.yaml` [설정 안내 파일](https://github.com/tmax-cloud/hypercloud-sds/blob/master/docs/ceph-cluster-setting.md)을 참고하여 해당 yaml 파일 수정이 필요합니다.
+  - `block_pool.yaml`, `block_sc.yaml` [설정 안내 파일](https://github.com/tmax-cloud/hypercloud-sds/blob/master/docs/block.md)을 참고하여 해당 yaml 파일 수정이 필요합니다.
+  - `file_system.yaml`, `file_sc.yaml` [설정 안내 파일](https://github.com/tmax-cloud/hypercloud-sds/blob/master/docs/file.md)을 참고하여 해당 yaml 파일 수정이 필요합니다.
+  - 메타데이터 바이스 분리 요건이 있는 경우, 참고할 [설정 안내 파일](https://github.com/tmax-cloud/hypercloud-sds/blob/master/docs/cluster-tuning.md)을 바탕으로 `cluster.yaml` 설정이 필요합니다.
 - 비고 :
   - 생성된 폴더와 파일명은 절대 변경 하시면 안됩니다.
   - 설정 안내는 각 링크 참고 부탁드립니다.
@@ -291,7 +291,7 @@ $ sudo docker push ${REGISTRY}/k8scsi/csi-attacher:${ATTACHER_VERSION}
 - 목적 : `rook 제거`
 - 순서 : 
   - ./hcsctl uninstall {$inventory_name}
-	- hcsctl 로 설치시 사용한 inventory 이름을 명시하여 hypercloud-storage 를 제거합니다.
+	- hcsctl 로 설치시 사용한 inventory 이름을 명시하여 hypercloud-sds를 제거합니다.
   - 제거 완료 후 출력되는 메시지를 확인하여 디바이스 초기화를 위해 다음 작업들을 수행해야 될 수 있습니다.
 	- sudo rm -rf /var/lib/rook
 	  - k8s Cluster의 모든 노드에서 /var/lib/rook directory를 삭제합니다.

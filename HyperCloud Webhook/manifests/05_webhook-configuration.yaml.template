@@ -1,4 +1,4 @@
-apiVersion: admissionregistration.k8s.io/${ADM_VERSION}
+apiVersion: admissionregistration.k8s.io/v1beta1
 kind: MutatingWebhookConfiguration
 metadata:
   name: hypercloud4-mutator
@@ -18,11 +18,11 @@ webhooks:
         resources: ["*"]
     matchPolicy: Equivalent
     sideEffects: None
-    admissionReviewVersions: ${ADM_VERSION2}
+    admissionReviewVersions: ["v1beta1"]
     timeoutSeconds: 10
     namespaceSelector:
       matchExpressions:
       - key: webhook
-        operator: In
-        values: ["true"]
+        operator: NotIn
+        values: ["false"]
     failurePolicy: Fail

@@ -2,14 +2,14 @@ apiVersion: v1
 kind: Namespace
 metadata:
   labels:
-    app: kubevirt-node-fail-controller
+    app: kube-failover-controller
   name: kubevirt-system
 ---
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
   labels:
-    app: kubevirt-node-fail-controller
+    app: kube-failover-controller
   name: virtnodefailcontroller
   namespace: kubevirt-system
 spec:
@@ -36,7 +36,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   labels:
-    app: kubevirt-node-fail-controller
+    app: kube-failover-controller
   name: virtnodefailcontroller
   namespace: kubevirt-system
 ---
@@ -44,7 +44,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   labels:
-    app: kubevirt-node-fail-controller
+    app: kube-failover-controller
   name: kubevirt-system:controller:virt-node-fail-controller
 rules:
   - apiGroups:
@@ -63,6 +63,7 @@ rules:
       - delete
       - list
       - watch
+      - patch
   - apiGroups:
       - "kubevirt.io"
     resources:
@@ -74,12 +75,13 @@ rules:
       - delete
       - list
       - watch
+      - patch
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   labels:
-    app: kubevirt-node-fail-controller
+    app: kube-failover-controller
   name: config-watcher
   namespace: kubevirt-system
 rules:
@@ -95,12 +97,13 @@ rules:
       - delete
       - list
       - watch
+      - patch
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   labels:
-    app: kubevirt-node-fail-controller
+    app: kube-failover-controller
   name: kubevirt-system:controller:virt-node-fail-controller
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -115,7 +118,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   labels:
-    app: kubevirt-node-fail-controller
+    app: kube-failover-controller
   name: config-watcher
   namespace: kubevirt-system
 roleRef:
@@ -127,52 +130,62 @@ subjects:
     name: virtnodefailcontroller
 ---
 apiVersion: apps/v1
-kind: DaemonSet
+kind: Deployment
 metadata:
   labels:
-    app: kubevirt-node-fail-controller
+    app: kube-failover-controller
     component: virtnodefailcontroller
-  name: kubevirt-node-fail-controller
+  name: kube-failover-controller
   namespace: kubevirt-system
 spec:
+  replicas: 1
   selector:
     matchLabels:
-      app: kubevirt-node-fail-controller
+      app: kube-failover-controller
       component: virtnodefailcontroller
   template:
     metadata:
       labels:
-        app: kubevirt-node-fail-controller
+        app: kube-failover-controller
         component: virtnodefailcontroller
     spec:
       tolerations:
         - key: node-role.kubernetes.io/master
           effect: NoSchedule
       affinity:
-        nodeAffinity:
+        nodeAffinity: # it needs for calicoctl command using /.kube/config
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
               - matchExpressions:
                   - key: node-role.kubernetes.io/master
                     operator: Exists
                     values:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - kube-failover-controller
+            topologyKey: kubernetes.io/hostname
       containers:
-        - name: kubevirt-node-fail-controller
-          image: kubevirt-node-fail-controller:$FAILOVER_VERSION
+        - name: kube-failover-controller
+          image: tmaxcloudck/kube-failover-controller:%FAILOVER_VERSION%
           env:
           - name: CALICO_DATASTORE_TYPE
             value: kubernetes
           - name: CALICO_KUBECONFIG
-            value: /root/.kube/config
+            value: %HOME%/.kube/config
           volumeMounts:
-          - mountPath: /root/.kube
+          - mountPath: %HOME%/.kube
             name: kube-config
           securityContext:
             privileged: true
       volumes:
       - name: kube-config
         hostPath:
-          path: /root/.kube
+          path: %HOME%/.kube
           type: Directory
       serviceAccountName: virtnodefailcontroller
       hostNetwork: true

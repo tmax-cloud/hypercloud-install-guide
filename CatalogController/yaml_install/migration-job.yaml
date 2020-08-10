@@ -6,7 +6,7 @@ metadata:
   labels:
     migration-job: "true"
     app: catalog-migration-job
-    chart: "catalog-0.3.0-beta.2"
+    chart: "catalog-0.3.0"
     release: "catalog"
     heritage: "Tiller"
   annotations:
@@ -21,7 +21,7 @@ metadata:
   labels:
     migration-job: "true"
     app: catalog-migration-job
-    chart: "catalog-0.3.0-beta.2"
+    chart: "catalog-0.3.0"
     release: "catalog"
     heritage: "Tiller"
   annotations:
@@ -72,7 +72,7 @@ metadata:
   labels:
     migration-job: "true"
     app: catalog-migration-job
-    chart: "catalog-0.3.0-beta.2"
+    chart: "catalog-0.3.0"
     release: "catalog"
     heritage: "Tiller"
   annotations:
@@ -95,7 +95,7 @@ metadata:
   namespace: catalog
   labels:
     app: catalog-migration-job
-    chart: "catalog-0.3.0-beta.2"
+    chart: "catalog-0.3.0"
     release: "catalog"
     heritage: "Tiller"
   annotations:
@@ -109,7 +109,7 @@ spec:
       labels:
         migration-job: "true"
         app: catalog-migration-job
-        chart: "catalog-0.3.0-beta.2"
+        chart: "catalog-0.3.0"
         release: "catalog"
         heritage: "Tiller"
     spec:

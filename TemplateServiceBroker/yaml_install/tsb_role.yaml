@@ -4,6 +4,9 @@ metadata:
   name: service-broker-role
   namespace: tsb-ns
 rules:
+- apiGroups: ['']
+  resources: ['*']
+  verbs: ['*']
 - apiGroups: ["tmax.io"]
   resources: ["*"]
   verbs: ["*"]

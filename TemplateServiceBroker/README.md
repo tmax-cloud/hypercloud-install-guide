@@ -8,8 +8,6 @@
 
 TemplateServiceBroker 설치 전, Hypercloud operator 및 catalog controller module이 설치 되어 있어야 합니다.
 
-## 폐쇄망 설치 가이드
-
 설치에 필요한 이미지를 준비합니다.
 
 1. 폐쇄망에서 설치하는 경우 사용하는 image를 다운받고 저장합니다.
@@ -82,7 +80,7 @@ TemplateServiceBroker 설치 전, Hypercloud operator 및 catalog controller mod
 - 생성 순서 : 아래 commmand로 yaml 적용
   - (namespace:tsb-ns / serviceaccount: tsb-account라고 가정)
   - kubectl apply -f tsb_deployment.yaml ([파일](./yaml_install/tsb_deployment.yaml))
-- 비고 : yaml파일의 image 항목은 registry주소의 이미지를 사용해야 합니다. (${REGISTRY}/tmaxcloudck/template-service-broker:b${TSB_VERSION})
+- 비고 : 폐쇄망의 경우, yaml파일의 image 항목은 registry주소의 이미지를 사용해야 합니다. (${REGISTRY}/tmaxcloudck/template-service-broker:b${TSB_VERSION})
 
 ## Step 4. TemplateServiceBroker Service 생성
 

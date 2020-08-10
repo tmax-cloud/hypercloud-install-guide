@@ -1,0 +1,8 @@
+- v1.5
+    - change controller name and endpoints name to 'kube-failover-controller' updated deployment name
+- v1.4
+    - add leader election for HA
+    - add fetch verb to Roles
+    - (remember) this controller should be run on the master node, because calico ctl library use .kube/config file
+- v1.3
+    - when node fail, if vm pod has auto failover flag, this controller releases all type ip (including not static ip)

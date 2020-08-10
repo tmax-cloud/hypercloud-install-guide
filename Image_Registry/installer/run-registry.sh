@@ -11,4 +11,4 @@ registry_port=$(echo $2 | cut -d':' -f2)
 docker load -i docker-registry.tar
 
 #start install registry
-docker run -it -d -p$registry_port:5000 registry --restart=always
+docker run -it -d -p$registry_port:5000 registry

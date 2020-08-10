@@ -2,7 +2,7 @@
 
 **구성 요소 및 버전**:
 
-* failover-controller([tmaxcloudck/kube-failover-controller:v1.0](https://hub.docker.com/layers/tmaxcloudck/kube-failover-controller/v1.0/images/sha256-537c04aa66e99fff283151a2de6afba1f17810cfef14e4ff21e785da9de93da2?context=repo))
+* failover-controller([tmaxcloudck/kube-failover-controller:v1.3](https://hub.docker.com/layers/tmaxcloudck/kube-failover-controller/v1.3/images/sha256-b0e4eef8bbce41c36f3607c15643a50ff7a8ce7d1413621d5da9bf1c9c41e229?context=repo))
 
 **Prerequisite**:
 
@@ -35,9 +35,10 @@
   * failover-controller.tar를 docker-registry에 배포 한다.
   ```sh
   $ docker load -i failover-controller.tar 
-  $ docker tag kubevirt-node-fail-controller:${FAILOVER_VERSION} ${DOCKER_REGISTRY}/kubevirt-node-fail-controller:${FAILOVER_VERSION}
-  $ docker push ${DOCKER_REGISTRY}/kubevirt-node-fail-controller:${FAILOVER_VERSION}
-  $ sed -i "s/kubevirt-node-fail-controller:$FAILOVER_VERSION/$DOCKER_REGISTRY\/kubevirt-node-fail-controller:$FAILOVER_VERSION/g" $FAILOVER_HOME/yaml/kubevirt-node-fail-controller.yaml
+  $ docker tag tmaxcloudck/kube-failover-controller:${FAILOVER_VERSION} ${DOCKER_REGISTRY}/tmaxcloudck/kube-failover-controller:${FAILOVER_VERSION}
+  $ docker push ${DOCKER_REGISTRY}/tmaxcloudck/kube-failover-controller:${FAILOVER_VERSION}
+  $ sed -i "s/tmaxcloudck\/kube-failover-controller:%FAILOVER_VERSION%/${DOCKER_REGISTRY}\/tmaxcloudck\/kube-failover-controller:${FAILOVER_VERSION}/g" ${FAILOVER_HOME}/yaml/failover-controller.yaml
+  $ sed -i "s@%HOME%@${HOME}@g" ${FAILOVER_HOME}/yaml/failover-controller.yaml
   ```
   
 ## Install Step:
@@ -51,7 +52,7 @@
 
 ```sh
 
-$ kubectl apply -f kubevirt-node-fail-controller.yaml
+$ kubectl apply -f failover-controller.yaml
 ```
 # Step 2. Controller 확인:
 
@@ -67,7 +68,7 @@ $ kubectl get pods -n kubevirt-system
 
 You can clean up the created Controller with:
 
-    kubectl delete -f manifests/kubevirt-node-fail-controller.yaml
+    kubectl delete -f manifests/failover-controller.yaml
 
 ## Contact
 

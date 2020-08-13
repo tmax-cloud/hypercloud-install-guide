@@ -87,8 +87,27 @@ function install_crio() {
 	
 	sudo systemctl restart crio
 	
+  elif [[ ${os_check} = "\"Ubuntu\"" ]]; then
+
+        # install crio
+        sudo apt-get -y install cri-o-${crioVersion}
+        sudo systemctl enable crio.service
+        sudo systemctl start crio.service
+
+        # check crio
+        sudo systemctl status crio
+
+        # remove cni0
+        sudo rm -rf  /etc/cni/net.d/100-crio-bridge.conf
+        sudo rm -rf  /etc/cni/net.d/200-loopback.conf
+
+        # edit crio config
+        sudo systemctl restart crio
+
+  # others
   else
-        sudo systemctl restart crio  
+        sudo echo "This OS is not supported."
+        sudo exit 100
   fi
 
 

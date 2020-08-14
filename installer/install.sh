@@ -203,7 +203,7 @@ function uninstall() {
 
   sudo sed -i "s|v${k8sVersion}|{k8sVersion}|g" ${yaml_dir}/kubeadm-config.yaml
   sudo sed -i "s|${apiServer}|{apiServer}|g" ${yaml_dir}/kubeadm-config.yaml
-  sudo sed -i "s|\"${podSubnet}\"|{podSubnet}|g" ${yaml_dir}/kubeadm-config.yaml
+  sudo sed -i "s|${podSubnet}|{podSubnet}|g" ${yaml_dir}/kubeadm-config.yaml
   sudo sed -i "s|${imageRegistry}|{imageRegistry}|g" ${yaml_dir}/kubeadm-config.yaml
 
   sudo rm -rf $HOME/.kube

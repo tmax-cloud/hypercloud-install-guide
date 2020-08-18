@@ -69,7 +69,9 @@
 	```
 * 업그레이드 실행
 	```bash
-	sudo kubeadm upgrade apply v1.16.x
+	(1.15.x-> 1.16.x) sudo kubeadm upgrade apply v1.16.x
+	
+	(1.16.x-> 1.17.x) sudo kubeadm upgrade apply v1.17.x
 	```
 	```bash
 	[upgrade/config] Making sure the configuration is correct:
@@ -124,7 +126,9 @@
 	```
 * master와 node에 kubelet 및 kubectl을 업그레이드한다.
 	```bash
-	yum install -y kubelet-1.16.x-0 kubectl-1.16.x-0 --disableexcludes=kubernetes
+	(1.15.x-> 1.16.x) yum install -y kubelet-1.16.x-0 kubectl-1.16.x-0 --disableexcludes=kubernetes
+	
+	(1.16.x-> 1.17.x) yum install -y kubelet-1.17.x-0 kubectl-1.17.x-0 --disableexcludes=kubernetes
 	```
 * kubelet을 재시작 한다.
 	```bash
@@ -144,7 +148,9 @@
 * 모든 worker node에서 kubeadm을 업그레이드한다.
 	```bash
 	yum install -y kubeadm-설치버전 --disableexcludes=kubernetes
-	ex) yum install -y kubeadm-1.16.0-0 --disableexcludes=kubernetes
+	ex) (1.15.x-> 1.16.x) yum install -y kubeadm-1.16.x-0 --disableexcludes=kubernetes
+	
+	ex) (1.15.x-> 1.16.x) yum install -y kubeadm-1.17.x-0 --disableexcludes=kubernetes
 	```
 * 스케줄 불가능(unschedulable)으로 표시하고 워크로드를 축출하여 유지 보수할 노드를 준비한다.
 	```bash
@@ -156,7 +162,10 @@
 	```
 * kubelet과 kubectl 업그레이드
 	```bash
-	yum install -y kubelet-1.16.x-0 kubectl-1.16.x-0 --disableexcludes=kubernetes
+	(1.15.x-> 1.16.x) yum install -y kubelet-1.16.x-0 kubectl-1.16.x-0 --disableexcludes=kubernetes
+	
+	(1.16.x-> 1.17.x) yum install -y kubelet-1.17.x-0 kubectl-1.17.x-0 --disableexcludes=kubernetes
+	
 	sudo systemctl daemon-reload
 	sudo systemctl restart kubelet	
 	```

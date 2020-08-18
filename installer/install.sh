@@ -199,7 +199,7 @@ function install_kube() {
 
 function uninstall() {
 
-  kubeadm reset -f
+  kubeadm reset -f --cri-socket=/var/run/crio/crio.sock;
 
   sudo sed -i "s|v${k8sVersion}|{k8sVersion}|g" ${yaml_dir}/kubeadm-config.yaml
   sudo sed -i "s|${apiServer}|{apiServer}|g" ${yaml_dir}/kubeadm-config.yaml

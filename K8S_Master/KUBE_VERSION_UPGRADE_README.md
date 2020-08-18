@@ -20,7 +20,9 @@
 * master에서 kubeadm을 upgrade 한다.
 	```bash
 	yum install -y kubeadm-설치버전 --disableexcludes=kubernetes
+	
 	ex) yum install -y kubeadm-1.16.0-0 --disableexcludes=kubernetes
+	
 	ex) yum install -y kubeadm-1.17.6-0 --disableexcludes=kubernetes
 	```
 * 버전 확인
@@ -122,6 +124,7 @@
 * 적용된 cordon을 해제한다.
 	```bash
 	kubectl uncordon <cp-node-name>
+	
 	ex) kubectl uncordon k8s-master
 	```
 * master와 node에 kubelet 및 kubectl을 업그레이드한다.
@@ -148,6 +151,7 @@
 * 모든 worker node에서 kubeadm을 업그레이드한다.
 	```bash
 	yum install -y kubeadm-설치버전 --disableexcludes=kubernetes
+	
 	ex) (1.15.x-> 1.16.x) yum install -y kubeadm-1.16.x-0 --disableexcludes=kubernetes
 	
 	ex) (1.15.x-> 1.16.x) yum install -y kubeadm-1.17.x-0 --disableexcludes=kubernetes
@@ -172,6 +176,7 @@
 * 적용된 cordon을 해제한다.
 	```bash
 	kubectl uncordon <cp-node-name>
+	
 	ex) kubectl uncordon k8s-node
 	```
 * 비고 : 	

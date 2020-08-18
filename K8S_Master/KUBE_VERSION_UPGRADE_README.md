@@ -137,6 +137,7 @@
 	sudo kubeadm upgrade node
 	sudo kubeadm upgrade apply
 	``` 	
+    * 1.16.x -> 1.17.x로 업그레이드시 버전에 맞추어 위에 작업을 실행한다.
 	
 ## Step1. kubernetes node upgrade
 * 워커 노드의 업그레이드 절차는 워크로드를 실행하는 데 필요한 최소 용량을 보장하면서, 한 번에 하나의 노드 또는 한 번에 몇 개의 노드로 실행해야 한다.
@@ -164,3 +165,5 @@
 	kubectl uncordon <cp-node-name>
 	ex) kubectl uncordon k8s-node
 	```
+* 비고 : 	
+    * 1.16.x -> 1.17.x로 업그레이드시 버전에 맞추어 위에 작업을 실행한다.

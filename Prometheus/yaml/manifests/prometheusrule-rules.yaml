@@ -26,12 +26,12 @@ spec:
             sum(container_fs_usage_bytes{container_name!="POD",pod!=""}) BY
             (pod, namespace)
           record: 'pod:container_fs_usage_bytes:sum'
-        - expr: 'sum(container_memory_usage_bytes{container_name!=""}) BY (namespace)'
+        - expr: sum(container_memory_usage_bytes{pod!=""}) BY (namespace)
           record: 'namespace:container_memory_usage_bytes:sum'
-        - expr: 'sum(container_spec_cpu_shares{container_name!=""}) BY (namespace)'
+        - expr: sum(container_spec_cpu_shares{pod!=""}) BY (namespace)
           record: 'namespace:container_spec_cpu_shares:sum'
         - expr: >-
-            sum(rate(container_cpu_usage_seconds_total{container_name!="POD"}[5m]))
+            sum(rate(container_cpu_usage_seconds_total{pod!=""}[5m]))
             BY (namespace)
           record: 'namespace:container_cpu_usage:sum'
         - expr: >-

@@ -112,6 +112,9 @@
         $ export CONFIG_FILE=${KF_DIR}/kfctl_hypercloud_kubeflow.v1.0.2.yaml
         $ kfctl apply -V -f ${CONFIG_FILE}
         ```
+    * 아래와 같이, cert-manager 관련 오류가 계속 뜨는 현상이 있을 수 있는데, 이는 관련 컴포넌트들이 아직 로딩중이라 발생하는 것으로, 기다리자.
+    
+        ![pasted image 0](https://user-images.githubusercontent.com/63379907/90479302-6aedb380-e169-11ea-8c6c-9c1b4e15517a.png)
     * 설치에는 약 10분 정도가 소요된다.
 * 비고 :
     * 기존 Kubeflow에서 수정된 점

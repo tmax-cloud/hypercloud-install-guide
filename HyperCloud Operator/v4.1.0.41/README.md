@@ -1,5 +1,6 @@
 
 
+
 # hypercloud-operator 설치 가이드
 
 ## 구성 요소
@@ -71,16 +72,23 @@
 	$ sudo docker push ${REGISTRY}/registry:2.6.2
 	$ sudo docker push ${REGISTRY}/tmaxcloudck/hypercloud-operator:b${HPCD_VERSION}
     ```
-
+    
+3.  [Nginx Ingress Controller 설치 가이드]([https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/IngressNginx/README.md](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/IngressNginx/README.md)를 참고하여 Nginx Ingress Controller 설치에 필요한 이미지 준비
+	* 비고:
+		* [폐쇄망 설치 가이드]([https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/IngressNginx/README.md#%ED%8F%90%EC%87%84%EB%A7%9D-%EC%84%A4%EC%B9%98-%EA%B0%80%EC%9D%B4%EB%93%9C](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/IngressNginx/README.md#%ED%8F%90%EC%87%84%EB%A7%9D-%EC%84%A4%EC%B9%98-%EA%B0%80%EC%9D%B4%EB%93%9C)에서 아래의 부분 수행
+			* 1-1. 작업 디렉토리 생성 및 환경 설정
+			* 1-2. 외부 네트워크 통신이 가능한 환경에서 필요한 이미지를 다운받는다.
+			* 2-1.  위의 과정에서 생성한 tar 파일들을 폐쇄망 환경으로 이동시킨 뒤 사용하려는 registry에 이미지를 push한다. 
 
 ## Install Steps
-1. [1.initialization.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/README.md#step-1-1initializationyaml-%EC%8B%A4%ED%96%89)
-2. [CRD 적용](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/README.md#step-2-crd-%EC%A0%81%EC%9A%A9)
-3. [2.mysql-settings.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/README.md#step-3-2mysql-settingsyaml-%EC%8B%A4%ED%96%89)
-4. [3.mysql-create.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/README.md#step-4-3mysql-createyaml-%EC%8B%A4%ED%96%89)
-5. [6.hypercloud4-operator.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/README.md#step-5-6hypercloud4-operatoryaml-%EC%8B%A4%ED%96%89)
-6. [8.default-auth-object-init.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/README.md#step-6-8default-auth-object-inityaml-%EC%8B%A4%ED%96%89)
-7. [webhook-config 설정](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/README.md#step-7-webhook-config-%EC%84%A4%EC%A0%95)
+1. [1.initialization.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/v4.1.0.41/README.md#step-1-1initializationyaml-%EC%8B%A4%ED%96%89)
+2. [CRD 적용](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/v4.1.0.41/README.md#step-2-crd-%EC%A0%81%EC%9A%A9)
+3. [2.mysql-settings.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/v4.1.0.41/README.md#step-3-2mysql-settingsyaml-%EC%8B%A4%ED%96%89)
+4. [3.mysql-create.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/v4.1.0.41/README.md#step-4-3mysql-createyaml-%EC%8B%A4%ED%96%89)
+5. [6.hypercloud4-operator.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/v4.1.0.41/README.md#step-5-6hypercloud4-operatoryaml-%EC%8B%A4%ED%96%89)
+6. [8.default-auth-object-init.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/v4.1.0.41/README.md#step-6-8default-auth-object-inityaml-%EC%8B%A4%ED%96%89)
+7. [webhook-config 설정](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/v4.1.0.41/README.md#step-7-webhook-config-%EC%84%A4%EC%A0%95)
+8. [9.nginx-controller.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/v4.1.0.41/README.md#step-8-9nginx-controlleryaml-%EC%8B%A4%ED%96%89)
 
 
 ## Step 0. install  yaml 수정
@@ -177,3 +185,21 @@
 * 비고 : 
     * /etc/kubernetes/pki directory 에 webhook-config 파일 복사
 	* kube api-server manifest 설정 추가 : --authentication-token-webhook-config-file=/etc/kubernetes/pki/webhook-config
+
+## Step 8. 9.nginx-controller.yaml 실행
+* 목적 : `registry 생성 서비스용 nginx-controller 설치`
+* 실행: 
+	```bash
+	$ export INGRESS_NGINX_NAME=ingress-nginx-shared
+	$ export INGRESS_CLASS=nginx-shd
+	$ export NGINX_INGRESS_VERSION=0.33.0
+	$ export KUBE_WEBHOOK_CERTGEN_VERSION=v1.2.2
+	
+	$ sed -i 's/ingress-nginx/'${INGRESS_NGINX_NAME}'/g' ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/9.nginx-controller.yaml
+	$ sed -i 's/--ingress-class=nginx/--ingress-class='${INGRESS_CLASS}'/g' ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/9.nginx-controller.yaml
+	$ sed -i 's/ingress-controller-leader-nginx/ingress-controller-leader-'${INGRESS_CLASS}'/g' ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/9.nginx-controller.yaml
+	$ sed -i 's/{nginx_ingress_version}/'${NGINX_INGRESS_VERSION}'/g' ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/9.nginx-controller.yaml
+ 	$ sed -i 's/{kube_webhook_certgen_version}/'${KUBE_WEBHOOK_CERTGEN_VERSION}'/g' ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/9.nginx-controller.yaml
+ 	
+ 	$ kubectl apply -f ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/9.nginx-controller.yaml
+	```

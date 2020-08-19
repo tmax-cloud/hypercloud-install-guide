@@ -2,14 +2,48 @@
 # Federation 설치 가이드
 
 ## 구성 요소 및 버전
+* federation verion: v0.3.0 구축 요망
 
 ## Prerequisites
 * helm version 2
 
 ## 폐쇄망 설치 가이드
-추후 작업 예정.
-
-## Install Steps
+## Step 0. 환경변수 설정 및 폐쇄망 작업
+* 목적 : Fed 구축에 필요한 환경 변수 설정
+* 생성 순서 :
+    * script 실행 권한 부여
+    ```bash
+    $ chmod +x *.sh
+    ```
+    * 환경 변수를 적절히 수정 및 적용
+    ```bash
+    $ vim 0.setEnv.sh
+    $ source ./0.setEnv.sh
+    ```
+    * 폐쇄망 작업 수행
+    ```bash
+    $ ./1.setPrivate.sh
+    ```
+## Step 1. federation 배포
+* 목적 : federation 배포
+* 배포 순서 :
+    * federation 배포 script 수행
+    ```bash
+    $ ./2.deployFed.sh
+    ```
+    * 정상 동작 확인
+    ```bash
+    $ kubectl get pod -n kube-federation-system (step.0에서 설정한 namespace)
+    ```
+    ![image](figure/pod.JPG)
+## Step 2. federation 제거
+* 목적 : federation 제거
+* 제거 순서 :
+    * federation 제거 script 수행
+    ```bash
+    $ ./3.deleteFed.sh
+    ```
+## Public Install Steps
 0. [Binary 설치](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Fed#step-0-binary-%EC%84%A4%EC%B9%98)
 1. [helm을 통한 federation 설치](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Fed#step-1-helm%EC%9D%84-%ED%86%B5%ED%95%9C-federation-%EC%84%A4%EC%B9%98)
 

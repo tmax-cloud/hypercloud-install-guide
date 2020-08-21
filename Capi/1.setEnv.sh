@@ -9,6 +9,9 @@ export AWS_SECRET_ACCESS_KEY=DlGnrb7pp6KuI+Ylfi3kgHQCcWc6tho5aQ2g3+eh
 
 export REGISTRY=172.21.6.2:5000
 
+curl -LO https://github.com/kubernetes-sigs/cluster-api-provider-aws/releases/download/${AWS_VERSION}/clusterawsadm-linux-amd64
+mv clusterawsadm-linux-amd64 /usr/local/bin/clusterawsadm
+
 clusterawsadm bootstrap iam create-cloudformation-stack
 export AWS_B64ENCODED_CREDENTIALS=$(clusterawsadm bootstrap credentials encode-as-profile)
 

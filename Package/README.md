@@ -6,8 +6,7 @@
 * ISO 파일(CentOS 7.7 :http://vault.centos.org/7.7.1908/isos/x86_64/ 또는 http://192.168.2.136/ISOs/CentOS-7-x86_64-DVD-1908.iso)
 
 ## Prerequisites
-* ceph 설치 시 주의사항 참고
-* https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Package/warning.md
+* ceph 설치 시 주의사항 참고 (https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Package/warning.md)
 ## 폐쇄망 설치 가이드
 1. Install OS
     * CentOS 7.7 설치

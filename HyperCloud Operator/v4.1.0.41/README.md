@@ -186,7 +186,7 @@
     * /etc/kubernetes/pki directory 에 webhook-config 파일 복사
 	* kube api-server manifest 설정 추가 : --authentication-token-webhook-config-file=/etc/kubernetes/pki/webhook-config
 
-## Step 8. 9.nginx-controller.yaml 실행
+## Step 8. 7.nginx-controller.yaml 실행
 * 목적 : `registry 생성 서비스용 nginx-controller 설치`
 * 실행: 
 	```bash
@@ -195,11 +195,11 @@
 	$ export NGINX_INGRESS_VERSION=0.33.0
 	$ export KUBE_WEBHOOK_CERTGEN_VERSION=v1.2.2
 	
-	$ sed -i 's/ingress-nginx/'${INGRESS_NGINX_NAME}'/g' ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/9.nginx-controller.yaml
-	$ sed -i 's/--ingress-class=nginx/--ingress-class='${INGRESS_CLASS}'/g' ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/9.nginx-controller.yaml
-	$ sed -i 's/ingress-controller-leader-nginx/ingress-controller-leader-'${INGRESS_CLASS}'/g' ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/9.nginx-controller.yaml
-	$ sed -i 's/{nginx_ingress_version}/'${NGINX_INGRESS_VERSION}'/g' ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/9.nginx-controller.yaml
- 	$ sed -i 's/{kube_webhook_certgen_version}/'${KUBE_WEBHOOK_CERTGEN_VERSION}'/g' ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/9.nginx-controller.yaml
+	$ sed -i 's/ingress-nginx/'${INGRESS_NGINX_NAME}'/g' ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/7.nginx-controller.yaml
+	$ sed -i 's/--ingress-class=nginx/--ingress-class='${INGRESS_CLASS}'/g' ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/7.nginx-controller.yaml
+	$ sed -i 's/ingress-controller-leader-nginx/ingress-controller-leader-'${INGRESS_CLASS}'/g' ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/7.nginx-controller.yaml
+	$ sed -i 's/{nginx_ingress_version}/'${NGINX_INGRESS_VERSION}'/g' ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/7.nginx-controller.yaml
+ 	$ sed -i 's/{kube_webhook_certgen_version}/'${KUBE_WEBHOOK_CERTGEN_VERSION}'/g' ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/7.nginx-controller.yaml
  	
- 	$ kubectl apply -f ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/9.nginx-controller.yaml
+ 	$ kubectl apply -f ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/7.nginx-controller.yaml
 	```

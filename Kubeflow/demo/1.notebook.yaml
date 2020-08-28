@@ -1,0 +1,39 @@
+apiVersion: hyperflow.tmax.io/v1
+kind: Notebook
+metadata:
+  labels:
+    app: demo-notebook
+  name: demo-notebook
+  namespace: demo
+spec:
+  template:
+    spec:
+      containers:
+      - env: []
+        ## notebook image 정의
+        image: 'brightfly/kubeflow-jupyter-lab:tf2.0-gpu'
+        name: demo
+        resources:
+          ## notebook 사양 정의
+          requests:
+            cpu: "0.5"
+            memory: 1.0Gi
+        volumeMounts:
+        - mountPath: /home/jovyan
+          name: demo-pvc
+        - mountPath: /dev/shm
+          name: dshm
+      serviceAccountName: default-editor
+      ttlSecondsAfterFinished: 300
+      ## 사용할 volume 정의
+      volumes:
+      - name: demo-pvc
+        persistentVolumeClaim:
+          claimName: demo-pvc
+      - emptyDir:
+          medium: Memory
+        name: dshm
+  ## 사용할 volumeClaim 정의 : 없으면 새로 pvc를 생성      
+  volumeClaim:
+  - name: demo-pvc
+    size: 10Gi

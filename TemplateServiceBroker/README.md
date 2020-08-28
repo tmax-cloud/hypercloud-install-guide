@@ -17,7 +17,7 @@ TemplateServiceBroker 설치 전, Hypercloud operator 및 catalog controller mod
    ```bash
    mkdir -p ~/template-service-broker-install
    export TSB_HOME=~/template-service-broker-install
-   export TSB_VERSION=4.0.0.4
+   export TSB_VERSION=4.0.0.5
    cd $TSB_HOME
    ```
 
@@ -63,7 +63,7 @@ TemplateServiceBroker 설치 전, Hypercloud operator 및 catalog controller mod
 - 생성 순서 : 아래 command로 yaml 적용
   - (namespace:tsb-ns / serviceaccount: tsb-account라고 가정)
   - kubectl create namespace tsb-ns
-  - kubectl create serviceaccount tsb-account -n tsb-ns
+  - kubectl apply -f tsb_role.yaml ([파일](./yaml_install/tsb_serviceaccount.yaml))
 - 비고 : namespace, serviceaccount 변경 시, step1 이후 단계의 namesapce 및 serviceaccount 도 모두 맞게 변경해야 합니다.
 
 ## Step 2. Role 및 RoleBinding 생성

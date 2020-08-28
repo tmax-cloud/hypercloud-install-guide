@@ -6,7 +6,7 @@
 * Argo v2.8 (https://github.com/argoproj/argo)
 * Jupyter (https://github.com/jupyter/notebook)
 * Katib v0.8.0 (https://github.com/kubeflow/katib)
-* KFServing v0.2.2 (https://github.com/kubeflow/kfserving)
+* KFServing v0.4.0 (https://github.com/kubeflow/kfserving)
 * Training Job
     * TFJob v1.0.0 (https://github.com/kubeflow/tf-operator)
     * PytorchJob v1.0.0 (https://github.com/kubeflow/pytorch-operator)

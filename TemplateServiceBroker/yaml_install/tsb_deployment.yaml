@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: template-service-broker
-        image: tmaxcloudck/template-service-broker:b4.0.0.4
+        image: tmaxcloudck/template-service-broker:b4.0.0.5
         imagePullPolicy: Always
         env:
         - name: BackIp

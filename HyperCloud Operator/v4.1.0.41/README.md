@@ -88,7 +88,7 @@
 5. [6.hypercloud4-operator.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/v4.1.0.41/README.md#step-5-6hypercloud4-operatoryaml-%EC%8B%A4%ED%96%89)
 6. [8.default-auth-object-init.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/v4.1.0.41/README.md#step-6-8default-auth-object-inityaml-%EC%8B%A4%ED%96%89)
 7. [webhook-config 설정](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/v4.1.0.41/README.md#step-7-webhook-config-%EC%84%A4%EC%A0%95)
-8. [9.nginx-controller.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/v4.1.0.41/README.md#step-8-9nginx-controlleryaml-%EC%8B%A4%ED%96%89)
+8. [7.nginx-controller.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/v4.1.0.41/README.md#step-8-9nginx-controlleryaml-%EC%8B%A4%ED%96%89)
 
 
 ## Step 0. install  yaml 수정
@@ -186,7 +186,7 @@
     * /etc/kubernetes/pki directory 에 webhook-config 파일 복사
 	* kube api-server manifest 설정 추가 : --authentication-token-webhook-config-file=/etc/kubernetes/pki/webhook-config
 
-## Step 8. 9.nginx-controller.yaml 실행
+## Step 8. 7.nginx-controller.yaml 실행
 * 목적 : `registry 생성 서비스용 nginx-controller 설치`
 * 실행: 
 	```bash
@@ -195,11 +195,11 @@
 	$ export NGINX_INGRESS_VERSION=0.33.0
 	$ export KUBE_WEBHOOK_CERTGEN_VERSION=v1.2.2
 	
-	$ sed -i 's/ingress-nginx/'${INGRESS_NGINX_NAME}'/g' ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/9.nginx-controller.yaml
-	$ sed -i 's/--ingress-class=nginx/--ingress-class='${INGRESS_CLASS}'/g' ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/9.nginx-controller.yaml
-	$ sed -i 's/ingress-controller-leader-nginx/ingress-controller-leader-'${INGRESS_CLASS}'/g' ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/9.nginx-controller.yaml
-	$ sed -i 's/{nginx_ingress_version}/'${NGINX_INGRESS_VERSION}'/g' ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/9.nginx-controller.yaml
- 	$ sed -i 's/{kube_webhook_certgen_version}/'${KUBE_WEBHOOK_CERTGEN_VERSION}'/g' ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/9.nginx-controller.yaml
+	$ sed -i 's/ingress-nginx/'${INGRESS_NGINX_NAME}'/g' ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/7.nginx-controller.yaml
+	$ sed -i 's/--ingress-class=nginx/--ingress-class='${INGRESS_CLASS}'/g' ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/7.nginx-controller.yaml
+	$ sed -i 's/ingress-controller-leader-nginx/ingress-controller-leader-'${INGRESS_CLASS}'/g' ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/7.nginx-controller.yaml
+	$ sed -i 's/{nginx_ingress_version}/'${NGINX_INGRESS_VERSION}'/g' ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/7.nginx-controller.yaml
+ 	$ sed -i 's/{kube_webhook_certgen_version}/'${KUBE_WEBHOOK_CERTGEN_VERSION}'/g' ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/7.nginx-controller.yaml
  	
- 	$ kubectl apply -f ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/9.nginx-controller.yaml
+ 	$ kubectl apply -f ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/7.nginx-controller.yaml
 	```

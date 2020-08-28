@@ -245,8 +245,8 @@
 	cgroupDriver: systemd
 	```
       * kubernetesVersion : kubernetes version
-      * advertiseAddress : API server IP ( master IP or virtual IP)
-        * 1개의 마스터 : master IP , 2개 이상의 마스터 구축시 : virtual IP
+      * advertiseAddress : API server IP ( master IP )
+        * 해당 master 노드의 IP
       * controlPlaneEndpoint : endpoint IP ( master IP or virtual IP) , port는 반드시 6443으로 설정
         * 1개의 마스터 : master IP , 2개 이상의 마스터 구축시 : virtual IP
       * serviceSubnet : "${SERVICE_IP_POOL}/${CIDR}"

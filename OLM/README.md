@@ -13,7 +13,44 @@
 * Access to a Kubernetes v1.11.3+ cluster.
 
 ## 폐쇄망 설치 가이드
+설치를 진행하기 전 아래의 과정을 통해 필요한 이미지 및 yaml 파일을 준비한다.
+1. **폐쇄망에서 설치하는 경우** 사용하는 image repository에 HyperCloud Webhook 설치 시 필요한 이미지를 push한다. 
+
+    * 작업 디렉토리 생성 및 환경 설정
+    ```bash
+    $ mkdir -p ~/olm-install
+    $ export OLM_HOME=~/olm-install
+    $ export OLM_VERSION=0.15.1
+    $ export REG_VERSION=v.13.3
+    $ cd $OLM_HOME
+    ```
+    * 외부 네트워크 통신이 가능한 환경에서 필요한 이미지를 다운받는다.
+    ```bash
+    $ sudo docker pull quay.io/operator-framework/olm:${OLM_VERSION}
+    $ sudo docker save quay.io/operator-framework/olm:${OLM_VERSION} > olm_${OLM_VERSION}.tar
+    $ sudo docker pull quay.io/operator-framework/configmap-operator-registry:${REG_VERSION}
+    $ sudo docker save quay.io/operator-framework/configmap-operator-registry:${REG_VERSION} > registry_${REG_VERSION}.tar
+    ```
+    * install yaml을 다운로드한다.
+    ```bash
+    $ git clone https://github.com/tmax-cloud/hypercloud-install-guide.git
+    $ cd olm-install/OLM/yaml
+    ```
+  
+2. 위의 과정에서 생성한 tar 파일들을 폐쇄망 환경으로 이동시킨 뒤 사용하려는 registry에 이미지를 push한다.
+    ```bash
+    $ sudo docker load < olm_${OLM_VERSION}.tar
     
+    $ sudo docker tag quay.io/operator-framework/olm:${OLM_VERSION} ${REGISTRY}/operator-framework/olm:${OLM_VERSION}
+    
+    $ sudo docker push ${REGISTRY}/operator-framework/olm:${OLM_VERSION}
+    
+    $ sudo docker load < registry_${REG_VERSION}.tar
+    
+    $ sudo docker tag quay.io/operator-framework/configmap-operator-registry:${REG_VERSION} ${REGISTRY}/operator-framework/configmap-operator-registry:${REG_VERSION}
+    
+    $ sudo docker push ${REGISTRY}/operator-framework/configmap-operator-registry:${REG_VERSION}
+    ```
 
 ## Install Steps
 0. [olm yaml 수정](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/HyperCloud%20Webhook#step-0-hypercloud-webhook-yaml-%EC%88%98%EC%A0%95)
@@ -27,7 +64,12 @@
     $ sed -i 's/{olm_version}/'${OLM_VERSION}'/g' 02_olm.yaml
     $ sed -i 's/{registry_version}/'${REGISTRY_VERSION}'/g' 02_olm.yaml
     ```
-
+    
+* 비고 :
+    * 폐쇄망에서 설치를 진행하여 별도의 image registry를 사용하는 경우 registry 정보를 추가로 설정해준다.
+	```bash
+	$ sed -i 's/quay.io\operator-framework/'${REGISTRY}'\/operator-framework/g' 02_olm.yaml
+	```
 
 
 ## Step 1. CRDs 생성

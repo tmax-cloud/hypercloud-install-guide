@@ -138,7 +138,6 @@ cp /root/.docker/config.json /home/jovyan/.docker/config.json
   - demo-inferenceservice가 성공적으로 생성되었다면, curl 을 이용하여 inference 응답이 오는지 확인하자. (hyperCloud가 있는 네트워크 망에서 테스트 진행)
   ```
   MODEL_NAME=demo-inferenceservice
-  INPUT_PATH=@./input.json
   CLUSTER_IP=$(kubectl -n istio-system get service kfserving-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
   SERVICE_HOSTNAME=$(kubectl get inferenceservice ${MODEL_NAME} -n demo -o jsonpath='{.status.url}' | cut -d "/" -f 3)
   curl -v -H "Host: ${SERVICE_HOSTNAME}" http://$CLUSTER_IP/v1/models/$MODEL_NAME:predict -d '{

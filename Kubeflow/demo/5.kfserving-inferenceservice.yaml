@@ -1,0 +1,20 @@
+apiVersion: serving.kubeflow.org/v1alpha2
+kind: InferenceService
+metadata:
+  name: demo-inferenceservice
+  namespace: demo
+spec:
+  default:
+    predictor:
+      ## inference server 정의
+      tensorflow:
+        resources:
+          limits:
+            cpu: 100m
+            memory: 1Gi
+          requests:
+            cpu: 100m
+            memory: 1Gi
+        runtimeVersion: 1.14.0
+        ## Model 위치 설정
+        storageUri: pvc://demo-pvc/saved_model

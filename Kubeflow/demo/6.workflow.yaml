@@ -1,0 +1,117 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  name: demo-workflow
+  namespace: demo
+spec:
+  ## 기본적인 arg 정의
+  arguments:
+    parameters:
+    - name: learning_rate
+      value: "0.001397"
+    - name: dropout_rate
+      value: "0.18"
+    - name: epoch
+      value: "11"
+    - name: act
+      value: sigmoid
+    - name: layer
+      value: "2"
+    - name: checkpoint_dir
+      value: /reuslt/training_checkpoints
+    - name: saved_model_dir
+      value: /result/saved_model/
+    - name: pvc_name
+      value: demo-pvc
+    - name: tensorboard_log
+      value: /result/log
+    - name: name
+      value: demo-inferenceservice
+    - name: model_version
+      value: "0001"
+    - name: namespace
+      value: demo
+  ## 시작 task(template) 설정
+  entrypoint: fmnist
+  ## 끝 task(template) 설정
+  onExit: demo-inferenceservice
+  serviceAccountName: default-editor
+  templates:
+  ## training을 하는 task 정의
+  - arguments: {}
+    container:
+      args:
+      - --learning_rate
+      - '{{inputs.parameters.learning_rate}}'
+      - --dropout_rate
+      - '{{inputs.parameters.dropout_rate}}'
+      - --epoch
+      - '{{inputs.parameters.epoch}}'
+      - --act
+      - '{{inputs.parameters.act}}'
+      - --layer
+      - '{{inputs.parameters.layer}}'
+      - --checkpoint_dir
+      - '{{inputs.parameters.checkpoint_dir}}'
+      - --saved_model_dir
+      - '{{inputs.parameters.saved_model_dir}}'
+      - --model_version
+      - '{{inputs.parameters.model_version}}'
+      - --tensorboard_log
+      - '{{inputs.parameters.tensorboard_log}}'
+      command:
+      - python
+      - /app/fmnist-save-model-renew.py
+      image: rhojw/sample-job:3C8CE2EE
+      name: ""
+      resources: {}
+      volumeMounts:
+      - mountPath: /result
+        name: pvolume-4a58304317c5a3f7e710d2eb21f621e4ee3cae3e64f19e1d55a8a09
+    inputs:
+      parameters:
+      - name: act
+      - name: checkpoint_dir
+      - name: dropout_rate
+      - name: epoch
+      - name: layer
+      - name: learning_rate
+      - name: model_version
+      - name: pvc_name
+      - name: saved_model_dir
+      - name: tensorboard_log
+    metadata: 
+      annotations:
+        sidecar.istio.io/inject: "false"
+    name: fmnist
+    outputs: {}
+    volumes:
+    - name: pvolume-4a58304317c5a3f7e710d2eb21f621e4ee3cae3e64f19e1d55a8a09
+      persistentVolumeClaim:
+        claimName: '{{inputs.parameters.pvc_name}}'
+  ## serving을 하는 task 정의
+  - arguments: {}
+    container:
+      args:
+      - --namespace
+      - '{{inputs.parameters.namespace}}'
+      - --storage_uri
+      - pvc://{{inputs.parameters.pvc_name}}/saved_model
+      - --name
+      - '{{inputs.parameters.name}}'
+      command:
+      - python
+      - /app/KFServing-fairing.py
+      image: docker.io/rhojw/kfserving:745DCD9A
+      name: ""
+      resources: {}
+    inputs:
+      parameters:
+      - name: name
+      - name: namespace
+      - name: pvc_name
+    metadata: 
+      annotations:
+        sidecar.istio.io/inject: "false"
+    name: demo-inferenceservice
+    outputs: {}

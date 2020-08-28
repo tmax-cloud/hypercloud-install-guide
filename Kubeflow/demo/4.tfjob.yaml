@@ -1,0 +1,43 @@
+apiVersion: kubeflow.org/v1
+kind: TFJob
+metadata:
+  name: demo-tfjob
+  namespace: demo
+spec:
+  tfReplicaSpecs:
+    Worker:
+      replicas: 1
+      template:
+        metadata:
+          annotations:
+            sidecar.istio.io/inject: "false"
+          name: fairing-deployer
+        spec:
+          ## hyperparameter값을 설정 : learningRate, dropoutRate
+          containers:
+          - command:
+            - python
+            - /app/fmnist-save-model-renew.py
+            - "--learning_rate=0.01393"
+            - "--dropout_rate=0.84807"
+            env:
+            - name: FAIRING_RUNTIME
+              value: "1"
+            image: rhojw/sample-job:3C8CE2EE
+            name: tensorflow
+            resources:
+              limits:
+                cpu: 1
+                memory: 1.86Gi
+            securityContext:
+              runAsUser: 0
+            volumeMounts:
+            - mountPath: /result
+              name: fairing-volume-demo-pvc
+            workingDir: /app/
+          restartPolicy: Never
+          ## Model이 저장될 storage 정의
+          volumes:
+          - name: fairing-volume-demo-pvc
+            persistentVolumeClaim:
+              claimName: demo-pvc

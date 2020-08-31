@@ -99,6 +99,11 @@ cp /root/.docker/config.json /home/jovyan/.docker/config.json
 ```
 
   - 위의 작업이 끝났다면, code run을 하여 이미지를 배포하자. (UI는 jupyter 버전에 따라 다를 수 있음)
+  
+*kubeflow.fairing.builders.cluster.minio_context가 없다는 에러가 뜬다면, 다음 커맨드를 입력하여 kubeflow-fairing module을 업데이트하자
+```
+pip install kubeflow-fairing --upgrade
+```
 
 ![2.fmnist-save-model-renew.PNG](./img/2.fmnist-save-model-renew.PNG)
   - 참고 : [fmnist-save-model-renew.ipynb](./fmnist-save-model-renew.ipynb)
@@ -135,7 +140,7 @@ cp /root/.docker/config.json /home/jovyan/.docker/config.json
 
 ![5.kfserving-inferenceservice.PNG](./img/5.kfserving-inferenceservice.PNG)
   - 참고 : [5.kfserving-inferenceservice.yaml](5.kfserving-inferenceservice.yaml)
-  - demo-inferenceservice가 성공적으로 생성되었다면, curl 을 이용하여 inference 응답이 오는지 확인하자. (hyperCloud가 있는 네트워크 망에서 테스트 진행)
+  - demo-inferenceservice가 성공적으로 생성되었다면, curl 을 이용하여 inference 응답이 오는지 확인하자. (마스터 노드에서 테스트 진행)
   ```
   MODEL_NAME=demo-inferenceservice
   CLUSTER_IP=$(kubectl -n istio-system get service kfserving-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')

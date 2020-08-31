@@ -31,6 +31,8 @@
         ![ip-config2](https://user-images.githubusercontent.com/45585638/86681543-a3628380-c03a-11ea-8af4-95a769c87cb4.png)
       * IPv4 Setting 클릭 후 해당 환경에 맞게 IP 설정
         ![ip-config3](https://user-images.githubusercontent.com/45585638/86681549-a52c4700-c03a-11ea-9058-3a4eb56d676f.png)
+      * IPv6 Setting 클릭 후 해당 환경에 맞게 IP 설정
+        ![ip-config3-(1)](https://user-images.githubusercontent.com/22101375/91559682-7dd76380-e973-11ea-96fd-f8712c73c068.jpg)
       * Network 설정 활성화
         ![ip-config4](https://user-images.githubusercontent.com/45585638/86681561-a8273780-c03a-11ea-8532-6d6788dee8fe.png)
       * Hostname 설정 후 Apply

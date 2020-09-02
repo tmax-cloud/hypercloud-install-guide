@@ -164,7 +164,7 @@
 	```bash
 	kubectl drain <node-to-drain> --ignore-daemonsets
 	
-	ex) kubectl drain k8s-master --ignore-daemonsets
+	ex) kubectl drain k8s-master2 --ignore-daemonsets
 	```
     * 추가 컨트롤 프레인에서는 해당 명령어를 실행하지 않는다. (sudo kubeadm upgrade plan)
     * sudo kubeadm upgrade apply 명령어 대신에 sudo kubeadm upgrade node 명령어를 실행한다.
@@ -175,7 +175,7 @@
 	```bash
 	kubectl uncordon <cp-node-name>
 	
-	ex) kubectl uncordon k8s-master
+	ex) kubectl uncordon k8s-master2
 	```
      * master와 node에 kubelet 및 kubectl을 업그레이드한다.
 	```bash

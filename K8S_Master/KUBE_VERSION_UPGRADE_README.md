@@ -147,7 +147,8 @@
 * 비고 : 
     * master 다중화 구성 클러스터 업그레이드 시에는 다음과 같은 명령어를 실행한다.
     * 첫번째 컨트롤 플레인 업그레이드 시에는 위에 step을 진행하고, 나머지 컨트롤 플레인 업그레이드 시에는 아래의 명령어를 실행한다.	
-    * master에서 kubeadm을 upgrade 한다.
+    
+    * 추가된 master에서 kubeadm을 upgrade 한다.
 	```bash
 	yum install -y kubeadm-설치버전 --disableexcludes=kubernetes
 	

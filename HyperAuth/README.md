@@ -1,16 +1,14 @@
-# HyperCloud Webhook 설치 가이드
+# HyperAuth 설치 가이드
 
 ## 구성 요소 및 버전
-* hypercloud-webhook 
-    * ([tmaxcloudck/hypercloud-webhook:b4.1.0.14](https://hub.docker.com/layers/tmaxcloudck/hypercloud-webhook/b4.1.0.14/images/sha256-a77b966925af32df7e31047bda599bfcf5fe91092a6feeb5802bf57ab8c0a083?context=explore)) 
+* hyperauth
+    * ([tmaxcloudck/hyperauth:b1.0.2.5](https://hub.docker.com/layers/tmaxcloudck/hyperauth/b1.0.2.5/images/sha256-ac5297490881a49849b1c9c58f5d2e94fe1acc4406939be9310400bc9563a6a9?context=explore)) 
 
 ## Prerequisites
-1. 해당 모듈 설치 전 HyperCloud Operator 모듈 설치 필요
-    * ([HyperCloud Operator](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/README.md))
-    
-2. 설치 과정에 필요한 인증서 생성을 위해 JAVA 패키지 설치 필요
-    * ProLinux 7, CentOS 7: `ex) java-1.8.0-openjdk-devel.x86_64`
-    * Ubuntu: `ex) openjdk-8-jre-headless`
+X
+
+## Dependencies
+X
 
 ## 폐쇄망 설치 가이드
 설치를 진행하기 전 아래의 과정을 통해 필요한 이미지 및 yaml 파일을 준비한다.

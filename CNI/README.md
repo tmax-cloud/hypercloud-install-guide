@@ -3,6 +3,7 @@
 * CNI 플러그인 중 하나인 Calico CNI를 사용하며, 3.13 이후 버전 사용 필요
 * Calicoctl도 함께 설치 진행 필요
     * https://www.projectcalico.org/
+* [Calico 듀얼스택에 대한 설치 가이드](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/CNI/calico_dualstack_v3.15.1.yaml)
 
 
 ## 구성 요소 및 버전

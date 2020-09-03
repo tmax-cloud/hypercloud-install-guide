@@ -9,6 +9,7 @@ X
 
 ## Dependencies
 openssl
+csi-cephfs-sc storageClass
 
 ## 폐쇄망 설치 가이드
 설치를 진행하기 전 아래의 과정을 통해 필요한 이미지 및 yaml 파일을 준비한다.
@@ -17,24 +18,28 @@ openssl
 
 ## Install Steps
 1. [초기화 작업]()
-2. [DB Deployment 생성]()
-3. [SSL 인증서 생성]()
+2. [SSL 인증서 생성]()
 4. [HyperAuth Deployment 생성]()
 5. [Kubernetes OIDC 연동]()
 
 ## Step 1. 초기화 작업
-* 목적 : `HyperAuth 구축을 위한 초기화 작업`
-* 생성 순서 : [03_webhook-deployment.yaml](manifests/03_webhook-deployment.yaml) 실행 `ex) kubectl apply -f 03_webhook-deployment.yaml`)
-    ```bash
-    $ mkdir ./pki
-    $ sh 01_gen_certs.sh
-    $ openssl pkcs12 -export -in ./pki/hypercloud4-webhook.crt -inkey ./pki/hypercloud4-webhook.key -out ./pki/hypercloud4-webhook.p12 (Export Password: webhook)
-    $ keytool -importkeystore -deststorepass webhook -destkeypass webhook -destkeystore ./pki/hypercloud4-webhook.jks -srckeystore ./pki/hypercloud4-webhook.p12 -srcstoretype PKCS12 -srcstorepass webhook
-    ```
+* 목적 : `HyperAuth 구축을 위한 초기화 작업 및 DB 구축`
+* 생성 순서 : [1.initialization.yaml](manifest/1.initialization.yaml) 실행 `ex) kubectl apply -f 1.initialization.yaml`)
+* 확인 : 아래 커맨드 수행 후, Postgre DB table 생성 확인 (약 96-97개)
+```bash
+    $ kubectl exec -it $(kubectl get pods -n hyperauth | grep postgre | cut -d ' ' -f1) -n hyperauth -- bash
+    $ psql -U keycloak keycloak
+    $ \dt
+ ```
 
-## Step 2. Secret 생성
-* 목적 : `Step 1을 통해 생성한 인증서를 Secret으로 변환합니다`
-* 생성 순서 : [02_create_secret.sh](manifests/02_create_secret.sh) 실행 `ex) sh 02_create_secret.sh`
+## Step 2. SSL 인증서 생성
+* 목적 : `HTTPS 인증을 위한 openssl 인증서를 생성하고 secret으로 변환`
+* 생성 순서 : 아래 커맨드를 실행하여 인증서 생성 및 secret을 생성 (특정 directory 내부에서 실행 권장)
+```bash
+    $ openssl req -newkey rsa:4096 -nodes -sha256 -keyout hyperauth.key -x509 -subj "/C=KR/ST=Seoul/O=tmax/CN={HYPERAUTH_SERVICE_IP}" -days 365 -config <(cat /etc/ssl/openssl.cnf <(printf "[v3_ca]\nsubjectAltName=IP:$(kubectl describe service hyperauth -n hyperauth | grep 'LoadBalancer Ingress' | cut -d ' ' -f7)")) -out hyperauth.crt
+    $ kubectl create secret tls hyperauth-https-secret --cert=./hyperauth.crt --key=./hyperauth.key -n hyperauth
+    $ cp hyperauth.crt /etc/kubernetes/pki/hyperauth.crt
+```
 
 
 ## Step 3. HyperCloud Webhook Server 설치

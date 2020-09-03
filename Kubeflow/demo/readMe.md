@@ -205,4 +205,4 @@ kubectl get service -n istio-system kfserving-ingressgateway
 
   - 참고 : [5.workflow.yaml](5.workflow.yaml)
 
-*serving 같은 경우 kfp python module을 사용하여 image로 만들고, 이를 workflow task로 등록하여 생성하였다. 오픈소스 이미지 문제로 인해, crio runtime으로 구성된 hyperCloud에서는 image를 제대로 받지 못한다.
+*serving 같은 경우 kfp python module을 사용하여 image로 만들고, 이를 workflow task로 등록하여 생성하였다.

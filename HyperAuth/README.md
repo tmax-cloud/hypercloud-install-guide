@@ -8,8 +8,11 @@
 X
 
 ## Dependencies
-openssl
+openssl binary
+
 csi-cephfs-sc storageClass
+
+LoadBalancer type의 service 생성 가능
 
 ## 폐쇄망 설치 가이드
 설치를 진행하기 전 아래의 과정을 통해 필요한 이미지 및 yaml 파일을 준비한다.
@@ -25,7 +28,7 @@ csi-cephfs-sc storageClass
 ## Step 1. 초기화 작업
 * 목적 : `HyperAuth 구축을 위한 초기화 작업 및 DB 구축`
 * 생성 순서 : [1.initialization.yaml](manifest/1.initialization.yaml) 실행 `ex) kubectl apply -f 1.initialization.yaml`)
-* 확인 : 아래 커맨드 수행 후, Postgre DB table 생성 확인 (약 96-97개)
+* 비고 : 아래 커맨드 수행 후, Postgre DB table 생성 확인 (약 96-97개)
 ```bash
     $ kubectl exec -it $(kubectl get pods -n hyperauth | grep postgre | cut -d ' ' -f1) -n hyperauth -- bash
     $ psql -U keycloak keycloak
@@ -42,19 +45,18 @@ csi-cephfs-sc storageClass
 ```
 
 
-## Step 3. HyperCloud Webhook Server 설치
+## Step 3. HyperAuth Deployment 배포
 * 목적 : `HyperCloud Webhook Server 설치`
-* 생성 순서 : [03_webhook-deployment.yaml](manifests/03_webhook-deployment.yaml) 실행 `ex) kubectl apply -f 03_webhook-deployment.yaml`
+* 생성 순서 : [2.hyperauth_deployment.yaml](manifests/2.hyperauth_deployment.yaml) 실행 `ex) kubectl apply -f 2.hyperauth_deployment.yaml`
+* 비고 :
+    * kubectl get svc hyperauth -n hyperauth 명령어의 IP로 접속하여 정상 기동 확인
+    * 계정 : admin/admin
 
 
-## Step 4. HyperCloud Webhook Config 생성
+## Step 4. Kubernetes OIDC 연동
 * 목적 : `앞서 생성한 인증서 정보를 기반으로 Webhook 연동 설정 파일 생성`
 * 생성 순서 : 아래의 command를 실행하여 Webhook Config를 생성한다. ([04_gen-webhook-config.sh](manifests/04_gen-webhook-config.sh))
     ```bash
     $ sh 04_gen-webhook-config.sh
     ```
-
-
-## Step 5. HyperCloud Webhook Config 적용
-* 목적 : `Webhook 연동 설정을 적용하여 API 서버가 Webhook Server와 HTTPS 통신을 하도록 설정`
-* 생성 순서 : [05_webhook-configuration.yaml](manifests/05_webhook-configuration.yaml.template) 실행 `ex) kubectl apply -f 05_webhook-configuration.yaml`
+    

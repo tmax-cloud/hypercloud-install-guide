@@ -105,6 +105,8 @@ cp /root/.docker/config.json /home/jovyan/.docker/config.json
 pip install kubeflow-fairing --upgrade
 ```
 
+*실행이 잘 되지 않는다면, pythonNotebook의 kerner을 리셋 후 다시 code run을 진행하자. (IDE UI상단 커널새로고침 버튼 클릭)
+
 ![2.fmnist-save-model-renew.PNG](./img/2.fmnist-save-model-renew.PNG)
   - 참고 : [fmnist-save-model-renew.ipynb](./fmnist-save-model-renew.ipynb)
   - 아래와 같이 docker hub에 rhojw/sample-job:3C8CE2EE 의 image가 배포된 것을 확인할 수 있다. 이후 Step에 사용할 image이다. 

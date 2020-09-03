@@ -20,15 +20,15 @@ LoadBalancer type의 service 생성 가능
 
 
 ## Install Steps
-1. [초기화 작업]()
-2. [SSL 인증서 생성]()
-4. [HyperAuth Deployment 생성]()
-5. [Kubernetes OIDC 연동]()
+1. [초기화 작업](https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/HyperAuth/README.md#step-1-%EC%B4%88%EA%B8%B0%ED%99%94-%EC%9E%91%EC%97%85)
+2. [SSL 인증서 생성](https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/HyperAuth/README.md#step-2-ssl-%EC%9D%B8%EC%A6%9D%EC%84%9C-%EC%83%9D%EC%84%B1)
+3. [HyperAuth Deployment 생성](https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/HyperAuth/README.md#step-3-hyperauth-deployment-%EB%B0%B0%ED%8F%AC)
+4. [Kubernetes OIDC 연동](https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/HyperAuth/README.md#step-4-kubernetes-oidc-%EC%97%B0%EB%8F%99)
 
 ## Step 1. 초기화 작업
 * 목적 : `HyperAuth 구축을 위한 초기화 작업 및 DB 구축`
 * 생성 순서 : [1.initialization.yaml](manifest/1.initialization.yaml) 실행 `ex) kubectl apply -f 1.initialization.yaml`)
-* 비고 : 아래 커맨드 수행 후, Postgre DB table 생성 확인 (약 96-97개)
+* 비고 : 아래 명령어 수행 후, Postgre DB table 생성 확인 (약 96-97개)
 ```bash
     $ kubectl exec -it $(kubectl get pods -n hyperauth | grep postgre | cut -d ' ' -f1) -n hyperauth -- bash
     $ psql -U keycloak keycloak
@@ -37,7 +37,7 @@ LoadBalancer type의 service 생성 가능
 
 ## Step 2. SSL 인증서 생성
 * 목적 : `HTTPS 인증을 위한 openssl 인증서를 생성하고 secret으로 변환`
-* 생성 순서 : 아래 커맨드를 실행하여 인증서 생성 및 secret을 생성 (특정 directory 내부에서 실행 권장)
+* 생성 순서 : 아래 명령어를 실행하여 인증서 생성 및 secret을 생성 (특정 directory 내부에서 실행 권장)
 ```bash
     $ openssl req -newkey rsa:4096 -nodes -sha256 -keyout hyperauth.key -x509 -subj "/C=KR/ST=Seoul/O=tmax/CN={HYPERAUTH_SERVICE_IP}" -days 365 -config <(cat /etc/ssl/openssl.cnf <(printf "[v3_ca]\nsubjectAltName=IP:$(kubectl describe service hyperauth -n hyperauth | grep 'LoadBalancer Ingress' | cut -d ' ' -f7)")) -out hyperauth.crt
     $ kubectl create secret tls hyperauth-https-secret --cert=./hyperauth.crt --key=./hyperauth.key -n hyperauth
@@ -54,9 +54,6 @@ LoadBalancer type의 service 생성 가능
 
 
 ## Step 4. Kubernetes OIDC 연동
-* 목적 : `앞서 생성한 인증서 정보를 기반으로 Webhook 연동 설정 파일 생성`
-* 생성 순서 : 아래의 command를 실행하여 Webhook Config를 생성한다. ([04_gen-webhook-config.sh](manifests/04_gen-webhook-config.sh))
-    ```bash
-    $ sh 04_gen-webhook-config.sh
-    ```
+* 목적 : ``
+* 생성 순서 : 
     

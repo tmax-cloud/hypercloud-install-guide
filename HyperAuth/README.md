@@ -46,7 +46,7 @@ LoadBalancer type의 service 생성 가능
 
 
 ## Step 3. HyperAuth Deployment 배포
-* 목적 : `HyperCloud Webhook Server 설치`
+* 목적 : `HyperAuth 설치`
 * 생성 순서 : [2.hyperauth_deployment.yaml](manifests/2.hyperauth_deployment.yaml) 실행 `ex) kubectl apply -f 2.hyperauth_deployment.yaml`
 * 비고 :
     * kubectl get svc hyperauth -n hyperauth 명령어의 IP로 접속하여 정상 기동 확인

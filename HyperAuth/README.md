@@ -56,7 +56,7 @@ LoadBalancer type의 service 생성 가능
         * Name : admin-tmax.co.kr
         * Email : 관리자 전용 email
     4. Manage > Users > admin-tmax.co.kr UserDetail > Credentials 에서 password 재설정
-    5. Master > Add realm > Import - Select file 에 [3.tmax-realm.export.json](manifests/3.tmax_realm_export.json) 을 추가하여 Realm Import
+    5. Master > Add realm > Import - Select file 에 [3.tmax_realm_export.json](manifests/3.tmax_realm_export.json) 을 추가하여 Realm Import
 
 
 ## Step 4. Kubernetes OIDC 연동

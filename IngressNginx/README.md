@@ -56,9 +56,9 @@
 * 생성 순서 : 
     * 아래의 command를 수정하여 사용하고자 하는 image 버전 정보를 수정한다.
 	```bash
-	 $ sed -i 's/ingress-nginx/'${INGRESS_NGINX_NAME}'/g' deploy.yaml
-     $ sed -i 's/--ingress-class=nginx/--ingress-class='${INGRESS_CLASS}'/g' deploy.yaml
-     $ sed -i 's/ingress-controller-leader-nginx/ingress-controller-leader-'${INGRESS_CLASS}'/g' deploy.yaml
+	$ sed -i 's/ingress-nginx/'${INGRESS_NGINX_NAME}'/g' deploy.yaml
+	$ sed -i 's/--ingress-class=nginx/--ingress-class='${INGRESS_CLASS}'/g' deploy.yaml
+	$ sed -i 's/ingress-controller-leader-nginx/ingress-controller-leader-'${INGRESS_CLASS}'/g' deploy.yaml
 	$ sed -i 's/{nginx_ingress_version}/'${NGINX_INGRESS_VERSION}'/g' deploy.yaml
 	$ sed -i 's/{kube_webhook_certgen_version}/'${KUBE_WEBHOOK_CERTGEN_VERSION}'/g' deploy.yaml
 	```

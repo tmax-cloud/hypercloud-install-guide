@@ -63,6 +63,7 @@
     ```
 
 ## Install Steps
+0. [hypercloud-secret-watcher-daemonset.yaml 수정](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/SecretWatcher/README.md#step-0-hypercloud-secret-watcher-daemonsetyaml-%EC%88%98%EC%A0%95)
 1. [hypercloud-secret-watcher-daemonset.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/SecretWatcher#step-1-hypercloud-secret-watcher-daemonsetyaml-%EC%8B%A4%ED%96%89)
 
 ## Step 0. hypercloud-secret-watcher-daemonset.yaml 수정

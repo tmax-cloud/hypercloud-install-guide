@@ -15,8 +15,7 @@ csi-cephfs-sc storageClass
 LoadBalancer type의 service 생성 가능
 
 ## 폐쇄망 설치 가이드
-설치를 진행하기 전 아래의 과정을 통해 필요한 이미지 및 yaml 파일을 준비한다.
-1. 사용하는 image repository에 HyperAuth 설치 시 필요한 이미지를 push한다. 
+
 
 
 ## Install Steps

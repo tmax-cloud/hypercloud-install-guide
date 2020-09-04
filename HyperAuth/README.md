@@ -23,7 +23,6 @@ LoadBalancer type의 service 생성 가능
 1. [초기화 작업](https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/HyperAuth/README.md#step-1-%EC%B4%88%EA%B8%B0%ED%99%94-%EC%9E%91%EC%97%85)
 2. [SSL 인증서 생성](https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/HyperAuth/README.md#step-2-ssl-%EC%9D%B8%EC%A6%9D%EC%84%9C-%EC%83%9D%EC%84%B1)
 3. [HyperAuth Deployment 생성](https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/HyperAuth/README.md#step-3-hyperauth-deployment-%EB%B0%B0%ED%8F%AC)
-4. [Kubernetes OIDC 연동](https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/HyperAuth/README.md#step-4-kubernetes-oidc-%EC%97%B0%EB%8F%99)
 
 ## Step 1. 초기화 작업
 * 목적 : `HyperAuth 구축을 위한 초기화 작업 및 DB 구축`
@@ -48,7 +47,7 @@ LoadBalancer type의 service 생성 가능
 ## Step 3. HyperAuth Deployment 배포
 * 목적 : `HyperAuth 설치`
 * 생성 순서 :
-    1. [2.hyperauth_deployment.yaml](manifests/2.hyperauth_deployment.yaml) 실행 `ex) kubectl apply -f 2.hyperauth_deployment.yaml`
+    1. [2.hyperauth_deployment.yaml](manifest/2.hyperauth_deployment.yaml) 실행 `ex) kubectl apply -f 2.hyperauth_deployment.yaml`
     2. HyperAuth Admin Console에 접속
         * `kubectl get svc hyperauth -n hyperauth` 명령어로 IP 확인
         * 계정 : admin/admin
@@ -56,10 +55,4 @@ LoadBalancer type의 service 생성 가능
         * Name : admin-tmax.co.kr
         * Email : 관리자 전용 email
     4. Manage > Users > admin-tmax.co.kr UserDetail > Credentials 에서 password 재설정
-    5. Master > Add realm > Import - Select file 에 [3.tmax_realm_export.json](manifests/3.tmax_realm_export.json) 을 추가하여 Realm Import
-
-
-## Step 4. Kubernetes OIDC 연동
-* 목적 : `Kubernetes의 RBAC 인가 시스템과 HyperAuth를 연동`
-* 생성 순서 : 
-    
+    5. Master > Add realm > Import - Select file 에 [3.tmax_realm_export.json](manifest/3.tmax_realm_export.json) 을 추가하여 Realm Import

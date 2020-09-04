@@ -47,12 +47,12 @@ LoadBalancer type의 service 생성 가능
 ## Step 3. HyperAuth Deployment 배포
 * 목적 : `HyperAuth 설치`
 * 생성 순서 :
-    1. [2.hyperauth_deployment.yaml](manifest/2.hyperauth_deployment.yaml) 실행 `ex) kubectl apply -f 2.hyperauth_deployment.yaml`
-    2. HyperAuth Admin Console에 접속
+    * [2.hyperauth_deployment.yaml](manifest/2.hyperauth_deployment.yaml) 실행 `ex) kubectl apply -f 2.hyperauth_deployment.yaml`
+    * HyperAuth Admin Console에 접속
         * `kubectl get svc hyperauth -n hyperauth` 명령어로 IP 확인
         * 계정 : admin/admin
-    3. Manage > Users > Add user 에서 admin-tmax.co.kr 계정을 생성
+    * Manage > Users > Add user 에서 admin-tmax.co.kr 계정을 생성
         * Name : admin-tmax.co.kr
         * Email : 관리자 전용 email
-    4. Manage > Users > admin-tmax.co.kr UserDetail > Credentials 에서 password 재설정
-    5. Master > Add realm > Import - Select file 에 [3.tmax_realm_export.json](manifest/3.tmax_realm_export.json) 을 추가하여 Realm Import
+    * Manage > Users > admin-tmax.co.kr UserDetail > Credentials 에서 password 재설정
+    * Master > Add realm > Import - Select file 에 [3.tmax_realm_export.json](manifest/3.tmax_realm_export.json) 을 추가하여 Realm Import

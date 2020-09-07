@@ -76,7 +76,7 @@ helm repository server
    - helm init --client-only --stable-repo-url {helm_repo_url}
    - 비고: helm_repo_url은 폐쇄망에서 구축한 helm repository 주소 입니다. (ex.http://192.168.6.76:8080)
 
-## Install Steps
+## Install Steps (Public)
 1. [helm 바이너리 다운 및 설치](#Step-1-helm-바이너리-다운-및-설치)
 2. [tiller 설치](#Step-2-tiller-생성)
 
@@ -98,3 +98,39 @@ helm repository server
     - tiller 서버를 생성 합니다.
         - helm init --service-account tiller
 - 비고 : Step 2는 helm version이 2인 경우에만 진행 하시면 됩니다. (version 3은 진행할 필요 없음.)
+
+
+## Helm 기본 명령어 (Helm 3.x 버전 기준)
+1. Repo 조회
+    ```bash
+    helm repo list
+    ```
+2. Repo 추가
+    ```bash
+    helm repo add {repo_name} http://{repo_ip}:{repo_port}
+    ```
+3. Repo 정보 업데이트
+    ```bash
+    helm repo update
+    ```
+4. Repo 삭제
+    ```bash
+    helm repo remove {repo_name}
+    ```
+5. Chart 정보 가져오기
+    ```
+    helm search repo
+    ```
+6. Chart 설치
+    ```
+    helm install {install_name} {repo_name}/{chart_name} --namespace {namespace} --version {chart_version}
+    ```
+7. Chart 삭제
+    ```
+    helm uninstall {install_name} --namespace {namespace}
+    ```
+8. Chart 설치 확인
+    ```
+    helm list -A
+    ```
+- 비고 : 자세한 건, https://helm.sh/docs/helm/ 의 Helm Commands 참고

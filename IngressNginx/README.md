@@ -80,9 +80,9 @@
 	```console
 	$ kubectl get pods -n ingress-nginx
     NAME                                        READY   STATUS      RESTARTS   AGE
-    ingress-nginx-admission-create-jxcjs        0/1     Completed   0          11s
-    ingress-nginx-admission-patch-h7kv5         0/1     Completed   0          11s
-    ingress-nginx-controller-579fddb54f-xhvmn   1/1     Running     0          11s
+    ingress-nginx-shared-admission-create-jxcjs        0/1     Completed   0          11s
+    ingress-nginx-shared-admission-patch-h7kv5         0/1     Completed   0          11s
+    ingress-nginx-shared-controller-579fddb54f-xhvmn   1/1     Running     0          11s
     ```
 
 

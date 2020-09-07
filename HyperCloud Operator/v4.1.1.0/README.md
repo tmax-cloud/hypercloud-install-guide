@@ -79,7 +79,7 @@
 2. [CRD 적용](https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/HyperCloud%20Operator/v4.1.1.0/README.md#step-2-crd-%EC%A0%81%EC%9A%A9)
 3. [2.mysql-settings.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/HyperCloud%20Operator/v4.1.1.0/README.md#step-3-2mysql-settingsyaml-%EC%8B%A4%ED%96%89)
 4. [3.mysql-create.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/HyperCloud%20Operator/v4.1.1.0/README.md#step-4-3mysql-createyaml-%EC%8B%A4%ED%96%89)
-5. [4.hypercloud4-operator.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/HyperCloud%20Operator/v4.1.1.0/README.md#step-5-6hypercloud4-operatoryaml-%EC%8B%A4%ED%96%89)
+5. [4.hypercloud4-operator.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/HyperCloud%20Operator/v4.1.1.0/README.md#step-5-4hypercloud4-operatoryaml-%EC%8B%A4%ED%96%89)
 
 
 ## Step 0. install  yaml 수정

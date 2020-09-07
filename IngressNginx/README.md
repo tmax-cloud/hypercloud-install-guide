@@ -70,7 +70,7 @@
 	```
 
 ## Step 1. Nginx Ingress Controller 배포
-* 목적 : `ingress-nginx system namespace, clusterrole, clusterrolebinding, serviceaccount, deployment 생성`
+* 목적 : `ingress-nginx-shared system namespace, clusterrole, clusterrolebinding, serviceaccount, deployment 생성`
 * 생성 순서 : 
     * [deploy.yaml](yaml/deploy.yaml) 실행 
 	```bash

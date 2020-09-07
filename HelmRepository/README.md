@@ -66,7 +66,7 @@
     - 비고: repo_ip 및 port는 step 1에서 생성한 service의 loadbalancer ip 및 port 이며, id 및 password는 chartmuseum.yaml에 설정되어 있는 BASIC_AUTH_USER와 BASIC_AUTH_PASS를 의미 합니다.
 3. 업로드 확인
     - curl http://{repo_ip}:{repo_port}/api/charts
-4. 기타 API 사용법은 https://github.com/helm/chartmuseum를 참조하시면 됩니다.
+4. 기타 API 사용법은 https://github.com/helm/chartmuseum 를 참조하시면 됩니다.
 
 ### chart delete
 1. curl -u {id}:{password} -X DELETE http://{repo_ip}:{repo_port}/api/charts/{chart_name}/{chart_version}

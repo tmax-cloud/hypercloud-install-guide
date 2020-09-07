@@ -63,16 +63,19 @@ TemplateServiceBroker 설치 전, Hypercloud operator 및 catalog controller mod
 - 생성 순서 : 아래 command로 yaml 적용
   - (namespace:tsb-ns / serviceaccount: tsb-account라고 가정)
   - kubectl create namespace tsb-ns
-  - kubectl apply -f tsb_role.yaml ([파일](./yaml_install/tsb_serviceaccount.yaml))
+  - kubectl apply -f tsb_serviceaccount.yaml ([파일](./yaml_install/tsb_serviceaccount.yaml))
 - 비고 : namespace, serviceaccount 변경 시, step1 이후 단계의 namesapce 및 serviceaccount 도 모두 맞게 변경해야 합니다.
 
 ## Step 2. Role 및 RoleBinding 생성
 
 - 목적 : `해당 namespace의 serviceaccount에 권한 부여.`
 - 생성 순서 : 아래 command로 yaml 적용
-  - (namespace:tsb-ns / serviceaccount: tsb-account라고 가정)
+  - (namespace:tsb-ns / serviceaccount: tsb-account / ${USER_ID}:hypercloud 계정 id 라고 가정)
   - kubectl apply -f tsb_role.yaml ([파일](./yaml_install/tsb_role.yaml))
+  - kubectl apply -f tsb_cluster_role.yaml ([파일](./yaml_install/tsb_cluster_role.yaml))
   - kubectl apply -f tsb_rolebinding.yaml ([파일](./yaml_install/tsb_rolebinding.yaml))
+  - kubectl apply -f tsb_cluster_rolebinding.yaml ([파일](./yaml_install/tsb_cluster_rolebinding.yaml))
+- 비고 : rolebinding, clusterRolebinding 의 ${USER_ID}를 사용자 계정 id로 변경해주셔야 합니다.
 
 ## Step 3. TemplateServiceBroker Server 생성
 

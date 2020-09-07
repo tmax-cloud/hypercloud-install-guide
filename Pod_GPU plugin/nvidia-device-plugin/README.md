@@ -43,7 +43,7 @@
 
 ## Install Steps - for GPU node
 0. [NVIDIA driver 설치](#step-0-nvidia-driver-설치)
-1. [nvidia-docker2 설치](#step-1-nvidia-docker2-설치)
+1. [필요한 패키지 설치 및 설정](#step-1-필요한-패키지-설치-및-설정)
 
 ## Step 0. NVIDIA driver 설치
 * 목적 : `GPU device에 적절한 nvidia driver를 설치`
@@ -74,13 +74,23 @@
         $ nvidia-smi
         ```
 
-## Step 1. nvidia-docker2 설치
-* 목적 : `nvidia-docker2를 설치`
+## Step 1. 필요한 패키지 설치 및 설정
+### Docker를 사용하는 경우
+* 목적 : `nvidia-docker2를 설치 후, 설정을 적절하게 수정`
 * 생성 순서 : 
-    * nvidia-docker2를 설치
+    * nvidia-docker2 설치 및 설정 스크립트 실행
         ```bash
         $ cd ${INSTALLER_HOME}
         $ ./gpunode-install-nvidia-docker2.sh
+        ```
+### CRI-O를 사용하는 경우
+* 목적 : `nvidia-container-toolkit을 설치`
+* 생성 순서 : 
+    * nvidia-container-toolkit을 설치
+        ```bash
+        $ distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+        $ curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.repo | sudo tee /etc/yum.repos.d/nvidia-docker.repo
+        $ yum install -y nvidia-container-toolkit
         ```
 
 ## Install Steps - for master node

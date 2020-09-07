@@ -4,6 +4,9 @@ metadata:
   name: service-broker-rolebinding
   namespace: tsb-ns
 subjects:
+- kind: User
+  apiGroup: rbac.authorization.k8s.io
+  name: ${USER_ID}
 - kind: ServiceAccount
   name: tsb-account
 roleRef:

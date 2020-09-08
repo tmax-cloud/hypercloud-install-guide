@@ -58,8 +58,8 @@
 
 ### chart upload
 1. 외부 네트워크 가능한 환경에서 helm chart를 다운 받습니다.
-    - helm version 2: helm fetch {repo_name}/{char_name}
-    - helm version 3: helm pull {repo_name}/{char_name}
+    - helm version 2: helm fetch {repo_name}/{chart_name}
+    - helm version 3: helm pull {repo_name}/{chart_name}
 2. 다운 받은 chart 혹은 직접 만든 chart (.tgz)파일을 폐쇄망에 구축 되어 있는 helm repository로 업로드 합니다.
     - cd {chart파일이 있는 경로(.tgz)}
     - curl -u {id}:{password} --data-binary "@{file_name}.tgz" http://{repo_ip}:{repo_port}/api/charts

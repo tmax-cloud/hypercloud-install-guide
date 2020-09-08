@@ -26,7 +26,7 @@
     $ export ISTIO_HOME=~/istio-install
     $ export ISTIO_VERSION=1.5.1
     $ export JAEGER_VERSION=1.16
-    $ export KIALI_VERSION=v1.20
+    $ export KIALI_VERSION=v1.21
     $ export REGISTRY=[IP:PORT]
     $ cd $ISTIO_HOME
     ```
@@ -145,11 +145,8 @@
 * 비고 :
     * kiali에 접속하기 위한 서비스를 [원하는 타입](yaml/2.kiali.yaml#L346)으로 변경할 수 있다.
     * kiali에 접속하기 위한 방식을 [strategy](yaml/2.kiali.yaml#L184)를 configmap을 수정해 변경할 수 있다.
-    * kiali에서 token을 strategy를 default로 제공하려고 하고 있다.(token: service account token)
-    * service account token 은 secret에서 확인 가능하다.
-    * hypercloud accessToken 으로도 login 가능하며, 브라우져의 개발자도구 콘솔창에서 확인 가능하다.
-    * login 옵션의 경우 kiali에 접속하기 위한 [id/password](yaml/2.kiali.yaml#L215)를 configmap을 수정해 변경할 수 있다.(default: admin/admin)
-    * login 옵션은 추후 kiali에서 없어질 수 있다.
+    * kiali에서 openid connect 지원하여 hyperauth 인증을 통해 서비스를 사용 가능하다.
+    * hyperauth 에서 hypercloud4 client 설정에서 implicit flow enabled 를 on 으로 변경해야한다.
     * kilai pod가 running임을 확인한 뒤 http://$KIALI_URL/api/kiali 에 접속해 정상 동작을 확인한다.
     * hypercloud console 과 연동을 위해 kiali default web_root를 수정하였다.
 	

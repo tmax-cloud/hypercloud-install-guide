@@ -126,9 +126,10 @@
     * 아래의 command로 hyperauth IP를 확인하고 수정하여 사용하고자 하는 hyperauth IP 정보를 수정한다.
         ```bash
         $ kubectl get svc -n hyperauth hyperauth
-        ```    
+        ```
+	
 	```bash	
-	$ sed -i 's/{hyperauth_url}/'${HYPERAUTH_IP}'/g' 2.kiali.yaml	
+	$ sed -i 's/{hyperauth_IP}/'${HYPERAUTH_IP}'/g' 2.kiali.yaml	
 	```    
 * 비고 :
     * `폐쇄망에서 설치를 진행하여 별도의 image registry를 사용하는 경우 registry 정보를 추가로 설정해준다.`

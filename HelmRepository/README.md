@@ -58,15 +58,15 @@
 
 ### chart upload
 1. 외부 네트워크 가능한 환경에서 helm chart를 다운 받습니다.
-    - helm version 2: helm fetch {repo_name}/{char_name}
-    - helm version 3: helm pull {repo_name}/{char_name}
+    - helm version 2: helm fetch {repo_name}/{chart_name}
+    - helm version 3: helm pull {repo_name}/{chart_name}
 2. 다운 받은 chart 혹은 직접 만든 chart (.tgz)파일을 폐쇄망에 구축 되어 있는 helm repository로 업로드 합니다.
     - cd {chart파일이 있는 경로(.tgz)}
     - curl -u {id}:{password} --data-binary "@{file_name}.tgz" http://{repo_ip}:{repo_port}/api/charts
     - 비고: repo_ip 및 port는 step 1에서 생성한 service의 loadbalancer ip 및 port 이며, id 및 password는 chartmuseum.yaml에 설정되어 있는 BASIC_AUTH_USER와 BASIC_AUTH_PASS를 의미 합니다.
 3. 업로드 확인
     - curl http://{repo_ip}:{repo_port}/api/charts
-4. 기타 API 사용법은 https://github.com/helm/chartmuseum를 참조하시면 됩니다.
+4. 기타 API 사용법은 https://github.com/helm/chartmuseum 를 참조하시면 됩니다.
 
 ### chart delete
 1. curl -u {id}:{password} -X DELETE http://{repo_ip}:{repo_port}/api/charts/{chart_name}/{chart_version}

@@ -5,7 +5,7 @@
 * istiod ([docker.io/istio/pilot:1.5.1](https://hub.docker.com/layers/istio/pilot/1.5.1/images/sha256-818aecc1c73c53af9091ac1d4f500d9d7cec6d135d372d03cffab1addaff4ec0?context=explore))
 * istio-ingressgateway ([docker.io/istio/proxyv2:1.5.1](https://hub.docker.com/layers/istio/proxyv2/1.5.1/images/sha256-3ad9ee2b43b299e5e6d97aaea5ed47dbf3da9293733607d9b52f358313e852ae?context=explore))
 * istio-tracing ([docker.io/jaegertracing/all-in-one:1.16](https://hub.docker.com/layers/jaegertracing/all-in-one/1.16/images/sha256-738442983b772a5d413c8a2c44a5563956adaff224e5b38f52a959124dafc119?context=explore))
-* kiali ([quay.io/kiali/kiali:v1.20](https://quay.io/repository/kiali/kiali?tab=tags))
+* kiali ([quay.io/kiali/kiali:v1.21](https://quay.io/repository/kiali/kiali?tab=tags))
 * bookinfo example
     * productpage([docker.io/istio/examples-bookinfo-productpage-v1:1.15.0](https://hub.docker.com/layers/istio/examples-bookinfo-productpage-v1/1.15.0/images/sha256-0a5eb4795952372251d51f72834bccb7ea01a67cb72fd9b58b757cca103b7524?context=explore))
     * details([docker.io/istio/examples-bookinfo-details-v1:1.15.0](https://hub.docker.com/layers/istio/examples-bookinfo-details-v1/1.15.0/images/sha256-fce0bcbff0bed09116dacffca15695cd345e0c3788c15b0114a05f654ddecc17?context=explore))
@@ -26,7 +26,7 @@
     $ export ISTIO_HOME=~/istio-install
     $ export ISTIO_VERSION=1.5.1
     $ export JAEGER_VERSION=1.16
-    $ export KIALI_VERSION=v1.20
+    $ export KIALI_VERSION=v1.21
     $ export REGISTRY=[IP:PORT]
     $ cd $ISTIO_HOME
     ```
@@ -123,6 +123,14 @@
 	$ sed -i 's/{istio_version}/'${ISTIO_VERSION}'/g' 4.istio-core.yaml
 	$ sed -i 's/{istio_version}/'${ISTIO_VERSION}'/g' 5.istio-ingressgateway.yaml
 	```
+    * 아래의 command로 hyperauth IP를 확인하고 수정하여 사용하고자 하는 hyperauth IP 정보를 수정한다.
+        ```bash
+        $ kubectl get svc -n hyperauth hyperauth
+        ```
+	
+	```bash	
+	$ sed -i 's/{hyperauth_IP}/'${HYPERAUTH_IP}'/g' 2.kiali.yaml	
+	```    
 * 비고 :
     * `폐쇄망에서 설치를 진행하여 별도의 image registry를 사용하는 경우 registry 정보를 추가로 설정해준다.`
 	```bash
@@ -145,11 +153,8 @@
 * 비고 :
     * kiali에 접속하기 위한 서비스를 [원하는 타입](yaml/2.kiali.yaml#L346)으로 변경할 수 있다.
     * kiali에 접속하기 위한 방식을 [strategy](yaml/2.kiali.yaml#L184)를 configmap을 수정해 변경할 수 있다.
-    * kiali에서 token을 strategy를 default로 제공하려고 하고 있다.(token: service account token)
-    * service account token 은 secret에서 확인 가능하다.
-    * hypercloud accessToken 으로도 login 가능하며, 브라우져의 개발자도구 콘솔창에서 확인 가능하다.
-    * login 옵션의 경우 kiali에 접속하기 위한 [id/password](yaml/2.kiali.yaml#L215)를 configmap을 수정해 변경할 수 있다.(default: admin/admin)
-    * login 옵션은 추후 kiali에서 없어질 수 있다.
+    * kiali에서 openid connect 지원하여 hyperauth 인증을 통해 서비스를 사용 가능하다.
+    * hyperauth 에서 hypercloud4 client 설정에서 implicit flow enabled 를 on 으로 변경해야한다.
     * kilai pod가 running임을 확인한 뒤 http://$KIALI_URL/api/kiali 에 접속해 정상 동작을 확인한다.
     * hypercloud console 과 연동을 위해 kiali default web_root를 수정하였다.
 	

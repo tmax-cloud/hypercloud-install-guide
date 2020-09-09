@@ -74,13 +74,13 @@
 
 ## Install Steps
 0. [0.install yaml 수정](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/HyperCloud%20Operator/v4.1.0.13#step-0-install--yaml-%EC%88%98%EC%A0%95)
-1. [1.initialization.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/README.md#step-1-1initializationyaml-%EC%8B%A4%ED%96%89)
-2. [CRD 적용](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/README.md#step-2-crd-%EC%A0%81%EC%9A%A9)
-3. [2.mysql-settings.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/README.md#step-3-2mysql-settingsyaml-%EC%8B%A4%ED%96%89)
-4. [3.mysql-create.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/README.md#step-4-3mysql-createyaml-%EC%8B%A4%ED%96%89)
-5. [6.hypercloud4-operator.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/README.md#step-5-6hypercloud4-operatoryaml-%EC%8B%A4%ED%96%89)
-6. [8.default-auth-object-init.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/README.md#step-6-8default-auth-object-inityaml-%EC%8B%A4%ED%96%89)
-7. [webhook-config 설정](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/README.md#step-7-webhook-config-%EC%84%A4%EC%A0%95)
+1. [1.initialization.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/HyperCloud%20Operator/v4.1.0.13#step-1-1initializationyaml-%EC%8B%A4%ED%96%89)
+2. [CRD 적용](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/HyperCloud%20Operator/v4.1.0.13#step-2-crd-%EC%A0%81%EC%9A%A9)
+3. [2.mysql-settings.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/HyperCloud%20Operator/v4.1.0.13#step-3-2mysql-settingsyaml-%EC%8B%A4%ED%96%89)
+4. [3.mysql-create.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/HyperCloud%20Operator/v4.1.0.13#step-4-3mysql-createyaml-%EC%8B%A4%ED%96%89)
+5. [6.hypercloud4-operator.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/HyperCloud%20Operator/v4.1.0.13#step-5-6hypercloud4-operatoryaml-%EC%8B%A4%ED%96%89)
+6. [8.default-auth-object-init.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/HyperCloud%20Operator/v4.1.0.13#step-6-8default-auth-object-inityaml-%EC%8B%A4%ED%96%89)
+7. [webhook-config 설정](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/HyperCloud%20Operator/v4.1.0.13#step-7-webhook-config-%EC%84%A4%EC%A0%95)
 
 ## Step 0. install  yaml 수정
 * 목적 : `hypercloud-operator install yaml파일 내용 수정`

@@ -3,7 +3,7 @@
 ### Module (Required)
 | Module | Version | Guide | 진행률(O/△/X) |
 | ------ | ------ | ------ | ------ |
-| OS 설치 & package repo |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Package/README.md | O |
+| CentOS 설치 & package repo | 7.7 | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Package/README.md | O |
 | Image registry |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Image_Registry/README.md | O |
 | K8s Master | v1.17.6  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/K8S_Master/README.md | O |
 | K8s Worker | v1.17.6 | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/K8S_Worker/README.md | O |

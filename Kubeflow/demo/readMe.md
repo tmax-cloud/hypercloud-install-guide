@@ -100,13 +100,16 @@ cp /root/.docker/config.json /home/jovyan/.docker/config.json
 
   - 위의 작업이 끝났다면, code run을 하여 이미지를 배포하자. (UI는 jupyter 버전에 따라 다를 수 있음)
   
+![2.fmnist-save-model-renew.PNG](./img/2.fmnist-save-model-renew.PNG)
+  - 참고 : [fmnist-save-model-renew.ipynb](./fmnist-save-model-renew.ipynb)
+  
 *kubeflow.fairing.builders.cluster.minio_context가 없다는 에러가 뜬다면, 다음 커맨드를 입력하여 kubeflow-fairing module을 업데이트하자
 ```
 pip install kubeflow-fairing --upgrade
 ```
 
-![2.fmnist-save-model-renew.PNG](./img/2.fmnist-save-model-renew.PNG)
-  - 참고 : [fmnist-save-model-renew.ipynb](./fmnist-save-model-renew.ipynb)
+*실행이 잘 되지 않는다면, pythonNotebook의 kerner을 리셋 후 다시 code run을 진행하자. (code run 옆에 커널새로고침 버튼 클릭)
+
   - 아래와 같이 docker hub에 rhojw/sample-job:3C8CE2EE 의 image가 배포된 것을 확인할 수 있다. 이후 Step에 사용할 image이다. 
 
 ![2.docker-image.PNG](./img/2.docker-image.PNG)
@@ -202,4 +205,4 @@ kubectl get service -n istio-system kfserving-ingressgateway
 
   - 참고 : [5.workflow.yaml](5.workflow.yaml)
 
-*serving 같은 경우 kfp python module을 사용하여 image로 만들고, 이를 workflow task로 등록하여 생성하였다. 오픈소스 이미지 문제로 인해, crio runtime으로 구성된 hyperCloud에서는 image를 제대로 받지 못한다.
+*serving 같은 경우 kfp python module을 사용하여 image로 만들고, 이를 workflow task로 등록하여 생성하였다.

@@ -29,6 +29,12 @@
 	```bash
 	kubeadm version
 	```
+* node drain
+	```bash
+	kubectl drain <node-to-drain> --ignore-daemonsets
+	
+	ex) kubectl drain k8s-master --ignore-daemonsets
+	```	
 * 업그레이드 plan 변경
 	```bash
 	sudo kubeadm upgrade plan 
@@ -140,12 +146,48 @@
 	```		
 * 비고 : 
     * master 다중화 구성 클러스터 업그레이드 시에는 다음과 같은 명령어를 실행한다.
+    * 첫번째 컨트롤 플레인 업그레이드 시에는 위에 step을 진행하고, 나머지 컨트롤 플레인 업그레이드 시에는 아래의 명령어를 실행한다.	
+    
+    * 추가된 master에서 kubeadm을 upgrade 한다.
+	```bash
+	yum install -y kubeadm-설치버전 --disableexcludes=kubernetes
+	
+	ex) yum install -y kubeadm-1.16.0-0 --disableexcludes=kubernetes
+	
+	ex) yum install -y kubeadm-1.17.6-0 --disableexcludes=kubernetes
+	```
+    * 버전 확인
+	```bash
+	kubeadm version
+	```
+    * node drain
+	```bash
+	kubectl drain <node-to-drain> --ignore-daemonsets
+	
+	ex) kubectl drain k8s-master2 --ignore-daemonsets
+	```
+    * 추가 컨트롤 프레인에서는 해당 명령어를 실행하지 않는다. (sudo kubeadm upgrade plan)
+    * sudo kubeadm upgrade apply 명령어 대신에 sudo kubeadm upgrade node 명령어를 실행한다.
 	```bash
 	sudo kubeadm upgrade node
-	sudo kubeadm upgrade apply
-	``` 	
-    * 1.16.x -> 1.17.x로 업그레이드시 버전에 맞추어 위에 작업을 실행한다.
+	```
+	* 적용된 cordon을 해제한다.
+	```bash
+	kubectl uncordon <cp-node-name>
 	
+	ex) kubectl uncordon k8s-master2
+	```
+     * master와 node에 kubelet 및 kubectl을 업그레이드한다.
+	```bash
+	(1.15.x-> 1.16.x) yum install -y kubelet-1.16.x-0 kubectl-1.16.x-0 --disableexcludes=kubernetes
+	
+	(1.16.x-> 1.17.x) yum install -y kubelet-1.17.x-0 kubectl-1.17.x-0 --disableexcludes=kubernetes
+	```
+     * kubelet을 재시작 한다.
+	```bash
+	sudo systemctl daemon-reload
+	sudo systemctl restart kubelet
+	```
 ## Step1. kubernetes node upgrade
 * 워커 노드의 업그레이드 절차는 워크로드를 실행하는 데 필요한 최소 용량을 보장하면서, 한 번에 하나의 노드 또는 한 번에 몇 개의 노드로 실행해야 한다.
 * 모든 worker node에서 kubeadm을 업그레이드한다.

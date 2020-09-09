@@ -1,5 +1,5 @@
 #!/bin/bash
-hyperauthserver=$1
+hyperauthserver=$(kubectl get svc -n hyperauth | grep hyperauth | cut -d ' ' -f1)
 echo hyperauthserver : $hyperauthserver
 
 # get Admin Token
@@ -13,10 +13,10 @@ token=$(curl -X POST 'http://'$hyperauthserver':8080/auth/realms/master/protocol
 echo accessToken : $token
 
 # Sed HypercloudServer IP
-hypercloudconsole=$2
+hypercloudconsole=$(kubectl get svc -n console-system | grep console | cut -d ' ' -f1)
 echo hypercloudconsole : $hypercloudconsole
-sed -i 's/172.22.6.14/'$hypercloudconsole'/g' tmax-realm-export.json
-sed -i 's/172.22.6.2:31304/'$hypercloudconsole'/g' tmax-realm-export.json
+sed -i 's/172.22.6.14/'$hypercloudconsole'/g' 3.tmax_realm_export.json
+sed -i 's/172.22.6.2:31304/'$hypercloudconsole'/g' 3.tmax_realm_export.json
 
 # tmax Realm Import
 curl 'http://'$hyperauthserver':8080/auth/admin/realms' \

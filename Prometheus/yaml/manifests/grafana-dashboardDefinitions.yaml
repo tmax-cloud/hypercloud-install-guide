@@ -8069,7 +8069,7 @@ items:
                           "text": "Prometheus",
                           "value": "Prometheus"
                       },
-                      "hide": 0,
+                      "hide": 2,
                       "label": null,
                       "name": "datasource",
                       "options": [
@@ -8114,7 +8114,7 @@ items:
                           "value": "prod"
                       },
                       "datasource": "$datasource",
-                      "hide": 0,
+                      "hide": 2,
                       "includeAll": false,
                       "label": "namespace",
                       "multi": false,
@@ -8202,7 +8202,7 @@ items:
           },
           "timezone": "",
           "title": "Kubernetes / Compute Resources / Namespace (Pods)",
-          "uid": "85a562078cdf77779eaa1add43ccec1e",
+          "uid": "k8s-namespace",
           "version": 0
       }
   kind: ConfigMap

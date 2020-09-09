@@ -36,6 +36,9 @@ spec:
         - mountPath: /var/lib/grafana
           name: grafana-storage
           readOnly: false
+        - mountPath: /etc/grafana
+          name: grafana-config
+          readOnly: false
         - mountPath: /etc/grafana/provisioning/datasources
           name: grafana-datasources
           readOnly: false
@@ -126,6 +129,9 @@ spec:
       - name: grafana-datasources
         secret:
           secretName: grafana-datasources
+      - configMap:
+          name: grafana-config
+        name: grafana-config
       - configMap:
           name: grafana-dashboards
         name: grafana-dashboards

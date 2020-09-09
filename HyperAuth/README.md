@@ -27,11 +27,10 @@ LoadBalancer type의 service 생성 가능
 ## Step 1. 초기화 작업
 * 목적 : `HyperAuth 구축을 위한 초기화 작업 및 DB 구축`
 * 생성 순서 : [1.initialization.yaml](manifest/1.initialization.yaml) 실행 `ex) kubectl apply -f 1.initialization.yaml`)
-* 비고 : 아래 명령어 수행 후, Postgre DB table 생성 확인 (약 96-97개)
+* 비고 : 아래 명령어 수행 후, Postgre Admin 접속 확인
 ```bash
     $ kubectl exec -it $(kubectl get pods -n hyperauth | grep postgre | cut -d ' ' -f1) -n hyperauth -- bash
     $ psql -U keycloak keycloak
-    $ \dt
  ```
 
 ## Step 2. SSL 인증서 생성

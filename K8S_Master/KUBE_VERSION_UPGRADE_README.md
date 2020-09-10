@@ -11,7 +11,115 @@
 * 하나의 MINOR 버전에서 다음 MINOR 버전으로, 또는 동일한 MINOR의 PATCH 버전 사이에서만 업그레이드할 수 있다. 
 * 즉, 업그레이드할 때 MINOR 버전을 건너 뛸 수 없다. 예를 들어, 1.y에서 1.y+1로 업그레이드할 수 있지만, 1.y에서 1.y+2로 업그레이드할 수는 없다.
 * ex) 1.15 버전에서 1.17 버전으로 한번에 업그레이드는 불가능 하다. 1.15 -> 1.16 -> 1.17 스텝을 진행 해야 한다.
-
+## 폐쇄망 가이드 
+1. **폐쇄망에서 설치하는 경우** 아래 가이드를 참고 하여 image registry를 먼저 구축한다.
+    * https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Image_Registry   
+2. 사용하는 image repository에 k8s 설치 시 필요한 이미지를 push한다. 
+    * 작업 디렉토리 생성 및 환경 설정
+    ```bash
+    $ mkdir -p ~/k8s-install
+    $ cd ~/k8s-install
+    ```
+    * 외부 네트워크 통신이 가능한 환경에서 필요한 이미지를 다운받는다. (1.15.x -> 1.17.x으로 upgrade 하는 경우 두 버전의 image들이 모두 필요하다)
+    * v1.16.15 images
+     ```bash
+    $ sudo docker pull k8s.gcr.io/kube-proxy:v1.16.15
+    $ sudo docker pull k8s.gcr.io/kube-apiserver:v1.16.15
+    $ sudo docker pull k8s.gcr.io/kube-controller-manager:v1.16.15
+    $ sudo docker pull k8s.gcr.io/kube-scheduler:v1.16.15
+    $ sudo docker pull k8s.gcr.io/etcd:3.3.15-0
+    $ sudo docker pull k8s.gcr.io/coredns:1.6.2
+    $ sudo docker pull k8s.gcr.io/pause:3.1    
+    ```
+    * v1.17.6 images
+    ```bash
+    $ sudo docker pull k8s.gcr.io/kube-proxy:v1.17.6
+    $ sudo docker pull k8s.gcr.io/kube-apiserver:v1.17.6
+    $ sudo docker pull k8s.gcr.io/kube-controller-manager:v1.17.6
+    $ sudo docker pull k8s.gcr.io/kube-scheduler:v1.17.6
+    $ sudo docker pull k8s.gcr.io/etcd:3.4.3-0
+    $ sudo docker pull k8s.gcr.io/coredns:1.6.5
+    $ sudo docker pull k8s.gcr.io/pause:3.1
+    ```
+    
+    * docker image를 tar로 저장한다.
+    * v1.16.15 images
+    ```bash
+    $ sudo docker save -o kube-proxy-1.16.tar k8s.gcr.io/kube-proxy:v1.16.15
+    $ sudo docker save -o kube-controller-manager-1.16.tar k8s.gcr.io/kube-apiserver:v1.16.15
+    $ sudo docker save -o etcd-1.16.tar k8s.gcr.io/etcd:3.3.15-0
+    $ sudo docker save -o coredns-1.16.tar k8s.gcr.io/coredns:1.6.2
+    $ sudo docker save -o kube-scheduler-1.16.tar k8s.gcr.io/kube-scheduler:v1.16.15
+    $ sudo docker save -o kube-apiserver-1.16.tar k8s.gcr.io/kube-apiserver:v1.16.15
+    $ sudo docker save -o pause-1.16.tar k8s.gcr.io/pause:3.1
+    ```
+    * v1.17.6 images
+    ```bash
+    $ sudo docker save -o kube-proxy-1.17.tar k8s.gcr.io/kube-proxy:v1.17.6
+    $ sudo docker save -o kube-controller-manager-1.17.tar k8s.gcr.io/kube-controller-manager:v1.17.6
+    $ sudo docker save -o etcd-1.17.tar k8s.gcr.io/etcd:3.4.3-0
+    $ sudo docker save -o coredns-1.17.tar k8s.gcr.io/coredns:1.6.5
+    $ sudo docker save -o kube-scheduler-1.17.tar k8s.gcr.io/kube-scheduler:v1.17.6
+    $ sudo docker save -o kube-apiserver-1.17.tar k8s.gcr.io/kube-apiserver:v1.17.6
+    $ sudo docker save -o pause-1.17.tar k8s.gcr.io/pause:3.1
+    ```
+3. 위의 과정에서 생성한 tar 파일들을 폐쇄망 환경으로 이동시킨 뒤 사용하려는 registry에 이미지를 push한다.
+    * v1.16.15 images
+    ```bash
+    $ sudo docker load -i kube-apiserver-1.16.tar
+    $ sudo docker load -i kube-scheduler-1.16.tar
+    $ sudo docker load -i kube-controller-manager-1.16.tar 
+    $ sudo docker load -i kube-proxy-1.16.tar
+    $ sudo docker load -i etcd-1.16.tar
+    $ sudo docker load -i coredns-1.16.tar
+    $ sudo docker load -i pause-1.16.tar
+    ```
+    ```bash
+    $ sudo docker tag k8s.gcr.io/kube-apiserver:v1.16.15 ${REGISTRY}/k8s.gcr.io/kube-apiserver:v1.16.15
+    $ sudo docker tag k8s.gcr.io/kube-proxy:v1.16.15 ${REGISTRY}/k8s.gcr.io/kube-proxy:v1.16.15
+    $ sudo docker tag k8s.gcr.io/kube-controller-manager:v1.16.15 ${REGISTRY}/k8s.gcr.io/kube-controller-manager:v1.16.15
+    $ sudo docker tag k8s.gcr.io/etcd:3.3.15-0 ${REGISTRY}/k8s.gcr.io/etcd:3.3.15-0
+    $ sudo docker tag k8s.gcr.io/coredns:1.6.2 ${REGISTRY}/k8s.gcr.io/coredns:1.6.2
+    $ sudo docker tag k8s.gcr.io/kube-scheduler:v1.16.15 ${REGISTRY}/k8s.gcr.io/kube-scheduler:v1.16.15
+    $ sudo docker tag k8s.gcr.io/pause:3.1 ${REGISTRY}/k8s.gcr.io/pause:3.1
+    ```
+    ```bash
+    $ sudo docker push ${REGISTRY}/k8s.gcr.io/kube-apiserver:v1.16.15
+    $ sudo docker push ${REGISTRY}/k8s.gcr.io/kube-proxy:v1.16.15
+    $ sudo docker push ${REGISTRY}/k8s.gcr.io/kube-controller-manager:v1.16.15
+    $ sudo docker push ${REGISTRY}/k8s.gcr.io/etcd:3.3.15-0
+    $ sudo docker push ${REGISTRY}/k8s.gcr.io/coredns:1.6.2
+    $ sudo docker push ${REGISTRY}/k8s.gcr.io/kube-scheduler:v1.16.15
+    $ sudo docker push ${REGISTRY}/k8s.gcr.io/pause:3.1
+    ```
+    * v1.17.6 images
+    ```bash
+    $ sudo docker load -i kube-apiserver-1.17.tar
+    $ sudo docker load -i kube-scheduler-1.17.tar
+    $ sudo docker load -i kube-controller-manager-1.17.tar 
+    $ sudo docker load -i kube-proxy-1.17.tar
+    $ sudo docker load -i etcd-1.17.tar
+    $ sudo docker load -i coredns-1.17.tar
+    $ sudo docker load -i pause-1.17.tar
+    ```
+    ```bash
+    $ sudo docker tag k8s.gcr.io/kube-apiserver:v1.17.6 ${REGISTRY}/k8s.gcr.io/kube-apiserver:v1.17.6
+    $ sudo docker tag k8s.gcr.io/kube-proxy:v1.17.6 ${REGISTRY}/k8s.gcr.io/kube-proxy:v1.17.6
+    $ sudo docker tag k8s.gcr.io/kube-controller-manager:v1.17.6 ${REGISTRY}/k8s.gcr.io/kube-controller-manager:v1.17.6
+    $ sudo docker tag k8s.gcr.io/etcd:3.4.3-0 ${REGISTRY}/k8s.gcr.io/etcd:3.4.3-0
+    $ sudo docker tag k8s.gcr.io/coredns:1.6.5 ${REGISTRY}/k8s.gcr.io/coredns:1.6.5
+    $ sudo docker tag k8s.gcr.io/kube-scheduler:v1.17.6 ${REGISTRY}/k8s.gcr.io/kube-scheduler:v1.17.6
+    $ sudo docker tag k8s.gcr.io/pause:3.1 ${REGISTRY}/k8s.gcr.io/pause:3.1
+    ```
+    ```bash
+    $ sudo docker push ${REGISTRY}/k8s.gcr.io/kube-apiserver:v1.17.6
+    $ sudo docker push ${REGISTRY}/k8s.gcr.io/kube-proxy:v1.17.6
+    $ sudo docker push ${REGISTRY}/k8s.gcr.io/kube-controller-manager:v1.17.6
+    $ sudo docker push ${REGISTRY}/k8s.gcr.io/etcd:3.4.3-0
+    $ sudo docker push ${REGISTRY}/k8s.gcr.io/coredns:1.6.5
+    $ sudo docker push ${REGISTRY}/k8s.gcr.io/kube-scheduler:v1.17.6
+    $ sudo docker push ${REGISTRY}/k8s.gcr.io/pause:3.1
+    ```    
 ## Steps
 0. [master upgrade](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/K8S_Master/KUBE_VERSION_UPGRADE_README.md#step0-kubernetes-master-upgrade)
 1. [node upgrade](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/K8S_Master/KUBE_VERSION_UPGRADE_README.md#step1-kubernetes-node-upgrade)

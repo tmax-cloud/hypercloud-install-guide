@@ -149,14 +149,22 @@
 
 ## Step 2. kiali 설치
 * 목적 : `istio ui kiali 설치`
-* 생성 순서: [2.kiali.yaml](yaml/2.kiali.yaml) 실행
+* 생성 순서: 
+    * [2.kiali.yaml](yaml/2.kiali.yaml) 실행 `ex) kubectl apply -f 1.istio-base.yaml`
+        * openid login 을 위한 설정
+            * hyperauth 에서 client 설정에서 hypercloud4 선택 후 
+                * implicit flow enabled 를 on 으로 변경
+                * Valid Redirect URIs * 추가
+    * kilai pod가 running임을 확인한 뒤 http://$KIALI_URL/api/kiali 에 접속해 정상 동작을 확인한다.
+    * hypercloud console 과 연동을 위해 https 서버가 필요하여 tls secret 생성 및 ingress를 생성해야한다.
+        * tls sercet 생성 'ex) kubectl create secret tls kiali-https-secret --key tls.key --cert tls.crt -n istio-system'
+        * ingress 생성 `ex) kubectl apply -f 1.kiali-ingress.yaml`
 * 비고 :
     * kiali에 접속하기 위한 서비스를 [원하는 타입](yaml/2.kiali.yaml#L346)으로 변경할 수 있다.
-    * kiali에 접속하기 위한 방식을 [strategy](yaml/2.kiali.yaml#L184)를 configmap을 수정해 변경할 수 있다.
-    * kiali에서 openid connect 지원하여 hyperauth 인증을 통해 서비스를 사용 가능하다.
-    * hyperauth 에서 hypercloud4 client 설정에서 implicit flow enabled 를 on 으로 변경해야한다.
-    * kilai pod가 running임을 확인한 뒤 http://$KIALI_URL/api/kiali 에 접속해 정상 동작을 확인한다.
-    * hypercloud console 과 연동을 위해 kiali default web_root를 수정하였다.
+    * kiali에 접속하기 위한 방식을 [strategy](yaml/2.kiali.yaml#L184)를 configmap을 수정해 변경할 수 있다.    
+    * hypercloud console 과 연동을 위해 kiali default web_root가 /kiali 에서 /api/kiali로 수정되었다.
+    
+    
 	
 ![image](figure/kiali-ui.png)
 

@@ -3,10 +3,10 @@
 
 ## 구성 요소
 * hypercloud-console ([tmaxcloudck/hypercloud-console](https://hub.docker.com/r/tmaxcloudck/hypercloud-console/tags))
-* 가이드 작성 시점(2020/07/09) 최신 버전은 1.1.34.7 입니다.
+* 가이드 작성 시점(2020/09/11) 최신 버전은 4.1.4.1 입니다.
 
 ## Prerequisites
-* Kubernetes, HyperCloud4 Operator, Grafana, Istio(Kiali, Jaeger), Prometheus가 설치되어 있어야 합니다.
+* Kubernetes, HyperCloud4 Operator, Grafana, Istio(Kiali, Jaeger), Prometheus, hyperauth가 설치되어 있어야 합니다.
 * Kubernetes에 Public IP 여유분이 최소한 1개 있어야 합니다.
 * HCDC 모드로 설치하려는 경우, portal과 동일한 도메인을 사용할 수 있도록 DNS가 세팅되어 있어야 합니다.
 
@@ -17,7 +17,7 @@
     * 작업 디렉토리 생성 및 환경 설정
 	  ```bash
 	  mkdir -p ~/console-install
-	  export CONSOLE_VERSION=1.1.34.7
+	  export CONSOLE_VERSION=4.1.4.1
 	  ```
 	  
     * 외부 네트워크 통신이 가능한 환경에서 이미지 다운로드
@@ -43,7 +43,7 @@
 ## Step 1. Namespace, ResourceQuota, ServiceAccount, ClusterRole, ClusterRoleBinding 생성
 * 목적 : console에 필요한 Namespace, ResourceQuota, ServiceAccount, ClusterRole, ClusterRoleBinding을 생성한다.
 * 순서 : 
-    1. 작업 폴더에 [1.initialization.yaml](https://raw.githubusercontent.com/tmax-cloud/hypercloud-console/hc-dev/install-yaml/1.initialization.yaml) 파일을 생성하고, `@@NAME_NS@@`들을 모두 원하는 문자열로 교체합니다.
+    1. 작업 폴더에 [1.initialization.yaml](https://raw.githubusercontent.com/tmax-cloud/hypercloud-console4.1/hc-dev/install-yaml/1.initialization.yaml) 파일을 생성하고, `@@NAME_NS@@`들을 모두 원하는 문자열로 교체합니다.
 	    * 이 과정에서 `@@NAME_NS@@` 대신 기입하는 문자열은 console이 설치될 namespace의 이름이 됩니다.
     2. `kubectl create -f 1.initialization.yaml` 을 실행합니다.
 
@@ -64,15 +64,14 @@
 ## Step 3. Service (Load Balancer) 생성
 * 목적 : 브라우저를 통해 console에 접속할 수 있게 한다.
 * 순서 : 
-    1. 작업 폴더에 [2.svc-lb.yaml](https://raw.githubusercontent.com/tmax-cloud/hypercloud-console/hc-dev/install-yaml/2.svc-lb.yaml) 파일을 생성하고, `@@NAME_NS@@`를 원하는 문자열로 교체합니다.
+    1. 작업 폴더에 [2.svc-lb.yaml](https://raw.githubusercontent.com/tmax-cloud/hypercloud-console4.1/hc-dev/install-yaml/2.svc-lb.yaml) 파일을 생성하고, `@@NAME_NS@@`를 원하는 문자열로 교체합니다.
 	    * `@@NAME_NS@@` 대신 기입하는 문자열은 Step 1에서와 같아야 합니다.
     2. `kubectl create -f 2.svc-lb.yaml` 을 실행합니다.
 
 ## Step 4. Deployment (with Pod Template) 생성
 * 목적 : console 웹서버를 호스팅할 pod를 생성한다.
 * 순서 : 
-    1. 작업 폴더에 [3.deployment-pod.yaml](https://raw.githubusercontent.com/tmax-cloud/hypercloud-console4.1/hc-dev/install-yaml/3.deployment-pod.yaml) 파일을 생성하고, 다음의 문자열들을 교체해줍니다.
-    
+    1. 작업 폴더에 [3.deployment.yaml](https://raw.githubusercontent.com/tmax-cloud/hypercloud-console4.1/hc-dev/install-yaml/3.deployment-pod.yaml) 파일을 생성하고, 다음의 문자열들을 교체해줍니다.
     
     | 문자열 | 상세내용 | 형식예시 |
     | ---- | ---- | ---- |
@@ -82,6 +81,13 @@
     | `@@GRAFANA@@` | `kubectl get svc -n monitoring grafana` 에서 CLUSTER-IP와 PORT(S) 확인하여 입력 (포트는 `:` 왼쪽 값 사용) | `10.x.x.x:3000` |
     | `@@KIALI@@` | `kubectl get svc -n istio-system kiali` 에서 CLUSTER-IP와 PORT(S) 확인하여 입력 (포트는 `:` 왼쪽 값 사용) | `10.x.x.x:20001` |
     | `@@JAEGER@@` | `kubectl get svc -n istio-system tracing` 에서 CLUSTER-IP와 PORT(S) 확인하여 입력 (포트는 `:` 왼쪽 값 사용) | `10.x.x.x:80` |
+    | `@@APPROVAL@@` | `kubectl get svc -n approval-system approval-proxy-server` 에서 CLUSTER-IP와 PORT(S) 확인하여 입력 (포트는 `:` 왼쪽 값 사용) | `10.x.x.x:80` |
+    | `@@KUBEFLOW@@` | `kubectl get svc -n istio-system istio-ingressgateway` 에서 CLUSTER-IP와 PORT(S) 확인하여 입력 (포트는 `:` 왼쪽 값 사용) | `10.x.x.x:80` |
+    | `@@VNC@@` | `kubectl get svc -n kubevirt virtvnc` 에서 CLUSTER-IP와 PORT(S) 확인하여 입력 (포트는 `:` 왼쪽 값 사용) | `10.x.x.x:80` |    
+    | `@@HYPERAUTH@@` | `kubectl get svc -n hyperauth hyperauth` 에서 CLUSTER-IP와 PORT(S) 확인하여 입력 (포트는 `:` 왼쪽 값 사용) | `10.x.x.x:80` |    
+    | `@@REALM@@` | hyperauth이용하여 로그인 시 필요한 정보 입력 | `tmax` |
+    | `@@KEYCLOAK@@` | `kubectl get svc -n hyperauth hyperauth` 에서 CLUSTER-IP와 PORT(S) 확인하여 입력 (포트는 `:` 왼쪽 값 사용) | `10.x.x.x:80` |
+    | `@@CLIENTID@@` | hyperauth이용하여 로그인 시 필요한 client 정보 입력 | `hypercloud4` | 
     | `@@HDC_FLAG@@` | HCDC 모드로 설치하려는 경우 `true` 입력 (아닌 경우 행 삭제) | `true` |
     | `@@PORTAL@@` | HCDC 모드로 설치하려는 경우 tmaxcloud portal 로그인 페이지 URL 입력 (아닌 경우 행 삭제) | `https://tmaxcloud.com/#!/sign-in` |
     | `@@VER@@` | hypercloud-console 이미지 태그 입력 | `1.1.x.x` |

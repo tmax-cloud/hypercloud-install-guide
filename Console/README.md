@@ -71,7 +71,8 @@
 ## Step 4. Deployment (with Pod Template) 생성
 * 목적 : console 웹서버를 호스팅할 pod를 생성한다.
 * 순서 : 
-    1. 작업 폴더에 [3.deployment-pod.yaml](https://raw.githubusercontent.com/tmax-cloud/hypercloud-console/hc-dev/install-yaml/3.deployment-pod.yaml) 파일을 생성하고, 다음의 문자열들을 교체해줍니다.
+    1. 작업 폴더에 [3.deployment-pod.yaml](https://raw.githubusercontent.com/tmax-cloud/hypercloud-console4.1/hc-dev/install-yaml/3.deployment-pod.yaml) 파일을 생성하고, 다음의 문자열들을 교체해줍니다.
+    
     
     | 문자열 | 상세내용 | 형식예시 |
     | ---- | ---- | ---- |

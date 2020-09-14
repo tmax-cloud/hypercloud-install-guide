@@ -7,10 +7,6 @@
 ## Prerequisites
 1. 해당 모듈 설치 전 HyperCloud Operator 모듈 설치 필요
     * ([HyperCloud Operator](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/README.md))
-    
-2. 설치 과정에 필요한 인증서 생성을 위해 JAVA 패키지 설치 필요
-    * ProLinux 7, CentOS 7: `ex) java-1.8.0-openjdk-devel.x86_64`
-    * Ubuntu: `ex) openjdk-8-jre-headless`
 
 ## 폐쇄망 설치 가이드
 설치를 진행하기 전 아래의 과정을 통해 필요한 이미지 및 yaml 파일을 준비한다.
@@ -61,54 +57,43 @@
 
 ## Install Steps
 0. [hypercloud-webhook yaml 수정](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/HyperCloud%20Webhook#step-0-hypercloud-webhook-yaml-%EC%88%98%EC%A0%95)
-1. [인증서 생성](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/HyperCloud%20Webhook#step-1-%EC%9D%B8%EC%A6%9D%EC%84%9C-%EC%83%9D%EC%84%B1)
-2. [Secret 생성](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/HyperCloud%20Webhook#step-2-secret-%EC%83%9D%EC%84%B1)
-3. [HyperCloud Webhook Server 설치](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/HyperCloud%20Webhook#step-3-hypercloud-webhook-server-%EC%84%A4%EC%B9%98)
-4. [HyperCloud Webhook Config 생성](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/HyperCloud%20Webhook#step-4-hypercloud-webhook-config-%EC%83%9D%EC%84%B1)
-5. [HyperCloud Webhook Config 적용](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/HyperCloud%20Webhook#step-5-hypercloud-webhook-config-%EC%A0%81%EC%9A%A9)
-6. [test-yaml 배포](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/HyperCloud%20Webhook#step-6-test-yaml-%EB%B0%B0%ED%8F%AC)
+1. [Secret 생성](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/HyperCloud%20Webhook#step-2-secret-%EC%83%9D%EC%84%B1)
+2. [HyperCloud Webhook Server 설치](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/HyperCloud%20Webhook#step-3-hypercloud-webhook-server-%EC%84%A4%EC%B9%98)
+3. [HyperCloud Webhook Config 생성](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/HyperCloud%20Webhook#step-4-hypercloud-webhook-config-%EC%83%9D%EC%84%B1)
+4. [HyperCloud Webhook Config 적용](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/HyperCloud%20Webhook#step-5-hypercloud-webhook-config-%EC%A0%81%EC%9A%A9)
+5. [test-yaml 배포](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/HyperCloud%20Webhook#step-6-test-yaml-%EB%B0%B0%ED%8F%AC)
 
 ## Step 0. hypercloud-webhook yaml 수정
 * 목적 : `hypercloud-webhook yaml에 이미지 registry, 버전 및 마스터 노드 정보를 수정` ([manifests](manifests) 디렉토리 참고)
-* 생성 순서 : 아래의 command를 실행하여 사용하고자 하는 image 버전을 수정한다. ([03_webhook-deployment.yaml](manifests/03_webhook-deployment.yaml))
+* 생성 순서 : 아래의 command를 실행하여 사용하고자 하는 image 버전을 수정한다. ([02_webhook-deployment.yaml](manifests/02_webhook-deployment.yaml))
     ```bash
-    $ sed -i 's/{webhook_version}/'${WEBHOOK_VERSION}'/g' 03_webhook-deployment.yaml
-    $ sed -i 's/{hostname}/'${HOSTNAME}'/g' 03_webhook-deployment.yaml
+    $ sed -i 's/{webhook_version}/'${WEBHOOK_VERSION}'/g' 02_webhook-deployment.yaml
+    $ sed -i 's/{hostname}/'${HOSTNAME}'/g' 02_webhook-deployment.yaml
     ```
 * 비고 :
     * 폐쇄망에서 설치를 진행하여 별도의 image registry를 사용하는 경우 registry 정보를 추가로 설정해준다.
 	```bash
-	$ sed -i 's/tmaxcloudck\/hypercloud-webhook/'${REGISTRY}'\/hypercloud-webhook/g' 03_webhook-deployment.yaml
+	$ sed -i 's/tmaxcloudck\/hypercloud-webhook/'${REGISTRY}'\/hypercloud-webhook/g' 02_webhook-deployment.yaml
 	```
 
-## Step 1. 인증서 생성
-* 목적 : `HTTPS 활성화를 위한 CA 인증서를 생성`
-* 생성 순서 : 아래의 command를 실행하여 CA 인증서를 생성한다. ([01_gen_certs.sh](manifests/01_gen_certs.sh))
-    ```bash
-    $ mkdir ./pki
-    $ sh 01_gen_certs.sh
-    $ openssl pkcs12 -export -in ./pki/hypercloud4-webhook.crt -inkey ./pki/hypercloud4-webhook.key -out ./pki/hypercloud4-webhook.p12 (Export Password: webhook)
-    $ keytool -importkeystore -deststorepass webhook -destkeypass webhook -destkeystore ./pki/hypercloud4-webhook.jks -srckeystore ./pki/hypercloud4-webhook.p12 -srcstoretype PKCS12 -srcstorepass webhook
-    ```
-
-## Step 2. Secret 생성
+## Step 1. Secret 생성
 * 목적 : `Step 1을 통해 생성한 인증서를 Secret으로 변환합니다`
-* 생성 순서 : [02_create_secret.sh](manifests/02_create_secret.sh) 실행 `ex) sh 02_create_secret.sh`
+* 생성 순서 : [01_create_secret.sh](manifests/01_create_secret.sh) 실행 `ex) sh 01_create_secret.sh`
 
 
-## Step 3. HyperCloud Webhook Server 설치
+## Step 2. HyperCloud Webhook Server 설치
 * 목적 : `HyperCloud Webhook Server 설치`
-* 생성 순서 : [03_webhook-deployment.yaml](manifests/03_webhook-deployment.yaml) 실행 `ex) kubectl apply -f 03_webhook-deployment.yaml`
+* 생성 순서 : [02_webhook-deployment.yaml](manifests/02_webhook-deployment.yaml) 실행 `ex) kubectl apply -f 02_webhook-deployment.yaml`
 
 
-## Step 4. HyperCloud Webhook Config 생성
+## Step 3. HyperCloud Webhook Config 생성
 * 목적 : `앞서 생성한 인증서 정보를 기반으로 Webhook 연동 설정 파일 생성`
-* 생성 순서 : 아래의 command를 실행하여 Webhook Config를 생성한다. ([04_gen-webhook-config.sh](manifests/04_gen-webhook-config.sh))
+* 생성 순서 : 아래의 command를 실행하여 Webhook Config를 생성한다. ([03_gen-webhook-config.sh](manifests/03_gen-webhook-config.sh))
     ```bash
-    $ sh 04_gen-webhook-config.sh
+    $ sh 03_gen-webhook-config.sh
     ```
 
 
-## Step 5. HyperCloud Webhook Config 적용
+## Step 4. HyperCloud Webhook Config 적용
 * 목적 : `Webhook 연동 설정을 적용하여 API 서버가 Webhook Server와 HTTPS 통신을 하도록 설정`
-* 생성 순서 : [05_webhook-configuration.yaml](manifests/05_webhook-configuration.yaml.template) 실행 `ex) kubectl apply -f 05_webhook-configuration.yaml`
+* 생성 순서 : [04_webhook-configuration.yaml](manifests/04_webhook-configuration.yaml.template) 실행 `ex) kubectl apply -f 04_webhook-configuration.yaml`

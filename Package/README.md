@@ -2,7 +2,7 @@
 # OS 설치 & package repo 구축 가이드
 
 ## 구성 요소 및 버전
-* HyperCloud 패키지(ck-ftp@192.168.1.150:/home/ck-ftp/k8s_pl/install/offline/archive_20.07.10)
+* HyperCloud 패키지(ck-ftp@192.168.1.150:/home/ck-ftp/k8s_pl/install/offline/archive_20.07.27)
 * ISO 파일(CentOS 7.7 :http://vault.centos.org/7.7.1908/isos/x86_64/ 또는 http://192.168.2.136/ISOs/CentOS-7-x86_64-DVD-1908.iso)
 
 ## Prerequisites

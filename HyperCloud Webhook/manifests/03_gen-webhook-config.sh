@@ -1,5 +1,6 @@
 #!/bin/bash
-export HYPERCLOUD4_CA_CERT=$(openssl base64 -A <"./pki/ca.crt")
+CURRENT_PATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+export HYPERCLOUD4_CA_CERT=$(openssl base64 -A <"$CURRENT_PATH/../pki/ca.crt")
 
 WEBHOOK_CONFIG_FILE=04_webhook-configuration.yaml
 if [ -f "$WEBHOOK_CONFIG_FILE" ]; then

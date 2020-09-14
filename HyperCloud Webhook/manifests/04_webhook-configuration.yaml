@@ -1,0 +1,28 @@
+apiVersion: admissionregistration.k8s.io/v1beta1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: hypercloud4-mutator
+webhooks:
+  - name: hypercloud4-webhook-svc.hypercloud4-system.svc
+    clientConfig:
+      service:
+        name: hypercloud4-webhook-svc
+        namespace: hypercloud4-system
+        path: "/mutate"
+        port: 443
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURYRENDQWtTZ0F3SUJBZ0lCQVRBTkJna3Foa2lHOXcwQkFRc0ZBREJHTVFzd0NRWURWUVFHRXdKTFVqRVYKTUJNR0ExVUVDZ3dNYkdWemMzUnBaaUJKYm1NdU1TQXdIZ1lEVlFRRERCZHNaWE56ZEdsbWN5QlRaV3htSUZOcApaMjVsWkNCRFFUQWVGdzB5TURBNU1Ea3dOekEyTWpkYUZ3MHpNREE1TURjd056QTJNamRhTUVZeEN6QUpCZ05WCkJBWVRBa3RTTVJVd0V3WURWUVFLREF4c1pYTnpkR2xtSUVsdVl5NHhJREFlQmdOVkJBTU1GMnhsYzNOMGFXWnoKSUZObGJHWWdVMmxuYm1Wa0lFTkJNSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQVE4QU1JSUJDZ0tDQVFFQQp3bFk4d2h0TmMwMWxtQ2puaVVjMTJBOWcrNW81NnVqR1FnUFo3N1hvL0VpSjFjemxObWhSS2FCNEkrL2lpUklMCk4yUzFERG13cVZiVmdON2pKWXBtWFRNZ0g1V0luem5ObnF6UXVFbkxoVnRQVnBkbmJwc2ZTNnlEb0kxcTFwVEEKV3kxSGRGdWFMVVBnekJDSlkycTZuMjNLd2c0MnZPUjBZYUxVUWJFQjNVV0lCNWF5L0Z5ZWtrYzBNY1lELzgxWgpzd3NUemlKYzI5ZXFJRHpTenJzd2pnaHFNckNPUjRZUGwrR3lOaGE3MEQ5TGcyMnpmRkg4WTJ4Vlo5T0VmTW0xCjdqVE0yNUIya2haTjNPaCtBNVhHMU9kaXhidHRnMkczMUM2TlNOWXN6QkIyYU9ncUNVNDBNUlFvQVlFalNtNmsKN0JieE1IelBLWlUzeForaEoyand6UUlEQVFBQm8xVXdVekFTQmdOVkhSTUJBZjhFQ0RBR0FRSC9BZ0VBTUIwRwpBMVVkRGdRV0JCVHZHY0grajR6NzVBOGJoeEdKd1BnRVYxU2g3REFMQmdOVkhROEVCQU1DQVFZd0VRWUpZSVpJCkFZYjRRZ0VCQkFRREFnQUhNQTBHQ1NxR1NJYjNEUUVCQ3dVQUE0SUJBUUIxSEJHMFNkVHE0amszQ0dwRnROKzkKdmRXcm1aOHdPelRJWUJWVmgrZUF0UURqQlRBMVJPcFlnRHpJb1kwditzQ1lWazRxZTlad3ZxOHlNckY1V2F4NgpkSGNzUlFYczc5aFMvYytSbUZHQ2ZNenRuS1ltaEFWNjYwSlBlKy9wcE1JVC8zMTc4WmVueXR0ekJKMGxqN2NqCjhGZHRZZlJ4QWw0cnJiS0hqNXkzUlF6dkdOS1lpTWhnK2FIaDdoOUk1Nk9BaFhvcno2b1NzZjV1V3QrbHZpaXoKZDJrYzJ2SVZmV0o4VVFjWHh5SmppTzNHcGJWbDlkajhBYjhGWlF3NjlqdkMvQXNjMGJUOE9pNktaVzlrOFFJOApzTjdBTTc3SFVBTG10RUdLQlZwSklNNDlRUE9qYUEvSG1tNG4wZ2R1TTIvTWhsejRkbHBmS0ppSEZVUko3R2tpCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+    rules:
+      - operations: ["CREATE","UPDATE"]
+        apiGroups: [""]
+        apiVersions: ["v1"]
+        resources: ["configmaps"]
+    matchPolicy: Equivalent
+    sideEffects: None
+    admissionReviewVersions: ["v1beta1"]
+    timeoutSeconds: 10
+    namespaceSelector:
+      matchExpressions:
+      - key: webhook
+        operator: NotIn
+        values: ["false"]
+    failurePolicy: Fail

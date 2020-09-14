@@ -107,6 +107,6 @@
 * 생성 순서 : [namespaceclaim.yaml](manifests/test-yaml/namespaceclaim.yaml) 실행 `ex) kubectl apply -f namespaceclaim.yaml`
 	```
 	kubectl describe namespaceclaim example-namespace-webhook
-	Annotation에 creator/updater/createdTime/updatedTime 필드가 생성 되었는지 확인
+	Annotation에 creator/updater/createdTime/updatedTime 필드가 생성 되었는지 확인한다.
 
 	```

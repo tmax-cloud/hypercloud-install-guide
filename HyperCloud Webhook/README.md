@@ -2,7 +2,7 @@
 
 ## 구성 요소 및 버전
 * hypercloud-webhook 
-    * ([tmaxcloudck/hypercloud-webhook:b4.1.0.20](https://hub.docker.com/layers/tmaxcloudck/hypercloud-webhook/b4.1.0.20/images/sha256-c0b89b02335bfde9024ce7388c36b229dd4ab224f90fef872e13f973bb29a48f?context=explore)) 
+    * ([tmaxcloudck/hypercloud-webhook:b4.1.0.21](https://hub.docker.com/layers/tmaxcloudck/hypercloud-webhook/b4.1.0.21/images/sha256-c04bf0ac926574b6a5b919eb3f60f07408b507e0570c8683c5ebfe6f190766dc?context=explore)) 
 
 ## Prerequisites
 1. 해당 모듈 설치 전 HyperCloud Operator 모듈 설치 필요
@@ -16,7 +16,7 @@
     ```bash
     $ mkdir -p ~/hypercloud-webhook-install
     $ export WEBHOOK_HOME=~/hypercloud-webhook-install
-    $ export WEBHOOK_VERSION=b4.1.0.20
+    $ export WEBHOOK_VERSION=b4.1.0.21
     $ cd $WEBHOOK_HOME
     ```
     * 외부 네트워크 통신이 가능한 환경에서 필요한 이미지를 다운받는다.

@@ -3,7 +3,7 @@ kind: Config
 clusters:
 - cluster:
      certificate-authority-data: ${HYPERCLOUD4_CA_CERT}
-     server: https://hypercloud4-webhook-svc.hypercloud4-system.svc/audit
+     server: https://hypercloud4-webhook-svc.hypercloud4-system.svc/api/webhook/audit
   name: audit-webhook-service
 contexts:
 - context:

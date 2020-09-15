@@ -19,7 +19,7 @@ spec:
         kubernetes.io/hostname: cho
       containers:
       - name: hypercloud4-webhook
-        image: tmaxcloudck/hypercloud-webhook:b4.1.0.20
+        image: tmaxcloudck/hypercloud-webhook:{webhook_version}
         imagePullPolicy: IfNotPresent
         resources:
           requests:

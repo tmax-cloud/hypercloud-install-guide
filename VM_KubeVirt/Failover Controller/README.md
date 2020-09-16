@@ -2,7 +2,8 @@
 
 **구성 요소 및 버전**:
 
-* failover-controller([tmaxcloudck/kube-failover-controller:v1.3](https://hub.docker.com/layers/tmaxcloudck/kube-failover-controller/v1.3/images/sha256-b0e4eef8bbce41c36f3607c15643a50ff7a8ce7d1413621d5da9bf1c9c41e229?context=repo))
+* failover-controller docker image
+  * `최신 버전 정보`는 [tmaxcloudck/kube-failover-controller docker hub](https://hub.docker.com/r/tmaxcloudck/kube-failover-controller/tags) 또는 [CHANGELOG.md](CHANGELOG.md) 파일에서 확인 가능합니다.
 
 **Prerequisite**:
 
@@ -19,7 +20,7 @@
   *  작업 디렉토리 생성 및 환경 설정
   ```sh
   $ mkdir -p ~/failover-controller
-  $ export FAILOVER_VERSION=v1.0
+  $ export FAILOVER_VERSION=${failover controller image version}
   $ export DOCKER_REGISTRY=${docker_registry}
   $ export FAILOVER_HOME=~/failover-controller
   $ cd $FAILOVER_HOME

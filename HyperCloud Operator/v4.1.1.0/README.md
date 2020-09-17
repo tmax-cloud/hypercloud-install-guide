@@ -1,3 +1,4 @@
+
 # hypercloud-operator 설치 가이드
 
 ## 구성 요소
@@ -73,6 +74,9 @@
 1.  Nginx Ingress Controller 설치 필요
     * [Nginx Ingress Controller 설치 가이드] 
         * [https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/IngressNginx/README.md](https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/IngressNginx/README.md)
+2.  Secret Watcher 설치 필요
+    * [secret-watcher 설치 가이드] 
+        * [https://github.com/tmax-cloud/hypercloud-install-guide/tree/4.1/SecretWatcher#secret-watcher-%EC%84%A4%EC%B9%98-%EA%B0%80%EC%9D%B4%EB%93%9C](https://github.com/tmax-cloud/hypercloud-install-guide/tree/4.1/SecretWatcher#secret-watcher-%EC%84%A4%EC%B9%98-%EA%B0%80%EC%9D%B4%EB%93%9C)
 
 ## Install Steps
 1. [1.initialization.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/HyperCloud%20Operator/v4.1.1.0/README.md#step-1-1initializationyaml-%EC%8B%A4%ED%96%89)
@@ -142,4 +146,3 @@
 	```bash
 	$ kubectl apply -f ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/4.hypercloud4-operator.yaml
 	```
-

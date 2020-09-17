@@ -95,7 +95,7 @@
 	```
 	spec.containers.command:
 	- --audit-log-path=/var/log/kubernetes/apiserver/audit.log
-	- --audit-policy-file=/etc/kubernetes/pki/policy.yaml
+	- --audit-policy-file=/etc/kubernetes/pki/audit-policy.yaml
 	- --audit-webhook-config-file=/etc/kubernetes/pki/audit-webhook-config
 	spec.dnsPolicy: ClusterFirstWithHostNet
 

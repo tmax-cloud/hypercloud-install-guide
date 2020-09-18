@@ -17,7 +17,7 @@
 | Tekton | v0.12.1+ | https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Tekton_CI_CD | O |
 | Catalog Controller |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/CatalogController/README.md | O |
 | TemplateServiceBroker |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/TemplateServiceBroker/README.md | O |
-| SecretWatcher |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/SecretWatcher/README.md | O |
+| SecretWatcher | v4.1.0.9  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/SecretWatcher/README.md | O |
 
 ### Module (Optional)
 | Module | Version | Guide | 진행률(O/△/X) |

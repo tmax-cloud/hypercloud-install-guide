@@ -51,8 +51,8 @@
     * 아래 명령어를 수행하여 Kubeflow 설치에 필요한 yaml 파일들과 script 파일들을 다운로드 받는다. 
         ```bash
         $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/Kubeflow/sed.sh
-        $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/Kubeflow/kustomize-apply.sh
         $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/Kubeflow/kustomize.tar.gz
+        $ wget https://github.com/kubeflow/kfctl/releases/download/v1.0.2/kfctl_v1.0.2-0-ga476281_linux.tar.gz
         ```
 3. 앞으로의 진행
     * Step 0 ~ 4 중 Step 0은 진행할 필요없고 Step 2, 3은 비고를 참고하여 진행한다. 나머지는 그대로 진행하면 된다.
@@ -72,6 +72,8 @@
     $ tar xzvf kfctl_v1.0.2-0-ga476281_linux.tar.gz
     $ sudo mv kfctl /usr/bin
     ```
+* 비고 : 
+    * 폐쇄망 환경일 경우 첫 번째 명령어로 github에 있는 kfctl을 다운로드받는 대신 미리 준비한 kfctl을 다운받으면 된다.
 
 ## Step 1. 설치 디렉토리 생성
 * 목적 : `Kubeflow의 설치 yaml이 저장될 설치 디렉토리를 생성하고 해당 경로로 이동한다.`
@@ -96,7 +98,7 @@
         ```
     * 정상적으로 완료되면 kustomize라는 디렉토리가 생성된다.
 * 비고 : 
-    * 폐쇄망 환경일 경우 설치 디렉토리에 미리 다운로드받은 sed.sh, kustomize-apply.sh, kustomize.tar.gz 파일을 옮긴다.
+    * 폐쇄망 환경일 경우 설치 디렉토리에 미리 다운로드받은 sed.sh, kustomize.tar.gz 파일을 옮긴다.
     * 아래 명령어를 통해 Kustomize 리소스의 압축을 풀고 yaml 파일들에서 이미지들을 pull 받을 registry를 바꿔준다.
         ```bash
         $ tar xvfz kustomize.tar.gz
@@ -120,11 +122,7 @@
     * 기존 Kubeflow에서 수정된 점
         * Istio 1.5.1 호환을 위해 KFServing의 controller 수정
         * Workflow template을 사용하기 위한 argo controller 버전 업
-    * 폐쇄망 환경일 경우 kfctl을 이용하는 대신 아래 명령어를 통해 Kubeflow를 배포한다.
-        ```bash
-        $ chmod +x ./kustomize-apply.sh
-        $ ./kustomize-apply.sh ${KF_DIR}/kustomize
-        ```
+        * Notebook CRD, controller 변경
 
 ## Step 4. 배포 확인 및 기타 작업
 * 목적 : `Kubeflow 배포를 확인하고 문제가 있을 경우 정상화한다.`

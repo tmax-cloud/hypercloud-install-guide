@@ -55,7 +55,7 @@
         $ wget https://github.com/kubeflow/kfctl/releases/download/v1.0.2/kfctl_v1.0.2-0-ga476281_linux.tar.gz
         ```
 3. 앞으로의 진행
-    * Step 0 ~ 4 중 Step 0은 진행할 필요없고 Step 2, 3은 비고를 참고하여 진행한다. 나머지는 그대로 진행하면 된다.
+    * Step 0 ~ 4 중 Step 0, 2 비고를 참고하여 진행한다. 나머지는 그대로 진행하면 된다.
 
 ## Install Steps
 0. [kfctl 설치](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Kubeflow/README.md#step-0-kfctl-%EC%84%A4%EC%B9%98)

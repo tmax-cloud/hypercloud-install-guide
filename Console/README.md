@@ -83,6 +83,7 @@
     | `@@JAEGER@@` | `kubectl get svc -n istio-system tracing` 에서 CLUSTER-IP와 PORT(S) 확인하여 입력 (포트는 `:` 왼쪽 값 사용) | `10.x.x.x:80` |
     | `@@APPROVAL@@` | `kubectl get svc -n approval-system approval-proxy-server` 에서 CLUSTER-IP와 PORT(S) 확인하여 입력 (포트는 `:` 왼쪽 값 사용) | `10.x.x.x:80` |
     | `@@KUBEFLOW@@` | `kubectl get svc -n istio-system istio-ingressgateway` 에서 CLUSTER-IP와 PORT(S) 확인하여 입력 (포트는 `:` 왼쪽 값 사용) | `10.x.x.x:80` |
+    | `@@WEBHOOK@@` | `kubectl get svc -n hypercloud4-system  hypercloud4-webhook-svc` 에서 CLUSTER-IP와 PORT(S) 확인하여 입력 (포트는 `:` 왼쪽 값 사용) | `10.x.x.x:80` |
     | `@@VNC@@` | `kubectl get svc -n kubevirt virtvnc` 에서 CLUSTER-IP와 PORT(S) 확인하여 입력 (포트는 `:` 왼쪽 값 사용) | `10.x.x.x:80` |    
     | `@@HYPERAUTH@@` | `kubectl get svc -n hyperauth hyperauth` 에서 CLUSTER-IP와 PORT(S) 확인하여 입력 (포트는 `:` 왼쪽 값 사용) | `10.x.x.x:80` |    
     | `@@REALM@@` | hyperauth이용하여 로그인 시 필요한 정보 입력 | `tmax` |

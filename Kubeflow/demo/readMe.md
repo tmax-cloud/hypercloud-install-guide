@@ -93,9 +93,10 @@ sudo apt-get install -y docker-ce
 ```
 docker login
 ```
-  - 로그인 후에 config.json이 /home/jovyan/.docker/config.json에 위치하도록 다음 커맨드를 입력한다
+  - 로그인 후에 config.json이 /home/jovyan/.docker/config.json에 위치하는지 확인하고, 없다면 cp 커맨드를 통해 옮기자.
 ```
-cp /root/.docker/config.json /home/jovyan/.docker/config.json
+ls home/jovyan/.docker/
+cp $HOME/.docker/config.json /home/jovyan/.docker/config.json
 ```
 
   - 위의 작업이 끝났다면, code run을 하여 이미지를 배포하자. (UI는 jupyter 버전에 따라 다를 수 있음)

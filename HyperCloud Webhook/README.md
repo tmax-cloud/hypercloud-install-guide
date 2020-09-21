@@ -25,7 +25,7 @@
     ```
     * install yaml을 다운로드한다.
     ```bash
-    $ git clone https://github.com/tmax-cloud/hypercloud-install-guide.git
+    $ git clone https://github.com/tmax-cloud/hypercloud-install-guide.git -b 4.1
     $ cd hypercloud-install-guide/HyperCloud Webhook/manifests
     ```
   

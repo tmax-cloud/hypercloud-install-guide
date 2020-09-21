@@ -11,7 +11,6 @@
         * https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Image_Registry/installer
         * git이 설치되어 있는 경우 clone
            ```bash
-           $ git clone https://github.com/tmax-cloud/hypercloud-install-guide.git
            $ cd hypercloud-install-guide/Image_Registry/installer
            ```
 ## Install Steps

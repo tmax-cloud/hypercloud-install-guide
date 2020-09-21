@@ -15,14 +15,14 @@ echo accessToken : $token
 # Sed HypercloudServer IP
 hypercloudconsole=$2
 echo hypercloudconsole : $hypercloudconsole
-sed -i 's/172.22.6.14/'$hypercloudconsole'/g' tmax-realm-export.json
-sed -i 's/172.22.6.2:31304/'$hypercloudconsole'/g' tmax-realm-export.json
+sed -i 's/172.22.6.14/'$hypercloudconsole'/g' 3.tmax-realm-export.json
+sed -i 's/172.22.6.2:31304/'$hypercloudconsole'/g' 3.tmax-realm-export.json
 
 # tmax Realm Import
 curl 'http://'$hyperauthserver':8080/auth/admin/realms' \
   -H "authorization: Bearer $token" \
   -H "content-type: application/json;charset=UTF-8" \
-  --data-binary @tmax-realm-export.json 
+  --data-binary @3.tmax-realm-export.json 
 
 # Add admin-tmax.co.kr User
 curl -g -i -X POST \

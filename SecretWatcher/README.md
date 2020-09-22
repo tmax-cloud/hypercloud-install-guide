@@ -4,7 +4,12 @@
 * secret-watcher 
 	* image: [https://hub.docker.com/r/tmaxcloudck/hypercloud4-secret-watcher/tags](https://hub.docker.com/r/tmaxcloudck/hypercloud4-secret-watcher/tags)
 	* git: [https://github.com/tmax-cloud/secret-watcher](https://github.com/tmax-cloud/secret-watcher)
-
+	
+## Dependency
+1.  Hypercloud Operator
+    * [Hypercloud Operator 설치 가이드] 
+        * [https://github.com/tmax-cloud/hypercloud-install-guide/tree/4.1/HyperCloud%20Operator/v4.1.1.0#hypercloud-operator-%EC%84%A4%EC%B9%98-%EA%B0%80%EC%9D%B4%EB%93%9C](https://github.com/tmax-cloud/hypercloud-install-guide/tree/4.1/HyperCloud%20Operator/v4.1.1.0#hypercloud-operator-%EC%84%A4%EC%B9%98-%EA%B0%80%EC%9D%B4%EB%93%9C)
+	
 ## Prerequisite
 설치를 진행하기 전 아래의 과정을 통해 필요한 이미지 및 yaml 파일을 준비한다.
 1. **폐쇄망에서 설치하는 경우** 사용하는 image repository에 필요한 이미지를 push한다. 

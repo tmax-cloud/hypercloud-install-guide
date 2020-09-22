@@ -8,7 +8,7 @@
 | K8s Master | v1.17.6  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/K8S_Master/README.md | O |
 | K8s Worker | v1.17.6 | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/K8S_Worker/README.md | O |
 | CNI | | https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/CNI | O |
-| MetalLB |  | https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/MetalLB | O |
+| MetalLB | v0.8.2 | https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/MetalLB | O |
 | Rook Ceph | v1.3.6 | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/rook-ceph/README.md | O |
 | HyperCloud Operator | v4.1.0.13 ~ v4.1.0.40 | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/v4.1.0.13/README.md | O |
 | HyperCloud Webhook | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Webhook/README.md | O |
@@ -24,7 +24,7 @@
 | ------ | ------ | ------ | ------ |
 | NetworkAgent |  | https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/NetworkAgent | O |
 | Pod_GPU plugin | | <ul><li>https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Pod_GPU%20plugin</li><li> NVIDIA Device Plugin : https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Pod_GPU%20plugin/nvidia-device-plugin/README.md</li><li> NVIDIA Pod GPU Metrics Exporter : https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Pod_GPU%20plugin/nvidia-pod-gpu-metrics-exporter/README.md</li></ul> | O |
-| Istio | | [installation guide](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Istio/README.md) | O |
+| Istio | 1.5.1 | [installation guide](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Istio/README.md) | O |
 | Kubeflow | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Kubeflow/README.md | O |
 | EFK | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/EFK/README.md | O |
 | Multicloud-console |  |  | X |

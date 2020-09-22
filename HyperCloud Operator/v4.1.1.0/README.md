@@ -1,4 +1,5 @@
 
+
 # hypercloud-operator 설치 가이드
 
 ## 구성 요소
@@ -70,11 +71,13 @@
 	$ sudo docker push ${REGISTRY}/registry:2.6.2
 	$ sudo docker push ${REGISTRY}/tmaxcloudck/hypercloud-operator:b${HPCD_VERSION}
     ```
-## Dependency
-1.  Nginx Ingress Controller 설치 필요
+## Optional
+1.  Nginx Ingress Controller 설치
+    * 목적: Hypercloud Operator 내 기능(Reigstry Operator) 사용
     * [Nginx Ingress Controller 설치 가이드] 
         * [https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/IngressNginx/README.md](https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/IngressNginx/README.md)
-2.  Secret Watcher 설치 필요
+2.  Secret Watcher 설치 
+    * 목적: Hypercloud Operator 내 기능(Reigstry Operator) 사용
     * [secret-watcher 설치 가이드] 
         * [https://github.com/tmax-cloud/hypercloud-install-guide/tree/4.1/SecretWatcher#secret-watcher-%EC%84%A4%EC%B9%98-%EA%B0%80%EC%9D%B4%EB%93%9C](https://github.com/tmax-cloud/hypercloud-install-guide/tree/4.1/SecretWatcher#secret-watcher-%EC%84%A4%EC%B9%98-%EA%B0%80%EC%9D%B4%EB%93%9C)
 

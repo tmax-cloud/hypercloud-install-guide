@@ -11,6 +11,7 @@
 | CNI | | https://github.com/tmax-cloud/hypercloud-install-guide/tree/4.1/CNI | O |
 | MetalLB |  | https://github.com/tmax-cloud/hypercloud-install-guide/tree/4.1/MetalLB | O |
 | Rook Ceph | v1.3.6 | https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/rook-ceph/README.md | O |
+| HyperAuth | 1.0.5.6 | https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/HyperAuth/README.md | O |
 | HyperCloud Operator | v4.1.1.0+ | https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/HyperCloud%20Operator/v4.1.1.0/README.md | O |
 | HyperCloud Webhook | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/HyperCloud%20Webhook/README.md | O |
 | Prometheus | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/Prometheus/README.md | O |

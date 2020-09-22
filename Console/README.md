@@ -3,7 +3,7 @@
 
 ## 구성 요소
 * hypercloud-console ([tmaxcloudck/hypercloud-console](https://hub.docker.com/r/tmaxcloudck/hypercloud-console/tags))
-* 가이드 작성 시점(2020/09/11) 최신 버전은 4.1.4.1 입니다.
+* 가이드 작성 시점(2020/09/19) 최신 버전은 4.1.4.6 입니다.
 
 ## Prerequisites
 * Kubernetes, HyperCloud4 Operator, Grafana, Istio(Kiali, Jaeger), Prometheus, hyperauth가 설치되어 있어야 합니다.
@@ -87,7 +87,7 @@
     | `@@VNC@@` | `kubectl get svc -n kubevirt virtvnc` 에서 CLUSTER-IP와 PORT(S) 확인하여 입력 (포트는 `:` 왼쪽 값 사용) | `10.x.x.x:80` |    
     | `@@HYPERAUTH@@` | `kubectl get svc -n hyperauth hyperauth` 에서 CLUSTER-IP와 PORT(S) 확인하여 입력 (포트는 `:` 왼쪽 값 사용) | `10.x.x.x:80` |    
     | `@@REALM@@` | hyperauth이용하여 로그인 시 필요한 정보 입력 | `tmax` |
-    | `@@KEYCLOAK@@` | `kubectl get svc -n hyperauth hyperauth` 에서 CLUSTER-IP와 PORT(S) 확인하여 입력 (포트는 `:` 왼쪽 값 사용) | `10.x.x.x:80` |
+    | `@@KEYCLOAK@@` | `kubectl get svc -n hyperauth hyperauth` 에서 EXTERNAL-IP 확인하여 입력 | `10.x.x.x` |
     | `@@CLIENTID@@` | hyperauth이용하여 로그인 시 필요한 client 정보 입력 | `hypercloud4` | 
     | `@@HDC_FLAG@@` | HCDC 모드로 설치하려는 경우 `true` 입력 (아닌 경우 행 삭제) | `true` |
     | `@@PORTAL@@` | HCDC 모드로 설치하려는 경우 tmaxcloud portal 로그인 페이지 URL 입력 (아닌 경우 행 삭제) | `https://tmaxcloud.com/#!/sign-in` |

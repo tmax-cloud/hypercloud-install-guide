@@ -136,7 +136,7 @@ spec:
         effect: NoSchedule
       containers:
       - name: my-hypernet-local-agent
-        image: tmaxcloudck/hypernet-local-agent:0.5.0
+        image: tmaxcloudck/hypernet-local-agent:0.4.2
         securityContext:
           privileged: true
         env:

@@ -11,7 +11,8 @@
 * 하나의 MINOR 버전에서 다음 MINOR 버전으로, 또는 동일한 MINOR의 PATCH 버전 사이에서만 업그레이드할 수 있다. 
 * 즉, 업그레이드할 때 MINOR 버전을 건너 뛸 수 없다. 예를 들어, 1.y에서 1.y+1로 업그레이드할 수 있지만, 1.y에서 1.y+2로 업그레이드할 수는 없다.
 * ex) 1.15 버전에서 1.17 버전으로 한번에 업그레이드는 불가능 하다. 1.15 -> 1.16 -> 1.17 스텝을 진행 해야 한다.
-* upgrade시 container runtime 변경(docker -> crio)은 지원하지 않는다.
+* upgrade시 처음 구성한 클러스터 container runtime 변경(docker -> crio)은 불가능하다.
+* runtime으로 crio 사용시, CRI-O 메이저와 마이너 버전은 쿠버네티스 메이저와 마이너 버전이 일치해야 한다. 따라서 업데이트한 쿠버네티스 버전에 따라 crio 버전도 함께 업데이트 한다.
 
 ## Steps
 0. [master upgrade](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/K8S_Master/KUBE_VERSION_UPGRADE_README.md#step0-kubernetes-master-upgrade)

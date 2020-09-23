@@ -36,7 +36,9 @@
 	kubectl drain <node-to-drain> --ignore-daemonsets
 	
 	ex) kubectl drain k8s-master --ignore-daemonsets
-	```	
+	```
+	* node drain시 cannot delete Pods with local storage (use --delete-local-data to override) 문구가 보인 경우
+	  * 기존 VM의 emptydir에 작업 내용이 필요한 경우 기존 etcd 백업을 한다.
 * 업그레이드 plan 변경
 	```bash
 	sudo kubeadm upgrade plan 
@@ -168,6 +170,7 @@
 	
 	ex) kubectl drain k8s-master2 --ignore-daemonsets
 	```
+	
     * 추가 컨트롤 프레인에서는 해당 명령어를 실행하지 않는다. (sudo kubeadm upgrade plan)
     * sudo kubeadm upgrade apply 명령어 대신에 sudo kubeadm upgrade node 명령어를 실행한다.
 	```bash
@@ -190,6 +193,7 @@
 	sudo systemctl daemon-reload
 	sudo systemctl restart kubelet
 	```
+     
 ## Step1. kubernetes node upgrade
 * 워커 노드의 업그레이드 절차는 워크로드를 실행하는 데 필요한 최소 용량을 보장하면서, 한 번에 하나의 노드 또는 한 번에 몇 개의 노드로 실행해야 한다.
 * 모든 worker node에서 kubeadm을 업그레이드한다.
@@ -204,6 +208,8 @@
 	```bash
 	kubectl drain <node name> --ignore-daemonsets
 	```
+	* node drain시 cannot delete Pods with local storage (use --delete-local-data to override) 문구가 보인 경우
+	  * 기존 VM의 emptydir에 작업 내용이 필요한 경우 기존 etcd 백업을 한다.	
 * kubelet 구성 업그레이드
 	```bash
 	sudo kubeadm upgrade node

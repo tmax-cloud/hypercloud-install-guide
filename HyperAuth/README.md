@@ -12,7 +12,7 @@ openssl binary
 
 csi-cephfs-sc storageClass
 
-LoadBalancer type의 service 생성 가능
+LoadBalancer, NodePort type의 service 생성 가능
 
 ## 폐쇄망 설치 가이드
 

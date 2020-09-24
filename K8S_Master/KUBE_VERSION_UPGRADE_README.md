@@ -194,12 +194,12 @@
 	sudo systemctl restart kubelet
 	```
     * 업그레이드 후 노드가 ready -> not ready 상태로 바뀐 경우
-     Failed to initialize CSINode: error updating CSINode annotation: timed out waiting for the condition; caused by: the server could not find the requested resource
-       * sudo vi /var/lib/kubelet/config.yaml에 아래 옵션 추가
+      * Failed to initialize CSINode: error updating CSINode annotation: timed out waiting for the condition; caused by: the server could not find the requested resource
+        * sudo vi /var/lib/kubelet/config.yaml에 아래 옵션 추가
     ```bash    
 	featureGates:
           CSIMigration: false  
-    ```     
+    ```    
 ## Step1. kubernetes node upgrade
 * 워커 노드의 업그레이드 절차는 워크로드를 실행하는 데 필요한 최소 용량을 보장하면서, 한 번에 하나의 노드 또는 한 번에 몇 개의 노드로 실행해야 한다.
 * 모든 worker node에서 kubeadm을 업그레이드한다.
@@ -238,9 +238,9 @@
 * 비고 : 	
     * 1.16.x -> 1.17.x로 업그레이드시 버전에 맞추어 위에 작업을 실행한다.
     * 업그레이드 후 노드가 ready -> not ready 상태로 바뀐 경우
-     Failed to initialize CSINode: error updating CSINode annotation: timed out waiting for the condition; caused by: the server could not find the requested resource
-       * sudo vi /var/lib/kubelet/config.yaml에 아래 옵션 추가
-    ```bash    
-	featureGates:
-          CSIMigration: false  
-    ```
+      * Failed to initialize CSINode: error updating CSINode annotation: timed out waiting for the condition; caused by: the server could not find the requested resource
+        * sudo vi /var/lib/kubelet/config.yaml에 아래 옵션 추가
+        ```bash    
+	  featureGates:
+            CSIMigration: false  
+        ```

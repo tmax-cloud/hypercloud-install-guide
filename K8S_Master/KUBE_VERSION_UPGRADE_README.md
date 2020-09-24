@@ -233,10 +233,7 @@
     * 1.16.x -> 1.17.x로 업그레이드시 버전에 맞추어 위에 작업을 실행한다.
     * 업그레이드 후 노드가 ready -> not ready 상태로 바뀐 경우
      Failed to initialize CSINode: error updating CSINode annotation: timed out waiting for the condition; caused by: the server could not find the requested resource
-    ```bash
-	sudo vi /var/lib/kubelet/config.yaml
-    ```
-     * kubelet config에 아래 옵션 추가
+     * sudo vi /var/lib/kubelet/config.yaml에 아래 옵션 추가
     ```bash    
 	featureGates:
           CSIMigration: false  

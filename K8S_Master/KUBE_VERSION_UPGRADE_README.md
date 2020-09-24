@@ -199,7 +199,9 @@
     sudo vi /var/lib/kubelet/config.yaml에 아래 옵션 추가
     
 	featureGates:
-          CSIMigration: false  
+          CSIMigration: false
+	  
+    sudo systemctl restart kubelet	   
     ```    
 ## Step1. kubernetes node upgrade
 * 워커 노드의 업그레이드 절차는 워크로드를 실행하는 데 필요한 최소 용량을 보장하면서, 한 번에 하나의 노드 또는 한 번에 몇 개의 노드로 실행해야 한다.
@@ -244,5 +246,7 @@
     sudo vi /var/lib/kubelet/config.yaml에 아래 옵션 추가
     
 	featureGates:
-          CSIMigration: false  
-    ```  
+          CSIMigration: false
+	  
+    sudo systemctl restart kubelet	   
+    ``` 

@@ -15,8 +15,60 @@ csi-cephfs-sc storageClass
 LoadBalancer, NodePort type의 service 생성 가능
 
 ## 폐쇄망 설치 가이드
+1. **폐쇄망에서 설치하는 경우** 사용하는 image repository에 필요한 이미지를 push한다. 
 
+    * 작업 디렉토리 생성 및 환경 설정
+    ```bash
+	$ mkdir -p ~/hyperauth-install
+	$ export HYPERAUTH_HOME=~/hyperauth-install
+   $ export POSTGRES_VERSION=9.6.2-alpine
+	$ export HYPERAUTH_VERSION=<tag1>
+	$ cd ${HYPERAUTH_HOME}
 
+	* <tag1>에는 설치할 hyperauth 버전 명시
+		예시: $ export HYPERAUTH_VERSION=1.0.5.6
+    ```
+    * 외부 네트워크 통신이 가능한 환경에서 필요한 이미지를 다운받는다.
+    ```bash
+	# postgres
+	$ sudo docker pull postgres:${POSTGRES_VERSION}
+	$ sudo docker save postgres:${POSTGRES_VERSION} > postgres_${POSTGRES_VERSION}.tar
+
+	# hyperauth
+	$ sudo docker pull tmaxcloudck/hyperauth:b${HYPERAUTH_VERSION}
+	$ sudo docker save tmaxcloudck/hyperauth:b${HYPERAUTH_VERSION} > hyperauth_b${HYPERAUTH_VERSION}.tar
+    ```
+  
+2. 위의 과정에서 생성한 tar 파일들을 `폐쇄망 환경으로 이동`시킨 뒤 사용하려는 registry에 이미지를 push한다.
+	* 작업 디렉토리 생성 및 환경 설정
+    ```bash
+	$ mkdir -p ~/hyperauth-install
+	$ export HYPERAUTH_HOME=~/hyperauth-install
+   $ export POSTGRES_VERSION=9.6.2-alpine
+	$ export HYPERAUTH_VERSION=<tag1>
+   $ export REGISTRY=<REGISTRY_IP_PORT>
+	$ cd ${HYPERAUTH_HOME}
+
+	* <tag1>에는 설치할 hypercloud-operator 버전 명시
+		예시: $ export HYPERAUTH_VERSION=1.0.5.6
+	* <REGISTRY_IP_PORT>에는 폐쇄망 Docker Registry IP:PORT명시
+		예시: $ export REGISTRY=192.168.6.110:5000
+	```
+    * 이미지 load 및 push
+    ```bash
+    # Load Images
+   $ sudo docker load < postgres_${POSTGRES_VERSION}.tar
+   $ sudo docker load < hyperauth_b${HYPERAUTH_VERSION}.tar
+    
+    # Change Image's Tag For Private Registry
+   $ sudo docker tag postgres:${POSTGRES_VERSION} ${REGISTRY}/postgres:${POSTGRES_VERSION}
+	$ sudo docker tag tmaxcloudck/hyperauth:b${HYPERAUTH_VERSION} ${REGISTRY}/tmaxcloudck/hyperauth:b${HYPERAUTH_VERSION}
+    
+    # Push Images
+	$ sudo docker push ${REGISTRY}/postgres:${POSTGRES_VERSION}
+	$ sudo docker push ${REGISTRY}/tmaxcloudck/hyperauth:b${HYPERAUTH_VERSION}
+    ```
+    ```  
 
 ## Install Steps
 1. [초기화 작업](https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/HyperAuth/README.md#step-1-%EC%B4%88%EA%B8%B0%ED%99%94-%EC%9E%91%EC%97%85)

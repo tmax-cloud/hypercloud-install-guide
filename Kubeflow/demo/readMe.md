@@ -204,6 +204,6 @@ kubectl get service -n istio-system kfserving-ingressgateway
 
 ![5.workflow.PNG](./img/5.workflow.PNG)
 
-  - 참고 : [5.workflow.yaml](5.workflow.yaml)
+  - 참고 : [6.workflow.yaml](6.workflow.yaml)
 
 *serving 같은 경우 kfp python module을 사용하여 image로 만들고, 이를 workflow task로 등록하여 생성하였다.

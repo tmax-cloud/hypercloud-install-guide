@@ -211,7 +211,7 @@
     변경 (cri-o) : KUBELET_KUBEADM_ARGS="--container-runtime=remote --container-runtime-endpoint=/var/run/crio/crio.sock"
     
     systemctl restart kubelet
-    systemctl restart docker
+    systemctl restart docker ( #docker image registry node는 systemctl restart docker 명령어를 실행한다. )
     ```
     
 ## Step1. kubernetes node upgrade
@@ -270,5 +270,6 @@
     변경 (cri-o) : KUBELET_KUBEADM_ARGS="--container-runtime=remote --container-runtime-endpoint=/var/run/crio/crio.sock"
     
     systemctl restart kubelet
-    systemctl restart docker
+    systemctl stop docker ( #docker image registry node는 systemctl restart docker 명령어를 실행한다. )
+    
     ```

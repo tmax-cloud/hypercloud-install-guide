@@ -11,7 +11,6 @@
 * 하나의 MINOR 버전에서 다음 MINOR 버전으로, 또는 동일한 MINOR의 PATCH 버전 사이에서만 업그레이드할 수 있다. 
 * 즉, 업그레이드할 때 MINOR 버전을 건너 뛸 수 없다. 예를 들어, 1.y에서 1.y+1로 업그레이드할 수 있지만, 1.y에서 1.y+2로 업그레이드할 수는 없다.
 * ex) 1.15 버전에서 1.17 버전으로 한번에 업그레이드는 불가능 하다. 1.15 -> 1.16 -> 1.17 스텝을 진행 해야 한다.
-* upgrade시 처음 구성한 클러스터 container runtime 변경(docker -> crio)은 불가능하다.
 * runtime으로 crio 사용시, CRI-O 메이저와 마이너 버전은 쿠버네티스 메이저와 마이너 버전이 일치해야 한다. 따라서 업데이트한 쿠버네티스 버전에 따라 crio 버전도 함께 업데이트 한다.
 
 ## Steps
@@ -147,7 +146,7 @@
 	```bash
 	sudo systemctl daemon-reload
 	sudo systemctl restart kubelet
-	```		
+	```
 * 비고 : 
     * master 다중화 구성 클러스터 업그레이드 시에는 다음과 같은 명령어를 실행한다.
     * 첫번째 컨트롤 플레인 업그레이드 시에는 위에 step을 진행하고, 나머지 컨트롤 플레인 업그레이드 시에는 아래의 명령어를 실행한다.	
@@ -202,7 +201,18 @@
           CSIMigration: false
 	  
     sudo systemctl restart kubelet	   
-    ```    
+    ```
+     * 업그레이드시 runtime 변경을 하는 경우 (docker -> cri-o)
+    ```bash
+    sudo vi /var/lib/kubelet/kubeadm-flags.env에 옵션 변경
+    
+    기존 : KUBELET_KUBEADM_ARGS="--cgroup-driver=cgroupfs --network-plugin=cni --pod-infra-container-image=k8s.gcr.io/pause:3.1      
+    변경 : KUBELET_KUBEADM_ARGS="--container-runtime=remote --container-runtime-endpoint=/var/run/crio/crio.sock"
+    
+    systemctl restart kubelet
+    systemctl restart docker
+    ```
+    
 ## Step1. kubernetes node upgrade
 * 워커 노드의 업그레이드 절차는 워크로드를 실행하는 데 필요한 최소 용량을 보장하면서, 한 번에 하나의 노드 또는 한 번에 몇 개의 노드로 실행해야 한다.
 * 모든 worker node에서 kubeadm을 업그레이드한다.
@@ -250,3 +260,13 @@
 	  
     sudo systemctl restart kubelet	   
     ``` 
+     * 업그레이드시 runtime 변경을 하는 경우 (docker -> cri-o)
+    ```bash
+    sudo vi /var/lib/kubelet/kubeadm-flags.env에 옵션 변경
+    
+    기존 : KUBELET_KUBEADM_ARGS="--cgroup-driver=cgroupfs --network-plugin=cni --pod-infra-container-image=k8s.gcr.io/pause:3.1      
+    변경 : KUBELET_KUBEADM_ARGS="--container-runtime=remote --container-runtime-endpoint=/var/run/crio/crio.sock"
+    
+    systemctl restart kubelet
+    systemctl restart docker
+    ```

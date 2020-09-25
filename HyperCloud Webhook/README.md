@@ -83,7 +83,7 @@
 ## Step 5. HyperCloud Audit Webhook Config 생성
 * 목적 : `앞서 생성한 인증서 정보를 기반으로 Audit Webhook 연동 설정 파일 생성`
 * 생성 순서 : 아래의 command를 실행하여 Webhook Config를 생성한다. ([05_gen-audit-config.sh](manifests/05_gen-audit-config.sh))
-* 주의: 마스터 다중화일 경우 모든 마스터에서 진행한다.
+* 주의: 마스터 다중화일 경우 cp 명령어를 모든 마스터에서 진행한다.
     ```bash
     $ sh 05_gen-audit-config.sh
 	$ cp 06_audit-webhook-config /etc/kubernetes/pki/audit-webhook-config

@@ -138,15 +138,15 @@ LoadBalancer, NodePort type의 service 생성 가능
 #HyperAuth 유저 Migration Guide
 ## Hypercloud 4.0 User (CRD) Hyperauth 로 Migration
 * 순서 : 
-    * https://github.com/tmax-cloud/hypercloud-operator/blob/master/scripts/userMigrationFromK8s.sh 파일을 migration하려는 환경에 위치시킨다.
-    * chmod +777 userMigrationFromK8s.sh 
-    * kubectl get svc -n hyperauth 
-    * hyperauth 서비스의 http ip:port 를 복사한다. ex) 192.168.6.223:8080
-    * ./userMigrationFromK8s.sh 192.168.6.223:8080 으로 call 한다.
-  	* 전제조건 : tmax realm은 만들어진 상태라고 가정한다.
+1. https://github.com/tmax-cloud/hypercloud-operator/blob/master/scripts/userMigrationFromK8s.sh 파일을 migration하려는 환경에 위치시킨다.
+2. chmod +777 userMigrationFromK8s.sh 
+3. kubectl get svc -n hyperauth 
+	* hyperauth 서비스의 http ip:port 를 복사한다. ex) 192.168.6.223:8080
+4. ./userMigrationFromK8s.sh 192.168.6.223:8080 으로 call 한다.
+	* 전제조건 : tmax realm은 만들어진 상태라고 가정한다.
 	* 이미 존재해서 중복되는 아이디가 있을 경우, 해당 유저만 migration이 되지 않는다.
-    * hyperauth admin console에서 tmax realm의 user가 추가된 것을 확인한다, attribute도 추가된 것을 확인한다. ( phone, department, dateOfBirth, description 지원 )
-    * 비밀번호 Setting 하기
+5. hyperauth admin console에서 tmax realm의 user가 추가된 것을 확인한다, attribute도 추가된 것을 확인한다. ( phone, department, dateOfBirth, description 지원 )
+6. 비밀번호 Setting 하기
    	* client 로그인 화면에서 Forgot Password? 를 클릭한다.
 	* 본인이 기존에 쓰던 userId를 Username에 입력한다.
 	* 등록되어 있던 메일로 전송 된 비밀번호 재설정 링크를 통해 비밀번호를 설정한다.

@@ -105,12 +105,11 @@ LoadBalancer, NodePort type의 service 생성 가능
     * HyperAuth Admin Console에 접속
         * `kubectl get svc hyperauth -n hyperauth` 명령어로 IP 확인
         * 계정 : admin/admin
-    * Manage > Users > Add user 에서 admin-tmax.co.kr 계정을 생성
+    * Master > Add realm > Import - Select file 에 [3.tmax_realm_export.json](manifest/3.tmax_realm_export.json) 을 추가하여 Realm Import
+    * tmaxRealm > Manage > Users > Add user 에서 admin-tmax.co.kr 계정을 생성
         * Name : admin-tmax.co.kr
         * Email : 관리자 전용 email
     * Manage > Users > admin-tmax.co.kr UserDetail > Credentials 에서 password 재설정
-    * Master > Add realm > Import - Select file 에 [3.tmax_realm_export.json](manifest/3.tmax_realm_export.json) 을 추가하여 Realm Import
-    
  * 위의 HyperAuth Admin Console 접속 부터 tmax realm import까지의 과정을 tmaxRealmImport.sh로 대신할 수 있음 
     * {HYPERAUTH_SERVICE_IP} = $(kubectl describe service hyperauth -n hyperauth | grep 'LoadBalancer Ingress' | cut -d ' ' -f7)
     * {HYPERCLOUD-CONSOLE_IP} = $(kubectl describe service console-lb -n console-system | grep 'LoadBalancer Ingress' | cut -d

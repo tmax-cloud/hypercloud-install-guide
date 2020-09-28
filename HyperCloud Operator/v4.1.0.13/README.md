@@ -126,6 +126,9 @@
 	$ kubectl apply -f ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_CRD/${HPCD_VERSION}/Template/TemplateCRD_v1beta1.yaml
 	$ kubectl apply -f ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_CRD/${HPCD_VERSION}/Template/TemplateInstanceCRD_v1beta1.yaml
 	$ kubectl apply -f ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_CRD/${HPCD_VERSION}/Template/CatalogServiceClaimCRD_v1beta1.yaml
+	$ kubectl apply -f ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_CRD/${HPCD_VERSION}/Auth/clusterMenuPolicyCRD.yaml
+	$ kubectl apply -f ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_CRD/${HPCD_VERSION}/Auth/adminCMP.yaml
+	$ kubectl apply -f ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_CRD/${HPCD_VERSION}/Auth/defaultCMP.yaml
 	```
 
 

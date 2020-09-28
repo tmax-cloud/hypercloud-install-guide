@@ -8,10 +8,10 @@
   * image registry는 노드 1개(master)에서만 진행한다. 
   * 환경 설정
     * run-registry.sh, docker-registry.tar를 Master 환경에 다운로드한다.
-        * https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Image_Registry/installer
+        * https://github.com/tmax-cloud/hypercloud-install-guide/tree/4.1/Image_Registry/installer
         * git이 설치되어 있는 경우 clone
            ```bash
-           $ git clone https://github.com/tmax-cloud/hypercloud-install-guide.git
+           $ git clone -b 4.1 --single-branch https://github.com/tmax-cloud/hypercloud-install-guide.git
            $ cd hypercloud-install-guide/Image_Registry/installer
            ```
 ## Install Steps

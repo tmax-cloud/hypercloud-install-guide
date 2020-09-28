@@ -19,7 +19,7 @@
         $ kubectl get storageclass
         ```
     * 만약 아무 storage class가 없다면 아래 링크로 이동하여 rook-ceph 설치한다.
-        * https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Rook%20Ceph/README.md
+        * https://github.com/tmax-cloud/hypercloud-install-guide/tree/4.1/rook-ceph
     * Storage class는 있지만 default로 설정된 것이 없다면 아래 명령어를 실행한다.
         ```bash
         $ kubectl patch storageclass csi-cephfs-sc -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
@@ -27,13 +27,13 @@
     * csi-cephfs-sc는 위 링크로 rook-ceph를 설치했을 때 생성되는 storage class이며 다른 storage class를 default로 사용해도 무관하다.
 2. Istio
     * v1.5.1
-        * https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Istio
+        * https://github.com/tmax-cloud/hypercloud-install-guide/tree/4.1/Istio
 3. Prometheus
     * kubeflow의 모니터링 정보를 제공하기 위해 필요하다.
         * http://192.168.1.150:10080/hypercloud/hypercloud/wikis/Prometheus-InstallerGuide
 4. GPU plug-in (Optional)
     * Kubernetes cluster 내 node에 GPU가 탑재되어 있으며 AI DevOps 기능을 사용할 때 GPU가 요구될 경우에 필요하다.
-        * https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Pod_GPU%20plugin
+        * https://github.com/tmax-cloud/hypercloud-install-guide/tree/4.1/Pod_GPU%20plugin
 
 ## 폐쇄망 설치 가이드
 설치를 진행하기 전 아래의 과정을 통해 필요한 이미지 및 yaml 파일을 준비한다.
@@ -42,27 +42,27 @@
         * 폐쇄망 registry 구축 링크
     * 아래 명령어를 수행하여 Kubeflow 설치 시 필요한 이미지들을 위에서 구축한 registry에 push한다.
         ```bash
-        $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/Kubeflow/image-push.sh
-        $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/Kubeflow/imagelist
+        $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/4.1/Kubeflow/image-push.sh
+        $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/4.1/Kubeflow/imagelist
         $ chmod +x ./image-push.sh
         $ ./image-push.sh <<REGISTRY_ADDRESS>>
         ```
 2. Yaml 파일 및 script 파일 준비
     * 아래 명령어를 수행하여 Kubeflow 설치에 필요한 yaml 파일들과 script 파일들을 다운로드 받는다. 
         ```bash
-        $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/Kubeflow/sed.sh
-        $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/Kubeflow/kustomize-apply.sh
-        $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/Kubeflow/kustomize.tar.gz
+        $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/4.1/Kubeflow/sed.sh
+        $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/4.1/Kubeflow/kustomize.tar.gz
+        $ wget https://github.com/kubeflow/kfctl/releases/download/v1.0.2/kfctl_v1.0.2-0-ga476281_linux.tar.gz
         ```
 3. 앞으로의 진행
-    * Step 0 ~ 4 중 Step 0은 진행할 필요없고 Step 2, 3은 비고를 참고하여 진행한다. 나머지는 그대로 진행하면 된다.
+    * Step 0 ~ 4 중 Step 0, 2 비고를 참고하여 진행한다. 나머지는 그대로 진행하면 된다.
 
 ## Install Steps
-0. [kfctl 설치](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Kubeflow/README.md#step-0-kfctl-%EC%84%A4%EC%B9%98)
-1. [설치 디렉토리 생성](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Kubeflow/README.md#step-1-%EC%84%A4%EC%B9%98-%EB%94%94%EB%A0%89%ED%86%A0%EB%A6%AC-%EC%83%9D%EC%84%B1)
-2. [Kustomize 리소스 생성](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Kubeflow/README.md#step-2-kustomize-%EB%A6%AC%EC%86%8C%EC%8A%A4-%EC%83%9D%EC%84%B1)
-3. [Kubeflow 배포](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Kubeflow/README.md#step-3-kubeflow-%EB%B0%B0%ED%8F%AC)
-4. [배포 확인 및 기타 작업](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Kubeflow/README.md#step-4-%EB%B0%B0%ED%8F%AC-%ED%99%95%EC%9D%B8-%EB%B0%8F-%EA%B8%B0%ED%83%80-%EC%9E%91%EC%97%85)
+0. [kfctl 설치](https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/Kubeflow/README.md#step-0-kfctl-%EC%84%A4%EC%B9%98)
+1. [설치 디렉토리 생성](https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/Kubeflow/README.md#step-1-%EC%84%A4%EC%B9%98-%EB%94%94%EB%A0%89%ED%86%A0%EB%A6%AC-%EC%83%9D%EC%84%B1)
+2. [Kustomize 리소스 생성](https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/Kubeflow/README.md#step-2-kustomize-%EB%A6%AC%EC%86%8C%EC%8A%A4-%EC%83%9D%EC%84%B1)
+3. [Kubeflow 배포](https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/Kubeflow/README.md#step-3-kubeflow-%EB%B0%B0%ED%8F%AC)
+4. [배포 확인 및 기타 작업](https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/Kubeflow/README.md#step-4-%EB%B0%B0%ED%8F%AC-%ED%99%95%EC%9D%B8-%EB%B0%8F-%EA%B8%B0%ED%83%80-%EC%9E%91%EC%97%85)
 
 ## Step 0. kfctl 설치
 * 목적 : `Kubeflow component를 배포 및 관리하기 위한 커맨드 라인툴인 kfctl을 설치한다.`
@@ -72,6 +72,8 @@
     $ tar xzvf kfctl_v1.0.2-0-ga476281_linux.tar.gz
     $ sudo mv kfctl /usr/bin
     ```
+* 비고 : 
+    * 폐쇄망 환경일 경우 첫 번째 명령어로 github에 있는 kfctl을 다운로드받는 대신 미리 준비한 kfctl을 다운받으면 된다.
 
 ## Step 1. 설치 디렉토리 생성
 * 목적 : `Kubeflow의 설치 yaml이 저장될 설치 디렉토리를 생성하고 해당 경로로 이동한다.`
@@ -96,7 +98,7 @@
         ```
     * 정상적으로 완료되면 kustomize라는 디렉토리가 생성된다.
 * 비고 : 
-    * 폐쇄망 환경일 경우 설치 디렉토리에 미리 다운로드받은 sed.sh, kustomize-apply.sh, kustomize.tar.gz 파일을 옮긴다.
+    * 폐쇄망 환경일 경우 설치 디렉토리에 미리 다운로드받은 sed.sh, kustomize.tar.gz 파일을 옮긴다.
     * 아래 명령어를 통해 Kustomize 리소스의 압축을 풀고 yaml 파일들에서 이미지들을 pull 받을 registry를 바꿔준다.
         ```bash
         $ tar xvfz kustomize.tar.gz
@@ -120,11 +122,7 @@
     * 기존 Kubeflow에서 수정된 점
         * Istio 1.5.1 호환을 위해 KFServing의 controller 수정
         * Workflow template을 사용하기 위한 argo controller 버전 업
-    * 폐쇄망 환경일 경우 kfctl을 이용하는 대신 아래 명령어를 통해 Kubeflow를 배포한다.
-        ```bash
-        $ chmod +x ./kustomize-apply.sh
-        $ ./kustomize-apply.sh ${KF_DIR}/kustomize
-        ```
+        * Notebook CRD, controller 변경
 
 ## Step 4. 배포 확인 및 기타 작업
 * 목적 : `Kubeflow 배포를 확인하고 문제가 있을 경우 정상화한다.`

@@ -2,7 +2,7 @@
 
 ## 구성 요소 및 버전
 * hypercloud-webhook 
-    * ([tmaxcloudck/hypercloud-webhook:b4.1.0.20](https://hub.docker.com/layers/tmaxcloudck/hypercloud-webhook/b4.1.0.20/images/sha256-c0b89b02335bfde9024ce7388c36b229dd4ab224f90fef872e13f973bb29a48f?context=explore)) 
+* ([tmaxcloudck/hypercloud-webhook:b4.1.0.22](https://hub.docker.com/layers/tmaxcloudck/hypercloud-webhook/b4.1.0.22/images/sha256-ba70e762c512fd42aa5a7aad6efe574e01cdbbcc99ab6f6c0484cb0dee4c0f9b?context=explore)) 
 
 ## Prerequisites
 1. 해당 모듈 설치 전 HyperCloud Operator 모듈 설치 필요
@@ -16,7 +16,8 @@
     ```bash
     $ mkdir -p ~/hypercloud-webhook-install
     $ export WEBHOOK_HOME=~/hypercloud-webhook-install
-    $ export WEBHOOK_VERSION=b4.1.0.20
+
+    $ export WEBHOOK_VERSION=b4.1.0.22
     $ cd $WEBHOOK_HOME
     ```
     * 외부 네트워크 통신이 가능한 환경에서 필요한 이미지를 다운받는다.
@@ -26,7 +27,7 @@
     ```
     * install yaml을 다운로드한다.
     ```bash
-    $ git clone https://github.com/tmax-cloud/hypercloud-install-guide.git
+    $ git clone https://github.com/tmax-cloud/hypercloud-install-guide.git -b 4.1
     $ cd hypercloud-install-guide/HyperCloud Webhook/manifests
     ```
   
@@ -84,6 +85,7 @@
 ## Step 5. HyperCloud Audit Webhook Config 생성
 * 목적 : `앞서 생성한 인증서 정보를 기반으로 Audit Webhook 연동 설정 파일 생성`
 * 생성 순서 : 아래의 command를 실행하여 Webhook Config를 생성한다. ([05_gen-audit-config.sh](manifests/05_gen-audit-config.sh))
+* 주의: 마스터 다중화일 경우 cp 명령어를 모든 마스터에서 진행한다.
     ```bash
     $ sh 05_gen-audit-config.sh
 	$ cp 06_audit-webhook-config /etc/kubernetes/pki/audit-webhook-config
@@ -93,10 +95,11 @@
 ## Step 6. HyperCloud Audit Webhook Config 적용
 * 목적 : `Audit Webhook 연동 설정을 적용하여 API 서버가 Audit Webhook Server와 HTTPS 통신을 하도록 설정`
 * 생성 순서 : /etc/kubernetes/manifests/kube-apiserver.yaml을 아래와 같이 수정한다.
+* 주의: 마스터 다중화일 경우 모든 마스터에서 진행한다.
 	```
 	spec.containers.command:
 	- --audit-log-path=/var/log/kubernetes/apiserver/audit.log
-	- --audit-policy-file=/etc/kubernetes/pki/policy.yaml
+	- --audit-policy-file=/etc/kubernetes/pki/audit-policy.yaml
 	- --audit-webhook-config-file=/etc/kubernetes/pki/audit-webhook-config
 	spec.dnsPolicy: ClusterFirstWithHostNet
 
@@ -105,6 +108,7 @@
 ## Step 7. test-yaml 배포
 * 목적 : `Webhook Server 동작 검증`
 * 생성 순서 : [namespaceclaim.yaml](manifests/test-yaml/namespaceclaim.yaml) 실행 `ex) kubectl apply -f namespaceclaim.yaml`
+* 주의: 마스터 다중화일 경우 모든 마스터에서 진행한다.
 	```
 	kubectl describe namespaceclaim example-namespace-webhook
 	Annotation에 creator/updater/createdTime/updatedTime 필드가 생성 되었는지 확인한다.

@@ -4,31 +4,30 @@
 ### Module (Required)
 | Module | Version | Guide | 진행률(O/△/X) |
 | ------ | ------ | ------ | ------ |
-| CentOS 설치 & package repo | 7.7 | https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/Package/README.md | O |
-| Image registry |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/Image_Registry/README.md | O |
-| K8s Master | v1.17.6  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/K8S_Master/README.md | O |
-| K8s Worker | v1.17.6 | https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/K8S_Worker/README.md | O |
-| CNI | | https://github.com/tmax-cloud/hypercloud-install-guide/tree/4.1/CNI | O |
-| MetalLB |  | https://github.com/tmax-cloud/hypercloud-install-guide/tree/4.1/MetalLB | O |
-| Rook Ceph | v1.3.6 | https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/rook-ceph/README.md | O |
-| HyperAuth | 1.0.5.6 | https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/HyperAuth/README.md | O |
-| HyperCloud Operator | v4.1.1.0+ | https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/HyperCloud%20Operator/v4.1.1.0/README.md | O |
-| HyperCloud Webhook | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/HyperCloud%20Webhook/README.md | O |
-| Prometheus | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/Prometheus/README.md | O |
-| Console | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/Console/README.md | O |
-| Tekton | v0.12.1+ | https://github.com/tmax-cloud/hypercloud-install-guide/tree/4.1/Tekton_CI_CD | O |
-| Catalog Controller |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/CatalogController/README.md | O |
-| TemplateServiceBroker |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/TemplateServiceBroker/README.md | O |
-| SecretWatcher | v4.1.0.9  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/SecretWatcher/README.md | O |
+| CentOS 설치 & package repo | 7.7 | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Package/README.md | O |
+| Image registry |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Image_Registry/README.md | O |
+| K8s Master | v1.17.6  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/K8S_Master/README.md | O |
+| K8s Worker | v1.17.6 | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/K8S_Worker/README.md | O |
+| CNI | | https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/CNI | O |
+| MetalLB | v0.8.2 | https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/MetalLB | O |
+| Rook Ceph | v1.3.6 | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/rook-ceph/README.md | O |
+| HyperCloud Operator | v4.1.0.13 ~ v4.1.0.40 | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/v4.1.0.13/README.md | O |
+| HyperCloud Webhook | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Webhook/README.md | O |
+| Prometheus | v2.11.0 | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Prometheus/README.md | O |
+| Console | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Console/README.md | O |
+| Tekton | v0.12.1+ | https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Tekton_CI_CD | O |
+| Catalog Controller |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/CatalogController/README.md | O |
+| TemplateServiceBroker |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/TemplateServiceBroker/README.md | O |
+| SecretWatcher |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/SecretWatcher/README.md | O |
 
 ### Module (Optional)
 | Module | Version | Guide | 진행률(O/△/X) |
 | ------ | ------ | ------ | ------ |
-| NetworkAgent |  | https://github.com/tmax-cloud/hypercloud-install-guide/tree/4.1/NetworkAgent | O |
-| Pod_GPU plugin | | <ul><li>https://github.com/tmax-cloud/hypercloud-install-guide/tree/4.1/Pod_GPU%20plugin</li><li> NVIDIA Device Plugin : https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/Pod_GPU%20plugin/nvidia-device-plugin/README.md</li><li> NVIDIA Pod GPU Metrics Exporter : https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/Pod_GPU%20plugin/nvidia-pod-gpu-metrics-exporter/README.md</li></ul> | O |
-| Istio | | [installation guide](https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/Istio/README.md) | O |
-| Kubeflow | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/Kubeflow/README.md | O |
-| EFK | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/EFK/README.md | O |
+| NetworkAgent |  | https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/NetworkAgent | O |
+| Pod_GPU plugin | | <ul><li>https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Pod_GPU%20plugin</li><li> NVIDIA Device Plugin : https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Pod_GPU%20plugin/nvidia-device-plugin/README.md</li><li> NVIDIA Pod GPU Metrics Exporter : https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Pod_GPU%20plugin/nvidia-pod-gpu-metrics-exporter/README.md</li></ul> | O |
+| Istio | 1.5.1 | [installation guide](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Istio/README.md) | O |
+| Kubeflow | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Kubeflow/README.md | O |
+| EFK | E(7.2.0), F(v1.4.2), K(7.2.0) | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/EFK/README.md | O |
 | Multicloud-console |  |  | X |
 | Capi provider |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/Capi/README.md | O |
 | NGINX Ingress Controller | 0.33.0 | https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/IngressNginx/README.md | O |

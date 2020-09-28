@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Config
+clusters:
+- cluster:
+     certificate-authority-data: ${HYPERCLOUD4_CA_CERT}
+     server: https://hypercloud4-webhook-svc.hypercloud4-system.svc/api/webhook/audit
+  name: audit-webhook-service
+contexts:
+- context:
+    cluster: audit-webhook-service
+  name: audit-webhook-context
+current-context: audit-webhook-context

@@ -49,6 +49,7 @@ sed -i "s/image: mysql/image: ${registry}\/mysql/g" ${dir}/metadata\/overlays\/d
 sed -i "s/image: gcr.io\/kubeflow-images-public\/katib\/v1alpha3\/katib-ui/image: ${registry}\/gcr.io\/kubeflow-images-public\/katib\/v1alpha3\/katib-ui/g" ${dir}/katib-controller\/base\/katib-ui-deployment.yaml
 sed -i "s/image: \"docker.io\/istio\/proxyv2/image: \"${registry}\/docker.io\/istio\/proxyv2/g" ${dir}/kfserving-gateway\/base\/deployment.yaml
 sed -i "s/image: \"docker.io\/istio\/proxyv2/image: \"${registry}\/docker.io\/istio\/proxyv2/g" ${dir}/cluster-local-gateway\/base\/deployment.yaml
+sed -i "s/\"image\" : \"gcr.io\/kfserving\/batcher/\"image\" : \"${registry}\/gcr.io\/kfserving\/batcher/g" ${dir}/kfserving-install\/base\/config-map.yaml
 sed -i "s/\"image\" : \"gcr.io\/kfserving\/alibi-explainer/\"image\" : \"${registry}\/gcr.io\/kfserving\/alibi-explainer/g" ${dir}/kfserving-install\/base\/config-map.yaml
 sed -i "s/\"image\" : \"gcr.io\/kfserving\/logger/\"image\" : \"${registry}\/gcr.io\/kfserving\/logger/g" ${dir}/kfserving-install\/base\/config-map.yaml
 sed -i "s/\"image\": \"tensorflow\/serving/\"image\": \"${registry}\/tensorflow\/serving/g" ${dir}/kfserving-install\/base\/config-map.yaml
@@ -69,7 +70,7 @@ sed -i "s/image: gcr.io\/ml-pipeline\/envoy:metadata-grpc/image: ${registry}\/gc
 sed -i "s/image: gcr.io\/tfx-oss-public\/ml_metadata_store_server/image: ${registry}\/gcr.io\/tfx-oss-public\/ml_metadata_store_server/g" ${dir}/metadata\/base\/metadata-deployment.yaml
 sed -i "s/image: gcr.io\/kubeflow-images-public\/metadata-frontend/image: ${registry}\/gcr.io\/kubeflow-images-public\/metadata-frontend/g" ${dir}/metadata\/base\/metadata-ui-deployment.yaml
 sed -i "s/image: minio\/minio/image: ${registry}\/minio\/minio/g" ${dir}/minio\/base\/deployment.yaml
-sed -i "s/image: gcr.io\/kubeflow-images-public\/notebook-controller/image: ${registry}\/gcr.io\/kubeflow-images-public\/notebook-controller/g" ${dir}/notebook-controller\/base\/deployment.yaml
+sed -i "s/image: tmaxcloudck\/notebook-controller-go:b0.0.2/image: ${registry}\/tmaxcloudck\/notebook-controller-go:b0.0.2/g" ${dir}/notebook-controller\/base\/deployment.yaml
 sed -i "s/image: gcr.io\/ml-pipeline\/persistenceagent/image: ${registry}\/gcr.io\/ml-pipeline\/persistenceagent/g" ${dir}/persistent-agent\/base\/deployment.yaml
 sed -i "s/image: gcr.io\/ml-pipeline\/frontend/image: ${registry}\/gcr.io\/ml-pipeline\/frontend/g" ${dir}/pipelines-ui\/base\/deployment.yaml
 sed -i "s/image: gcr.io\/ml-pipeline\/viewer-crd-controller/image: ${registry}\/gcr.io\/ml-pipeline\/viewer-crd-controller/g" ${dir}/pipelines-viewer\/base\/deployment.yaml
@@ -79,7 +80,6 @@ sed -i "s/image: gcr.io\/kubeflow-images-public\/kfam/image: ${registry}\/gcr.io
 sed -i "s/image: gcr.io\/kubeflow-images-public\/pytorch-operator/image: ${registry}\/gcr.io\/kubeflow-images-public\/pytorch-operator/g" ${dir}/pytorch-operator\/base\/deployment.yaml
 sed -i "s/image: gcr.io\/ml-pipeline\/scheduledworkflow/image: ${registry}\/gcr.io\/ml-pipeline\/scheduledworkflow/g" ${dir}/scheduledworkflow\/base\/deployment.yaml
 sed -i "s/image: 'docker.io\/seldonio\/seldon-core-operator/image: '${registry}\/docker.io\/seldonio\/seldon-core-operator/g" ${dir}/seldon-core-operator\/base\/resources.yaml
-sed -i "s/\"image\" : \"gcr.io\/kfserving\/storage-initializer/\"image\" : \"${registry}\/gcr.io\/kfserving\/storage-initializer/g" ${dir}/kfserving-install\/base\/config-map.yaml
 sed -i "s/image: gcr.io\/spark-operator\/spark-operator/image: ${registry}\/gcr.io\/spark-operator\/spark-operator/g" ${dir}/spark-operator\/base\/deploy.yaml
 sed -i "s/image: gcr.io\/spark-operator\/spark-operator/image: ${registry}\/gcr.io\/spark-operator\/spark-operator/g" ${dir}/spark-operator\/base\/crd-cleanup-job.yaml
 sed -i "s/image: gcr.io\/google_containers\/spartakus-amd64/image: ${registry}\/gcr.io\/google_containers\/spartakus-amd64/g" ${dir}/spartakus\/base\/deployment.yaml

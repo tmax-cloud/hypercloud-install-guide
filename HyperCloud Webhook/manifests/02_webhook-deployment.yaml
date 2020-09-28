@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hypercloud4-webhook
+  namespace: hypercloud4-system
+  labels:
+    hypercloud4: webhook
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      hypercloud4: webhook
+  template:
+    metadata:
+      labels:
+        hypercloud4: webhook
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: {hostname}
+      containers:
+      - name: hypercloud4-webhook
+        image: tmaxcloudck/hypercloud-webhook:{webhook_version}
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+           memory: "1Gi"
+           cpu: "500m"
+          limits:
+           memory: "1Gi"
+           cpu: "500m"
+        env:
+        - name: TZ
+          value: "Asia/Seoul"
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secrets
+              key: ROOT_PASSWORD
+        ports:
+        - containerPort: 8443
+          name: webhook 
+        volumeMounts:
+        - name: hypercloud4-webhook-certs
+          mountPath: /run/secrets/tls
+          readOnly: true
+      volumes:
+      - name: hypercloud4-webhook-certs
+        secret:
+          secretName: hypercloud4-webhook-certs
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hypercloud4-webhook-svc
+  namespace: hypercloud4-system
+spec:
+  selector:
+    hypercloud4: webhook
+  ports:
+    - port: 443
+      targetPort: webhook

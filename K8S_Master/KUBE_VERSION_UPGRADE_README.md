@@ -146,8 +146,6 @@
 	
 	ex) kubectl drain k8s-master --ignore-daemonsets
 	```
-	* node drain시 cannot delete Pods with local storage (use --delete-local-data to override) 문구가 보인 경우
-	  * 기존 VM의 emptydir에 작업 내용이 필요한 경우 기존 etcd 백업을 한다.
 * 업그레이드 plan 변경
 	```bash
 	sudo kubeadm upgrade plan 
@@ -337,9 +335,7 @@
 * 스케줄 불가능(unschedulable)으로 표시하고 워크로드를 축출하여 유지 보수할 노드를 준비한다.
 	```bash
 	kubectl drain <node name> --ignore-daemonsets
-	```
-	* node drain시 cannot delete Pods with local storage (use --delete-local-data to override) 문구가 보인 경우
-	  * 기존 VM의 emptydir에 작업 내용이 필요한 경우 기존 etcd 백업을 한다.	
+	```	
 * kubelet 구성 업그레이드
 	```bash
 	sudo kubeadm upgrade node

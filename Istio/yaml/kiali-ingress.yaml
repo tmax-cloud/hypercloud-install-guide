@@ -3,6 +3,8 @@ kind: Ingress
 metadata:
   name: kiali-ingress
   namespace: istio-system
+  annotations:
+    kubernetes.io/ingress.class: nginx-system
 spec:
   tls:
   - secretName: kiali-https-secret

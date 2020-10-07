@@ -146,6 +146,7 @@
 	
 	ex) kubectl drain k8s-master --ignore-daemonsets
 	```
+	* drain 시 pod의 local data는 삭제 될 수 있다.
 * 업그레이드 plan 변경
 	```bash
 	sudo kubeadm upgrade plan 
@@ -277,7 +278,7 @@
 	
 	ex) kubectl drain k8s-master2 --ignore-daemonsets
 	```
-	
+	* drain 시 pod의 local data는 삭제 될 수 있다.
     * 추가 컨트롤 프레인에서는 해당 명령어를 실행하지 않는다. (sudo kubeadm upgrade plan)
     * sudo kubeadm upgrade apply 명령어 대신에 sudo kubeadm upgrade node 명령어를 실행한다.
 	```bash
@@ -335,7 +336,8 @@
 * 스케줄 불가능(unschedulable)으로 표시하고 워크로드를 축출하여 유지 보수할 노드를 준비한다.
 	```bash
 	kubectl drain <node name> --ignore-daemonsets
-	```	
+	```
+	* drain 시 pod의 local data는 삭제 될 수 있다.
 * kubelet 구성 업그레이드
 	```bash
 	sudo kubeadm upgrade node

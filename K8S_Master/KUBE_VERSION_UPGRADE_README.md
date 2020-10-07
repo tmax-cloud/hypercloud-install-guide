@@ -141,8 +141,9 @@
 	kubeadm version
 	```
 * node drain
+        ``` 
         * 주의: node drain시 해당 node상의 pod가 evict되기 때문에, pod의 local-data의 경우 보존되지 않음
-	
+	```
 	```bash
 	kubectl drain <node-to-drain> --ignore-daemonsets
 	
@@ -335,6 +336,9 @@
 	ex) (1.15.x-> 1.16.x) yum install -y kubeadm-1.17.x-0 --disableexcludes=kubernetes
 	```
 * 스케줄 불가능(unschedulable)으로 표시하고 워크로드를 축출하여 유지 보수할 노드를 준비한다.
+	``` 
+        * 주의: node drain시 해당 node상의 pod가 evict되기 때문에, pod의 local-data의 경우 보존되지 않음
+	```
 	```bash
 	kubectl drain <node name> --ignore-daemonsets
 	```	

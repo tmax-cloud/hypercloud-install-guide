@@ -141,6 +141,8 @@
 	kubeadm version
 	```
 * node drain
+        * 주의: node drain시 해당 node상의 pod가 evict되기 때문에, pod의 local-data의 경우 보존되지 않음
+	
 	```bash
 	kubectl drain <node-to-drain> --ignore-daemonsets
 	

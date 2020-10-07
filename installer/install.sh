@@ -9,6 +9,11 @@ type=$2
 
 os_check=$(awk -F= '/^NAME/{print $2}' /etc/os-release)
 
+# ProLinux == CentOS Linux
+if [ ${os_check} == "\"ProLinux\"" ]; then
+	os_check="\"CentOS Linux\"";
+fi
+
 function set_env() {
 
   echo "========================================================================="

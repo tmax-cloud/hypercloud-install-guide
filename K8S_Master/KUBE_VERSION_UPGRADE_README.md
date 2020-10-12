@@ -143,9 +143,9 @@
 * node drain
    * 주의: node drain시 해당 node상의 pod가 evict되기 때문에, pod의 local-data의 경우 보존되지 않음
 	```bash
-	kubectl drain <node-to-drain> --ignore-daemonsets
+	kubectl drain <node-to-drain> --ignore-daemonsets --delete-local-data
 	
-	ex) kubectl drain k8s-master --ignore-daemonsets
+	ex) kubectl drain k8s-master --ignore-daemonsets --delete-local-data
 	```
 * 업그레이드 plan 변경
 	```bash
@@ -275,9 +275,9 @@
    * node drain
      * 주의: node drain시 해당 node상의 pod가 evict되기 때문에, pod의 local-data의 경우 보존되지 않음
 	```bash
-	kubectl drain <node-to-drain> --ignore-daemonsets
+	kubectl drain <node-to-drain> --ignore-daemonsets --delete-local-data
 	
-	ex) kubectl drain k8s-master2 --ignore-daemonsets
+	ex) kubectl drain k8s-master2 --ignore-daemonsets --delete-local-data
 	```
     * 추가 컨트롤 프레인에서는 해당 명령어를 실행하지 않는다. (sudo kubeadm upgrade plan)
     * sudo kubeadm upgrade apply 명령어 대신에 sudo kubeadm upgrade node 명령어를 실행한다.
@@ -337,7 +337,9 @@
    * node drain
      * 주의: node drain시 해당 node상의 pod가 evict되기 때문에, pod의 local-data의 경우 보존되지 않음
 	```bash
-	kubectl drain <node name> --ignore-daemonsets
+	kubectl drain <node name> --ignore-daemonsets --delete-local-data
+	
+	ex) kubectl drain k8s-node1 --ignore-daemonsets --delete-local-data
 	```
 * kubelet 구성 업그레이드
 	```bash

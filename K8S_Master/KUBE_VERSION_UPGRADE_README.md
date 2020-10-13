@@ -155,7 +155,7 @@
        kubectl get pdb -A
        or
        kubectl get pdb <pdb-name> -oyaml
-      ```       
+      ``` 
      * 1) 해당 Pod를 다른 Node로 재스케줄링을 시도한다.
       ```bash
        kubectl delete pod <pod-name>
@@ -163,7 +163,7 @@
      * 2) 다른 Node의 리소스 부족, noScheduling 설정 등으로 인해 a번 재스케줄링이 불가할 경우엔 PDB 데이터를 삭제하고 drain한 후에 PDB 데이터를 복구한다.
       ```bash
        kubectl get pdb <pdb-name> -o yaml > pdb-backup.yaml
-       kubectl drain 완료 후
+       kubectl drain <node-to-drain> --ignore-daemonsets --delete-local-data
        kubectl apply -f pdb-backup.yaml
       ```
 * 업그레이드 plan 변경

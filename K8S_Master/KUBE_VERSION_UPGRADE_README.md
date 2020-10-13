@@ -166,9 +166,9 @@
        ```
    * node drain 실행 
       ```bash
-	kubectl drain <node-to-drain> --ignore-daemonsets --delete-local-data
+      kubectl drain <node-to-drain> --ignore-daemonsets --delete-local-data
 	
-	ex) kubectl drain k8s-master --ignore-daemonsets --delete-local-data
+      ex) kubectl drain k8s-master --ignore-daemonsets --delete-local-data
       ```       
 * 업그레이드 plan 변경
 	```bash

@@ -142,7 +142,7 @@
 	```
 * node drain
    * node drain 전 체크 사항
-     * PDB가 존재하는 Pod가 drain node에 생성되어있는 경우 evict되지 않기 때문에, 아래 명령어로 drain이 가능한 상태인지 확인한다.
+     * PDB가 존재하는 Pod가 drain하려는 node에 생성되어있는 경우 evict될 수 없기 때문에, 아래 명령어로 drain이 가능한 상태인지 확인한다.
       ```bash
        kubectl get pdb -A
        or

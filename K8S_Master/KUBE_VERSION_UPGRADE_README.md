@@ -141,8 +141,8 @@
 	kubeadm version
 	```
 * node drain
-   * node drain 전 pod pdb 체크 사항
-     * 주의 : node drain시 해당 node상의 pod가 evict되기 때문에, pod의 local-data의 경우 보존되지 않음
+   * node drain 전 체크 사항
+     * node drain시 해당 node상의 pod가 evict되기 때문에, pod의 local-data의 경우 보존되지 않음
      * drain 시도하는 node에 PDB가 존재하는 Pod가 생성되어있는 경우, 아래 명령어로 drain이 가능한지 확인한다.
       ```bash
        kubectl get pdb -A

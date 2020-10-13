@@ -141,21 +141,19 @@
 	kubeadm version
 	```
 * node drain
-   * 주의 : node drain시 해당 node상의 pod가 evict되기 때문에, pod의 local-data의 경우 보존되지 않음
-	```bash
-	kubectl drain <node-to-drain> --ignore-daemonsets --delete-local-data
-	
-	ex) kubectl drain k8s-master --ignore-daemonsets --delete-local-data
-	```
-   * 'Cannot evict pod as it would violate the pod's disruption budget'로 node drain이 실패한 경우
-     * drain 시도하는 node에 PDB가 존재하는 Pod가 생성되어있는 경우, 아래 명령어로 ALLOWED DISRUPTIONS를 확인한다.   
+   * node drain 전 pod pdb 체크 사항
+     * 주의 : node drain시 해당 node상의 pod가 evict되기 때문에, pod의 local-data의 경우 보존되지 않음
+     * drain 시도하는 node에 PDB가 존재하는 Pod가 생성되어있는 경우, 아래 명령어로 drain이 가능한지 확인한다.
       ```bash
        kubectl get pdb -A
        or
        kubectl get pdb <pdb-name> -oyaml
       ```
-     * ALLOWED DISRUPTIONS가 해당 노드에 떠있는 pod(pdb 설정 pod) 개수보다 적을 때, 아래와 같은 방법으로 진행 한다.
-        * ex) virt-api pod가 drain하려는 node에 2개 떠있는데, ALLOWED DISRUPTIONS는 0 또는 1일 경우        
+     * MIN AVAILABLE 과 ALLOWED DISRUPTIONS 및 drain 시키려는 node의 pod를 확인한다.
+        * 해당 PDB의 ALLOWED DISRUPTIONS가 drain을 시도하는 node에 뜬 pod(pdb 설정 pod) 개수보다 적을 경우 아래와 같이 다른 노드로 재스케줄링이 필요하다.
+	   * ex) virt-api pod가 drain하려는 node에 2개 떠있는데, ALLOWED DISRUPTIONS는 0 또는 1일 경우 
+        * 해당 조건에 만족하지 않는 경우 'Cannot evict pod as it would violate the pod's disruption budget' 와 같은 에러가 발생할 수 있다.
+     * 해결 방법       
         * 1) 해당 Pod를 다른 Node로 재스케줄링을 시도한다.
         ```bash
         kubectl delete pod <pod-name>
@@ -166,6 +164,12 @@
        kubectl drain <node-to-drain> --ignore-daemonsets --delete-local-data
        kubectl apply -f pdb-backup.yaml
        ```
+     * node drain 실행 
+	```bash
+	kubectl drain <node-to-drain> --ignore-daemonsets --delete-local-data
+	
+	ex) kubectl drain k8s-master --ignore-daemonsets --delete-local-data
+	```       
 * 업그레이드 plan 변경
 	```bash
 	sudo kubeadm upgrade plan 

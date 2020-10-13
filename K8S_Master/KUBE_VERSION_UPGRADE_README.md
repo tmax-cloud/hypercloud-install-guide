@@ -148,14 +148,14 @@
 	ex) kubectl drain k8s-master --ignore-daemonsets --delete-local-data
 	```
    * 'Cannot evict pod as it would violate the pod's disruption budget'로 node drain이 실패한 경우
-     * drain 시도하는 node에 PDB가 존재하는 Pod가 생성되어있는 경우, 아래 명령어로 ALLOWED DISRUPTIONS를 확인한다.
-     * ALLOWED DISRUPTIONS가 해당 노드에 떠있는 pod(pdb 설정 pod) 개수보다 적을 때, 아래와 같은 방법으로 진행 한다.
-        * ex) virt-api pod가 drain하려는 node에 2개 떠있는데, ALLOWED DISRUPTIONS는 0 또는 1일 경우     
+     * drain 시도하는 node에 PDB가 존재하는 Pod가 생성되어있는 경우, 아래 명령어로 ALLOWED DISRUPTIONS를 확인한다.   
       ```bash
        kubectl get pdb -A
        or
        kubectl get pdb <pdb-name> -oyaml
-      ``` 	     
+      ```
+     * ALLOWED DISRUPTIONS가 해당 노드에 떠있는 pod(pdb 설정 pod) 개수보다 적을 때, 아래와 같은 방법으로 진행 한다.
+        * ex) virt-api pod가 drain하려는 node에 2개 떠있는데, ALLOWED DISRUPTIONS는 0 또는 1일 경우        
      * 1) 해당 Pod를 다른 Node로 재스케줄링을 시도한다.
       ```bash
        kubectl delete pod <pod-name>

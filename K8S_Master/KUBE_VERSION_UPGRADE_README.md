@@ -141,23 +141,26 @@
 	kubeadm version
 	```
 * node drain
-   * 주의: node drain시 해당 node상의 pod가 evict되기 때문에, pod의 local-data의 경우 보존되지 않음
+   * 주의 : node drain시 해당 node상의 pod가 evict되기 때문에, pod의 local-data의 경우 보존되지 않음
 	```bash
 	kubectl drain <node-to-drain> --ignore-daemonsets --delete-local-data
 	
 	ex) kubectl drain k8s-master --ignore-daemonsets --delete-local-data
 	```
-   * Cannot evict pod as it would violate the pod's disruption budget 에러 발생시
+   * 'Cannot evict pod as it would violate the pod's disruption budget'로 drain 실패한 경우
      * PDB가 존재하는 Pod가 생성되어있는 Node일 경우, ALLOWED DISRUPTIONS를 확인한다.
-     * ALLOWED DISRUPTIONS가 0인 경우, 아래와 같은 방법으로 진행 한다.
+     * ALLOWED DISRUPTIONS가 drain 시도하는 node에 떠있는 pod(pdb 설정 pod) 개수보다 적을 때, 아래와 같은 방법으로 진행 한다.
+       * ex) virt-api pod가 drain하려는 node에 2개 떠있는데, ALLOWED DISRUPTIONS는 0 또는 1일 경우
       ```bash
       kubectl get pdb -A
-      ```
-      * 1) 해당 Pod를 다른 Node로 재스케줄링을 시도한다.
+      or
+      kubectl get pdb <pdb-name> -oyaml
+      ```       
+     * 1) 해당 Pod를 다른 Node로 재스케줄링을 시도한다.
       ```bash
       kubectl delete pod <pod-name>
       ```
-      * 2) 다른 Node의 리소스 부족, noScheduling 설정 등으로 인해 a번 재스케줄링이 불가할 경우엔 PDB 데이터를 삭제하고 drain한 후에 PDB 데이터를 복구한다.
+     * 2) 다른 Node의 리소스 부족, noScheduling 설정 등으로 인해 a번 재스케줄링이 불가할 경우엔 PDB 데이터를 삭제하고 drain한 후에 PDB 데이터를 복구한다.
       ```bash
       kubectl get pdb <pdb-name> -o yaml > pdb-backup.yaml
       kubectl drain 완료 후

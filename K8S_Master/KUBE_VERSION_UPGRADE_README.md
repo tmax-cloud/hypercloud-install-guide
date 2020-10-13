@@ -164,12 +164,12 @@
        kubectl drain <node-to-drain> --ignore-daemonsets --delete-local-data
        kubectl apply -f pdb-backup.yaml
        ```
-     * node drain 실행 
-	```bash
+   * node drain 실행 
+      ```bash
 	kubectl drain <node-to-drain> --ignore-daemonsets --delete-local-data
 	
 	ex) kubectl drain k8s-master --ignore-daemonsets --delete-local-data
-	```       
+      ```       
 * 업그레이드 plan 변경
 	```bash
 	sudo kubeadm upgrade plan 

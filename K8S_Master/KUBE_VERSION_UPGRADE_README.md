@@ -142,7 +142,7 @@
 	```
 * node drain
    * node drain 전 체크 사항
-     * PDB가 존재하는 Pod가 drain하려는 node에 생성되어있는 경우 evict를 막을수 있기 때문에, 아래 명령어로 drain이 가능한 상태인지 확인한다.
+     * PDB가 존재하는 Pod가 drain하려는 node에 생성되어있는 경우 evict가 제한 되기 때문에, 아래 명령어로 drain이 가능한 상태인지 확인한다.
       ```bash
        kubectl get pdb -A
        or
@@ -360,7 +360,7 @@
 	```
 * node drain
    * node drain 전 체크 사항
-     * PDB가 존재하는 Pod가 drain하려는 node에 생성되어있는 경우 evict를 막을수 있기 때문에, 아래 명령어로 drain이 가능한 상태인지 확인한다.
+     * PDB가 존재하는 Pod가 drain하려는 node에 생성되어있는 경우 evict가 제한 되기 때문에, 아래 명령어로 drain이 가능한 상태인지 확인한다.
       ```bash
        kubectl get pdb -A
        or
@@ -382,7 +382,7 @@
         kubectl apply -f pdb-backup.yaml
         ```
    * node drain 실행
-     * warning: node drain시 해당 node상의 pod가 evict되기 때문에, pod의 local-data의 경우 보존되지 않음
+     * warning : node drain시 해당 node상의 pod가 evict되기 때문에, pod의 local-data의 경우 보존되지 않음
       ```bash
       kubectl drain <node-to-drain> --ignore-daemonsets --delete-local-data
 	

@@ -295,7 +295,7 @@
 	```bash
 	kubeadm version
 	```
-   * node drain
+   * node drain 
      * 주의: node drain시 해당 node상의 pod가 evict되기 때문에, pod의 local-data의 경우 보존되지 않음
 	```bash
 	kubectl drain <node-to-drain> --ignore-daemonsets --delete-local-data
@@ -356,14 +356,36 @@
 	
 	ex) (1.15.x-> 1.16.x) yum install -y kubeadm-1.17.x-0 --disableexcludes=kubernetes
 	```
-* 스케줄 불가능(unschedulable)으로 표시하고 워크로드를 축출하여 유지 보수할 노드를 준비한다.
-   * node drain
-     * 주의: node drain시 해당 node상의 pod가 evict되기 때문에, pod의 local-data의 경우 보존되지 않음
-	```bash
-	kubectl drain <node name> --ignore-daemonsets --delete-local-data
+* node drain
+   * node drain 전 체크 사항
+     * PDB가 존재하는 Pod가 drain하려는 node에 생성되어있는 경우 evict될 수 없기 때문에, 아래 명령어로 drain이 가능한 상태인지 확인한다.
+      ```bash
+       kubectl get pdb -A
+       or
+       kubectl get pdb <pdb-name> -oyaml
+      ```
+     * ALLOWED DISRUPTIONS 및 drain 시키려는 node의 pod 상태를 확인한다.
+        * PDB의 ALLOWED DISRUPTIONS가 drain을 시도하는 node에 뜬 pod(pdb 설정 pod) 개수보다 적을 경우 아래와 같이 다른 노드로 재스케줄링이 필요하다.
+	   * ex) virt-api pod가 drain하려는 node에 2개 떠있는데, ALLOWED DISRUPTIONS는 0 또는 1일 경우 
+        * 해당 조건에 만족하지 않는 경우 'Cannot evict pod as it would violate the pod's disruption budget' 와 같은 에러가 발생할 수 있다.
+     * 해결 방법       
+        * 1) 해당 Pod를 다른 Node로 재스케줄링을 시도한다.
+        ```bash
+        kubectl delete pod <pod-name>
+        ```
+       * 2) 다른 Node의 리소스 부족, noScheduling 설정 등으로 인해 a번 재스케줄링이 불가할 경우엔 PDB 데이터를 삭제하고 drain한 후에 PDB 데이터를 복구한다.
+       ```bash
+       kubectl get pdb <pdb-name> -o yaml > pdb-backup.yaml
+       kubectl drain <node-to-drain> --ignore-daemonsets --delete-local-data
+       kubectl apply -f pdb-backup.yaml
+       ```
+   * node drain 실행
+     * node drain시 해당 node상의 pod가 evict되기 때문에, pod의 local-data의 경우 보존되지 않음
+      ```bash
+      kubectl drain <node-to-drain> --ignore-daemonsets --delete-local-data
 	
-	ex) kubectl drain k8s-node1 --ignore-daemonsets --delete-local-data
-	```
+      ex) kubectl drain k8s-node --ignore-daemonsets --delete-local-data
+      ``` 
 * kubelet 구성 업그레이드
 	```bash
 	sudo kubeadm upgrade node

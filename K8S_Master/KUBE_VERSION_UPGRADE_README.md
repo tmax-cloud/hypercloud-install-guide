@@ -298,7 +298,7 @@
    * node drain
      * 추가 컨트롤 플레인에서도 첫번째 컨트롤 플레인 node drain 전 체크 사항을 참고하여 drain 가능한 상태인지 체크한다. 
      * node drain 실행       
-       * 주의: node drain시 해당 node상의 pod가 evict되기 때문에, pod의 local-data의 경우 보존되지 않음
+       * node drain시 해당 node상의 pod가 evict되기 때문에, pod의 local-data의 경우 보존되지 않음
        ```bash
        kubectl drain <node-to-drain> --ignore-daemonsets --delete-local-data
        

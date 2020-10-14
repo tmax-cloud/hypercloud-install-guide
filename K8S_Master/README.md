@@ -371,7 +371,7 @@
         * join 시에 --cri-socket=/var/run/crio/crio.sock 옵션을 추가하여 실행한다.
 	    ```bash
 	    sudo kubeadm init --config=kubeadm-config.yaml --upload-certs 
-	    sudo kubeadm join {IP}:{PORT} --token ~~ discovery-token-ca-cert-hash --control-plane --certificate-key ~~ (1) --cri-socket=/var/run/crio/crio.sock
+	    sudo kubeadm join {IP}:{PORT} --token ~~ discovery-token-ca-cert-hash --control-plane --certificate-key ~~ --cri-socket=/var/run/crio/crio.sock (1)
 	    sudo kubeadm join {IP}:{PORT} --token ~~ discovery-token-ca-cert-hash --cri-socket=/var/run/crio/crio.sock (2)
 	    ```
 	![image](figure/master2.PNG)    

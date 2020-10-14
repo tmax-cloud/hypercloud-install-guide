@@ -299,11 +299,11 @@
      * 추가 컨트롤 플레인에서도 첫번째 컨트롤 플레인 node drain 전 체크 사항을 참고하여 drain 가능한 상태인지 체크한다. 
      * node drain 실행       
        * 주의: node drain시 해당 node상의 pod가 evict되기 때문에, pod의 local-data의 경우 보존되지 않음
-         ```bash
-	  kubectl drain <node-to-drain> --ignore-daemonsets --delete-local-data
-	
-	  ex) kubectl drain k8s-master2 --ignore-daemonsets --delete-local-data
-	 ```
+       ```bash
+       kubectl drain <node-to-drain> --ignore-daemonsets --delete-local-data
+       
+       ex) kubectl drain k8s-master2 --ignore-daemonsets --delete-local-data
+       ```
     * 추가 컨트롤 프레인에서는 해당 명령어를 실행하지 않는다. (sudo kubeadm upgrade plan)
     * sudo kubeadm upgrade apply 명령어 대신에 sudo kubeadm upgrade node 명령어를 실행한다.
 	```bash

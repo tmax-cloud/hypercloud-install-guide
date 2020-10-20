@@ -8,12 +8,19 @@
 ## 폐쇄망 설치 가이드
 1. 원하는 packages를 local repo 경로에 추가
     * 추가하고자 하는 packages를 local repo 경로에 추가
-	    * mv {packages} {local repo 경로}		* 
-    * 예시 ( kubernetes-v1.16 & 1.17 )
-            * kubernetes-v1.16 다운로드 (ck-ftp@192.168.1.150:/home/ck-ftp/k8s_pl/install/offline/k8s-upgrade/1.16.15)  		* 
-	    * scp -r ck-ftp@192.168.1.150:/home/ck-ftp/k8s_pl/install/offline/k8s-upgrade/1.16.15 . *
-2. Repository 구축
-    * HyperCloud 용 yum repository 구축
-	    * HyperCloud 설치 시 필요한 패키지들로 yum Reposiroty 구축		*  
-
-
+	    * mv {packages} {local repo 경로}		 
+    * 예시 ( kubernetes-v1.16 )
+            * kubernetes-v1.16 다운로드 (ck-ftp@192.168.1.150:/home/ck-ftp/k8s_pl/install/offline/k8s-upgrade/1.16.15)  		
+	    * scp -r ck-ftp@192.168.1.150:/home/ck-ftp/k8s_pl/install/offline/k8s-upgrade/1.16.15 . 
+	    * mv 1.16.15/*.rpm /tmp/localrepo
+    * 예시 ( kubernetes-v1.17 )
+            * kubernetes-v1.17 다운로드 (ck-ftp@192.168.1.150:/home/ck-ftp/k8s_pl/install/offline/k8s-upgrade/1.17.6)  		
+	    * scp -r ck-ftp@192.168.1.150:/home/ck-ftp/k8s_pl/install/offline/k8s-upgrade/1.17.6 . 
+	    * mv 1.17.6/*.rpm /tmp/localrepo *
+	    
+2. local Repository 구축
+    * yum repository 구축
+	    * sudo createrepo {repository 경로}
+    * 예시 
+            * sudo createrepo /tmp/localrepo 
+	    * yum clean all && yum repolist  *

@@ -21,6 +21,7 @@
 2. local Repository 구축
     * yum repository 구축
 	    * sudo createrepo {repository 경로}
-    * 예시 
+    
+    * 예시 *
             * sudo createrepo /tmp/localrepo 
 	    * yum clean all && yum repolist  

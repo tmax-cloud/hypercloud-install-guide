@@ -11,12 +11,14 @@
 	    * mv {packages} {local repo 경로}		 
 
     * 예시 ( kubernetes-v1.16 )    
-            * kubernetes-v1.16 다운로드 (ck-ftp@192.168.1.150:/home/ck-ftp/k8s_pl/install/offline/k8s-upgrade/1.16.15)  		
+    	    
+	    * kubernetes-v1.16 다운로드 (ck-ftp@192.168.1.150:/home/ck-ftp/k8s_pl/install/offline/k8s-upgrade/1.16.15)  		
 	    * scp -r ck-ftp@192.168.1.150:/home/ck-ftp/k8s_pl/install/offline/k8s-upgrade/1.16.15 . 		
 	    * mv 1.16.15/*.rpm /tmp/localrepo
     
     * 예시 ( kubernetes-v1.17 )
-            * kubernetes-v1.17 다운로드 (ck-ftp@192.168.1.150:/home/ck-ftp/k8s_pl/install/offline/k8s-upgrade/1.17.6)  		
+    
+    	    * kubernetes-v1.17 다운로드 (ck-ftp@192.168.1.150:/home/ck-ftp/k8s_pl/install/offline/k8s-upgrade/1.17.6)  		
 	    * scp -r ck-ftp@192.168.1.150:/home/ck-ftp/k8s_pl/install/offline/k8s-upgrade/1.17.6 . 		
 	    * mv 1.17.6/*.rpm /tmp/localrepo 
 	    

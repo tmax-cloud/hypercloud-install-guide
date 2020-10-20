@@ -339,6 +339,8 @@
      * 업그레이드시 runtime 변경을 하는 경우 (docker -> cri-o)
        * crio 설치는 https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/K8S_Master#step-1-cri-o-%EC%84%A4%EC%B9%98를 참조한다.
     ```bash
+    systemctl stop kubelet    
+    
     sudo vi /var/lib/kubelet/kubeadm-flags.env에 옵션 변경
     
     기존 (docker) : KUBELET_KUBEADM_ARGS="--cgroup-driver=cgroupfs --network-plugin=cni --pod-infra-container-image=k8s.gcr.io/pause:3.1      

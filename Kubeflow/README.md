@@ -47,11 +47,16 @@
         $ chmod +x ./image-push.sh
         $ ./image-push.sh <<REGISTRY_ADDRESS>>
         ```
+    * 아래 명령어를 수행하여 registry에 이미지들이 잘 push되었는지 확인한다.
+        ```bash
+        $ curl -X GET <<REGISTRY_ADDRESS>>/v2/_catalog
+        ```
 2. Yaml 파일 및 script 파일 준비
     * 아래 명령어를 수행하여 Kubeflow 설치에 필요한 yaml 파일들과 script 파일들을 다운로드 받는다. 
         ```bash
         $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/4.1/Kubeflow/sed.sh
         $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/4.1/Kubeflow/kustomize.tar.gz
+        $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/4.1/Kubeflow/kfctl_hypercloud_kubeflow.v1.0.2.yaml
         $ wget https://github.com/kubeflow/kfctl/releases/download/v1.0.2/kfctl_v1.0.2-0-ga476281_linux.tar.gz
         ```
 3. 앞으로의 진행
@@ -98,7 +103,7 @@
         ```
     * 정상적으로 완료되면 kustomize라는 디렉토리가 생성된다.
 * 비고 : 
-    * 폐쇄망 환경일 경우 설치 디렉토리에 미리 다운로드받은 sed.sh, kustomize.tar.gz 파일을 옮긴다.
+    * 폐쇄망 환경일 경우 설치 디렉토리에 미리 다운로드받은 sed.sh, kustomize.tar.gz, kfctl_hypercloud_kubeflow.v1.0.2.yaml 파일을 옮긴다.
     * 아래 명령어를 통해 Kustomize 리소스의 압축을 풀고 yaml 파일들에서 이미지들을 pull 받을 registry를 바꿔준다.
         ```bash
         $ tar xvfz kustomize.tar.gz

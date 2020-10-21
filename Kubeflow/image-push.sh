@@ -21,7 +21,8 @@ do
 	echo "[$0] [ ${i} / ${image_num} ] $line"
 	sudo docker pull $line
 	sudo docker tag $line ${registry}/$line
-	sudo docker save $line > ./images/${i}.tar
+	name=`echo $line |tr '/' '-'`
+	sudo docker save $line > ./images/${name}.tar
 	sudo docker push ${registry}/$line
 	let i+=1
 done

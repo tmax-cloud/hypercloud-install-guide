@@ -17,7 +17,8 @@ i=1
 cat imagelist | while read line
 do
 	echo "[$0] [ ${i} / ${image_num} ] $line"
-	sudo docker load < ./images/${i}.tar
+	name=`echo $line |tr '/' '-'`
+	sudo docker load < ./images/${name}.tar
 	sudo docker tag $line ${registry}/$line
 	sudo docker push ${registry}/$line
 	let i+=1

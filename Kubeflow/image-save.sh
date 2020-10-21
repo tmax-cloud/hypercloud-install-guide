@@ -10,7 +10,8 @@ cat imagelist | while read line
 do
 	echo "[$0] [ ${i} / ${image_num} ] $line"
 	sudo docker pull $line
-	sudo docker save $line > ./images/${i}.tar
+	name=`echo $line |tr '/' '-'`
+        sudo docker save $line > ./images/${name}.tar
 	let i+=1
 done
 

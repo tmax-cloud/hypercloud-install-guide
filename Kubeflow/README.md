@@ -39,28 +39,46 @@
 설치를 진행하기 전 아래의 과정을 통해 필요한 이미지 및 yaml 파일을 준비한다.
 1. 이미지 준비
     * 아래 링크를 참고하여 폐쇄망에서 사용할 registry를 구축한다.
-        * 폐쇄망 registry 구축 링크
-    * 아래 명령어를 수행하여 Kubeflow 설치 시 필요한 이미지들을 위에서 구축한 registry에 push한다.
+        * https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/Image_Registry/README.md
+    * 자신이 사용할 registry의 IP와 port를 입력한다.
+        ```bash
+        $ export REGISTRY_ADDRESS=1.1.1.1:5000
+        ```
+    * 아래 명령어를 수행하여 Kubeflow 설치 시 필요한 이미지들을 위에서 구축한 registry에 push하고 이미지들을 tar 파일로 저장한다. tar 파일은 images 디렉토리에 저장된다.
         ```bash
         $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/4.1/Kubeflow/image-push.sh
         $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/4.1/Kubeflow/imagelist
         $ chmod +x ./image-push.sh
-        $ ./image-push.sh <<REGISTRY_ADDRESS>>
+        $ ./image-push.sh ${REGISTRY_ADDRESS}
         ```
-    * 아래 명령어를 수행하여 registry에 이미지들이 잘 push되었는지 확인한다.
+    * 아래 명령어를 수행하여 registry에 이미지들이 잘 push되었는지, 그리고 필요한 이미지들이 tar 파일로 저장되었는지 확인한다.
         ```bash
-        $ curl -X GET <<REGISTRY_ADDRESS>>/v2/_catalog
+        $ curl -X GET ${REGISTRY_ADDRESS}/v2/_catalog
+        $ ls ./images
+        ```
+    * (Optional) 만약 필요한 이미지들을 pull받아서 tar 파일로 저장하는 작업과 로드하여 push하는 작업을 따로 수행하고자 한다면 image-push.sh이 아니라 image-save.sh, image-load.sh를 각각 실행하면 된다. image-load.sh은 images 디렉토리와 같은 경로에서 실행해야만 한다.
+        ```bash
+        $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/4.1/Kubeflow/image-save.sh
+        $ chmod +x ./image-save.sh
+        $ ./image-save.sh
+        $ ls ./images
+        ```
+        ```bash
+        $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/4.1/Kubeflow/image-load.sh
+        $ chmod +x ./image-load.sh
+        $ ./image-load.sh ${REGISTRY_ADDRESS}
+        $ curl -X GET ${REGISTRY_ADDRESS}/v2/_catalog
         ```
 2. Yaml 파일 및 script 파일 준비
     * 아래 명령어를 수행하여 Kubeflow 설치에 필요한 yaml 파일들과 script 파일들을 다운로드 받는다. 
         ```bash
         $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/4.1/Kubeflow/sed.sh
-        $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/4.1/Kubeflow/kustomize.tar.gz
-        $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/4.1/Kubeflow/kfctl_hypercloud_kubeflow.v1.0.2.yaml
+        $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/4.1/Kubeflow/kustomize_local.tar.gz
+        $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/4.1/Kubeflow/kfctl_hypercloud_kubeflow.v1.0.2_local.yaml
         $ wget https://github.com/kubeflow/kfctl/releases/download/v1.0.2/kfctl_v1.0.2-0-ga476281_linux.tar.gz
         ```
 3. 앞으로의 진행
-    * Step 0 ~ 4 중 Step 0, 2 비고를 참고하여 진행한다. 나머지는 그대로 진행하면 된다.
+    * Step 0 ~ 4 중 Step 0, 2, 3은 비고를 참고하여 진행한다. 나머지는 그대로 진행하면 된다.
 
 ## Install Steps
 0. [kfctl 설치](https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/Kubeflow/README.md#step-0-kfctl-%EC%84%A4%EC%B9%98)
@@ -78,7 +96,7 @@
     $ sudo mv kfctl /usr/bin
     ```
 * 비고 : 
-    * 폐쇄망 환경일 경우 첫 번째 명령어로 github에 있는 kfctl을 다운로드받는 대신 미리 준비한 kfctl을 다운받으면 된다.
+    * 폐쇄망 환경일 경우 kfctl_v1.0.2-0-ga476281_linux.tar.gz을 github에서 받는 것이 아니라 미리 다운로드 해둔 것을 사용하면 된다.
 
 ## Step 1. 설치 디렉토리 생성
 * 목적 : `Kubeflow의 설치 yaml이 저장될 설치 디렉토리를 생성하고 해당 경로로 이동한다.`
@@ -103,12 +121,12 @@
         ```
     * 정상적으로 완료되면 kustomize라는 디렉토리가 생성된다.
 * 비고 : 
-    * 폐쇄망 환경일 경우 설치 디렉토리에 미리 다운로드받은 sed.sh, kustomize.tar.gz, kfctl_hypercloud_kubeflow.v1.0.2.yaml 파일을 옮긴다.
+    * 폐쇄망 환경일 경우 설치 디렉토리에 미리 다운로드받은 sed.sh, kustomize_local.tar.gz 파일을 옮긴다.
     * 아래 명령어를 통해 Kustomize 리소스의 압축을 풀고 yaml 파일들에서 이미지들을 pull 받을 registry를 바꿔준다.
         ```bash
-        $ tar xvfz kustomize.tar.gz
+        $ tar xvfz kustomize_local.tar.gz
         $ chmod +x ./sed.sh
-        $ ./sed.sh <<REGISTRY_ADDRESS>> ${KF_DIR}/kustomize
+        $ ./sed.sh ${REGISTRY_ADDRESS} ${KF_DIR}/kustomize
         ```
 
 ## Step 3. Kubeflow 배포
@@ -124,6 +142,12 @@
         ![pasted image 0](https://user-images.githubusercontent.com/63379907/90479302-6aedb380-e169-11ea-8c6c-9c1b4e15517a.png)
     * 설치에는 약 10분 정도가 소요된다.
 * 비고 :
+    * 폐쇄망 환경일 경우 설치 디렉토리에 미리 다운로드받은 kfctl_hypercloud_kubeflow.v1.0.2_local.yaml 파일을 옮긴다.
+    * 아래 명령어를 수행하여 Kubeflow를 배포한다.
+        ```bash
+        $ export CONFIG_FILE=${KF_DIR}/kfctl_hypercloud_kubeflow.v1.0.2_local.yaml
+        $ kfctl apply -V -f ${CONFIG_FILE}
+        ```
     * 기존 Kubeflow에서 수정된 점
         * Istio 1.5.1 호환을 위해 KFServing의 controller 수정
         * Workflow template을 사용하기 위한 argo controller 버전 업

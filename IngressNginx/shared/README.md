@@ -47,8 +47,8 @@
 
 
 ## Install Steps
-0. [deploy yaml 수정](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/IngressNginx#step0-deploy-yaml-%EC%88%98%EC%A0%95)
-1. [Nginx Ingress Controller 배포](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/IngressNginx#step-1-nginx-ingress-controller-%EB%B0%B0%ED%8F%AC)
+0. [deploy yaml 수정](https://github.com/tmax-cloud/hypercloud-install-guide/tree/4.1/IngressNginx/shared#step0-deploy-yaml-%EC%88%98%EC%A0%95)
+1. [Nginx Ingress Controller 배포](https://github.com/tmax-cloud/hypercloud-install-guide/tree/4.1/IngressNginx/shared#step-1-nginx-ingress-controller-%EB%B0%B0%ED%8F%AC)
 
 
 ## Step0. deploy yaml 수정

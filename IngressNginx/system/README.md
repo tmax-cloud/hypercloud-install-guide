@@ -13,10 +13,8 @@
 
     * 작업 디렉토리 생성 및 환경 설정
     ```bash
-    $ mkdir -p ~/install-ingress-nginx
-    $ export NGINX_INGRESS_HOME=~/install-ingress-nginx
-    $ export INGRESS_NGINX_NAME=ingress-nginx-shared
-    $ export INGRESS_CLASS=nginx-shd
+    $ mkdir -p ~/install-ingress-nginx-system
+    $ export NGINX_INGRESS_HOME=~/install-ingress-nginx-system
     $ export NGINX_INGRESS_VERSION=0.33.0
     $ export KUBE_WEBHOOK_CERTGEN_VERSION=v1.2.2
     $ cd $NGINX_INGRESS_HOME

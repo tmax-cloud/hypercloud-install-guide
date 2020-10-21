@@ -21,7 +21,7 @@ spec:
           secretName: hyperauth-https-secret
       containers:
       - name: hyperauth
-        image: tmaxcloudck/hyperauth:b1.0.9.7
+        image: tmaxcloudck/hyperauth:b1.0.9.12
         env:
         - name: KEYCLOAK_USER
           value: "admin"

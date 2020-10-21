@@ -47,7 +47,7 @@
 * 생성 순서 : 
     * 패키지 가져오기
       * scp -r ck-ftp@192.168.1.150:/home/ck-ftp/k8s_pl/install/offline/archive_20.08.03 .
-      * cp -rT ./archive_20.07.10 /tmp/localrepo
+      * cp -rT ./archive_20.08.03 /tmp/localrepo
     * CentOS Repository 비활성화
       * sudo vi /etc/yum.repos.d/CentOS-Base.repo
       * [base], [updates], [extra] repo config 에 enabled=0 추가

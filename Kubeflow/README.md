@@ -56,15 +56,16 @@
         $ curl -X GET ${REGISTRY_ADDRESS}/v2/_catalog
         $ ls ./images
         ```
-    * (Optional) 만약 필요한 이미지들을 pull받아서 tar 파일로 저장하는 작업과 로드하여 push하는 작업을 따로 수행하고자 한다면 image-push.sh이 아니라 image-save.sh, image-load.sh를 각각 실행하면 된다. image-load.sh은 images 디렉토리와 같은 경로에서 실행해야만 한다.
+    * (Optional) 만약 설치에 필요한 이미지들을 pull받아서 tar 파일로 저장하는 작업과 로드하여 push하는 작업을 따로 수행하고자 한다면 image-push.sh이 아니라 image-save.sh, image-load.sh를 각각 실행하면 된다. 
+    * image-save.sh을 실행하면 설치에 필요한 이미지들을 pull 받아서 images 디렉토리에 tar 파일로 저장한다.
         ```bash
         $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/4.1/Kubeflow/image-save.sh
         $ chmod +x ./image-save.sh
         $ ./image-save.sh
         $ ls ./images
         ```
+    * 위에서 저장한 images 디렉토리와 image-load.sh을 폐쇄망 환경으로 옮긴 후 실행하면 폐쇄망 내 구축한 registry에 이미지들을 push할 수 있다. image-load.sh은 images 디렉토리와 같은 경로에서 실행해야만 한다.
         ```bash
-        $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/4.1/Kubeflow/image-load.sh
         $ chmod +x ./image-load.sh
         $ ./image-load.sh ${REGISTRY_ADDRESS}
         $ curl -X GET ${REGISTRY_ADDRESS}/v2/_catalog
@@ -121,7 +122,7 @@
         ```
     * 정상적으로 완료되면 kustomize라는 디렉토리가 생성된다.
 * 비고 : 
-    * 폐쇄망 환경일 경우 설치 디렉토리에 미리 다운로드받은 sed.sh, kustomize_local.tar.gz 파일을 옮긴다.
+    * 폐쇄망 환경일 경우 설치 디렉토리 ${KF_DIR}에 미리 다운로드받은 sed.sh, kustomize_local.tar.gz 파일을 옮긴다.
     * 아래 명령어를 통해 Kustomize 리소스의 압축을 풀고 yaml 파일들에서 이미지들을 pull 받을 registry를 바꿔준다.
         ```bash
         $ tar xvfz kustomize_local.tar.gz
@@ -142,7 +143,7 @@
         ![pasted image 0](https://user-images.githubusercontent.com/63379907/90479302-6aedb380-e169-11ea-8c6c-9c1b4e15517a.png)
     * 설치에는 약 10분 정도가 소요된다.
 * 비고 :
-    * 폐쇄망 환경일 경우 설치 디렉토리에 미리 다운로드받은 kfctl_hypercloud_kubeflow.v1.0.2_local.yaml 파일을 옮긴다.
+    * 폐쇄망 환경일 경우 설치 디렉토리 ${KF_DIR}에 미리 다운로드받은 kfctl_hypercloud_kubeflow.v1.0.2_local.yaml 파일을 옮긴다.
     * 아래 명령어를 수행하여 Kubeflow를 배포한다.
         ```bash
         $ export CONFIG_FILE=${KF_DIR}/kfctl_hypercloud_kubeflow.v1.0.2_local.yaml

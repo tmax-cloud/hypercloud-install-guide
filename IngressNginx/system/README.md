@@ -73,7 +73,7 @@
 	```
 	* 설치 확인
 	```console
-	$ kubectl get pods -n ingress-nginx-shared
+	$ kubectl get pods -n ingress-nginx
     NAME                                        READY   STATUS      RESTARTS   AGE
     ingress-nginx-shared-admission-create-jxcjs        0/1     Completed   0          11s
     ingress-nginx-shared-admission-patch-h7kv5         0/1     Completed   0          11s

@@ -57,19 +57,19 @@
         $ ls ./images
         ```
     * (Optional) 만약 설치에 필요한 이미지들을 pull받아서 tar 파일로 저장하는 작업과 로드하여 push하는 작업을 따로 수행하고자 한다면 image-push.sh이 아니라 image-save.sh, image-load.sh를 각각 실행하면 된다. 
-    * image-save.sh을 실행하면 설치에 필요한 이미지들을 pull 받아서 images 디렉토리에 tar 파일로 저장한다.
-        ```bash
-        $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/4.1/Kubeflow/image-save.sh
-        $ chmod +x ./image-save.sh
-        $ ./image-save.sh
-        $ ls ./images
-        ```
-    * 위에서 저장한 images 디렉토리와 image-load.sh을 폐쇄망 환경으로 옮긴 후 실행하면 폐쇄망 내 구축한 registry에 이미지들을 push할 수 있다. image-load.sh은 images 디렉토리와 같은 경로에서 실행해야만 한다.
-        ```bash
-        $ chmod +x ./image-load.sh
-        $ ./image-load.sh ${REGISTRY_ADDRESS}
-        $ curl -X GET ${REGISTRY_ADDRESS}/v2/_catalog
-        ```
+       * image-save.sh을 실행하면 설치에 필요한 이미지들을 pull 받아서 images 디렉토리에 tar 파일로 저장한다.
+           ```bash
+           $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/4.1/Kubeflow/image-save.sh
+           $ chmod +x ./image-save.sh
+           $ ./image-save.sh
+           $ ls ./images
+           ```
+       * 위에서 저장한 images 디렉토리와 image-load.sh을 폐쇄망 환경으로 옮긴 후 실행하면 폐쇄망 내 구축한 registry에 이미지들을 push할 수 있다. image-load.sh은 images 디렉토리와 같은 경로에서 실행해야만 한다.
+           ```bash
+           $ chmod +x ./image-load.sh
+           $ ./image-load.sh ${REGISTRY_ADDRESS}
+           $ curl -X GET ${REGISTRY_ADDRESS}/v2/_catalog
+           ```
 2. Yaml 파일 및 script 파일 준비
     * 아래 명령어를 수행하여 Kubeflow 설치에 필요한 yaml 파일들과 script 파일들을 다운로드 받는다. 
         ```bash

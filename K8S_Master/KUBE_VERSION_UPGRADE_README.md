@@ -339,10 +339,12 @@
      * 업그레이드시 runtime 변경을 하는 경우 (docker -> cri-o)
        * crio 설치는 https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/K8S_Master#step-1-cri-o-%EC%84%A4%EC%B9%98를 참조한다.
     ```bash
+    systemctl stop kubelet
+    
     sudo vi /var/lib/kubelet/kubeadm-flags.env에 옵션 변경
     
     기존 (docker) : KUBELET_KUBEADM_ARGS="--cgroup-driver=cgroupfs --network-plugin=cni --pod-infra-container-image=k8s.gcr.io/pause:3.1      
-    변경 (cri-o) : KUBELET_KUBEADM_ARGS="--container-runtime=remote --container-runtime-endpoint=/var/run/crio/crio.sock"
+    변경 (cri-o) : KUBELET_KUBEADM_ARGS="--container-runtime=remote --cgroup-driver=systemd --container-runtime-endpoint=/var/run/crio/crio.sock"
     
     systemctl restart kubelet
     systemctl restart docker ( #docker image registry node는 systemctl restart docker 명령어를 실행한다. )
@@ -422,10 +424,12 @@
      * 업그레이드시 runtime 변경을 하는 경우 (docker -> cri-o)
        * crio 설치는 https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/K8S_Master#step-1-cri-o-%EC%84%A4%EC%B9%98를 참조한다.
     ```bash
+    systemctl stop kubelet
+    
     sudo vi /var/lib/kubelet/kubeadm-flags.env에 옵션 변경
     
     기존 (docker) : KUBELET_KUBEADM_ARGS="--cgroup-driver=cgroupfs --network-plugin=cni --pod-infra-container-image=k8s.gcr.io/pause:3.1      
-    변경 (cri-o) : KUBELET_KUBEADM_ARGS="--container-runtime=remote --container-runtime-endpoint=/var/run/crio/crio.sock"
+    변경 (cri-o) : KUBELET_KUBEADM_ARGS="--container-runtime=remote --cgroup-driver=systemd --container-runtime-endpoint=/var/run/crio/crio.sock"
     
     systemctl restart kubelet
     systemctl stop docker ( #docker image registry node는 systemctl restart docker 명령어를 실행한다. )

@@ -344,7 +344,7 @@
     sudo vi /var/lib/kubelet/kubeadm-flags.env에 옵션 변경
     
     기존 (docker) : KUBELET_KUBEADM_ARGS="--cgroup-driver=cgroupfs --network-plugin=cni --pod-infra-container-image=k8s.gcr.io/pause:3.1      
-    변경 (cri-o) : KUBELET_KUBEADM_ARGS="--container-runtime=remote --container-runtime-endpoint=/var/run/crio/crio.sock"
+    변경 (cri-o) : KUBELET_KUBEADM_ARGS="--container-runtime=remote --cgroup-driver=systemd --container-runtime-endpoint=/var/run/crio/crio.sock"
     
     systemctl restart kubelet
     systemctl restart docker ( #docker image registry node는 systemctl restart docker 명령어를 실행한다. )
@@ -429,7 +429,7 @@
     sudo vi /var/lib/kubelet/kubeadm-flags.env에 옵션 변경
     
     기존 (docker) : KUBELET_KUBEADM_ARGS="--cgroup-driver=cgroupfs --network-plugin=cni --pod-infra-container-image=k8s.gcr.io/pause:3.1      
-    변경 (cri-o) : KUBELET_KUBEADM_ARGS="--container-runtime=remote --container-runtime-endpoint=/var/run/crio/crio.sock"
+    변경 (cri-o) : KUBELET_KUBEADM_ARGS="--container-runtime=remote --cgroup-driver=systemd --container-runtime-endpoint=/var/run/crio/crio.sock"
     
     systemctl restart kubelet
     systemctl stop docker ( #docker image registry node는 systemctl restart docker 명령어를 실행한다. )

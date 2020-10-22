@@ -39,7 +39,7 @@ curl -g -i -X POST \
       },
       "username": "admin-tmax.co.kr",
       "emailVerified": "",
-      "email": "hc-admin@tmax.co.kr"
+      "email": "admin@tmax.co.kr"
     }' \
      'http://'$hyperauthserver':8080/auth/admin/realms/tmax/users'
 

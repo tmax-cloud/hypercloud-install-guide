@@ -37,7 +37,7 @@ curl -g -i -X POST \
         "department": "tmaxCloud",
         "description": "hypercloud admin"
       },
-      "username": "admin-tmax.co.kr",
+      "username": "admin@tmax.co.kr",
       "emailVerified": "",
       "email": "hc-admin@tmax.co.kr"
     }' \
@@ -55,4 +55,4 @@ curl 'http://'$hyperauthserver':8080/auth/admin/realms/tmax/users/'$userid'/rese
   -X 'PUT' \
   -H "authorization: Bearer $token" \
   -H "content-type: application/json;charset=UTF-8" \
-  --data-binary '{"type":"password","value":"admin","temporary":false}'       
+  --data-binary '{"type":"password","value":"Tmaxadmin1!","temporary":false}'       

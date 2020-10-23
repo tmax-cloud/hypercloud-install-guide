@@ -73,9 +73,9 @@
 	$ sudo docker push ${REGISTRY}/tmaxcloudck/hypercloud-operator:b${HPCD_VERSION}
     ```
     
-3.  [Nginx Ingress Controller 설치 가이드]([https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/IngressNginx/README.md](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/IngressNginx/README.md)를 참고하여 Nginx Ingress Controller 설치에 필요한 이미지 준비
+3.  [Nginx Ingress Controller 설치 가이드]([https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/IngressNginx/shared/README.md](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/IngressNginx/shared/README.md)를 참고하여 Nginx Ingress Controller 설치에 필요한 이미지 준비
 	* 비고:
-		* [폐쇄망 설치 가이드]([https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/IngressNginx/README.md#%ED%8F%90%EC%87%84%EB%A7%9D-%EC%84%A4%EC%B9%98-%EA%B0%80%EC%9D%B4%EB%93%9C](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/IngressNginx/README.md#%ED%8F%90%EC%87%84%EB%A7%9D-%EC%84%A4%EC%B9%98-%EA%B0%80%EC%9D%B4%EB%93%9C)에서 아래의 부분 수행
+		* [폐쇄망 설치 가이드]([https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/IngressNginx/shared/README.md#%ED%8F%90%EC%87%84%EB%A7%9D-%EC%84%A4%EC%B9%98-%EA%B0%80%EC%9D%B4%EB%93%9C](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/IngressNginx/shared/README.md#%ED%8F%90%EC%87%84%EB%A7%9D-%EC%84%A4%EC%B9%98-%EA%B0%80%EC%9D%B4%EB%93%9C)에서 아래의 부분 수행
 			* 1-1. 작업 디렉토리 생성 및 환경 설정
 			* 1-2. 외부 네트워크 통신이 가능한 환경에서 필요한 이미지를 다운받는다.
 			* 2-1.  위의 과정에서 생성한 tar 파일들을 폐쇄망 환경으로 이동시킨 뒤 사용하려는 registry에 이미지를 push한다. 

@@ -75,18 +75,18 @@
 1.  Nginx Ingress Controller 설치
     * 목적: Hypercloud Operator 내 기능(Reigstry Operator) 사용
     * [Nginx Ingress Controller 설치 가이드] 
-        * [https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/IngressNginx/README.md](https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/IngressNginx/README.md)
+        * [https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/IngressNginx/shared/README.md](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/IngressNginx/shared/README.md)
 2.  Secret Watcher 설치 
     * 목적: Hypercloud Operator 내 기능(Reigstry Operator) 사용
     * [secret-watcher 설치 가이드] 
-        * [https://github.com/tmax-cloud/hypercloud-install-guide/tree/4.1/SecretWatcher#secret-watcher-%EC%84%A4%EC%B9%98-%EA%B0%80%EC%9D%B4%EB%93%9C](https://github.com/tmax-cloud/hypercloud-install-guide/tree/4.1/SecretWatcher#secret-watcher-%EC%84%A4%EC%B9%98-%EA%B0%80%EC%9D%B4%EB%93%9C)
+        * [https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/SecretWatcher/README.md](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/SecretWatcher/README.md)
 
 ## Install Steps
-1. [1.initialization.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/HyperCloud%20Operator/v4.1.1.0/README.md#step-1-1initializationyaml-%EC%8B%A4%ED%96%89)
-2. [CRD 적용](https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/HyperCloud%20Operator/v4.1.1.0/README.md#step-2-crd-%EC%A0%81%EC%9A%A9)
-3. [2.mysql-settings.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/HyperCloud%20Operator/v4.1.1.0/README.md#step-3-2mysql-settingsyaml-%EC%8B%A4%ED%96%89)
-4. [3.mysql-create.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/HyperCloud%20Operator/v4.1.1.0/README.md#step-4-3mysql-createyaml-%EC%8B%A4%ED%96%89)
-5. [4.hypercloud4-operator.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/HyperCloud%20Operator/v4.1.1.0/README.md#step-5-4hypercloud4-operatoryaml-%EC%8B%A4%ED%96%89)
+1. [1.initialization.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/v4.1.1.0/README.md#step-1-1initializationyaml-%EC%8B%A4%ED%96%89)
+2. [CRD 적용](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/v4.1.1.0/README.md#step-1-1initializationyaml-%EC%8B%A4%ED%96%89)
+3. [2.mysql-settings.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/v4.1.1.0/README.md#step-3-2mysql-settingsyaml-%EC%8B%A4%ED%96%89)
+4. [3.mysql-create.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/v4.1.1.0/README.md#step-4-3mysql-createyaml-%EC%8B%A4%ED%96%89)
+5. [4.hypercloud4-operator.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/v4.1.1.0/README.md#step-5-4hypercloud4-operatoryaml-%EC%8B%A4%ED%96%89)
 
 
 ## Step 0. install  yaml 수정

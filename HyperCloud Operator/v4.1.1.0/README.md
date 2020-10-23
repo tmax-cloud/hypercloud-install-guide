@@ -75,7 +75,7 @@
 1.  Nginx Ingress Controller 설치
     * 목적: Hypercloud Operator 내 기능(Reigstry Operator) 사용
     * [Nginx Ingress Controller 설치 가이드] 
-        * [https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/IngressNginx/README.md](https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/IngressNginx/README.md)
+        * [https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/IngressNginx/shared/README.md](https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/IngressNginx/shared/README.md)
 2.  Secret Watcher 설치 
     * 목적: Hypercloud Operator 내 기능(Reigstry Operator) 사용
     * [secret-watcher 설치 가이드] 

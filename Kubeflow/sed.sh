@@ -57,7 +57,7 @@ sed -i "s/\"image\": \"mcr.microsoft.com\/onnxruntime\/server/\"image\": \"${reg
 sed -i "s/\"image\": \"gcr.io\/kfserving\/sklearnserver/\"image\": \"${registry}\/gcr.io\/kfserving\/sklearnserver/g" ${dir}/kfserving-install\/base\/config-map.yaml
 sed -i "s/\"image\": \"gcr.io\/kfserving\/xgbserver/\"image\": \"${registry}\/gcr.io\/kfserving\/xgbserver/g" ${dir}/kfserving-install\/base\/config-map.yaml
 sed -i "s/\"image\": \"gcr.io\/kfserving\/pytorchserver/\"image\": \"${registry}\/gcr.io\/kfserving\/pytorchserver/g" ${dir}/kfserving-install\/base\/config-map.yaml
-sed -i "s/\"image\": \"nvcr.io\/nvidia\/tensorrtserver/\"image\": \"${registry}\/nvcr.io\/nvidia\/tensorrtserver/g" ${dir}/kfserving-install\/base\/config-map.yaml
+sed -i "s/\"image\": \"nvcr.io\/nvidia\/tritonserver/\"image\": \"${registry}\/nvcr.io\/nvidia\/tritonserver/g" ${dir}/kfserving-install\/base\/config-map.yaml
 sed -i "s/\"image\" : \"gcr.io\/kfserving\/storage-initializer/\"image\" : \"${registry}\/gcr.io\/kfserving\/storage-initializer/g" ${dir}/kfserving-install\/base\/config-map.yaml
 sed -i "s/image: gcr.io\/kfserving\/kfserving-controller/image: ${registry}\/gcr.io\/kfserving\/kfserving-controller/g" ${dir}/kfserving-install\/base\/statefulset.yaml
 sed -i "s/image: gcr.io\/kubebuilder\/kube-rbac-proxy/image: ${registry}\/gcr.io\/kubebuilder\/kube-rbac-proxy/g" ${dir}/kfserving-install\/base\/statefulset.yaml

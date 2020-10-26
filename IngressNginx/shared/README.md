@@ -19,6 +19,10 @@
     $ export INGRESS_CLASS=nginx-shd
     $ export NGINX_INGRESS_VERSION=0.33.0
     $ export KUBE_WEBHOOK_CERTGEN_VERSION=v1.2.2
+    
+    # image를 push할 폐쇄망 Registry 주소 입력(예:192.168.6.150:5000)
+    $ export REGISTRY=<REGISTRY_IP_PORT>
+    
     $ cd $NGINX_INGRESS_HOME
     ```
     * 외부 네트워크 통신이 가능한 환경에서 필요한 이미지를 다운받는다.

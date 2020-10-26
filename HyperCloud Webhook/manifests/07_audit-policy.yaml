@@ -16,7 +16,14 @@ rules:
   # Don't log watch and get request
   - level: None
     verbs: ["watch", "get", "list"]
-    
+  
+  # Log the response body of pod changes.
+  - level: RequestResponse
+    verbs: ["create", "delete"]
+    resources:
+    - group: ""
+      resources: ["pods"]
+      
   # Log the request body of configmap changes in kube-system.
   - level: Metadata
     resources:

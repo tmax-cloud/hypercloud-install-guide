@@ -10,7 +10,7 @@
 | K8s Worker | v1.17.6 | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/K8S_Worker/README.md | O |
 | CNI | | https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/CNI | O |
 | MetalLB | v0.8.2 | https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/MetalLB | O |
-| Rook Ceph | v1.3.6 | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/rook-ceph/README.md | O |
+| Rook Ceph | v1.3.6 | https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/rook-ceph/README.md | O |
 | HyperCloud Operator | v4.1.0.13 ~ v4.1.0.40 | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/v4.1.0.13/README.md | O |
 | HyperCloud Webhook | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Webhook/README.md | O |
 | Prometheus | v2.11.0 | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Prometheus/README.md | O |

@@ -115,6 +115,7 @@
 * 목적 : `hypercloud crd 생성`
 * 실행 : *CRD.yaml실행
 	```bash
+	$ kubectl apply -f ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_CRD/${HPCD_VERSION}/Auth/clusterMenuPolicyCRD.yaml
 	$ kubectl apply -f ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_CRD/${HPCD_VERSION}/Auth/UserSecurityPolicyCRD.yaml
 	$ kubectl apply -f ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_CRD/${HPCD_VERSION}/Claim/NamespaceClaimCRD.yaml
 	$ kubectl apply -f ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_CRD/${HPCD_VERSION}/Claim/ResourceQuotaClaimCRD.yaml

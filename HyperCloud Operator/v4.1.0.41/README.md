@@ -122,6 +122,7 @@
 	$ kubectl apply -f ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_CRD/${HPCD_VERSION}/Auth/UsergroupCRD.yaml
 	$ kubectl apply -f ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_CRD/${HPCD_VERSION}/Auth/TokenCRD.yaml
 	$ kubectl apply -f ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_CRD/${HPCD_VERSION}/Auth/ClientCRD.yaml
+	$ kubectl apply -f ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_CRD/${HPCD_VERSION}/Auth/clusterMenuPolicyCRD.yaml
 	$ kubectl apply -f ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_CRD/${HPCD_VERSION}/Auth/UserSecurityPolicyCRD.yaml
 	$ kubectl apply -f ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_CRD/${HPCD_VERSION}/Claim/NamespaceClaimCRD.yaml
 	$ kubectl apply -f ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_CRD/${HPCD_VERSION}/Claim/ResourceQuotaClaimCRD.yaml

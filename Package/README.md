@@ -7,6 +7,8 @@
 
 ## Prerequisites
 * ceph 설치 시 주의사항 참고 (https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Package/warning.md)
+* Nvidia GPU Driver 설치 시 주의사항 참고 - [주의사항 링크](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Package/warning.md)
+
 ## 폐쇄망 설치 가이드
 1. Install OS
     * CentOS 7.7 설치

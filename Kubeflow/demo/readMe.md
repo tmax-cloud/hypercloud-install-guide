@@ -1,5 +1,5 @@
 # Hyperflow를 사용한 AI 개발 시나리오 가이드
-가이드 문의 CK2-4팀
+가이드 문의 CK1-4팀
 
 주의 사항 : 
  - notebook-controller-go image b0.0.2 이상 버전, hypercloud-console image 4.1.2.3.0 이상 버전에서 notebook이 UI에 정상 표기
@@ -55,8 +55,10 @@ Fashion-MNIST 데이터를 활용하여 Image가 어떤 Fashion Item인지 추�
 
 ![1.notebook.PNG](./img/1.notebook.PNG)
   - 참고 : [1.notebook.yaml](./1.notebook.yaml)
+  - 폐쇄망 환경의 경우 : [1.notebook_closednw.yaml](./1.notebook_closednw.yaml)
 
 *시나리오에서는 여러 커스텀 패키지가 포함된 custom jupyterNotebook image를 사용하였다. (brightfly/kubeflow-jupyter-lab:tf2.0-gpu)
+*폐쇄망 환경의 경우 시나리오에서 사용되는 파이썬 패키지가 포함되어 있고 fairing 코드가 수정된 custom jupyterNotebook image를 사용하였다. (tmaxcloudck/kubeflow-jupyter-lab:v0.1)
 
   - 정상적인 배포를 확인하기 위해, action->connect 버튼을 눌러 jupyter진입을 확인하자.
 
@@ -65,8 +67,12 @@ Fashion-MNIST 데이터를 활용하여 Image가 어떤 Fashion Item인지 추�
 
 ## Step 2. ML model을 코딩하고, 클라우드 작업을 위한 image 생성하기
   - tensorflow 모듈을 활용하여 ML 코드를 작성하고, kubeflow 모듈을 활용하여 ML image를 배포한다.
-  - 정상적으로 image를 배포하기 위해, jupyterNotebook container에 docker registry 인증정보를 넣어야한다.
-  - 시나리오에서는 public registry인 docker hub를 활용하였고, 인증이 적용된 private registry 또한 사용 가능하다.  
+  - 정상적으로 image를 배포하기 위해, jupyterNotebook container에 docker registry 인증정보를 넣어야 한다.
+  - 시나리오에서는 public registry인 docker hub를 활용하였고, 인증이 적용된 private registry 또한 사용 가능하다.
+  - 폐쇄망 환경일 경우 아래 인증 방법을 수행할 필요 없이 아래 명령어만 수행한다.
+      ```bash
+      $ kubectl -n demo create configmap docker-config
+      ```
 
 ### 인증 방법 1) 로컬 개발 환경의 docker registry 인증정보 사용
  - docker에 로그인 되어있는 로컬 개발환경에서 config.json을 복사하여, jupyterNotebook container에 붙여넣는다.
@@ -99,7 +105,9 @@ ls home/jovyan/.docker/
 cp $HOME/.docker/config.json /home/jovyan/.docker/config.json
 ```
 
-  - 위의 작업이 끝났다면, code run을 하여 이미지를 배포하자. (UI는 jupyter 버전에 따라 다를 수 있음)
+  - 위의 작업이 끝났다면, 코드 내 DOCKER_REGISTRY를 자신이 사용할 registry로 변경한다.
+  - 폐쇄망 환경의 경우 fairing에서 사용할 base_image 또한 폐쇄망 내 registry에서 받아오도록 변경한다.
+  - Run을 하여 이미지를 배포하자. (UI는 jupyter 버전에 따라 다를 수 있음)
   
 ![2.fmnist-save-model-renew.PNG](./img/2.fmnist-save-model-renew.PNG)
   - 참고 : [fmnist-save-model-renew.ipynb](./fmnist-save-model-renew.ipynb)
@@ -109,9 +117,9 @@ cp $HOME/.docker/config.json /home/jovyan/.docker/config.json
 pip install kubeflow-fairing --upgrade
 ```
 
-*실행이 잘 되지 않는다면, pythonNotebook의 kerner을 리셋 후 다시 code run을 진행하자. (code run 옆에 커널새로고침 버튼 클릭)
+*실행이 잘 되지 않는다면, pythonNotebook의 kernel을 리셋 후 다시 code run을 진행하자. (code run 옆에 커널 새로고침 버튼 클릭)
 
-  - 아래와 같이 docker hub에 rhojw/sample-job:3C8CE2EE 의 image가 배포된 것을 확인할 수 있다. 이후 Step에 사용할 image이다. 
+  - 아래와 같이 docker hub에 rhojw/sample-job:3C8CE2EE 의 image가 배포된 것을 확인할 수 있다. 이후 Step에서 사용할 image이다. 
 
 ![2.docker-image.PNG](./img/2.docker-image.PNG)
 

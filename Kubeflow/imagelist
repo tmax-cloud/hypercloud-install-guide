@@ -77,3 +77,4 @@ gcr.io/kaniko-project/executor:v0.22.0
 brightfly/kubeflow-jupyter-lab:tf2.0-cpu
 brightfly/kubeflow-jupyter-lab:tf2.0-gpu
 tmaxcloudck/kubeflow-jupyter-lab:v0.1
+brightfly/fminst-webui:latest 

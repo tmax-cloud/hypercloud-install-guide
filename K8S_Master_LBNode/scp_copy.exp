@@ -1,0 +1,30 @@
+#!/usr/bin/expect
+
+set username [lindex $argv 0]
+set password [lindex $argv 1]
+set hostname [lindex $argv 2]
+set pkgname [lindex $argv 3]
+set configfile [lindex $argv 4]
+#set pkgname {echo $configfile | awk -F'.' '{print $1, $2}'}
+
+if {[llength $argv] == 0} {
+  send_user "Usage: scriptname username \'password\' hostname \n"
+  exit 1
+}
+send_user "\n\n#######################\n Trying to transfer files \n#######################\n\n"
+
+set timeout 5;
+#split($configfile, arr, ".");
+#if {$pkgname[0] == "keepalived"} {
+#        spawn scp $configfile $username@$hostname:/home/etc/$pkgname[0]/$configfile
+#} elseif {$pkgname[0] == "haproxy"} {
+#        spawn scp $configfile $username@$hostname:/home/etc/$pkgname[0]/$configfile
+#}
+
+spawn scp $configfile $username@$hostname:/home/etc/$pkgname/$configfile
+#spawn scp $configfile $username@$hostname:/home/
+expect {
+  "password:" { send "$password\r"; exp_continue };
+  "*100\%" { send_user "\n\n#######################\n    Copy success  \n#######################\n\n"; exp_continue }
+}
+

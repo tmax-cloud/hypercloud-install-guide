@@ -187,9 +187,6 @@ function install_kube() {
     sudo chown $(id -u):$(id -g) $HOME/.kube/config
     echo "mainMaster"
   elif [ "${type}" == "master" ]; then
-    mkdir -p $HOME/.kube
-    sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-    sudo chown $(id -u):$(id -g) $HOME/.kube/config
     # master type
     echo "master"
   elif [ "${type}" == "worker" ]; then

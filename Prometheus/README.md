@@ -94,23 +94,23 @@
 	
     ```
 	* yaml파일에 version정보를 추가한다.
-	* manifests 폴더에 들어가서 아래의 명령어들을 실행한다.
-	```
-	$ sed -i 's/{ALERTMANAGER_VERSION}/'${ALERTMANAGER_VERSION}'/g' alertmanager-alertmanager.yaml
-	$ sed -i 's/{GRAFANA_VERSION}/'${GRAFANA_VERSION}'/g' grafana-deployment.yaml
-	$ sed -i 's/{KUBE_RBAC_PROXY_VERSION}/'${KUBE_RBAC_PROXY_VERSION}'/g' kube-state-metrics-deployment.yaml
-	$ sed -i 's/{KUBE_STATE_METRICS_VERSION}/'${KUBE_STATE_METRICS_VERSION}'/g' kube-state-metrics-deployment.yaml
-	$ sed -i 's/{NODE_EXPORTER_VERSION}/'${NODE_EXPORTER_VERSION}'/g' node-exporter-daemonset.yaml
-	$ sed -i 's/{KUBE_RBAC_PROXY_VERSION}/'${KUBE_RBAC_PROXY_VERSION}'/g' node-exporter-daemonset.yaml
-	$ sed -i 's/{PROMETHEUS_ADAPTER_VERSION}/'${PROMETHEUS_ADAPTER_VERSION}'/g' prometheus-adapter-deployment.yaml
-	$ sed -i 's/{PROMETHEUS_VERSION}/'${PROMETHEUS_VERSION}'/g' prometheus-prometheus.yaml
-	```
-	* setup 폴더에 들어가서 아래의 명령어들을 실행한다.
-	```
-	$ sed -i 's/{PROMETHEUS_OPERATOR_VERSION}/'${PROMETHEUS_OPERATOR_VERSION}'/g' prometheus-operator-deployment.yaml
-	$ sed -i 's/{CONFIGMAP_RELOADER_VERSION}/'${CONFIGMAP_RELOADER_VERSION}'/g' prometheus-operator-deployment.yaml
-	$ sed -i 's/{CONFIGMAP_RELOAD_VERSION}/'${CONFIGMAP_RELOAD_VERSION}'/g' prometheus-operator-deployment.yaml
-    ```
+		* manifests 폴더에 들어가서 아래의 명령어들을 실행한다.
+		```
+		$ sed -i 's/{ALERTMANAGER_VERSION}/'${ALERTMANAGER_VERSION}'/g' alertmanager-alertmanager.yaml
+		$ sed -i 's/{GRAFANA_VERSION}/'${GRAFANA_VERSION}'/g' grafana-deployment.yaml
+		$ sed -i 's/{KUBE_RBAC_PROXY_VERSION}/'${KUBE_RBAC_PROXY_VERSION}'/g' kube-state-metrics-deployment.yaml
+		$ sed -i 's/{KUBE_STATE_METRICS_VERSION}/'${KUBE_STATE_METRICS_VERSION}'/g' kube-state-metrics-deployment.yaml
+		$ sed -i 's/{NODE_EXPORTER_VERSION}/'${NODE_EXPORTER_VERSION}'/g' node-exporter-daemonset.yaml
+		$ sed -i 's/{KUBE_RBAC_PROXY_VERSION}/'${KUBE_RBAC_PROXY_VERSION}'/g' node-exporter-daemonset.yaml
+		$ sed -i 's/{PROMETHEUS_ADAPTER_VERSION}/'${PROMETHEUS_ADAPTER_VERSION}'/g' prometheus-adapter-deployment.yaml
+		$ sed -i 's/{PROMETHEUS_VERSION}/'${PROMETHEUS_VERSION}'/g' prometheus-prometheus.yaml
+		```
+		* setup 폴더에 들어가서 아래의 명령어들을 실행한다.
+		```
+		$ sed -i 's/{PROMETHEUS_OPERATOR_VERSION}/'${PROMETHEUS_OPERATOR_VERSION}'/g' prometheus-operator-deployment.yaml
+		$ sed -i 's/{CONFIGMAP_RELOADER_VERSION}/'${CONFIGMAP_RELOADER_VERSION}'/g' prometheus-operator-deployment.yaml
+		$ sed -i 's/{CONFIGMAP_RELOAD_VERSION}/'${CONFIGMAP_RELOAD_VERSION}'/g' prometheus-operator-deployment.yaml
+		```
 	
 	* 폐쇄망에서 설치를 진행하여 별도의 image registry를 사용하는 경우 registry 정보를 추가로 설정해준다.
 	* (manifests 폴더)
@@ -153,7 +153,7 @@
 ## Step 2. Prometheus 모듈들에 대한 deploy 및 RBAC 생성
 * 목적 : Prometheus server, adapter, node exporter, kube-state-metrics, grafana 등을 생성
 
-
+* prometheus pod에 storage를 마운트하고 싶지 않을 경우, prometheus-prometheus.yaml 에 spec.storage 부분을 삭제 한다.(storage를 마운트 하는 경우 rook-ceph-block stroage class가 설치 되어있어야 한다.)
 * kubectl create -f manifests/ 명령어를 통해 Prometheus 모듈 생성([manifests](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Prometheus/yaml/manifests))
 * 비고
 	* Prometheus UI 또는 Grafana 를 사용할 경우 kubectl edit svc $PROMETHEUS_SVC -n monitoring 또는 kubectl edit svc $GRAFANA_SVC -n monitoring 명령어를 통해 ClusterIP 타입으로 생성된 서비스를 LoadBalancer 타입으로 수정한 뒤 해당 IP:port 를 통해 대시보드에 접근할 수 있음

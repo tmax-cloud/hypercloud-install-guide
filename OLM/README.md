@@ -59,6 +59,26 @@
     
     $ sudo docker push ${REGISTRY}/operator-framework/upstream-community-operators:${REG_VERSION}
     ```
+    
+3. 설치할 Operator 이미지를 폐쇄망에서 다운받기 위해 Custom Registry를 빌드한다. (실제 Operator 이미지는 이미 로컬 레지스트리에 push되어 있다고 가정) 
+    ```bash
+    $ cd private
+    
+    $ cp bin/* /bin/
+    
+    $ sed -i 's/{registry}/'${REGISTRY}'/g' catalog_build.sh
+    
+    $ sed -i 's/{registry}/'${REGISTRY}'/g' prom_0.22/prometheusoperator.0.22.2.clusterserviceversion.yaml
+    
+    $ sh catalog_build.sh
+    ```
+    
+4. Custom Registry를 폐쇄망 환경에 구성한다.
+    ```bash
+    $ sed -i 's/{registry}/'${REGISTRY}'/g' custom_catalogsource.yaml
+    
+    $ kubectl apply -f custom_catalogsource.yaml
+    ```
 
 ## Install Steps
 0. [olm yaml 수정](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/HyperCloud%20Webhook#step-0-hypercloud-webhook-yaml-%EC%88%98%EC%A0%95)

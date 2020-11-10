@@ -60,7 +60,7 @@
     $ sudo docker push ${REGISTRY}/operator-framework/upstream-community-operators:${REG_VERSION}
     ```
     
-3. 설치할 Operator 이미지를 폐쇄망에서 다운받기 위해 Custom Registry를 빌드한다. (실제 Operator 이미지는 이미 로컬 레지스트리에 push되어 있다고 가정) 
+3. 설치할 Operator 이미지를 폐쇄망에서 다운받기 위해 Custom Registry를 빌드한다. (e.g. Prometheus Operator 0.22) 
     ```bash
     $ cd private
     

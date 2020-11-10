@@ -3,7 +3,7 @@
 ## 구성 요소 및 버전
 * OLM: ([quay.io/operator-framework/olm:0.15.1](https://quay.io/repository/operator-framework/olm/manifest/sha256:2c389d2e380c842cbf542820ad4493249164302ddf0e699b0a37105d234e67ee))
 * Registry Configmap: ([quay.io/operator-framework/configmap-operator-registry:v1.13.3](https://quay.io/repository/operator-framework/configmap-operator-registry/manifest/sha256:e8458dbd7cc7650f0e84bb55cb1f9f30937dd0b010377634ea75f6d9a4f6ee85))
-* Catalog Registry ([quay.io/operator-framework/upstream-community-operators:latest] (https://quay.io/repository/operator-framework/upstream-community-operators/manifest/sha256:abaa54d83d2825c7d2bc9367edbc1a3707df88e43ded36ff441398f23f030b6e)
+* Catalog Registry ([quay.io/operator-framework/upstream-community-operators:latest](https://quay.io/repository/operator-framework/upstream-community-operators/manifest/sha256:abaa54d83d2825c7d2bc9367edbc1a3707df88e43ded36ff441398f23f030b6e)
 
 ## Prerequisites
 * git

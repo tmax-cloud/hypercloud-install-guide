@@ -1,0 +1,8 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  name: demo-workflow
+  namespace: demo
+spec:
+  workflowTemplateRef:
+    name: demo-workflowtemplate

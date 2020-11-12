@@ -1,0 +1,206 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: demo-workflowtemplate
+  namespace: demo
+spec:
+  ## 공통 arg 정의
+  arguments:
+    parameters:
+    - name: pvc_name
+      value: demo-pvc
+  ## 시작 task(template) 설정
+  entrypoint: step
+  serviceAccountName: default-editor
+  templates:
+  ## 수행 flow를 정의
+  - name: step
+    steps: 
+      - - name: tunning
+          template: katib
+      - - name: training
+          template: tfjob
+          arguments:
+            parameters:
+              - name: tfjob-arg-lrrate
+                value: '{{steps.tunning.outputs.parameters.learning_rate}}'
+              - name: tfjob-arg-dorate
+                value: '{{steps.tunning.outputs.parameters.dropout_rate}}'
+      - - name: serving
+          template: kfserving
+
+  ## Katib를 수행하는 task를 정의
+  - name: katib
+    metadata: 
+      annotations:
+        sidecar.istio.io/inject: "false"
+    resource:
+      action: create
+      successCondition: status.trialsSucceeded==5
+      manifest: |
+        apiVersion: "kubeflow.org/v1alpha3"
+        kind: Experiment
+        metadata:
+          namespace: demo
+          labels:
+            controller-tools.k8s.io: "1.0"
+          name: demo-experiment
+        spec:
+          ## 목표 정의 : validation-accuracy를 maxmize
+          objective:
+            type: maximize
+            goal: 0.99
+            objectiveMetricName: Validation-accuracy
+            additionalMetricNames:
+              - accuracy
+              - loss
+              - Validation-loss
+          ## 메트릭 수집 방식 정의 : /result/mnist.log의 File을 통해 수집
+          metricsCollectorSpec:
+            source:
+              fileSystemPath:
+                path: "/result/mnist.log"
+                kind: File
+            collector:
+              kind: File
+          ## hyperParameter 탐색 algorithm 정의
+          algorithm:
+            algorithmName: random
+          ## 분산 학습 설정 : 최대 5 학습, 동시에 3 학습씩 진행
+          parallelTrialCount: 3
+          maxTrialCount: 5
+          maxFailedTrialCount: 3
+          ## 살펴볼 hyperParameter들과 그 범위 정의 : learning_rate와 dropout_rate를 살펴봄
+          parameters:
+            - name: --learning_rate
+              parameterType: double
+              feasibleSpace:
+                min: "0.01"
+                max: "0.03"
+            - name: --dropout_rate
+              parameterType: double
+              feasibleSpace:
+                min: "0.1"
+                max: "0.9"
+          ## ML Model을 학습시킬 Job 정의 
+          trialTemplate:  
+            goTemplate:
+                rawTemplate: |-
+                  apiVersion: batch/v1
+                  kind: Job
+                  metadata:
+                    name: {{.Trial}}
+                    namespace: {{.NameSpace}}
+                  spec:
+                    template:
+                      spec:
+                        containers:
+                        - name: {{.Trial}}
+                          image: docker.io/rhojw/sample-job:3C8CE2EE
+                          command:
+                          - "python"
+                          - "/app/fmnist-save-model-renew.py"
+                          {{- with .HyperParameters}}
+                          {{- range .}}
+                          - "{{.Name}}={{.Value}}"
+                          {{- end}}
+                          {{- end}}
+                          resources:
+                            limits:
+                              nvidia.com/gpu: 1
+                        restartPolicy: Never
+    outputs:
+      parameters:
+        - name: learning_rate
+          valueFrom:
+            jsonPath: "{.status.currentOptimalTrial.parameterAssignments[?(@.name=='--learning_rate')].value}"
+        - name: dropout_rate
+          valueFrom:
+            jsonPath: "{.status.currentOptimalTrial.parameterAssignments[?(@.name=='--dropout_rate')].value}"
+
+  ## TFJob을 수행하는 task를 정의
+  - name: tfjob
+    metadata: 
+      annotations:
+        sidecar.istio.io/inject: "false"
+    inputs:
+      parameters:
+        - name: tfjob-arg-lrrate
+        - name: tfjob-arg-dorate
+    resource:
+      action: create
+      successCondition: status.replicaStatuses.Worker.succeeded==1
+      manifest: |
+        apiVersion: kubeflow.org/v1
+        kind: TFJob
+        metadata:
+          name: demo-tfjob
+          namespace: demo
+        spec:
+          tfReplicaSpecs:
+            Worker:
+              replicas: 1
+              template:
+                metadata:
+                  annotations:
+                    sidecar.istio.io/inject: "false"
+                  name: fairing-deployer
+                spec:
+                  ## hyperparameter값을 설정 : learningRate, dropoutRate
+                  containers:
+                  - command:
+                    - python
+                    - /app/fmnist-save-model-renew.py
+                    - "--learning_rate={{inputs.parameters.tfjob-arg-lrrate}}"
+                    - "--dropout_rate={{inputs.parameters.tfjob-arg-dorate}}"
+                    env:
+                    - name: FAIRING_RUNTIME
+                      value: "1"
+                    image: rhojw/sample-job:3C8CE2EE
+                    name: tensorflow
+                    resources:
+                      limits:
+                        cpu: 1
+                        memory: 1.86Gi
+                    securityContext:
+                      runAsUser: 0
+                    volumeMounts:
+                    - mountPath: /result
+                      name: fairing-volume-demo-pvc
+                    workingDir: /app/
+                  restartPolicy: Never
+                  ## Model이 저장될 storage 정의
+                  volumes:
+                  - name: fairing-volume-demo-pvc
+                    persistentVolumeClaim:
+                      claimName: '{{workflow.parameters.pvc_name}}'
+
+  ## KFServing을 수행하는 task를 정의
+  - name: kfserving
+    metadata: 
+      annotations:
+        sidecar.istio.io/inject: "false"
+    resource:
+      action: create
+      successCondition: status.traffic==100
+      manifest: |
+        apiVersion: serving.kubeflow.org/v1alpha2
+        kind: InferenceService
+        metadata:
+          name: demo-inferenceservice
+          namespace: demo
+        spec:
+          default:
+            predictor:
+              ## inference server 정의
+              tensorflow:
+                resources:
+                  limits:
+                    cpu: 100m
+                    memory: 1Gi
+                  requests:
+                    cpu: 100m
+                    memory: 1Gi
+                runtimeVersion: 1.14.0
+                ## Model 위치 설정
+                storageUri: pvc://{{workflow.parameters.pvc_name}}/saved_model

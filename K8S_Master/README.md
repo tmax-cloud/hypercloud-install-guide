@@ -180,7 +180,10 @@
          * plugin_dirs : "/opt/cni/bin" 추가
          * (폐쇄망) pause_image : "k8s.gcr.io/pause:3.1" 을 "{registry}:{port}/k8s.gcr.io/pause:3.1" 로 변경
 	![image](figure/crio_config.PNG)
- 
+    * pid cgroup의 max pid limit 설정이 필요한 경우 pids_limit 개수를 수정한다. (default : pids_limit = 1024)
+	```bash
+	pids_limit = 2048
+	```     
     * registries.conf 내용을 수정한다.
       * sudo vi /etc/containers/registries.conf
 	```bash

@@ -104,7 +104,12 @@
          * plugin_dirs : "/opt/cni/bin" 추가
          * (폐쇄망) pause_image : "k8s.gcr.io/pause:3.1" 을 "{registry}:{port}/k8s.gcr.io/pause:3.1" 로 변경	 
 	![image](figure/crio_config.PNG)
-	
+    * pid cgroup의 max pid limit 설정이 필요한 경우 pids_limit 개수를 수정한다.
+      * default : pids_limit = 1024
+      * 시스템의 제한값인 `/proc/sys/kernel/pid_max`의 값 이하로 설정한다.
+	```bash
+	pids_limit = 32768
+	```     
     * cri-o를 재시작 한다.
 	```bash
 	sudo systemctl restart crio

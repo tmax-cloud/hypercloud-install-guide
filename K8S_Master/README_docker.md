@@ -214,8 +214,6 @@
 	localAPIEndpoint:
   		advertiseAddress: {api server IP}
   		bindPort: 6443
-	nodeRegistration:
-  		criSocket: /var/run/crio/crio.sock
 	---
 	apiVersion: kubeadm.k8s.io/v1beta2
 	kind: ClusterConfiguration

@@ -88,7 +88,7 @@
 0. [환경 설정](https://github.com/jinho0928/hypercloud-install-guide/blob/master/K8S_Master/README_docker.md#step0-%ED%99%98%EA%B2%BD-%EC%84%A4%EC%A0%95)
 1. [docker 설치 및 설정](https://github.com/jinho0928/hypercloud-install-guide/blob/master/K8S_Master/README_docker.md#step-1-docker-%EC%84%A4%EC%B9%98-%EB%B0%8F-%EC%84%A4%EC%A0%95)
 2. [kubeadm, kubelet, kubectl 설치](https://github.com/jinho0928/hypercloud-install-guide/blob/master/K8S_Master/README_docker.md#step-2-kubeadm-kubelet-kubectl-%EC%84%A4%EC%B9%98)
-3. [kubernetes cluster 구성]()
+3. [kubernetes cluster 구성](https://github.com/jinho0928/hypercloud-install-guide/blob/master/K8S_Master/README_docker.md#step-3-kubernetes-cluster-%EA%B5%AC%EC%84%B1)
 3-1. [kubernetes cluster 구성(master 다중화)]()
 
 ## Step0. 환경 설정

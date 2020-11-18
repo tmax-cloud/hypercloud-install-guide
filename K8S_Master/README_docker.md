@@ -3,7 +3,7 @@
 ※ [듀얼 스택 클러스터 구축을 위한 k8s-master 설치 가이드](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/K8S_Master/README_dualstack.md)
 
 ## 구성 요소 및 버전
-* cri-o (v1.17.4)
+* docker-ce (v19.03.12)
 * kubeadm, kubelet, kubectl (v1.17.6)
 * k8s.gcr.io/kube-apiserver:v1.17.6
 * k8s.gcr.io/kube-proxy:v1.17.6

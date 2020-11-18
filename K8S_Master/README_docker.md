@@ -161,9 +161,10 @@
     $  sudo systemctl status docker
     ```  
 * 비고 :
-    * pid cgroup의 max pid limit 설정이 필요한 경우 pids_limit 개수를 수정한다. (default : pids_limit = 1024)
+    * pid cgroup의 max pid limit 설정이 필요한 경우 pids_limit 개수를 수정한다. (default : pids_limit = )
+      * sudo vi /etc/containers/registries.conf	
 	```bash
-	pids_limit = 2048
+	pids_limit = 
 	```     
     * registries.conf 내용을 수정한다.
       * sudo vi /etc/containers/registries.conf
@@ -171,7 +172,7 @@
 	unqualified-search-registries = ['registry.fedoraproject.org', 'registry.access.redhat.com', 'registry.centos.org', 'docker.io', '{registry}:{port}']
 	ex) unqualified-search-registries = ['registry.fedoraproject.org', 'registry.access.redhat.com', 'registry.centos.org', 'docker.io', '172.22.5.2:5000']
 	``` 	      
-    * crio를 재시작 한다.
+    * docker를 재시작 한다.
 	```bash
 	sudo systemctl restart docker
 	```
@@ -330,18 +331,17 @@
 * 순서 : 
     * kubeadm-config.yaml 파일로 kubeadm 명령어 실행한다.
         * Master 다중구성시 --upload-certs 옵션은 반드시 필요.
-        * join 시에 --cri-socket=/var/run/crio/crio.sock 옵션을 추가하여 실행한다.
 	    ```bash
 	    sudo kubeadm init --config=kubeadm-config.yaml --upload-certs 
 	    sudo kubeadm join {IP}:{PORT} --token ~~ discovery-token-ca-cert-hash --control-plane --certificate-key ~~ (1)
-	    sudo kubeadm join {IP}:{PORT} --token ~~ discovery-token-ca-cert-hash --cri-socket=/var/run/crio/crio.sock (2)
+	    sudo kubeadm join {IP}:{PORT} --token ~~ discovery-token-ca-cert-hash (2)
 	    ```
 	![image](figure/master2.PNG)    
 	* 해당 옵션은 certificates를 control-plane으로 upload하는 옵션
 	* 해당 옵션을 설정하지 않을 경우, 모든 Master 노드에서 key를 복사해야 함
 	* Master 단일구성과는 다르게, --control-plane --certificate-key 옵션이 추가된 명령어가 출력됨
 	* (1)처럼 Master 다중구성을 위한 hash 값을 포함한 kubeadm join 명령어가 출력되므로 해당 명령어를 복사하여 다중구성에 포함시킬 다른 Master에서 실행
-	* (2)처럼 Worker의 join을 위한 명령어도 출력되므로 Worker 노드 join시 사용, crio 사용시 --cri-socket 옵션 추가
+	* (2)처럼 Worker의 join을 위한 명령어도 출력되므로 Worker 노드 join시 사용
 	   ```bash
 	     sudo kubeadm join 172.22.5.2:6443 --token 2cks7n.yvojnnnq1lyz1qud \ --discovery-token-ca-cert-hash sha256:efba18bb4862cbcb54fb643a1b7f91c25e08cfc1640e5a6fffa6de83e4c76f07 \ --control-plane --certificate-key f822617fcbfde09dff35c10e388bc881904b5b6c4da28f3ea8891db2d0bd3a62
 	   ```

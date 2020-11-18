@@ -82,7 +82,8 @@
     ```    
     ![image](figure/check.PNG)
 * 비고 :
-    * 위 내용은 2개이상의 마스터 구축시 마스터 1개에서만 진행한다.    
+    * 위 내용은 2개이상의 마스터 구축시 마스터 1개에서만 진행한다.
+    
 ## Install Steps
 0. [환경 설정](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/K8S_Master#step0-%ED%99%98%EA%B2%BD-%EC%84%A4%EC%A0%95)
 1. [cri-o 설치](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/K8S_Master#step-1-cri-o-%EC%84%A4%EC%B9%98)
@@ -126,34 +127,29 @@
 	sudo setenforce 0
 	sudo sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 	```
-
-## Step 1. docker 설치
+	
+## Step 1. docker 설치 및 설정
 * 목적 : `k8s container runtime 설치`
-* 순서 :
-    * docker를 설치한다.
-     * (폐쇄망) 아래 주소를 참조하여 패키지 레포를 등록 후 docker를 설치한다.
-          * https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Package#step-1-local-repository-%EA%B5%AC%EC%B6%95
-	```bash
-	sudo yum -y install docker-ce
-	sudo systemctl enable docker
-	sudo systemctl start docker
-	```
-     * (외부망) crio 버전 지정 및 레포를 등록 후 crio를 설치한다.
-	```bash
-	VERSION=1.17
-	sudo curl -L -o /etc/yum.repos.d/devel:kubic:libcontainers:stable.repo https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable/CentOS_7/devel:kubic:libcontainers:stable.repo
-	sudo curl -L -o /etc/yum.repos.d/devel:kubic:libcontainers:stable:cri-o:${VERSION}.repo https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable:cri-o:${VERSION}/CentOS_7/devel:kubic:libcontainers:stable:cri-o:${VERSION}.repo
-  
-	sudo yum -y install cri-o
-	sudo systemctl enable crio
-	sudo systemctl start crio
-	```	
-    * cri-o 설치를 확인한다.
-	```bash
-	sudo systemctl status crio
-	rpm -qi cri-o
-	```
-    ![image](figure/rpm.PNG)
+* 생성 순서 : 
+    * 다른 구성하는 마스터에 docker를 설치한다.
+    ```bash
+    $ sudo yum install -y docker-ce
+    $ sudo systemctl start docker
+    $ sudo systemctl enable docker
+    ```
+    * docker damon에 insecure-registries를 등록한다.
+      * sudo vi /etc/docker/daemon.json
+    ```bash
+    {
+        "insecure-registries": ["{IP}:5000"]
+    }
+    ```
+    * docker를 재실행하고 status를 확인한다.
+    ```bash
+    $  sudo systemctl restart docker
+    $  sudo systemctl status docker
+    ```  
+
 * 비고 :
     * 폐쇄망 환경에서 private registry 접근을 위해 daemon.json 내용을 수정한다.
     * insecure_registry, registries, plugin_dirs 내용을 수정한다.

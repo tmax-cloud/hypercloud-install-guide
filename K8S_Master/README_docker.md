@@ -127,7 +127,7 @@
 	sudo setenforce 0
 	sudo sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 	```
-    * 환경 설정
+    *  설정
 	```bash
 	sudo cat << "EOF" | sudo tee -a /etc/sysctl.d/k8s.conf
 	net.bridge.bridge-nf-call-iptables  = 1

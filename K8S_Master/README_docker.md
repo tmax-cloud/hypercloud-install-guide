@@ -87,9 +87,9 @@
 ## Install Steps
 0. [환경 설정](https://github.com/jinho0928/hypercloud-install-guide/blob/master/K8S_Master/README_docker.md#step0-%ED%99%98%EA%B2%BD-%EC%84%A4%EC%A0%95)
 1. [docker 설치 및 설정](https://github.com/jinho0928/hypercloud-install-guide/blob/master/K8S_Master/README_docker.md#step-1-docker-%EC%84%A4%EC%B9%98-%EB%B0%8F-%EC%84%A4%EC%A0%95)
-2. [kubeadm, kubelet, kubectl 설치](https://github.com/jinho0928/hypercloud-install-guide/blob/master/K8S_Master/README_docker.md#step-2-kubeadm-kubelet-kubectl-%EC%84%A4%EC%B9%98)
-3. [kubernetes cluster 구성](https://github.com/jinho0928/hypercloud-install-guide/blob/master/K8S_Master/README_docker.md#step-3-kubernetes-cluster-%EA%B5%AC%EC%84%B1)
-3-1. [kubernetes cluster 구성(master 다중화)]()
+2. [kubeadm, kubelet, kubectl 설치](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/K8S_Master#step-2-kubeadm-kubelet-kubectl-%EC%84%A4%EC%B9%98)
+3. [kubernetes cluster 구성](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/K8S_Master#step-3-kubernetes-cluster-%EA%B5%AC%EC%84%B1)
+3-1. [kubernetes cluster 구성(master 다중화)](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/K8S_Master#step-3-1-kubernetes-cluster-%EB%8B%A4%EC%A4%91%ED%99%94-%EA%B5%AC%EC%84%B1%EC%9D%84-%EC%9C%84%ED%95%9C-keepalived-%EC%84%A4%EC%B9%98)
 
 ## Step0. 환경 설정
 * 목적 : `k8s 설치 진행을 위한 os 환경 설정`

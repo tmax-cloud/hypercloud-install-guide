@@ -85,11 +85,11 @@
     * 위 내용은 2개이상의 마스터 구축시 마스터 1개에서만 진행한다.
     
 ## Install Steps
-0. [환경 설정](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/K8S_Master#step0-%ED%99%98%EA%B2%BD-%EC%84%A4%EC%A0%95)
-1. [cri-o 설치](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/K8S_Master#step-1-cri-o-%EC%84%A4%EC%B9%98)
+0. [환경 설정]()
+1. [docker 설치 및 설정]()
 2. [kubeadm, kubelet, kubectl 설치](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/K8S_Master#step-2-kubeadm-kubelet-kubectl-%EC%84%A4%EC%B9%98)
 3. [kubernetes cluster 구성](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/K8S_Master#step-3-kubernetes-cluster-%EA%B5%AC%EC%84%B1)
-3-1. [kubernetes cluster 구성(master 다중화)](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/K8S_Master#step-3-1-kubernetes-cluster-%EB%8B%A4%EC%A4%91%ED%99%94-%EA%B5%AC%EC%84%B1%EC%9D%84-%EC%9C%84%ED%95%9C-keepalived-%EC%84%A4%EC%B9%98)
+3-1. [kubernetes cluster 구성(master 다중화)]()
 
 ## Step0. 환경 설정
 * 목적 : `k8s 설치 진행을 위한 os 환경 설정`
@@ -127,6 +127,17 @@
 	sudo setenforce 0
 	sudo sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 	```
+    * 환경 설정
+	```bash
+	
+	sudo cat << "EOF" | sudo tee -a /etc/sysctl.d/k8s.conf
+	net.bridge.bridge-nf-call-iptables  = 1
+	net.ipv4.ip_forward                 = 1
+	net.bridge.bridge-nf-call-ip6tables = 1
+	EOF
+	
+	sudo sysctl --system
+	```
 	
 ## Step 1. docker 설치 및 설정
 * 목적 : `k8s container runtime 설치`
@@ -149,16 +160,13 @@
     $  sudo systemctl restart docker
     $  sudo systemctl status docker
     ```  
-
 * 비고 :
     * 폐쇄망 환경에서 private registry 접근을 위해 daemon.json 내용을 수정한다.
-    * insecure_registry, registries, plugin_dirs 내용을 수정한다.
-      * sudo vi /etc/crio/crio.conf
+      * sudo vi /etc/docker/daemon.json
          * registries = ["{registry}:{port}" , "docker.io"]
          * insecure_registries = ["{registry}:{port}"]
          * plugin_dirs : "/opt/cni/bin" 추가
          * (폐쇄망) pause_image : "k8s.gcr.io/pause:3.1" 을 "{registry}:{port}/k8s.gcr.io/pause:3.1" 로 변경
-	![image](figure/crio_config.PNG)
     * pid cgroup의 max pid limit 설정이 필요한 경우 pids_limit 개수를 수정한다. (default : pids_limit = 1024)
 	```bash
 	pids_limit = 2048
@@ -171,12 +179,12 @@
 	``` 	      
     * crio를 재시작 한다.
 	```bash
-	sudo systemctl restart crio
-	``` 	
+	sudo systemctl restart docker
+	```
+	
 ## Step 2. kubeadm, kubelet, kubectl 설치
 * 목적 : `Kubernetes 구성을 위한 kubeadm, kubelet, kubectl 설치한다.`
 * 순서:
-    * CRI-O 메이저와 마이너 버전은 쿠버네티스 메이저와 마이너 버전이 일치해야 한다.
     * (폐쇄망) kubeadm, kubectl, kubelet 설치 (v1.17.6)
 	```bash
 	sudo yum install -y kubeadm-1.17.6-0 kubelet-1.17.6-0 kubectl-1.17.6-0
@@ -323,29 +331,7 @@
 	* inet {VIP}/32 scope global eno1
 	![image](figure/ipa.PNG)
 	
-## Step 3-2. docker 설치 및 설정
-* 목적 : `구성한 docker registry에 접근을 위해 docker를 설치한다.`
-* 생성 순서 : 
-    * 다른 구성하는 마스터에 docker를 설치한다.
-    ```bash
-    $ sudo yum install -y docker-ce
-    $ sudo systemctl start docker
-    $ sudo systemctl enable docker
-    ```
-    * docker damon에 insecure-registries를 등록한다.
-      * sudo vi /etc/docker/daemon.json
-    ```bash
-    {
-        "insecure-registries": ["{IP}:5000"]
-    }
-    ```
-    * docker를 재실행하고 status를 확인한다.
-    ```bash
-    $  sudo systemctl restart docker
-    $  sudo systemctl status docker
-    ```  
-    
-## Step 3-3. kubernetes cluster 다중화 구성 설정
+## Step 3-2. kubernetes cluster 다중화 구성 설정
 * 목적 : `K8S cluster의 Master 다중화를 구성한다`
 * 순서 : 
     * kubeadm-config.yaml 파일로 kubeadm 명령어 실행한다.
@@ -353,7 +339,7 @@
         * join 시에 --cri-socket=/var/run/crio/crio.sock 옵션을 추가하여 실행한다.
 	    ```bash
 	    sudo kubeadm init --config=kubeadm-config.yaml --upload-certs 
-	    sudo kubeadm join {IP}:{PORT} --token ~~ discovery-token-ca-cert-hash --control-plane --certificate-key ~~ --cri-socket=/var/run/crio/crio.sock (1)
+	    sudo kubeadm join {IP}:{PORT} --token ~~ discovery-token-ca-cert-hash --control-plane --certificate-key ~~ (1)
 	    sudo kubeadm join {IP}:{PORT} --token ~~ discovery-token-ca-cert-hash --cri-socket=/var/run/crio/crio.sock (2)
 	    ```
 	![image](figure/master2.PNG)    
@@ -363,7 +349,7 @@
 	* (1)처럼 Master 다중구성을 위한 hash 값을 포함한 kubeadm join 명령어가 출력되므로 해당 명령어를 복사하여 다중구성에 포함시킬 다른 Master에서 실행
 	* (2)처럼 Worker의 join을 위한 명령어도 출력되므로 Worker 노드 join시 사용, crio 사용시 --cri-socket 옵션 추가
 	   ```bash
-	     sudo kubeadm join 172.22.5.2:6443 --token 2cks7n.yvojnnnq1lyz1qud \ --discovery-token-ca-cert-hash sha256:efba18bb4862cbcb54fb643a1b7f91c25e08cfc1640e5a6fffa6de83e4c76f07 \ --control-plane --certificate-key f822617fcbfde09dff35c10e388bc881904b5b6c4da28f3ea8891db2d0bd3a62 --cri-socket=/var/run/crio/crio.sock
+	     sudo kubeadm join 172.22.5.2:6443 --token 2cks7n.yvojnnnq1lyz1qud \ --discovery-token-ca-cert-hash sha256:efba18bb4862cbcb54fb643a1b7f91c25e08cfc1640e5a6fffa6de83e4c76f07 \ --control-plane --certificate-key f822617fcbfde09dff35c10e388bc881904b5b6c4da28f3ea8891db2d0bd3a62
 	   ```
 	   
 	* kubernetes config 

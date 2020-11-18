@@ -86,9 +86,9 @@
     
 ## Install Steps
 0. [환경 설정](https://github.com/jinho0928/hypercloud-install-guide/blob/master/K8S_Master/README_docker.md#step0-%ED%99%98%EA%B2%BD-%EC%84%A4%EC%A0%95)
-1. [docker 설치 및 설정]()
-2. [kubeadm, kubelet, kubectl 설치](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/K8S_Master#step-2-kubeadm-kubelet-kubectl-%EC%84%A4%EC%B9%98)
-3. [kubernetes cluster 구성](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/K8S_Master#step-3-kubernetes-cluster-%EA%B5%AC%EC%84%B1)
+1. [docker 설치 및 설정](https://github.com/jinho0928/hypercloud-install-guide/blob/master/K8S_Master/README_docker.md#step-1-docker-%EC%84%A4%EC%B9%98-%EB%B0%8F-%EC%84%A4%EC%A0%95)
+2. [kubeadm, kubelet, kubectl 설치]()
+3. [kubernetes cluster 구성]()
 3-1. [kubernetes cluster 구성(master 다중화)]()
 
 ## Step0. 환경 설정
@@ -141,17 +141,17 @@
 ## Step 1. docker 설치 및 설정
 * 목적 : `k8s container runtime 설치`
 * 생성 순서 : 
-    * 다른 구성하는 마스터에 docker를 설치한다.
+    * docker-ce를 설치한다. image registry 구축 시에 docker를 이미 설치하였고 daemon.json 내용이 같다면 step2를 진행한다.
     ```bash
     $ sudo yum install -y docker-ce
     $ sudo systemctl start docker
     $ sudo systemctl enable docker
     ```
-    * 폐쇄망 환경에서 private registry 접근을 위해 daemon.json 내용을 수정한다.
-    * docker cgroup 설정을 한다. 
+    * 폐쇄망 환경에서 private registry 접근 및 cgroup 설정을 위해 daemon.json 내용을 수정한다.
       * sudo vi /etc/docker/daemon.json
     ```bash
     {
+        "exec-opts": ["native.cgroupdriver=systemd"],
         "insecure-registries": ["{IP}:5000"]
     }
     ```
@@ -160,12 +160,7 @@
     $  sudo systemctl restart docker
     $  sudo systemctl status docker
     ```  
-* 비고 :
-    * pid cgroup의 max pid limit 설정이 필요한 경우 pids_limit 개수를 수정한다. (default : pids_limit = )
-      * sudo vi /etc/containers/registries.conf	
-	```bash
-	pids_limit = 
-	```     
+* 비고 : 
     * registries.conf 내용을 수정한다.
       * sudo vi /etc/containers/registries.conf
 	```bash
@@ -236,7 +231,7 @@
       * serviceSubnet : "${SERVICE_IP_POOL}/${CIDR}"
       * podSubnet : "${POD_IP_POOL}/${CIDR}"
       * imageRepository : "${registry} / docker hub name"
-      * cgroupDriver: cgroup driver systemd 변경
+      * cgroupDriver: cgroup driver 설정
 
     * kubeadm init (2개 이상 마스터 구축시에는 아래 가이드 참조)
 	```bash

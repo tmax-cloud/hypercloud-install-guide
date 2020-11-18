@@ -126,17 +126,29 @@
 	sudo setenforce 0
 	sudo sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 	```
-
-## Step 1. docker 설치
+    * crio 사용 전 환경 설정
+	```bash
+	sudo modprobe overlay
+	sudo modprobe br_netfilter
+	
+	sudo cat << "EOF" | sudo tee -a /etc/sysctl.d/99-kubernetes-cri.conf
+	net.bridge.bridge-nf-call-iptables  = 1
+	net.ipv4.ip_forward                 = 1
+	net.bridge.bridge-nf-call-ip6tables = 1
+	EOF
+	
+	sudo sysctl --system
+	```
+## Step 1. cri-o 설치
 * 목적 : `k8s container runtime 설치`
 * 순서 :
-    * docker를 설치한다.
-     * (폐쇄망) 아래 주소를 참조하여 패키지 레포를 등록 후 docker를 설치한다.
+    * cri-o를 설치한다.
+     * (폐쇄망) 아래 주소를 참조하여 패키지 레포를 등록 후 crio를 설치한다.
           * https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Package#step-1-local-repository-%EA%B5%AC%EC%B6%95
 	```bash
-	sudo yum -y install docker-ce
-	sudo systemctl enable docker
-	sudo systemctl start docker
+	sudo yum -y install cri-o
+	sudo systemctl enable crio
+	sudo systemctl start crio
 	```
      * (외부망) crio 버전 지정 및 레포를 등록 후 crio를 설치한다.
 	```bash
@@ -155,7 +167,12 @@
 	```
     ![image](figure/rpm.PNG)
 * 비고 :
-    * 폐쇄망 환경에서 private registry 접근을 위해 daemon.json 내용을 수정한다.
+    * 추후 설치예정인 network plugin과 crio의 가상 인터페이스 충돌을 막기위해 cri-o의 default 인터페이스 설정을 제거한다.
+	```bash
+	sudo rm -rf  /etc/cni/net.d/100-crio-bridge.conf
+ 	sudo rm -rf  /etc/cni/net.d/200-loopback.conf
+	``` 
+    * 폐쇄망 환경에서 private registry 접근을 위해 crio.conf 내용을 수정한다.
     * insecure_registry, registries, plugin_dirs 내용을 수정한다.
       * sudo vi /etc/crio/crio.conf
          * registries = ["{registry}:{port}" , "docker.io"]
@@ -163,9 +180,11 @@
          * plugin_dirs : "/opt/cni/bin" 추가
          * (폐쇄망) pause_image : "k8s.gcr.io/pause:3.1" 을 "{registry}:{port}/k8s.gcr.io/pause:3.1" 로 변경
 	![image](figure/crio_config.PNG)
-    * pid cgroup의 max pid limit 설정이 필요한 경우 pids_limit 개수를 수정한다. (default : pids_limit = 1024)
+    * pid cgroup의 max pid limit 설정이 필요한 경우 pids_limit 개수를 수정한다.
+      * default : pids_limit = 1024
+      * 시스템의 제한값인 `/proc/sys/kernel/pid_max`의 값 이하로 설정한다.
 	```bash
-	pids_limit = 2048
+	pids_limit = 32768
 	```     
     * registries.conf 내용을 수정한다.
       * sudo vi /etc/containers/registries.conf

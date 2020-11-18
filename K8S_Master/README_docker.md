@@ -129,7 +129,6 @@
 	```
     * 환경 설정
 	```bash
-	
 	sudo cat << "EOF" | sudo tee -a /etc/sysctl.d/k8s.conf
 	net.bridge.bridge-nf-call-iptables  = 1
 	net.ipv4.ip_forward                 = 1
@@ -148,7 +147,8 @@
     $ sudo systemctl start docker
     $ sudo systemctl enable docker
     ```
-    * docker damon에 insecure-registries를 등록한다.
+    * 폐쇄망 환경에서 private registry 접근을 위해 daemon.json 내용을 수정한다.
+    * docker cgroup 설정을 한다. 
       * sudo vi /etc/docker/daemon.json
     ```bash
     {
@@ -161,12 +161,6 @@
     $  sudo systemctl status docker
     ```  
 * 비고 :
-    * 폐쇄망 환경에서 private registry 접근을 위해 daemon.json 내용을 수정한다.
-      * sudo vi /etc/docker/daemon.json
-         * registries = ["{registry}:{port}" , "docker.io"]
-         * insecure_registries = ["{registry}:{port}"]
-         * plugin_dirs : "/opt/cni/bin" 추가
-         * (폐쇄망) pause_image : "k8s.gcr.io/pause:3.1" 을 "{registry}:{port}/k8s.gcr.io/pause:3.1" 로 변경
     * pid cgroup의 max pid limit 설정이 필요한 경우 pids_limit 개수를 수정한다. (default : pids_limit = 1024)
 	```bash
 	pids_limit = 2048

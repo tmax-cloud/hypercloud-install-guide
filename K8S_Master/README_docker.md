@@ -1,8 +1,9 @@
 
 # k8s-master 설치 가이드
+※ [듀얼 스택 클러스터 구축을 위한 k8s-master 설치 가이드](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/K8S_Master/README_dualstack.md)
 
 ## 구성 요소 및 버전
-* docker-ce (v19.03.12)
+* cri-o (v1.17.4)
 * kubeadm, kubelet, kubectl (v1.17.6)
 * k8s.gcr.io/kube-apiserver:v1.17.6
 * k8s.gcr.io/kube-proxy:v1.17.6
@@ -84,7 +85,7 @@
     * 위 내용은 2개이상의 마스터 구축시 마스터 1개에서만 진행한다.    
 ## Install Steps
 0. [환경 설정](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/K8S_Master#step0-%ED%99%98%EA%B2%BD-%EC%84%A4%EC%A0%95)
-1. [docker 설치]()
+1. [cri-o 설치](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/K8S_Master#step-1-cri-o-%EC%84%A4%EC%B9%98)
 2. [kubeadm, kubelet, kubectl 설치](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/K8S_Master#step-2-kubeadm-kubelet-kubectl-%EC%84%A4%EC%B9%98)
 3. [kubernetes cluster 구성](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/K8S_Master#step-3-kubernetes-cluster-%EA%B5%AC%EC%84%B1)
 3-1. [kubernetes cluster 구성(master 다중화)](https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/K8S_Master#step-3-1-kubernetes-cluster-%EB%8B%A4%EC%A4%91%ED%99%94-%EA%B5%AC%EC%84%B1%EC%9D%84-%EC%9C%84%ED%95%9C-keepalived-%EC%84%A4%EC%B9%98)
@@ -125,29 +126,17 @@
 	sudo setenforce 0
 	sudo sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 	```
-    * crio 사용 전 환경 설정
-	```bash
-	sudo modprobe overlay
-	sudo modprobe br_netfilter
-	
-	sudo cat << "EOF" | sudo tee -a /etc/sysctl.d/99-kubernetes-cri.conf
-	net.bridge.bridge-nf-call-iptables  = 1
-	net.ipv4.ip_forward                 = 1
-	net.bridge.bridge-nf-call-ip6tables = 1
-	EOF
-	
-	sudo sysctl --system
-	```
-## Step 1. cri-o 설치
+
+## Step 1. docker 설치
 * 목적 : `k8s container runtime 설치`
 * 순서 :
-    * cri-o를 설치한다.
-     * (폐쇄망) 아래 주소를 참조하여 패키지 레포를 등록 후 crio를 설치한다.
+    * docker를 설치한다.
+     * (폐쇄망) 아래 주소를 참조하여 패키지 레포를 등록 후 docker를 설치한다.
           * https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Package#step-1-local-repository-%EA%B5%AC%EC%B6%95
 	```bash
-	sudo yum -y install cri-o
-	sudo systemctl enable crio
-	sudo systemctl start crio
+	sudo yum -y install docker-ce
+	sudo systemctl enable docker
+	sudo systemctl start docker
 	```
      * (외부망) crio 버전 지정 및 레포를 등록 후 crio를 설치한다.
 	```bash
@@ -166,12 +155,7 @@
 	```
     ![image](figure/rpm.PNG)
 * 비고 :
-    * 추후 설치예정인 network plugin과 crio의 가상 인터페이스 충돌을 막기위해 cri-o의 default 인터페이스 설정을 제거한다.
-	```bash
-	sudo rm -rf  /etc/cni/net.d/100-crio-bridge.conf
- 	sudo rm -rf  /etc/cni/net.d/200-loopback.conf
-	``` 
-    * 폐쇄망 환경에서 private registry 접근을 위해 crio.conf 내용을 수정한다.
+    * 폐쇄망 환경에서 private registry 접근을 위해 daemon.json 내용을 수정한다.
     * insecure_registry, registries, plugin_dirs 내용을 수정한다.
       * sudo vi /etc/crio/crio.conf
          * registries = ["{registry}:{port}" , "docker.io"]
@@ -179,11 +163,9 @@
          * plugin_dirs : "/opt/cni/bin" 추가
          * (폐쇄망) pause_image : "k8s.gcr.io/pause:3.1" 을 "{registry}:{port}/k8s.gcr.io/pause:3.1" 로 변경
 	![image](figure/crio_config.PNG)
-    * pid cgroup의 max pid limit 설정이 필요한 경우 pids_limit 개수를 수정한다.
-      * default : pids_limit = 1024
-      * 시스템의 제한값인 `/proc/sys/kernel/pid_max`의 값 이하로 설정한다.
+    * pid cgroup의 max pid limit 설정이 필요한 경우 pids_limit 개수를 수정한다. (default : pids_limit = 1024)
 	```bash
-	pids_limit = 32768
+	pids_limit = 2048
 	```     
     * registries.conf 내용을 수정한다.
       * sudo vi /etc/containers/registries.conf

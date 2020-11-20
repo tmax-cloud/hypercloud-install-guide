@@ -113,6 +113,58 @@ function install_crio() {
 
 }
 
+function install_docker() {
+
+  echo  "========================================================================="
+  echo  "========================== start install docker ========================="
+  echo  "========================================================================="
+
+  #centos
+  if [[ ${os_check} == "\"CentOS Linux\"" ]]; then
+
+        # install docker
+        sudo yum install -y docker-ce
+        sudo systemctl start docker
+        sudo systemctl enable docker
+
+        # check docker
+        sudo systemctl status docker
+
+        # edit docker config
+	sudo cat << "EOF" | sudo tee -a /etc/docker/daemon.json
+	{
+        	"exec-opts": ["native.cgroupdriver=systemd"],
+        	"insecure-registries": ["{imageRegistry}"]
+	}
+EOF
+	sudo sed -i "s|{imageRegistry}|${imageRegistry}|g" /etc/docker/daemon.json
+	sudo sed -i 's/registry.fedoraproject.org/{imageRegistry}/g' /etc/containers/registries.conf 
+        sudo sed -i "s|{imageRegistry}|${imageRegistry}|g" /etc/containers/registries.conf
+	
+	sudo systemctl restart docker
+	
+  elif [[ ${os_check} = "\"Ubuntu\"" ]]; then
+
+        # install docker
+        sudo apt-get -y install docker
+        sudo systemctl enable docker.service
+        sudo systemctl start docker.service
+
+        # check docker
+        sudo systemctl status docker
+
+        # edit crio config
+        sudo systemctl restart docker
+
+  # others
+  else
+        sudo echo "This OS is not supported."
+        sudo exit 100
+  fi
+
+
+}
+
 function install_kube() {
 
   echo  "=========================================================================" 

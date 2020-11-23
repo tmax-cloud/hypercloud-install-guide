@@ -73,7 +73,6 @@
       * sudo vi /etc/docker/daemon.json
     ```bash
     {
-        "exec-opts": ["native.cgroupdriver=systemd"],
         "insecure-registries": ["{IP}:5000"]
     }
     ```

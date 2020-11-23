@@ -38,3 +38,7 @@
 	```
 * 비고 :
     * k8s.config, k8s_infra_installer.sh파일과 yaml 디렉토리는 같은 디렉토리 내에에 있어야 합니다.
+    * runtime을 docker로 사용하기 위해서는 아래 명령어로 설치한다.
+    	```bash
+        sudo ./k8s_infra_installer.sh up_docker
+	```

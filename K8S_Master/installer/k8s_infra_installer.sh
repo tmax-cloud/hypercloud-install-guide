@@ -110,7 +110,6 @@ function install_crio() {
         sudo exit 100
   fi
 
-
 }
 
 function install_docker() {
@@ -137,6 +136,21 @@ function install_docker() {
  "insecure-registries": ["{imageRegistry}"]
 }
 EOF
+        sudo rm -rf ${yaml_dir}/kubeadm-config.yaml
+        # edit kubeadm config
+        sudo cat << "EOF" | sudo tee -a ${yaml_dir}/kubeadm-config.yaml
+apiVersion: kubeadm.k8s.io/v1beta2
+kind: ClusterConfiguration
+kubernetesVersion: {k8sVersion}
+controlPlaneEndpoint: {apiServer}:6443
+imageRepository: {imageRegistry}/k8s.gcr.io
+networking:
+serviceSubnet: 10.96.0.0/16
+podSubnet: {podSubnet}
+apiServer:
+extraArgs:
+advertise-address: {apiServer}
+EOF
         sudo sed -i "s|{imageRegistry}|${imageRegistry}|g" /etc/docker/daemon.json
         sudo sed -i 's/registry.fedoraproject.org/{imageRegistry}/g' /etc/containers/registries.conf
         sudo sed -i "s|{imageRegistry}|${imageRegistry}|g" /etc/containers/registries.conf
@@ -162,66 +176,66 @@ EOF
 
 function install_kube() {
 
-  echo  "=========================================================================" 
+  echo  "========================================================================="
   echo  "=======================  start install kubernetes  ======================"
   echo  "========================================================================="
 
   #install kubernetes
   if [[ -z ${k8sVersion} ]]; then
-	k8sVersion=1.17.6
+        k8sVersion=1.17.6
   else
-	k8sVersion=${k8sVersion} 
+        k8sVersion=${k8sVersion}
   fi
 
   if [[ -z ${apiServer} ]]; then
-	apiServer=127.0.0.1
+        apiServer=127.0.0.1
   else
-    	apiServer=${apiServer} 
+        apiServer=${apiServer}
   fi
 
   if [[ -z ${podSubnet} ]]; then
-    	podSubnet=10.244.0.0/16
+        podSubnet=10.244.0.0/16
   else
-   	podSubnet=${podSubnet} 
+        podSubnet=${podSubnet}
   fi
 
   # centos
   if [[ ${os_check} == "\"CentOS Linux\"" ]]; then
 
-	#install kubernetes components
-	sudo yum install -y kubeadm-${k8sVersion}-0 kubelet-${k8sVersion}-0 kubectl-${k8sVersion}-0
-	sudo systemctl enable --now kubelet
+        #install kubernetes components
+        sudo yum install -y kubeadm-${k8sVersion}-0 kubelet-${k8sVersion}-0 kubectl-${k8sVersion}-0
+        sudo systemctl enable --now kubelet
   # ubuntu
   elif [[ ${os_check} = "\"Ubuntu\"" ]]; then
 
-	#install kubernetes components
-	sudo apt-get install -y kubeadm-${k8sVersion}-0 kubelet-${k8sVersion}-0 kubectl-${k8sVersion}-0
-	sudo systemctl enable kubelet
+        #install kubernetes components
+        sudo apt-get install -y kubeadm-${k8sVersion}-0 kubelet-${k8sVersion}-0 kubectl-${k8sVersion}-0
+        sudo systemctl enable kubelet
   # others
   else
         echo "This OS is not supported."
         exit 100
   fi
 
-  	sudo echo '1' > /proc/sys/net/ipv4/ip_forward
-  	sudo echo '1' > /proc/sys/net/bridge/bridge-nf-call-iptables
+        sudo echo '1' > /proc/sys/net/ipv4/ip_forward
+        sudo echo '1' > /proc/sys/net/bridge/bridge-nf-call-iptables
 
-  	#change kubeadm yaml
-  	sudo sed -i "s|{k8sVersion}|v${k8sVersion}|g" ${yaml_dir}/kubeadm-config.yaml
-  	sudo sed -i "s|{apiServer}|${apiServer}|g" ${yaml_dir}/kubeadm-config.yaml
-  	sudo sed -i "s|{podSubnet}|\"${podSubnet}\"|g" ${yaml_dir}/kubeadm-config.yaml
-	sudo sed -i "s|{imageRegistry}|${imageRegistry}|g" ${yaml_dir}/kubeadm-config.yaml
+        #change kubeadm yaml
+        sudo sed -i "s|{k8sVersion}|v${k8sVersion}|g" ${yaml_dir}/kubeadm-config.yaml
+        sudo sed -i "s|{apiServer}|${apiServer}|g" ${yaml_dir}/kubeadm-config.yaml
+        sudo sed -i "s|{podSubnet}|${podSubnet}|g" ${yaml_dir}/kubeadm-config.yaml
+        sudo sed -i "s|{imageRegistry}|${imageRegistry}|g" ${yaml_dir}/kubeadm-config.yaml
 
-  	# kube init
-  	sudo kubeadm init --config=${yaml_dir}/kubeadm-config.yaml --upload-certs
+        # kube init
+        sudo kubeadm init --config=${yaml_dir}/kubeadm-config.yaml --upload-certs
 
-  	mkdir -p $HOME/.kube
-  	sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-  	sudo chown $(id -u):$(id -g) $HOME/.kube/config
+        mkdir -p $HOME/.kube
+        sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+        sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
-  	echo  "========================================================================="
-  	echo  "======================  complete install kubernetes  ===================="
-  	echo  "========================================================================="
+        echo  "========================================================================="
+        echo  "======================  complete install kubernetes  ===================="
+        echo  "========================================================================="
 
 }
 
@@ -233,13 +247,13 @@ function uninstall() {
   sudo sed -i "s|${apiServer}|{apiServer}|g" ${yaml_dir}/kubeadm-config.yaml
   sudo sed -i "s|\"${podSubnet}\"|{podSubnet}|g" ${yaml_dir}/kubeadm-config.yaml
   sudo sed -i "s|${imageRegistry}|{imageRegistry}|g" ${yaml_dir}/kubeadm-config.yaml
-  
+
   sudo rm -rf $HOME/.kube
 
 }
 
 function main(){
-  
+
   case "${1:-}" in
   up)
     set_env
@@ -250,7 +264,7 @@ function main(){
     set_env
     install_docker
     install_kube
-    ;;    
+    ;;
   delete)
     uninstall
     ;;

@@ -147,11 +147,10 @@
     $ sudo systemctl start docker
     $ sudo systemctl enable docker
     ```
-    * 폐쇄망 환경에서 private registry 접근 및 cgroup 설정을 위해 daemon.json 내용을 수정한다.
+    * 폐쇄망 환경에서 private registry 접근을 위해 daemon.json 내용을 수정한다.
       * sudo vi /etc/docker/daemon.json
     ```bash
     {
-        "exec-opts": ["native.cgroupdriver=systemd"],
         "insecure-registries": ["{IP}:5000"]
     }
     ```
@@ -205,33 +204,25 @@
         * vi kubeadm-config.yaml
 	```bash
 	apiVersion: kubeadm.k8s.io/v1beta2
-	kind: InitConfiguration
-	localAPIEndpoint:
-  		advertiseAddress: {api server IP}
-  		bindPort: 6443
-	---
-	apiVersion: kubeadm.k8s.io/v1beta2
 	kind: ClusterConfiguration
-	kubernetesVersion: v1.17.6
-	controlPlaneEndpoint: {endpoint IP}:6443
-	imageRepository: {registry}/k8s.gcr.io
+	kubernetesVersion: {k8sVersion}
+	controlPlaneEndpoint: {apiServer}:6443
+	imageRepository: {imageRegistry}/k8s.gcr.io
 	networking:
- 		serviceSubnet: 10.96.0.0/16
-  		podSubnet: {POD_IP_POOL}/16
-	---
-	apiVersion: kubelet.config.k8s.io/v1beta1
-	kind: KubeletConfiguration
-	cgroupDriver: systemd
+		serviceSubnet: 10.96.0.0/16
+		podSubnet: {podSubnet}
+	apiServer:
+		extraArgs:
+		advertise-address: {apiServer}
 	```
       * kubernetesVersion : kubernetes version
-      * advertiseAddress : API server IP ( master IP )
+      * advertise-address : API server IP ( master IP )
         * 해당 master 노드의 IP
       * controlPlaneEndpoint : endpoint IP ( master IP or virtual IP) , port는 반드시 6443으로 설정
         * 1개의 마스터 : master IP , 2개 이상의 마스터 구축시 : virtual IP
       * serviceSubnet : "${SERVICE_IP_POOL}/${CIDR}"
       * podSubnet : "${POD_IP_POOL}/${CIDR}"
       * imageRepository : "${registry} / docker hub name"
-      * cgroupDriver: cgroup driver 설정
 
     * kubeadm init (2개 이상 마스터 구축시에는 아래 가이드 참조)
 	```bash

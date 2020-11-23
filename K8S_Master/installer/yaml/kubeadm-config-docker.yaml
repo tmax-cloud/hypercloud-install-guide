@@ -8,4 +8,4 @@ controlPlaneEndpoint: {apiServer}:6443
 imageRepository: {imageRegistry}/k8s.gcr.io
 networking:
   serviceSubnet: 10.96.0.0/16
-  podSubnet: 10.244.0.0/16
+  podSubnet: {podSubnet}/16

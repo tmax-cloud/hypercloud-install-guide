@@ -123,26 +123,26 @@ function install_docker() {
   if [[ ${os_check} == "\"CentOS Linux\"" ]]; then
 
         # install docker
-        sudo yum install -y docker-ce
+        sudo yum install -y docker
         sudo systemctl start docker
         sudo systemctl enable docker
 
         # check docker
         sudo systemctl status docker
+        sudo rm -rf /etc/docker/daemon.json
 
         # edit docker config
-	sudo cat << "EOF" | sudo tee -a /etc/docker/daemon.json
-	{
-        	"exec-opts": ["native.cgroupdriver=systemd"],
-        	"insecure-registries": ["{imageRegistry}"]
-	}
+        sudo cat << "EOF" | sudo tee -a /etc/docker/daemon.json
+{
+ "insecure-registries": ["{imageRegistry}"]
+}
 EOF
-	sudo sed -i "s|{imageRegistry}|${imageRegistry}|g" /etc/docker/daemon.json
-	sudo sed -i 's/registry.fedoraproject.org/{imageRegistry}/g' /etc/containers/registries.conf 
+        sudo sed -i "s|{imageRegistry}|${imageRegistry}|g" /etc/docker/daemon.json
+        sudo sed -i 's/registry.fedoraproject.org/{imageRegistry}/g' /etc/containers/registries.conf
         sudo sed -i "s|{imageRegistry}|${imageRegistry}|g" /etc/containers/registries.conf
-	
-	sudo systemctl restart docker
-	
+
+        sudo systemctl restart docker
+
   elif [[ ${os_check} = "\"Ubuntu\"" ]]; then
 
         # install docker
@@ -153,16 +153,11 @@ EOF
         # check docker
         sudo systemctl status docker
 
-        # edit crio config
-        sudo systemctl restart docker
-
   # others
   else
         sudo echo "This OS is not supported."
         sudo exit 100
   fi
-
-
 }
 
 function install_kube() {
@@ -251,6 +246,11 @@ function main(){
     install_crio
     install_kube
     ;;
+  up_docker)
+    set_env
+    install_docker
+    install_kube
+    ;;    
   delete)
     uninstall
     ;;
@@ -258,6 +258,7 @@ function main(){
     set +x
     echo " service list:" >&2
     echo "  $0 up" >&2
+    echo "  $0 up_docker" >&2
     echo "  $0 delete" >&2
     ;;
   esac

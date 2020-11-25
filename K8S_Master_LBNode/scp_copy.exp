@@ -21,6 +21,13 @@ set timeout 5;
 #        spawn scp $configfile $username@$hostname:/home/etc/$pkgname[0]/$configfile
 #}
 
+if {$pkgname == "keepalived"} {
+        spawn scp notify_action.sh $username@$hostname:/etc/$pkgname/
+        expect {
+          "password:" { send "$password\r"; exp_continue };
+        }
+}
+
 spawn scp $configfile $username@$hostname:/home/etc/$pkgname/$configfile
 #spawn scp $configfile $username@$hostname:/home/
 expect {

@@ -44,7 +44,7 @@
 ## Step.2 설치한 패키지 재시작
 * 목적 : `HAProxy와 Keepalived 재시작`
 * 순서 :
-        * 각 패키지의 설정파일에 Step0 에서 입력한 값들이 올바르게 설정되었는지 확인한다.
+	* 각 패키지의 설정파일에 Step0 에서 입력한 값들이 올바르게 설정되었는지 확인한다.
 	```bash
 	vi /etc/keepalived/keepalived.conf
 	vi /etc/haproxy/haproxy.cfg

@@ -6,7 +6,6 @@ set hostname [lindex $argv 2]
 set pkgname [lindex $argv 3]
 set timeout 5 
 
-
 if {[llength $argv] == 0} {
   send_user "Usage: scriptname username \'password\' hostname \n"
   exit 1

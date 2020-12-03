@@ -51,7 +51,6 @@
 3. [catalog manager 생성](#Step-3-catalog-manager-생성)
 4. [webhook 인증 키 생성](#Step-4-webhook-인증-키-생성)
 5. [catalog-webhook 생성](#Step-5-catalog-webhook-생성)
-6. [인증서 갱신 방법](#Step-6-인증서-갱신-방법)
 
 
 ## Step 1. 설치에 필요한 crd 생성
@@ -98,7 +97,24 @@
         - 비고: 각 파일에 image 항목이 있는 경우, registry주소의 이미지를 사용해야 합니다. (${REGISTRY}/quay.io/kubernetes-service-catalog/service-catalog:v${CATALOG_VERSION})
     - kubectl apply -f webhook-service.yaml ([파일](./yaml_install/webhook-service.yaml))
 
-## Step 6. 인증서 갱신 방법
+## 외부망 Install Steps
+1. [helm을 통한 CatalogController 설치](#Step-1-helm을-통한-CatalogController-설치)
+
+## Step 1. helm을 통한 CatalogController 설치
+- 목적 : `CatalogController 설치`
+- 생성 순서 : 
+    - CatalogController 차트 저장소를 로컬 저장소에 추가 합니다.
+      ```bash
+      helm repo add svc-cat https://svc-catalog-charts.storage.googleapis.com
+      ```
+
+    - 지정된 버전으로 CatalogController chart 설치 합니다.
+      ```bash
+      kubectl create namespace catalog
+      helm search service-catalog
+      helm install svc-cat/catalog --name catalog --version=<x.x.x> --namespace catalog
+
+## 인증서 갱신 방법
 - 목적 : `인증서 갱신`
 - 생성 순서 : Step4~5 과정과 동일 
             (Step4 인증서 재생성 후, Step5에서 사용했던 webhook-register.yaml 파일에 생성된 인증키 넣어 apply 하시면 됩니다.)
@@ -117,21 +133,3 @@
         - {{ b64enc $ca.Cert }} --> key0 내부 값으로 대체
         - {{ b64enc $cert.Cert }} --> cert 내부 값으로 대체
         - {{ b64enc $cert.Key }} --> key 내부 값으로 대체
-
-## 외부망 Install Steps
-1. [helm을 통한 CatalogController 설치](#Step-1-helm을-통한-CatalogController-설치)
-
-## Step 1. helm을 통한 CatalogController 설치
-- 목적 : `CatalogController 설치`
-- 생성 순서 : 
-    - CatalogController 차트 저장소를 로컬 저장소에 추가 합니다.
-      ```bash
-      helm repo add svc-cat https://svc-catalog-charts.storage.googleapis.com
-      ```
-
-    - 지정된 버전으로 CatalogController chart 설치 합니다.
-      ```bash
-      kubectl create namespace catalog
-      helm search service-catalog
-      helm install svc-cat/catalog --name catalog --version=<x.x.x> --namespace catalog
-

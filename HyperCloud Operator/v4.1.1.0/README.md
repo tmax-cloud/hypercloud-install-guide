@@ -157,3 +157,9 @@
 	```bash
 	$ kubectl apply -f ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/6.default-auth-object-init.yaml
 	```
+	
+## (참고) Registry Service 인증서 갱신 방법
+* 순서: 아래의 {REGISTRY_NAME}은 생성된 Registry의 metadata.name 값을 의미
+	1. `hpcd-{REGISTRY_NAME}` 이름의 secret 삭제
+	* 비고: spec.service.serviceType의 값이 Ingress로 생성된 경우 `hpcd-tls-{REGISTRY_NAME}` secret도 함께 삭제
+	2. `hpcd-registry-{REGISTRY_NAME}` 이름의 replicaset 삭제

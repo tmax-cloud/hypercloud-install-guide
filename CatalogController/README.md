@@ -101,7 +101,7 @@
 ## Step 6. 인증서 갱신 방법
 - 목적 : `인증서 갱신`
 - 생성 순서 : Step4~5 과정과 동일 
-            (Step4 인증서 재생성 후, Step5에서 사용했던 yaml파일에 생성된 인증키 넣어 apply 하시면 됩니다.)
+            (Step4 인증서 재생성 후, Step5에서 사용했던 webhook-register.yaml 파일에 생성된 인증키 넣어 apply 하시면 됩니다.)
     - openssl genrsa -out rootca.key 2048
     - openssl req -x509 -new -nodes -key rootca.key -sha256 -days 3650 -subj /C=KO/ST=None/L=None/O=None/CN=catalog-catalog-webhook -out rootca.crt
         - 비고: .rnd 파일이 없어서 해당 명령어 실행이 안되는 경우, /etc/ssl/openssl.cnf 파일의  "RANDFILE = $ENV::HOME/.rnd" 부분을 주석처리 합니다.
@@ -117,9 +117,6 @@
         - {{ b64enc $ca.Cert }} --> key0 내부 값으로 대체
         - {{ b64enc $cert.Cert }} --> cert 내부 값으로 대체
         - {{ b64enc $cert.Key }} --> key 내부 값으로 대체
-    - kubectl apply -f webhook-deployment.yaml ([파일](./yaml_install/webhook-deployment.yaml))
-        - 비고: 각 파일에 image 항목이 있는 경우, registry주소의 이미지를 사용해야 합니다. (${REGISTRY}/quay.io/kubernetes-service-catalog/service-catalog:v${CATALOG_VERSION})
-    - kubectl apply -f webhook-service.yaml ([파일](./yaml_install/webhook-service.yaml))
 
 ## 외부망 Install Steps
 1. [helm을 통한 CatalogController 설치](#Step-1-helm을-통한-CatalogController-설치)

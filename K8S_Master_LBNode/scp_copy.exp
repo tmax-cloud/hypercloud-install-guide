@@ -5,6 +5,15 @@ set password [lindex $argv 1]
 set hostname [lindex $argv 2]
 set pkgname [lindex $argv 3]
 set configfile [lindex $argv 4]
+set master1name [lindex $argv 5]
+set master2name [lindex $argv 6]
+set master3name [lindex $argv 7]
+set master1ip [lindex $argv 8]
+set master2ip [lindex $argv 9]
+set master3ip [lindex $argv 10]
+set lb1 [lindex $argv 11]
+set lb2 [lindex $argv 12]
+set vip [lindex $argv 13]
 #set pkgname {echo $configfile | awk -F'.' '{print $1, $2}'}
 
 if {[llength $argv] == 0} {
@@ -34,4 +43,6 @@ expect {
   "password:" { send "$password\r"; exp_continue };
   "*100\%" { send_user "\n\n#######################\n    Copy success  \n#######################\n\n"; exp_continue }
 }
+
+send 
 

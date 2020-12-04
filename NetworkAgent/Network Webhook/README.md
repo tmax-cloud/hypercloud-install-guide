@@ -93,3 +93,9 @@ Step 3. Network-hook 설치 확인
         network-hook-webhook-cfg   1          17h
     ```
     * network-hook-webhook-cfg가 생성되었는지 확인
+    
+## 인증서 갱신
+* Install Step의 step1, step2를 실행 후 Network-hook deployment rollout restart 실행
+```bash
+$  kubectl rollout restart deployment network-hook-deployment -n hypernet-local-agent-system 
+```

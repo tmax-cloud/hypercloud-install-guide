@@ -2,8 +2,8 @@
 * 본 가이드는 별도의 LBNode를 갖는 K8S 다중화 클러스터 구축을 위해 작성되었음.
 * 구축하려는 LBNode에 해당 파일들이 같은 디렉터리 내에 존재해야 함.
 ## 구성 요소 및 버전
-* Keepalived	v1.3.9	# LBNode에 설치
-* HA-Proxy	v1.8.8	# LBNode에 설치
+* Keepalived	v1.3.5	# LBNode에 설치
+* HA-Proxy	v1.5.18	# LBNode에 설치
 ## Install Steps
 0. 변수 설정
 1. HAProxy + Keepalived 설치

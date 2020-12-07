@@ -1,0 +1,39 @@
+#!/usr/bin/expect
+
+set username [lindex $argv 0]
+set password [lindex $argv 1]
+set hostname [lindex $argv 2]
+set pkgname [lindex $argv 3]
+set timeout 5 
+
+if {[llength $argv] == 0} {
+  send_user "Usage: scriptname username \'password\' hostname \n"
+  exit 1
+}
+send_user "\n\n#######################\n Try to connect server \n#######################\n\n"
+
+spawn ssh -o StrictHostKeyChecking=no $username@$hostname
+expect {
+  "password:" { send "$password\r"; exp_continue }
+  "Last login:" { send_user "\n\n#######################\n    SSH is success \n     Pkg checking    \n#######################\n\n"; exp_continue }
+}
+#expect -re "Last login:"
+#send_user "\n\n#######################\n    SSH is success \n     Pkg checking    \n#######################\n\n"
+
+send "sudo systemctl enable ${pkgname}\r\n"
+expect {
+  "password:" { send "$password\r"; exp_continue }
+  "Created symlink from" { send "sudo systemctl daemon-reload\r\n"; exp_continue }
+}
+
+send "sudo systemctl restart ${pkgname}\r\n"
+
+send "sudo systemctl status ${pkgname}\r\n"
+expect {
+  "Active: active (running)" { send_user "\n\n#######################\n Pkg Start Normal \n#######################\n\n"; exp_continue }
+}
+
+send_user "\n\n#######################\n         Done \n#######################\n\n"
+
+send "exit \r"
+expect eof

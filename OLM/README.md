@@ -2,7 +2,8 @@
 
 ## 구성 요소 및 버전
 * OLM: ([quay.io/operator-framework/olm:0.15.1](https://quay.io/repository/operator-framework/olm/manifest/sha256:2c389d2e380c842cbf542820ad4493249164302ddf0e699b0a37105d234e67ee))
-* Operator Registry: ([quay.io/operator-framework/configmap-operator-registry:v1.13.3](https://quay.io/repository/operator-framework/configmap-operator-registry/manifest/sha256:e8458dbd7cc7650f0e84bb55cb1f9f30937dd0b010377634ea75f6d9a4f6ee85))
+* Registry Configmap: ([quay.io/operator-framework/configmap-operator-registry:v1.13.3](https://quay.io/repository/operator-framework/configmap-operator-registry/manifest/sha256:e8458dbd7cc7650f0e84bb55cb1f9f30937dd0b010377634ea75f6d9a4f6ee85))
+* Catalog Registry ([quay.io/operator-framework/upstream-community-operators:latest](https://quay.io/repository/operator-framework/upstream-community-operators/manifest/sha256:abaa54d83d2825c7d2bc9367edbc1a3707df88e43ded36ff441398f23f030b6e))
 
 ## Prerequisites
 * git
@@ -21,15 +22,18 @@
     $ mkdir -p ~/olm-install
     $ export OLM_HOME=~/olm-install
     $ export OLM_VERSION=0.15.1
-    $ export REG_VERSION=v.13.3
+    $ export CFM_VERSION=v1.13.3
+    $ export REG_VERSION=latest
     $ cd $OLM_HOME
     ```
     * 외부 네트워크 통신이 가능한 환경에서 필요한 이미지를 다운받는다.
     ```bash
     $ sudo docker pull quay.io/operator-framework/olm:${OLM_VERSION}
     $ sudo docker save quay.io/operator-framework/olm:${OLM_VERSION} > olm_${OLM_VERSION}.tar
-    $ sudo docker pull quay.io/operator-framework/configmap-operator-registry:${REG_VERSION}
-    $ sudo docker save quay.io/operator-framework/configmap-operator-registry:${REG_VERSION} > registry_${REG_VERSION}.tar
+    $ sudo docker pull quay.io/operator-framework/configmap-operator-registry:${CFM_VERSION}
+    $ sudo docker save quay.io/operator-framework/configmap-operator-registry:${CFM_VERSION} > configmap_${CFM_VERSION}.tar
+    $ sudo docker pull quay.io/operator-framework/upstream-community-operators:${REG_VERSION}
+    $ sudo docker save quay.io/operator-framework/upstream-community-operators:${REG_VERSION} > registry_${REG_VERSION}.tar    
     ```
     * install yaml을 다운로드한다.
     ```bash
@@ -45,11 +49,35 @@
     
     $ sudo docker push ${REGISTRY}/operator-framework/olm:${OLM_VERSION}
     
-    $ sudo docker load < registry_${REG_VERSION}.tar
+    $ sudo docker load < configmap_${CFM_VERSION}.tar
     
-    $ sudo docker tag quay.io/operator-framework/configmap-operator-registry:${REG_VERSION} ${REGISTRY}/operator-framework/configmap-operator-registry:${REG_VERSION}
+    $ sudo docker tag quay.io/operator-framework/configmap-operator-registry:${CFM_VERSION} ${REGISTRY}/operator-framework/configmap-operator-registry:${CFM_VERSION}
     
-    $ sudo docker push ${REGISTRY}/operator-framework/configmap-operator-registry:${REG_VERSION}
+    $ sudo docker push ${REGISTRY}/operator-framework/configmap-operator-registry:${CFM_VERSION}
+    
+    $ sudo docker tag quay.io/operator-framework/upstream-community-operators:${REG_VERSION} ${REGISTRY}/operator-framework/upstream-community-operators:${REG_VERSION}
+    
+    $ sudo docker push ${REGISTRY}/operator-framework/upstream-community-operators:${REG_VERSION}
+    ```
+    
+3. 설치할 Operator 이미지를 폐쇄망에서 다운받기 위해 Custom Registry를 빌드한다. (e.g. Prometheus Operator 0.22) 
+    ```bash
+    $ cd private
+    
+    $ cp bin/* /bin/
+    
+    $ sed -i 's/{registry}/'${REGISTRY}'/g' catalog_build.sh
+    
+    $ sed -i 's/{registry}/'${REGISTRY}'/g' prom_0.22/prometheusoperator.0.22.2.clusterserviceversion.yaml
+    
+    $ sh catalog_build.sh
+    ```
+    
+4. Custom Registry를 폐쇄망 환경에 구성한다.
+    ```bash
+    $ sed -i 's/{registry}/'${REGISTRY}'/g' custom_catalogsource.yaml
+    
+    $ kubectl apply -f custom_catalogsource.yaml
     ```
 
 ## Install Steps
@@ -62,7 +90,8 @@
 * 생성 순서 : 아래의 command를 실행하여 사용하고자 하는 image 버전을 수정한다. ([02_olm.yaml](yaml/02_olm.yaml))
     ```bash
     $ sed -i 's/{olm_version}/'${OLM_VERSION}'/g' 02_olm.yaml
-    $ sed -i 's/{registry_version}/'${REGISTRY_VERSION}'/g' 02_olm.yaml
+    $ sed -i 's/{configmap_version}/'${CFM_VERSION}'/g' 02_olm.yaml
+    $ sed -i 's/{registry_version}/'${REG_VERSION}'/g' 02_olm.yaml
     ```
     
 * 비고 :

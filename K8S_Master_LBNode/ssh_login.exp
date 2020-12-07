@@ -1,0 +1,39 @@
+#!/usr/bin/expect
+
+set username [lindex $argv 0]
+set password [lindex $argv 1]
+set hostname [lindex $argv 2]
+set pkgname [lindex $argv 3]
+set timeout 5 
+
+
+if {[llength $argv] == 0} {
+  send_user "Usage: scriptname username \'password\' hostname \n"
+  exit 1
+}
+send_user "\n\n#######################\n Try to connect server \n#######################\n\n"
+
+spawn ssh -o StrictHostKeyChecking=no $username@$hostname
+expect {
+  "password:" { send "$password\r"; exp_continue }
+  "Last login:" { send_user "\n\n#######################\n    SSH is success \n     Pkg checking    \n#######################\n\n"; exp_continue }
+}
+#expect -re "Last login:"
+#send_user "\n\n#######################\n    SSH is success \n     Pkg checking    \n#######################\n\n"
+
+send "rpm -q ${pkgname}\r\n"
+expect {
+  "package ${pkgname} is not installed" { set timeout 20; send "yum install -y ${pkgname}\r\n"; expect { "Complete!"; exp_continue } }
+}
+
+set timeout 5;
+if {$pkgname == "keepalived"} {
+	send "cp -y /etc/$pkgname/$pkgname.conf /etc/$pkgname/$pkgname.conf_back\r\n"
+} elseif {$pkgname == "haproxy"} {
+        send "cp -y /etc/$pkgname/$pkgname.cfg /etc/$pkgname/$pkgname.cfg_back\r\n"
+}
+
+send_user "\n\n#######################\n         Done \n#######################\n\n"
+
+send "exit \r"
+expect eof

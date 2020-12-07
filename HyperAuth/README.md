@@ -96,7 +96,22 @@ LoadBalancer, NodePort type의 service 생성 가능
 ```
 * 비고 : 
     * Kubernetes Master가 다중화 된 경우, hyperauth.crt를 각 Master 노드들의 /etc/kubernetes/pki/hyperauth.crt 로 cp
-
+* 인증서 만료 됐을때
+    * 인증서 만료 확인 :  openssl x509 -in hyperauth.crt -noout -dates
+    * 인증서 재발급 및 secret 생성 적용
+```bash 
+    
+    // 10년 짜리 인증서 재발급
+    $ openssl req -newkey rsa:4096 -nodes -sha256 -keyout hyperauth.key -x509 -subj "/C=KR/ST=Seoul/O=tmax/CN=$(kubectl describe service hyperauth -n hyperauth | grep 'LoadBalancer Ingress' | cut -d ' ' -f7)" -days 3650 -config <(cat /etc/ssl/openssl.cnf <(printf "[v3_ca]\nsubjectAltName=IP:$(kubectl describe service hyperauth -n hyperauth | grep 'LoadBalancer Ingress' | cut -d ' ' -f7)")) -out hyperauth.crt
+    $ CentOS의 경우 : openssl req -newkey rsa:4096 -nodes -sha256 -keyout hyperauth.key -x509 -subj "/C=KR/ST=Seoul/O=tmax/CN=(kubectl describe service hyperauth -n hyperauth | grep 'LoadBalancer Ingress' | cut -d ' ' -f7)" -days 3650 -config <(cat /etc/pki/tls/openssl.cnf <(printf "[v3_ca]\nsubjectAltName=IP:$(kubectl describe service hyperauth -n hyperauth | grep 'LoadBalancer Ingress' | cut -d ' ' -f7)")) -out hyperauth.crt
+   
+    // hyperauth-https-secret-renewed 라는 이름으로 secret을 새롭게 만든다.
+    $ kubectl create secret tls hyperauth-https-secret-renewed --cert=./hyperauth.crt --key=./hyperauth.key -n hyperauth
+    $ cp hyperauth.crt /etc/kubernetes/pki/hyperauth.crt
+    
+    // hyperauth deploy의 mount secret 이름을 바꾼다.
+    $ kubectl patch deployment hyperauth -n hyperauth --patch '{"spec":{"template":{"spec":{"volumes":[{"name":"ssl","secret":{"secretName":"hyperauth-https-secret-renewed"}}]}}}}'
+``` 
 
 ## Step 3. HyperAuth Deployment 배포
 * 목적 : `HyperAuth 설치`

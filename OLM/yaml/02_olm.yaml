@@ -128,7 +128,7 @@ spec:
           args:
           - '-namespace'
           - olm
-          - -configmapServerImage=quay.io/operator-framework/configmap-operator-registry:{regisry_version}
+          - -configmapServerImage=quay.io/operator-framework/configmap-operator-registry:{configmap_version}
           - -util-image
           -  quay.io/operator-framework/olm:{olm_version}
           image: quay.io/operator-framework/olm:{olm_version}
@@ -342,6 +342,6 @@ metadata:
   namespace: olm
 spec:
   sourceType: grpc
-  image: quay.io/operator-framework/upstream-community-operators:latest
+  image: quay.io/operator-framework/upstream-community-operators:{registry_version}
   displayName: Community Operators
   publisher: OperatorHub.io

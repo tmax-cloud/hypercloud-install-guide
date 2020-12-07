@@ -1,0 +1,48 @@
+#!/usr/bin/expect
+
+set username [lindex $argv 0]
+set password [lindex $argv 1]
+set hostname [lindex $argv 2]
+set pkgname [lindex $argv 3]
+set configfile [lindex $argv 4]
+set master1name [lindex $argv 5]
+set master2name [lindex $argv 6]
+set master3name [lindex $argv 7]
+set master1ip [lindex $argv 8]
+set master2ip [lindex $argv 9]
+set master3ip [lindex $argv 10]
+set lb1 [lindex $argv 11]
+set lb2 [lindex $argv 12]
+set vip [lindex $argv 13]
+#set pkgname {echo $configfile | awk -F'.' '{print $1, $2}'}
+
+if {[llength $argv] == 0} {
+  send_user "Usage: scriptname username \'password\' hostname \n"
+  exit 1
+}
+send_user "\n\n#######################\n Trying to transfer files \n#######################\n\n"
+
+set timeout 5;
+#split($configfile, arr, ".");
+#if {$pkgname[0] == "keepalived"} {
+#        spawn scp $configfile $username@$hostname:/home/etc/$pkgname[0]/$configfile
+#} elseif {$pkgname[0] == "haproxy"} {
+#        spawn scp $configfile $username@$hostname:/home/etc/$pkgname[0]/$configfile
+#}
+
+if {$pkgname == "keepalived"} {
+        spawn scp notify_action.sh $username@$hostname:/etc/$pkgname/
+        expect {
+          "password:" { send "$password\r"; exp_continue };
+        }
+}
+
+spawn scp $configfile $username@$hostname:/home/etc/$pkgname/$configfile
+#spawn scp $configfile $username@$hostname:/home/
+expect {
+  "password:" { send "$password\r"; exp_continue };
+  "*100\%" { send_user "\n\n#######################\n    Copy success  \n#######################\n\n"; exp_continue }
+}
+
+send 
+

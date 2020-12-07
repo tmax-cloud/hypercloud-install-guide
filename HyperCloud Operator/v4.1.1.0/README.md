@@ -87,7 +87,7 @@
 3. [2.mysql-settings.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/v4.1.1.0/README.md#step-3-2mysql-settingsyaml-%EC%8B%A4%ED%96%89)
 4. [3.mysql-create.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/v4.1.1.0/README.md#step-4-3mysql-createyaml-%EC%8B%A4%ED%96%89)
 5. [4.hypercloud4-operator.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/v4.1.1.0/README.md#step-5-4hypercloud4-operatoryaml-%EC%8B%A4%ED%96%89)
-
+6. [6.default-auth-object-init.yaml 실행](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/HyperCloud%20Operator/v4.1.1.0/README.md#step-6-6default-auth-object-inityaml-%EC%8B%A4%ED%96%89)
 
 ## Step 0. install  yaml 수정
 * 목적 : `hypercloud-operator install yaml파일 내용 수정`
@@ -150,3 +150,16 @@
 	```bash
 	$ kubectl apply -f ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/4.hypercloud4-operator.yaml
 	```
+	
+## Step 6. 6.default-auth-object-init.yaml 실행
+* 목적: `admin ClusterRoleBinding 및 namespace-owner, namespace-user, clusterrole-trial, clusterrole-new-user, namespace-listget ClusterRole 생성`
+* 실행: 
+	```bash
+	$ kubectl apply -f ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/6.default-auth-object-init.yaml
+	```
+	
+## (참고) Registry Service 인증서 갱신 방법
+* 순서: 아래의 {REGISTRY_NAME}은 생성된 Registry의 metadata.name 값을 의미
+	1) `hpcd-{REGISTRY_NAME}` 이름의 secret 삭제
+		* 비고: spec.service.serviceType의 값이 Ingress로 생성된 경우 `hpcd-tls-{REGISTRY_NAME}` secret도 함께 삭제
+	2) `hpcd-registry-{REGISTRY_NAME}` 이름의 replicaset 삭제

@@ -2,13 +2,13 @@
   "id": "tmax",
   "realm": "tmax",
   "displayName": "tmax",
-  "notBefore": 1602720991,
+  "notBefore": 1607573241,
   "revokeRefreshToken": false,
   "refreshTokenMaxReuse": 0,
   "accessTokenLifespan": 300,
   "accessTokenLifespanForImplicitFlow": 900,
   "ssoSessionIdleTimeout": 1800,
-  "ssoSessionMaxLifespan": 36000,
+  "ssoSessionMaxLifespan": 2592000,
   "ssoSessionIdleTimeoutRememberMe": 0,
   "ssoSessionMaxLifespanRememberMe": 0,
   "offlineSessionIdleTimeout": 2592000,
@@ -16,6 +16,8 @@
   "offlineSessionMaxLifespan": 5184000,
   "clientSessionIdleTimeout": 0,
   "clientSessionMaxLifespan": 0,
+  "clientOfflineSessionIdleTimeout": 0,
+  "clientOfflineSessionMaxLifespan": 0,
   "accessCodeLifespan": 60,
   "accessCodeLifespanUserAction": 300,
   "accessCodeLifespanLogin": 1800,
@@ -32,7 +34,7 @@
   "resetPasswordAllowed": true,
   "editUsernameAllowed": false,
   "bruteForceProtected": true,
-  "permanentLockout": false,
+  "permanentLockout": true,
   "maxFailureWaitSeconds": 900,
   "minimumQuickLoginWaitSeconds": 60,
   "waitIncrementSeconds": 60,
@@ -62,14 +64,6 @@
         "id": "d449e9d4-b460-4ff4-b557-265f02683320",
         "name": "uma_authorization",
         "description": "${role_uma_authorization}",
-        "composite": false,
-        "clientRole": false,
-        "containerId": "tmax",
-        "attributes": {}
-      },
-      {
-        "id": "21b13295-61d1-436a-9ccf-9ec1c0bfdd3f",
-        "name": "test",
         "composite": false,
         "clientRole": false,
         "containerId": "tmax",
@@ -166,16 +160,6 @@
       }
     ],
     "client": {
-      "gatekeeper": [
-        {
-          "id": "74fd8dc5-c7ba-48cf-a38c-e09bf9d1509e",
-          "name": "uma_protection",
-          "composite": false,
-          "clientRole": true,
-          "containerId": "fe8716c3-728c-4d78-9a91-cc31176a01bf",
-          "attributes": {}
-        }
-      ],
       "console": [],
       "realm-management": [
         {
@@ -389,9 +373,8 @@
           "attributes": {}
         }
       ],
-      "kiali": [],
+      "appauth-test": [],
       "security-admin-console": [],
-      "admin-cli": [],
       "hypercloud4": [
         {
           "id": "f243fe37-24ad-4a5c-b42a-e3e7c67a8baf",
@@ -402,7 +385,6 @@
           "attributes": {}
         }
       ],
-      "notebook-gatekeeper": [],
       "account-console": [],
       "broker": [
         {
@@ -415,6 +397,22 @@
           "attributes": {}
         }
       ],
+      "tmaxcloud": [],
+      "gatekeeper": [
+        {
+          "id": "74fd8dc5-c7ba-48cf-a38c-e09bf9d1509e",
+          "name": "uma_protection",
+          "composite": false,
+          "clientRole": true,
+          "containerId": "fe8716c3-728c-4d78-9a91-cc31176a01bf",
+          "attributes": {}
+        }
+      ],
+      "hmt-test": [],
+      "kiali": [],
+      "admin-cli": [],
+      "hm-mobile-test": [],
+      "multicluster": [],
       "account": [
         {
           "id": "4066be6a-bebb-4441-b1cd-e580b81dc207",
@@ -484,8 +482,7 @@
           "containerId": "b48941f1-5c5e-4eae-854c-6057385d8772",
           "attributes": {}
         }
-      ],
-      "tmaxcloud": []
+      ]
     }
   },
   "groups": [
@@ -512,15 +509,6 @@
       "subGroups": []
     },
     {
-      "id": "20be74a8-e8fd-43df-bb35-c3b3c42ad91d",
-      "name": "nodejs",
-      "path": "/nodejs",
-      "attributes": {},
-      "realmRoles": [],
-      "clientRoles": {},
-      "subGroups": []
-    },
-    {
       "id": "fd8e1606-6daf-46a7-84b0-2e5e2320fcbf",
       "name": "tmaxcloud",
       "path": "/tmaxcloud",
@@ -537,7 +525,7 @@
   "requiredCredentials": [
     "password"
   ],
-  "passwordPolicy": "specialChars(1) and upperCase(1) and lowerCase(1) and length(9) and digits(1)",
+  "passwordPolicy": "specialChars(1) and upperCase(1) and lowerCase(1) and digits(1) and length(9)",
   "otpPolicyType": "totp",
   "otpPolicyAlgorithm": "HmacSHA1",
   "otpPolicyInitialCounter": 0,
@@ -696,9 +684,7 @@
       "redirectUris": [
         "/realms/tmax/account/*"
       ],
-      "webOrigins": [
-        ""
-      ],
+      "webOrigins": [],
       "notBefore": 0,
       "bearerOnly": false,
       "consentRequired": false,
@@ -762,9 +748,7 @@
       "clientAuthenticatorType": "client-secret",
       "secret": "**********",
       "redirectUris": [],
-      "webOrigins": [
-        ""
-      ],
+      "webOrigins": [],
       "notBefore": 0,
       "bearerOnly": false,
       "consentRequired": false,
@@ -798,6 +782,64 @@
         "role_list",
         "profile",
         "roles",
+        "email"
+      ],
+      "optionalClientScopes": [
+        "address",
+        "phone",
+        "offline_access",
+        "microprofile-jwt"
+      ]
+    },
+    {
+      "id": "31c1b395-9385-4707-b9ba-0334c01d8d6f",
+      "clientId": "appauth-test",
+      "rootUrl": "",
+      "baseUrl": "",
+      "surrogateAuthRequired": false,
+      "enabled": true,
+      "alwaysDisplayInConsole": false,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "**********",
+      "redirectUris": [
+        "",
+        "*"
+      ],
+      "webOrigins": [],
+      "notBefore": 0,
+      "bearerOnly": false,
+      "consentRequired": false,
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": true,
+      "serviceAccountsEnabled": false,
+      "publicClient": true,
+      "frontchannelLogout": false,
+      "protocol": "openid-connect",
+      "attributes": {
+        "saml.assertion.signature": "false",
+        "saml.multivalued.roles": "false",
+        "saml.force.post.binding": "false",
+        "saml.encrypt": "false",
+        "login_theme": "tmax",
+        "saml.server.signature": "false",
+        "saml.server.signature.keyinfo.ext": "false",
+        "exclude.session.state.from.auth.response": "false",
+        "saml_force_name_id_format": "false",
+        "saml.client.signature": "false",
+        "tls.client.certificate.bound.access.tokens": "false",
+        "saml.authnstatement": "false",
+        "display.on.consent.screen": "false",
+        "saml.onetimeuse.condition": "false"
+      },
+      "authenticationFlowBindingOverrides": {},
+      "fullScopeAllowed": true,
+      "nodeReRegistrationTimeout": -1,
+      "defaultClientScopes": [
+        "web-origins",
+        "role_list",
+        "roles",
+        "profile",
         "email"
       ],
       "optionalClientScopes": [
@@ -1012,6 +1054,164 @@
       ]
     },
     {
+      "id": "437755e7-eac0-402d-adcc-e857eecaab7c",
+      "clientId": "hm-mobile-test",
+      "name": "hm-mobile-test",
+      "description": "hypermeeting mobile test",
+      "rootUrl": "",
+      "adminUrl": "",
+      "surrogateAuthRequired": false,
+      "enabled": true,
+      "alwaysDisplayInConsole": false,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "**********",
+      "redirectUris": [
+        "tmax://hypermeeting.biz/*",
+        "https://192.168.8.69"
+      ],
+      "webOrigins": [
+        "tmax://hypermeeting.biz/*",
+        "https://192.168.8.69"
+      ],
+      "notBefore": 0,
+      "bearerOnly": false,
+      "consentRequired": false,
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": true,
+      "serviceAccountsEnabled": false,
+      "publicClient": true,
+      "frontchannelLogout": false,
+      "protocol": "openid-connect",
+      "attributes": {
+        "saml.assertion.signature": "false",
+        "access.token.lifespan": "1200",
+        "saml.multivalued.roles": "false",
+        "saml.force.post.binding": "false",
+        "saml.encrypt": "false",
+        "login_theme": "tmax",
+        "saml.server.signature": "false",
+        "saml.server.signature.keyinfo.ext": "false",
+        "exclude.session.state.from.auth.response": "false",
+        "saml_force_name_id_format": "false",
+        "saml.client.signature": "false",
+        "tls.client.certificate.bound.access.tokens": "false",
+        "saml.authnstatement": "false",
+        "display.on.consent.screen": "false",
+        "client.session.max.lifespan": "604800",
+        "client.session.idle.timeout": "604800",
+        "saml.onetimeuse.condition": "false"
+      },
+      "authenticationFlowBindingOverrides": {},
+      "fullScopeAllowed": true,
+      "nodeReRegistrationTimeout": -1,
+      "defaultClientScopes": [
+        "web-origins",
+        "role_list",
+        "roles",
+        "profile",
+        "isAdmin",
+        "email"
+      ],
+      "optionalClientScopes": [
+        "address",
+        "phone",
+        "offline_access",
+        "microprofile-jwt"
+      ]
+    },
+    {
+      "id": "9c0f68f3-ece9-4d6e-911f-aaee5d8c584b",
+      "clientId": "hmt-test",
+      "name": "hmt-test",
+      "description": "hypermeetin login test",
+      "rootUrl": "https://192.168.8.83:3003",
+      "adminUrl": "https://192.168.8.84:3004/auth/hyperAuth",
+      "baseUrl": "",
+      "surrogateAuthRequired": false,
+      "enabled": true,
+      "alwaysDisplayInConsole": false,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "**********",
+      "redirectUris": [
+        "https://192.168.8.69/*",
+        "https://localhost:3003/*",
+        "https://192.168.0.*",
+        "https://192.168.8.*"
+      ],
+      "webOrigins": [
+        "https://localhost:3003",
+        "https://192.168.8.134:13004",
+        "https://localhost:3004",
+        "https://192.168.8.69:9443",
+        "https://192.168.8.85:3003",
+        "https://192.168.8.69",
+        "https://192.168.8.83:3004",
+        "https://192.168.8.83:3003",
+        "https://192.168.8.85"
+      ],
+      "notBefore": 0,
+      "bearerOnly": false,
+      "consentRequired": false,
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": true,
+      "serviceAccountsEnabled": false,
+      "publicClient": true,
+      "frontchannelLogout": false,
+      "protocol": "openid-connect",
+      "attributes": {
+        "saml.assertion.signature": "false",
+        "saml.multivalued.roles": "false",
+        "saml.force.post.binding": "false",
+        "saml.encrypt": "false",
+        "saml.server.signature": "false",
+        "saml.server.signature.keyinfo.ext": "false",
+        "exclude.session.state.from.auth.response": "false",
+        "saml_force_name_id_format": "false",
+        "saml.client.signature": "false",
+        "tls.client.certificate.bound.access.tokens": "false",
+        "saml.authnstatement": "false",
+        "display.on.consent.screen": "false",
+        "pkce.code.challenge.method": "",
+        "saml.onetimeuse.condition": "false"
+      },
+      "authenticationFlowBindingOverrides": {},
+      "fullScopeAllowed": true,
+      "nodeReRegistrationTimeout": -1,
+      "protocolMappers": [
+        {
+          "id": "b7255eb9-989e-447c-bd7d-765d440ddfb2",
+          "name": "user_name",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-attribute-mapper",
+          "consentRequired": false,
+          "config": {
+            "userinfo.token.claim": "true",
+            "user.attribute": "user_name",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "user_name",
+            "jsonType.label": "String"
+          }
+        }
+      ],
+      "defaultClientScopes": [
+        "web-origins",
+        "hyperTest",
+        "role_list",
+        "profile",
+        "roles",
+        "email"
+      ],
+      "optionalClientScopes": [
+        "address",
+        "phone",
+        "offline_access",
+        "microprofile-jwt"
+      ]
+    },
+    {
       "id": "8e0f17ee-fd09-4da2-9b4f-270e49dc0e6c",
       "clientId": "hypercloud4",
       "name": "hypercloud4",
@@ -1026,13 +1226,27 @@
       "secret": "**********",
       "redirectUris": [
         "https://172.22.6.14/*",
+        "https://172.27.168.213:9001/*",
+        "https://172.31.*",
+        "https://172.31.153.142:9000/*",
+        "https://172.24.52.7:9000/*",
+        "https://192.168.6.*",
+        "https://192.168.8.*",
+        "http://192.168.8.25/complete.html",
+        "https://172.24.61.7:9001/*",
+        "http://172.24.57.243:9002/*",
+        "https://172.27.166.104:9000/*",
         "https://172.22.6.14/kiali/*",
+        "https://172.18.160.56:9000/*",
+        "http://172.18.124.172:9002/*",
         "https://192.168.6.125:9000/*",
         "http://192.168.8.*",
-        "https://192.168.8.*",
+        "https://172.17.218.71:9000/*",
         "https://172.22.1.12/*",
-        "http://192.168.8.25/complete.html",
-        "https://172.22.6.2:31304/*"
+        "https://172.24.62.101:19002/*",
+        "https://172.22.6.2:31304/*",
+        "https://172.23.128.1:9000/*",
+        "http://172.24.63.121:9002/*"
       ],
       "webOrigins": [
         "*"
@@ -1041,7 +1255,7 @@
       "bearerOnly": false,
       "consentRequired": false,
       "standardFlowEnabled": true,
-      "implicitFlowEnabled": true,
+      "implicitFlowEnabled": false,
       "directAccessGrantsEnabled": true,
       "serviceAccountsEnabled": false,
       "publicClient": true,
@@ -1049,20 +1263,20 @@
       "protocol": "openid-connect",
       "attributes": {
         "saml.assertion.signature": "false",
-        "access.token.lifespan": "3600",
+        "access.token.lifespan": "86400",
         "saml.multivalued.roles": "false",
         "saml.force.post.binding": "false",
         "saml.encrypt": "false",
-        "login_theme": "hypercloud",
+        "login_theme": "tmax",
         "saml.server.signature": "false",
         "saml.server.signature.keyinfo.ext": "false",
         "exclude.session.state.from.auth.response": "false",
-        "consent.screen.text": "",
+        "consent.screen.text": "test",
         "saml_force_name_id_format": "false",
         "saml.client.signature": "false",
         "tls.client.certificate.bound.access.tokens": "false",
         "saml.authnstatement": "false",
-        "display.on.consent.screen": "false",
+        "display.on.consent.screen": "true",
         "saml.onetimeuse.condition": "false"
       },
       "authenticationFlowBindingOverrides": {},
@@ -1140,13 +1354,31 @@
             "claim.name": "banlist",
             "jsonType.label": "String"
           }
+        },
+        {
+          "id": "e5c69efe-d708-456e-9b11-94a77238f118",
+          "name": "testmapper",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-attribute-mapper",
+          "consentRequired": false,
+          "config": {
+            "userinfo.token.claim": "true",
+            "user.attribute": "hypertest",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "hypertest",
+            "jsonType.label": "String"
+          }
         }
       ],
       "defaultClientScopes": [
         "web-origins",
+        "registry",
+        "kubernetes",
         "role_list",
-        "profile",
         "roles",
+        "profile",
+        "isAdmin",
         "email",
         "group"
       ],
@@ -1207,8 +1439,8 @@
       "nodeReRegistrationTimeout": -1,
       "defaultClientScopes": [
         "web-origins",
+        "kubernetes",
         "role_list",
-        "kiali",
         "profile",
         "roles",
         "email"
@@ -1221,15 +1453,30 @@
       ]
     },
     {
-      "id": "858cec17-d52d-4aba-a8b4-49ee72640b70",
-      "clientId": "notebook-gatekeeper",
+      "id": "df1849ff-4251-4348-844e-70472de85808",
+      "clientId": "multicluster",
+      "name": "multicluster",
+      "description": "multicluster test",
+      "rootUrl": "",
+      "baseUrl": "",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "secret": "**********",
-      "redirectUris": [],
-      "webOrigins": [],
+      "redirectUris": [
+        "https://172.22.61.219:9000/*",
+        "https://192.168.8.28:9000/*",
+        "https://172.27.166.104:9000/*",
+        "https://192.168.8.21:9000/*",
+        "https://172.24.61.7:9000/*",
+        "https://172.18.160.56:9000/*",
+        "https://172.27.168.213:9000/*",
+        "https://172.22.27.123:9000/*"
+      ],
+      "webOrigins": [
+        "*"
+      ],
       "notBefore": 0,
       "bearerOnly": false,
       "consentRequired": false,
@@ -1240,15 +1487,32 @@
       "publicClient": true,
       "frontchannelLogout": false,
       "protocol": "openid-connect",
-      "attributes": {},
+      "attributes": {
+        "saml.assertion.signature": "false",
+        "access.token.lifespan": "3600",
+        "saml.multivalued.roles": "false",
+        "saml.force.post.binding": "false",
+        "saml.encrypt": "false",
+        "login_theme": "tmax",
+        "saml.server.signature": "false",
+        "saml.server.signature.keyinfo.ext": "false",
+        "exclude.session.state.from.auth.response": "false",
+        "saml_force_name_id_format": "false",
+        "saml.client.signature": "false",
+        "tls.client.certificate.bound.access.tokens": "false",
+        "saml.authnstatement": "false",
+        "display.on.consent.screen": "false",
+        "saml.onetimeuse.condition": "false"
+      },
       "authenticationFlowBindingOverrides": {},
       "fullScopeAllowed": true,
       "nodeReRegistrationTimeout": -1,
       "defaultClientScopes": [
         "web-origins",
         "role_list",
-        "profile",
         "roles",
+        "profile",
+        "isAdmin",
         "email"
       ],
       "optionalClientScopes": [
@@ -1388,8 +1652,15 @@
       "clientAuthenticatorType": "client-secret",
       "secret": "**********",
       "redirectUris": [
+        "",
+        "https://portal.tmaxcloud.ck2/*",
+        "http://192.168.8.36/tmaxcloud/",
+        "https://172.23.0.11/*",
         "http://192.168.8.*",
-        "https://192.168.8.*"
+        "https://192.168.8.*",
+        "https://172.21.4.2:31306/*",
+        "https://172.17.217.181:9000/*",
+        "https://localhost:8080/*"
       ],
       "webOrigins": [
         "*"
@@ -1406,7 +1677,7 @@
       "protocol": "openid-connect",
       "attributes": {
         "saml.assertion.signature": "false",
-        "access.token.lifespan": "60",
+        "access.token.lifespan": "3600",
         "saml.multivalued.roles": "false",
         "saml.force.post.binding": "false",
         "saml.encrypt": "false",
@@ -1426,6 +1697,7 @@
       "nodeReRegistrationTimeout": -1,
       "defaultClientScopes": [
         "web-origins",
+        "kubernetes",
         "role_list",
         "profile",
         "roles",
@@ -1441,9 +1713,8 @@
   ],
   "clientScopes": [
     {
-      "id": "e3c8665e-4da4-41ca-9277-58fa2ff1ed52",
-      "name": "kiali",
-      "description": "kiali",
+      "id": "d7cea834-badd-4eeb-aa28-0604421d66d0",
+      "name": "hyperTest",
       "protocol": "openid-connect",
       "attributes": {
         "include.in.token.scope": "true",
@@ -1451,15 +1722,45 @@
       },
       "protocolMappers": [
         {
-          "id": "b9fa2ea1-6a72-4b78-8873-00a449e955c6",
-          "name": "kiali-kubernetes",
+          "id": "b4e59725-eed1-4cb9-99d3-37fdb638d545",
+          "name": "hyperTestAudience",
           "protocol": "openid-connect",
           "protocolMapper": "oidc-audience-mapper",
           "consentRequired": false,
           "config": {
-            "included.client.audience": "hypercloud4",
-            "id.token.claim": "true",
+            "included.client.audience": "hmt_test4",
+            "id.token.claim": "false",
             "access.token.claim": "true"
+          }
+        },
+        {
+          "id": "79764c89-17ac-47bf-a3e1-e5a8ca83b27b",
+          "name": "hypertest",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-attribute-mapper",
+          "consentRequired": false,
+          "config": {
+            "userinfo.token.claim": "false",
+            "user.attribute": "hypertest",
+            "id.token.claim": "false",
+            "access.token.claim": "true",
+            "claim.name": "hypertest",
+            "jsonType.label": "String"
+          }
+        },
+        {
+          "id": "8219f77e-b1a0-4dc8-952b-00785c05f4f5",
+          "name": "userrole",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-client-role-mapper",
+          "consentRequired": false,
+          "config": {
+            "multivalued": "true",
+            "userinfo.token.claim": "true",
+            "id.token.claim": "false",
+            "access.token.claim": "true",
+            "jsonType.label": "int",
+            "usermodel.clientRoleMapping.clientId": "hmt-test"
           }
         }
       ]
@@ -1777,6 +2078,34 @@
       ]
     },
     {
+      "id": "e6b496cb-caef-4e73-9ff3-78d181d409af",
+      "name": "isAdmin",
+      "description": "token claim for verify if isAmin of certain group",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "true",
+        "display.on.consent.screen": "true",
+        "consent.screen.text": "isAdmin"
+      },
+      "protocolMappers": [
+        {
+          "id": "395c5897-3358-4fe5-8c28-54b4dd4f4a76",
+          "name": "isAdmin",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-attribute-mapper",
+          "consentRequired": false,
+          "config": {
+            "userinfo.token.claim": "true",
+            "user.attribute": "isAdmin",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "isAdmin",
+            "jsonType.label": "String"
+          }
+        }
+      ]
+    },
+    {
       "id": "b0ea264d-ebe8-48c1-8f64-0d86dbfcd5bf",
       "name": "address",
       "description": "OpenID Connect built-in scope: address",
@@ -1900,6 +2229,30 @@
       ]
     },
     {
+      "id": "e3c8665e-4da4-41ca-9277-58fa2ff1ed52",
+      "name": "kubernetes",
+      "description": "Must Add this for kubernetes Call",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "true",
+        "display.on.consent.screen": "true"
+      },
+      "protocolMappers": [
+        {
+          "id": "b9fa2ea1-6a72-4b78-8873-00a449e955c6",
+          "name": "kiali-kubernetes",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "consentRequired": false,
+          "config": {
+            "included.client.audience": "hypercloud4",
+            "id.token.claim": "true",
+            "access.token.claim": "true"
+          }
+        }
+      ]
+    },
+    {
       "id": "72decb8c-2519-401b-b3c0-e16566dbc789",
       "name": "web-origins",
       "description": "OpenID Connect scope for add allowed web origins to the access token",
@@ -1963,6 +2316,33 @@
       ]
     },
     {
+      "id": "de7d554f-7749-414c-908f-b8417cfb85bc",
+      "name": "registry",
+      "description": "yunsukhee",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "true",
+        "display.on.consent.screen": "true"
+      },
+      "protocolMappers": [
+        {
+          "id": "d4c5edd6-e134-48d0-b17d-14d6b3a0262d",
+          "name": "registryAuth",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-attribute-mapper",
+          "consentRequired": false,
+          "config": {
+            "userinfo.token.claim": "true",
+            "user.attribute": "registryAuth",
+            "id.token.claim": "false",
+            "access.token.claim": "true",
+            "claim.name": "registryAuth",
+            "jsonType.label": "String"
+          }
+        }
+      ]
+    },
+    {
       "id": "173595e9-5811-4e62-b109-4b75b8d50da7",
       "name": "offline_access",
       "description": "OpenID Connect built-in scope: offline_access",
@@ -1998,6 +2378,7 @@
     }
   ],
   "defaultDefaultClientScopes": [
+    "isAdmin",
     "role_list",
     "profile",
     "email",
@@ -2012,11 +2393,15 @@
   ],
   "browserSecurityHeaders": {},
   "smtpServer": {
+    "password": "**********",
+    "starttls": "false",
+    "auth": "true",
+    "port": "25",
     "host": "mail.tmax.co.kr",
-    "from": "taegeon_woo@tmax.co.kr",
-    "starttls": "",
-    "auth": "",
-    "ssl": ""
+    "from": "tmaxcloud_ck@tmax.co.kr",
+    "fromDisplayName": "TMAX CLOUD",
+    "ssl": "false",
+    "user": "taegeon_woo@tmax.co.kr"
   },
   "loginTheme": "tmax",
   "accountTheme": "tmax",
@@ -2250,7 +2635,7 @@
     "ko",
     "en"
   ],
-  "defaultLocale": "en",
+  "defaultLocale": "ko",
   "authenticationFlows": [
     {
       "id": "b6231713-264b-4596-a39b-a5c3070c8efa",
@@ -2991,7 +3376,7 @@
       "alias": "VERIFY_EMAIL",
       "name": "Verify Email",
       "providerId": "VERIFY_EMAIL",
-      "enabled": false,
+      "enabled": true,
       "defaultAction": false,
       "priority": 50,
       "config": {}
@@ -3031,9 +3416,12 @@
   "clientAuthenticationFlow": "clients",
   "dockerAuthenticationFlow": "docker auth",
   "attributes": {
+    "clientOfflineSessionMaxLifespan": "0",
     "clientSessionIdleTimeout": "0",
-    "clientSessionMaxLifespan": "0"
+    "actionTokenGeneratedByUserLifespan.verify-email": "3600",
+    "clientSessionMaxLifespan": "0",
+    "clientOfflineSessionIdleTimeout": "0"
   },
-  "keycloakVersion": "10.0.2",
+  "keycloakVersion": "11.0.2",
   "userManagedAccessAllowed": true
 }

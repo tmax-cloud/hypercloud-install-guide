@@ -134,7 +134,8 @@ LoadBalancer, NodePort type의 service 생성 가능
     * Host, From 을 입력한다. ex) mail.tmax.co.kr, tmaxcloud_ck@tmax.co.kr
     * Enable Authentication을 ON 으로 바꾼다.
     * Username, Password를 입력한다. (mail.tmax.co.kr에 로그인 할 수 있는 관리자 계정)
-
+    * Manage account - Account 의 Username, Email, First name, Last name을 입력한다.
+    
 ## Step 4. Kubernetes OIDC 연동
 * 목적 : `Kubernetes의 RBAC 시스템과 HyperAuth 인증 연동`
 * 생성 순서 :

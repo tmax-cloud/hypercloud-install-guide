@@ -22,6 +22,7 @@ spec:
       containers:
       - name: hyperauth
         image: tmaxcloudck/hyperauth:b1.0.12.21
+#        args: ["-Dkeycloak.profile.feature.docker=enabled", "-b", "0.0.0.0"]        
         env:
         - name: KEYCLOAK_USER
           value: "admin"

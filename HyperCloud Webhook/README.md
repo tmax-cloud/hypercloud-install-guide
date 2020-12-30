@@ -55,7 +55,6 @@
 * 생성 순서 : 아래의 command를 실행하여 사용하고자 하는 image 버전을 수정한다. ([02_webhook-deployment.yaml](manifests/02_webhook-deployment.yaml))
     ```bash
     $ sed -i 's/{webhook_version}/'${WEBHOOK_VERSION}'/g' 02_webhook-deployment.yaml
-    $ sed -i 's/{hostname}/'${HOSTNAME}'/g' 02_webhook-deployment.yaml
     ```
 * 비고 :
     * 폐쇄망에서 설치를 진행하여 별도의 image registry를 사용하는 경우 registry 정보를 추가로 설정해준다.

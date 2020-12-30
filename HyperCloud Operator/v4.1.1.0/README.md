@@ -100,7 +100,7 @@
 		$ sed -i 's/mysql:5.6/'${REGISTRY}'\/mysql:5.6/g' ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/3.mysql-create.yaml
 		$ sed -i 's/tmaxcloudck\/hypercloud-operator/'${REGISTRY}'\/tmaxcloudck\/hypercloud-operator/g' ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/4.hypercloud4-operator.yaml
 
-		$ sed -i 's/{HPCD_VERSION}/'${HPCD_VERSION}'/g' ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/4.hypercloud4-operator.yaml
+		$ sed -i 's/{HPCD_VERSION}/'b${HPCD_VERSION}'/g' ${HPCD_HOME}/hypercloud-operator-${HPCD_VERSION}/_yaml_Install/4.hypercloud4-operator.yaml
 		```
 
 

@@ -15,8 +15,6 @@ spec:
       labels:
         hypercloud4: webhook
     spec:
-      nodeSelector:
-        kubernetes.io/hostname: {hostname}
       containers:
       - name: hypercloud4-webhook
         image: tmaxcloudck/hypercloud-webhook:{webhook_version}

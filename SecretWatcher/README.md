@@ -81,7 +81,7 @@
 	```
 	*  image version 수정
 		```bash
-		$ sed -i 's/tmaxcloudck\/hypercloud4-secret-watcher:latest/tmaxcloudck\/hypercloud4-secret-watcher:'${HPCD_SW_VERSION}'/g' ${HPCD_SW_HOME}/secret-watcher-${HPCD_SW_VERSION}/k8s-install/hypercloud-secret-watcher-daemonset.yaml
+		$ sed -i 's/tmaxcloudck\/hypercloud4-secret-watcher:latest/tmaxcloudck\/hypercloud4-secret-watcher:'b${HPCD_SW_VERSION}'/g' ${HPCD_SW_HOME}/secret-watcher-${HPCD_SW_VERSION}/k8s-install/hypercloud-secret-watcher-daemonset.yaml
 		```
 * 비고
 	* 폐쇄망의 경우 

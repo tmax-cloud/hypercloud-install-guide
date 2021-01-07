@@ -44,9 +44,11 @@
   - 각 노드마다 OSD를 배포하도록 권장 (Taint 걸린 host 없는 걸 확인해야함)
   - 총 OSD 개수는 3개 이상으로 권장
   - CephFS 및 RBD pool 설정 시 Replication 개수 3개 권장
-5. ntp 패키지 설치 및 설정이 필요합니다.
+5. lvm 패키지 설치, ntp 패키지 설치 및 설정이 필요합니다.
 
 ``` shell
+# lvm 설치
+$ yum install lvm2
 # ntp 설치
 $ yum install ntp
 # ntp 설정

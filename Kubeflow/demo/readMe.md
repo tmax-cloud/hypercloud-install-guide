@@ -68,7 +68,9 @@ Fashion-MNIST 데이터를 활용하여 Image가 어떤 Fashion Item인지 추�
 
 ## Step 2. ML model을 코딩하고, 클라우드 작업을 위한 image 생성하기
   - tensorflow 모듈을 활용하여 ML 코드를 작성하고, kubeflow 모듈을 활용하여 ML image를 배포한다.
-  - 정상적으로 image를 배포하기 위해, jupyterNotebook container에 docker registry 인증정보를 넣어야 한다.
+  - 정상적으로 image를 배포하기 다음 두가지 선행 작업이 필요하다.
+      - pod이 떠있는 node에 docker를 설치한다. (kubernetes container-runtime이 crio라면 설치되어있지 않은 경우가 있음)
+      - jupyterNotebook container에 docker registry 인증정보를 넣어야 한다.
   - 시나리오에서는 public registry인 docker hub를 활용하였고, 인증이 적용된 private registry 또한 사용 가능하다.
   - 폐쇄망 환경일 경우 아래 인증 방법을 수행할 필요 없이 아래 명령어만 수행한다.
       ```bash

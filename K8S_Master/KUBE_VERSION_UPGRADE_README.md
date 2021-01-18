@@ -428,7 +428,7 @@
     
     sudo vi /var/lib/kubelet/kubeadm-flags.env에 옵션 변경
     
-    기존 (docker) : KUBELET_KUBEADM_ARGS="--cgroup-driver=cgroupfs --network-plugin=cni --pod-infra-container-image=k8s.gcr.io/pause:3.1      
+    기존 (docker) : KUBELET_KUBEADM_ARGS="--cgroup-driver=cgroupfs --network-plugin=cni --pod-infra-container-image=k8s.gcr.io/pause:3.1"      
     변경 (cri-o) : KUBELET_KUBEADM_ARGS="--container-runtime=remote --cgroup-driver=systemd --container-runtime-endpoint=/var/run/crio/crio.sock"
     
     systemctl restart kubelet

@@ -172,6 +172,11 @@
 	sudo rm -rf  /etc/cni/net.d/100-crio-bridge.conf
  	sudo rm -rf  /etc/cni/net.d/200-loopback.conf
 	```
+    * crio.conf 내용을 수정한다. ( sudo vi /etc/crio/crio.conf )
+      * plugin_dirs : "/opt/cni/bin" 추가
+      * (폐쇄망) insecure_registries = ["{registry}:{port}"]
+      * (폐쇄망) pause_image : "k8s.gcr.io/pause:3.1" 을 "{registry}:{port}/k8s.gcr.io/pause:3.1" 로 변경
+      ![image](figure/crio_config.PNG)	
     * pid cgroup의 max pid limit 설정이 필요한 경우 pids_limit 개수를 수정한다.
       * default : pids_limit = 1024
       * 시스템의 제한값인 `/proc/sys/kernel/pid_max`의 값 이하로 설정한다.

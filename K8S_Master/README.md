@@ -172,14 +172,11 @@
 	sudo rm -rf  /etc/cni/net.d/100-crio-bridge.conf
  	sudo rm -rf  /etc/cni/net.d/200-loopback.conf
 	``` 
-    * 폐쇄망 환경에서 private registry 접근을 위해 crio.conf 내용을 수정한다.
-    * insecure_registry, registries, plugin_dirs 내용을 수정한다.
-      * sudo vi /etc/crio/crio.conf
-         * registries = ["{registry}:{port}" , "docker.io"]
-         * insecure_registries = ["{registry}:{port}"]
-         * plugin_dirs : "/opt/cni/bin" 추가
-         * (폐쇄망) pause_image : "k8s.gcr.io/pause:3.1" 을 "{registry}:{port}/k8s.gcr.io/pause:3.1" 로 변경
-	![image](figure/crio_config.PNG)
+    * crio.conf 내용을 수정한다. ( sudo vi /etc/crio/crio.conf )
+      * plugin_dirs : "/opt/cni/bin" 추가
+      * (폐쇄망) insecure_registries = ["{registry}:{port}"]
+      * (폐쇄망) pause_image : "k8s.gcr.io/pause:3.1" 을 "{registry}:{port}/k8s.gcr.io/pause:3.1" 로 변경
+      ![image](figure/crio_config.PNG)
     * pid cgroup의 max pid limit 설정이 필요한 경우 pids_limit 개수를 수정한다. (default : pids_limit = 1024)
 	```bash
 	pids_limit = 2048

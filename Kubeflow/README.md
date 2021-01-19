@@ -92,8 +92,8 @@
 * 목적 : `Kubeflow component를 배포 및 관리하기 위한 커맨드 라인툴인 kfctl을 설치한다.`
 * 생성 순서 : 아래 명령어를 수행하여 kfctl을 설치한다. (Kubeflow v1.0.2 기준)
     ```bash
-    $ wget https://github.com/kubeflow/kfctl/releases/download/v1.0.2/kfctl_v1.0.2-0-ga476281_linux.tar.gz
-    $ tar xzvf kfctl_v1.0.2-0-ga476281_linux.tar.gz
+    $ wget https://github.com/kubeflow/kfctl/releases/download/v1.2.0/kfctl_v1.2.0-0-gbc038f9_linux.tar.gz
+    $ tar xzvf kfctl_v1.2.0-0-gbc038f9_linux.tar.gz
     $ sudo mv kfctl /usr/bin
     ```
 * 비고 : 
@@ -197,4 +197,17 @@
         ```bash
         $ echo '{"apiVersion":"security.istio.io/v1beta1","kind":"PeerAuthentication","metadata":{"annotations":{},"name":"default","namespace":"istio-system"},"spec":{"mtls":{"mode":"DISABLE"}}}' |cat > disable-mtls.json
         $ kubectl apply -f disable-mtls.json
+        ```
+## 기타 : kubeflow 삭제
+* 목적 : `kubeflow 설치 시에 배포된 모든 리소스를 삭제 한다.`
+* 생성 순서 : 
+    * 아래 명령어를 수행하여 kubeflow 모듈을 삭제한다.
+        ```bash
+        $ export CONFIG_URI="https://raw.githubusercontent.com/tmax-cloud/kubeflow-manifests/kubeflow-manifests-v1.0.2/kfctl_hypercloud_kubeflow.v1.0.2.yaml"
+        $ kfctl delete -V -f ${CONFIG_URI}
+        ```
+* 비고 :
+    * kfctl 1.1버전 이상부터 리소스의 삭제가 정상적으로 이루어진다. kfctl 버전은 다음명령어를 통해 확인할 수 있다.
+        ```bash
+        $ kfctl version
         ```

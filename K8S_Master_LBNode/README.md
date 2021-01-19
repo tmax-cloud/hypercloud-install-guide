@@ -1,17 +1,18 @@
 # K8S Master 클러스터의 LBNode 설치 가이드(HAProxy + Keepalived)
 * 본 가이드는 별도의 LBNode를 갖는 K8S 다중화 클러스터 구축을 위해 작성되었음.
 * 구축하려는 LBNode에 해당 파일들이 같은 디렉터리 내에 존재해야 함.
+* LBNode 각각에서 아래의 작업들을 동일하게 수행해야 함.
 ## 구성 요소 및 버전
 * Keepalived	v1.3.5	# LBNode에 설치
 * HA-Proxy	v1.5.18	# LBNode에 설치
 ## Install Steps
-0. 변수 설정
+0. 변수 설정 및 준비
 1. HAProxy + Keepalived 설치
 2. 설치한 서비스 재시작
 3. K8S 클러스터 구축
 
-## Step 0. 변수 설정
-* 목적 : `LB Node 구축을 위한 변수 설정`
+## Step 0. 변수 설정 및 준비
+* 목적 : `LB Node 구축을 위한 변수 설정 및 준비과정`
 * 순서 : 
 	* Keepalived 와 HAProxy를 설치 및 동작시키기 위한 변수를 설정한다.
 	* 클러스터 구성에 사용할 각 Master Node의 IP, VIP, LBNode에 대한 정보를 입력한다.
@@ -24,10 +25,30 @@
 		export MASTER2IP=192.168.56.223
 		export MASTER3IP=192.168.56.224
 		
+		export MASTERPORT=6443		# 기본적으로 Master Port는 6443을 사용.
+		
 		export LB1=192.168.56.250	# 현재 LB Node의 IP를 입력.
 		export LB2=192.168.56.249	# 다른 LB Node의 IP를 입력.
 		
 		export VIP=192.168.56.240	# K8S Master Join시VIP로 사용할 IP를 입력.
+		```
+	
+	* LB Node 구축을 위해 필요한 파일들을 동일한 위치에 다운로드 받는다.
+		```bash
+		wget https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/K8S_Master_LBNode/haproxy.cfg
+		wget https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/K8S_Master_LBNode/keepalived.conf
+		wget https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/K8S_Master_LBNode/lb_set_script.sh
+		wget https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/K8S_Master_LBNode/notify_action.sh
+		```
+
+	* SELinux 관련 플래그를 설정한다.
+		```bash
+		sudo setsebool -P haproxy_connect_any=1
+		```
+	
+	* LBNode에서 동작 중인 firewalld를 중지 및 비활성화 한다.
+		```bash
+		sudo systemctl stop firewalld && sudo systemctl disable firewalld
 		```
 
 
@@ -36,8 +57,8 @@
 * 순서 : 
 	* 설치 스크립트에 실행 권한을 주고, 실행한다.
 	```bash
-	chmod +x lb_set_script.sh
-	./lb_set_script.sh
+	sudo chmod +x lb_set_script.sh
+	sudo /lb_set_script.sh
 	```
 
 
@@ -46,13 +67,15 @@
 * 순서 :
 	* 각 서비스의 설정파일에 Step0 에서 입력한 값들이 올바르게 설정되었는지 확인한다.
 	```bash
-	vi /etc/keepalived/keepalived.conf
-	vi /etc/haproxy/haproxy.cfg
+	sudo vi /etc/keepalived/keepalived.conf
+	sudo vi /etc/haproxy/haproxy.cfg
 	```
 
 	* Keepalived 설정파일의 세부내용을 확인/수정한다.
 	* state 필드는 MASTER or BACKUP을 반드시 수정하며, priority 또한 수정한다.
 	* interface도 수정해줘야한다.
+	* unicast_src_ip 는 현재 설치 진행 중인 LB 서버(앞서 설정한 LB1 변수)이다.
+	* unicast_peer 는 다른 LB 서버(앞서 설정한 LB2 변수)이다.
 	```bash
 	global_defs {
 	    script_user root root
@@ -71,7 +94,6 @@
 	    virtual_router_id 51
 	    priority 100        # MASTER의 우선순위가 적어도 1이상 높아야 함
 	    advert_int 1
-	    nopreempt
 	    authentication {    # 인증에 사용될 password(동일하게 맞춰주기만 하면 됨)
 	        auth_type PASS
 	        auth_pass 1111
@@ -123,31 +145,30 @@
 	  timeout server 1m
 	
 	frontend k8s-api
-	  bind 0.0.0.0:16443
+	  bind 0.0.0.0:6443
 	  default_backend k8s-api
 	
 	backend k8s-api
 	  option tcp-check
 	  balance roundrobin
-	  server MASTER1NAME MASTER1IP check # Master 다중화 서버들 정보 기재
-	  server MASTER2NAME MASTER2IP check
-	  server MASTER3NAME MASTER3IP check
+	  server MASTER1NAME MASTER1IP:MASTERPORT check # Master 다중화 서버들 정보 기재
+	  server MASTER2NAME MASTER2IP:MASTERPORT check
+	  server MASTER3NAME MASTER3IP:MASTERPORT check
 	```
 
 	* 각 서비스를 활성화시켜주며 재시작하고, 동작을 확인한다.
 	```bash
-	systemctl enable haproxy
 	systemctl enable keepalived
+	systemctl enable haproxy
 
 	systemctl daemon-reload
 
-	systemctl restart haproxy
 	systemctl restart keepalived
+	systemctl restart haproxy
 
-	systemctl status haproxy
 	systemctl status keepalived
+	systemctl status haproxy
 	```
-
 
 ## Step.3 K8S 클러스터 구축
 * 목적 : `LB Node 설정을 완료한 이후, K8S 클러스터 구축을 계속한다`

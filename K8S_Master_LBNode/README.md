@@ -145,7 +145,7 @@
 	  timeout server 1m
 	
 	frontend k8s-api
-	  bind 0.0.0.0:6443
+	  bind 0.0.0.0:MASTERPORT
 	  default_backend k8s-api
 	
 	backend k8s-api

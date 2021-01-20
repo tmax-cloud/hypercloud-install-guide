@@ -76,7 +76,7 @@
         $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/4.1/Kubeflow/sed.sh
         $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/4.1/Kubeflow/kustomize_local.tar.gz
         $ wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/4.1/Kubeflow/kfctl_hypercloud_kubeflow.v1.0.2_local.yaml
-        $ wget https://github.com/kubeflow/kfctl/releases/download/v1.0.2/kfctl_v1.0.2-0-ga476281_linux.tar.gz
+        $ wget https://github.com/kubeflow/kfctl/releases/download/v1.2.0/kfctl_v1.2.0-0-gbc038f9_linux.tar.gz
         ```
 3. 앞으로의 진행
     * Step 0 ~ 4 중 Step 0, 2, 3은 비고를 참고하여 진행한다. 나머지는 그대로 진행하면 된다.
@@ -97,7 +97,7 @@
     $ sudo mv kfctl /usr/bin
     ```
 * 비고 : 
-    * 폐쇄망 환경일 경우 kfctl_v1.0.2-0-ga476281_linux.tar.gz을 github에서 받는 것이 아니라 미리 다운로드 해둔 것을 사용하면 된다.
+    * 폐쇄망 환경일 경우 kfctl_v1.2.0-0-gbc038f9_linux.tar.gz을 github에서 받는 것이 아니라 미리 다운로드 해둔 것을 사용하면 된다.
 
 ## Step 1. 설치 디렉토리 생성
 * 목적 : `Kubeflow의 설치 yaml이 저장될 설치 디렉토리를 생성하고 해당 경로로 이동한다.`

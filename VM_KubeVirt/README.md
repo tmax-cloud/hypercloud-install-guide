@@ -45,6 +45,9 @@
    ```bash
    $ make upload
    ```
+4. docker 또는 crio의 search registries에 $REGISTRY_ENDPOINT 가 등록되어 있지 않은 경우 아래의 명령어를 통해 yaml을 수정합니다.\
+   ```sed -i 's/tmaxcloudck/'$REGISTRY_ENDPOINT'\/tmaxcloudck/g' yamls/kubevirt-operator.yaml```\
+   ```sed -i 's/tmaxcloudck/'$REGISTRY_ENDPOINT'\/tmaxcloudck/g' yamls/virtvnc.yaml```
 
 ## Install Steps
 1. 아래의 명령어를 수행하여 설치를 진행합니다

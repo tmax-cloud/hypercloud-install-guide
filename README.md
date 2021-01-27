@@ -26,7 +26,7 @@
 | NetworkAgent |  | https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/NetworkAgent | O |
 | Pod_GPU plugin | | <ul><li>https://github.com/tmax-cloud/hypercloud-install-guide/tree/master/Pod_GPU%20plugin</li><li> NVIDIA Device Plugin : https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Pod_GPU%20plugin/nvidia-device-plugin/README.md</li><li> NVIDIA Pod GPU Metrics Exporter : https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Pod_GPU%20plugin/nvidia-pod-gpu-metrics-exporter/README.md</li></ul> | O |
 | Istio | 1.5.1 | [installation guide](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Istio/README.md) | O |
-| Kubeflow | | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/Kubeflow/README.md | O |
+| Kubeflow | | https://github.com/tmax-cloud/ai-dev-ops/tree/4.1/README.md | O |
 | EFK | E(7.2.0), F(v1.4.2), K(7.2.0) | https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/EFK/README.md | O |
 | Multicloud-console |  |  | X |
 | Capi provider |  | https://github.com/tmax-cloud/hypercloud-install-guide/blob/4.1/Capi/README.md | O |

@@ -227,10 +227,10 @@ spec:
           timeoutSeconds: 1
         resources:
           limits:
-            cpu: 2000m
-            memory: 1024Mi
+            cpu: 200m
+            memory: 512Mi
           requests:
-            cpu: 100m
+            cpu: 50m
             memory: 128Mi
         volumeMounts:
         - mountPath: /var/run/secrets/istio
@@ -328,7 +328,7 @@ metadata:
   name: istio-ingressgateway
   namespace: istio-system
 spec:
-  maxReplicas: 5
+  maxReplicas: 1
   metrics:
   - resource:
       name: cpu

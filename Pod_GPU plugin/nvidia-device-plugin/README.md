@@ -74,6 +74,29 @@
         ```bash
         $ nvidia-smi
         ```
+### 참고용) Nvidia Driver Upgrade 방법
+- Step 1: nvidia-device-plugin 삭제
+    ```bash
+    $ cd ${INSTALLER_HOME}
+    $ kubectl delete -f ./nvidia-device-plugin-daemonset.yml
+    ```
+- Step 2: Nvidia GPU Driver 삭제 후 재부팅
+    ```bash
+    $ # Nvidia GPU Driver install 파일 준비 (run파일)
+    $ chmod +x ./{your-nvidia-file.run}
+    $ ./{your-nvidia-file.run} --uninstall
+    $ reboot
+    ```
+- Step 3: Nvidia GPU Driver 재설치 후 확인
+    ```bash
+    $ chmod +x ./{your-nvidia-file.run}
+    $ ./{your-nvidia-file.run} --dkms -s
+    ```
+- Step 4: Nvidia Device Plugin 재 설치
+    ```bash
+    $ cd ${INSTALLER_HOME}
+    $ kubectl create -f ./nvidia-device-plugin-daemonset.yml
+    ```
 
 ## Step 1. 필요한 패키지 설치 및 설정
 ### Docker를 사용하는 경우

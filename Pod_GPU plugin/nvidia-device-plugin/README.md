@@ -47,6 +47,7 @@
 
 ## Step 0. NVIDIA driver 설치
 * 목적 : `GPU device에 적절한 nvidia driver를 설치`
+* 버전 요구사항: `361.93 이상`
 * 생성 순서 : 
     * nouveau 비활성화
         ```bash

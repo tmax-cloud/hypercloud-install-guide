@@ -17,15 +17,16 @@
 	* Keepalived 와 HAProxy를 설치 및 동작시키기 위한 변수를 설정한다.
 	* 클러스터 구성에 사용할 각 Master Node의 IP, VIP, LBNode에 대한 정보를 입력한다.
 		```bash
-		export MASTER1NAME=test		# 클러스터로 구성할 Master Node의 host명을 각각 입력.
-		export MASTER2NAME=worker
-		export MASTER3NAME=worker2
+		export MASTER1NAME=master1hostname		# 클러스터로 구성할 Master Node의 host명을 각각 입력.
+		export MASTER2NAME=master2hostname
+		export MASTER3NAME=master3hostname
 		
 		export MASTER1IP=192.168.56.222 # Master Node의 IP를 각각 입력.
 		export MASTER2IP=192.168.56.223
 		export MASTER3IP=192.168.56.224
 		
 		export MASTERPORT=6443		# 기본적으로 Master Port는 6443을 사용.
+		export HAPROXYLBPORT=16443	# Master 와 동일한 Node에 설치시 반드시 MASTERPORT와 다른 Port를 사용해야 하며, 이경우 Master Join시에 이 변수로 설정한 Port를 사용해야 함.
 		
 		export LB1=192.168.56.250	# 현재 LB Node의 IP를 입력.
 		export LB2=192.168.56.249	# 다른 LB Node의 IP를 입력.
@@ -35,10 +36,10 @@
 	
 	* LB Node 구축을 위해 필요한 파일들을 동일한 위치에 다운로드 받는다.
 		```bash
-		wget https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/K8S_Master_LBNode/haproxy.cfg
-		wget https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/K8S_Master_LBNode/keepalived.conf
-		wget https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/K8S_Master_LBNode/lb_set_script.sh
-		wget https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/K8S_Master_LBNode/notify_action.sh
+		wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/K8S_Master_LBNode/haproxy.cfg
+		wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/K8S_Master_LBNode/keepalived.conf
+		wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/K8S_Master_LBNode/lb_set_script.sh
+		wget https://raw.githubusercontent.com/tmax-cloud/hypercloud-install-guide/master/K8S_Master_LBNode/notify_action.sh
 		```
 
 	* SELinux 관련 플래그를 설정한다.
@@ -58,12 +59,12 @@
 	* 설치 스크립트에 실행 권한을 주고, 실행한다.
 	```bash
 	sudo chmod +x lb_set_script.sh
-	sudo /lb_set_script.sh
+	sudo ./lb_set_script.sh
 	```
 
 
-## Step.2 설치한 서비스 재시작
-* 목적 : `HAProxy와 Keepalived 재시작`
+## Step.2 설치한 서비스 기동
+* 목적 : `HAProxy와 Keepalived 기동`
 * 순서 :
 	* 각 서비스의 설정파일에 Step0 에서 입력한 값들이 올바르게 설정되었는지 확인한다.
 	```bash
@@ -92,7 +93,7 @@
 	    state MASTER        # MASTER는 메인 LB, 백업 LB는  BACKUP 으로 설정
 	    interface enp0s8    # 사용할 interface
 	    virtual_router_id 51
-	    priority 100        # MASTER의 우선순위가 적어도 1이상 높아야 함
+	    priority 100        # MASTER의 우선순위를 가장 높게(ex. 100), BACKUP의 경우 그보다 낮게(ex. 99, 98) 설정.
 	    advert_int 1
 	    authentication {    # 인증에 사용될 password(동일하게 맞춰주기만 하면 됨)
 	        auth_type PASS
@@ -145,7 +146,7 @@
 	  timeout server 1m
 	
 	frontend k8s-api
-	  bind 0.0.0.0:MASTERPORT
+	  bind 0.0.0.0:HAPROXYLBPORT	# Master Node와 동일 Node에 설치시, Master Join을 해당 port로 해야함.
 	  default_backend k8s-api
 	
 	backend k8s-api
@@ -158,16 +159,16 @@
 
 	* 각 서비스를 활성화시켜주며 재시작하고, 동작을 확인한다.
 	```bash
-	systemctl enable keepalived
-	systemctl enable haproxy
+	sudo systemctl enable keepalived
+	sudo systemctl enable haproxy
 
-	systemctl daemon-reload
+	sudo systemctl daemon-reload
 
-	systemctl restart keepalived
-	systemctl restart haproxy
+	sudo systemctl start keepalived
+	sudo systemctl start haproxy
 
-	systemctl status keepalived
-	systemctl status haproxy
+	sudo systemctl status keepalived
+	sudo systemctl status haproxy
 	```
 
 ## Step.3 K8S 클러스터 구축

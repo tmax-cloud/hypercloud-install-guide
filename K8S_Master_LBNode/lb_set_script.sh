@@ -1,22 +1,21 @@
 #!/bin/bash
 
-pkg_check=`which rpm >& /dev/null; echo $?`
-
 rpm_pkg_list=("keepalived" "haproxy")
-#rpm_need_install="yum install -y"
-#dpkg_need_install=`apt-get install`
 
 for pkgname in ${rpm_pkg_list[@]};
 do
-	#pkg_check_cmd=`rpm -qa | grep "${list_num}" >& /dev/null; echo $?`
-	#if [ ${pkg_check_cmd} -eq 0 ];
-	#then
-		rpm_need_install="sudo yum install -y ${pkgname}"
-		${rpm_need_install} 2>&1 > /dev/null
-	#else
-	#	echo "${pkgname} is already installed!!"
-	#fi
+	echo " "
+	echo "*** ${pkgname} install... ***"
+	echo " "
+	rpm_need_install="sudo yum install -y ${pkgname}"
+	${rpm_need_install}
 done
+
+echo " "
+echo "*** Finish pkg installation ***"
+echo " "
+echo "*** File copying and modifying started ***"
+echo " "
 
 SCRIPTPATH=$(dirname `which $0`)
 
@@ -45,3 +44,9 @@ sudo sed -i 's/MASTER2IP/'"$MASTER2IP"'/' /etc/haproxy/haproxy.cfg
 sudo sed -i 's/MASTER3IP/'"$MASTER3IP"'/' /etc/haproxy/haproxy.cfg
 
 sudo sed -i 's/MASTERPORT/'"$MASTERPORT"'/' /etc/haproxy/haproxy.cfg
+
+echo " "
+echo "*** Finish file copying and modifying ***"
+echo " "
+echo "*** Finish all task in this script ***"
+echo " "

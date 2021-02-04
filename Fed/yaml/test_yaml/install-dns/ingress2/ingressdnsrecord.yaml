@@ -1,9 +1,0 @@
-apiVersion: multiclusterdns.kubefed.io/v1alpha1
-kind: IngressDNSRecord
-metadata:
-  name: test-ingress
-  namespace: test-namespace
-spec:
-  hosts:
-  - ingress.example.com
-  recordTTL: 300

@@ -1,9 +1,0 @@
-apiVersion: projectcalico.org/v3
-kind: IPPool
-metadata:
-  name: public-ipv4-ippool
-spec:
-  cidr: CIDR
-  blockSize: BLOCKSIZE
-  ipipMode: Never
-  natOutgoing: false

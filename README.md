@@ -33,7 +33,6 @@
 | Helm | v3 | https://github.com/tmax-cloud/install-helm/tree/4.1 |
 | ChartMuseum |  | https://github.com/tmax-cloud/install-helm-repository/tree/4.1 |
 | KubeVirt | v0.27.0 | https://github.com/tmax-cloud/install-kubevirt/tree/4.1 |
-
 | CDI |  |  |
-| ImageController | |  |
-| Exporter | |  |
+| ImageController |  |  |
+| Exporter |  |  |

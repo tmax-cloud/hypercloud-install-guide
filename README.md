@@ -1,2 +1,2 @@
 
-# HyperCloud 4 Install Guide Navigator
+# HyperCloud Install Guide Navigator

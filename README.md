@@ -34,4 +34,4 @@
 | Helm | v3 | https://github.com/tmax-cloud/install-helm/tree/4.1 |
 | ChartMuseum |  | https://github.com/tmax-cloud/install-helm-repository/tree/4.1 |
 | KubeVirt | v0.27.0 | https://github.com/tmax-cloud/install-kubevirt/tree/4.1 |
-| VM Exporter | v2.0.0-3 |  |
+| VM Exporter | v2.0.0-3 | https://github.com/tmax-cloud/install-vm-exporter/tree/4.1 |

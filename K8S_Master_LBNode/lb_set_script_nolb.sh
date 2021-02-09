@@ -25,7 +25,7 @@ sudo cp ${THISPATH}/notify_action.sh /etc/keepalived/notify_action.sh
 sudo chmod +x /etc/keepalived/notify_action.sh
 
 sudo mv /etc/keepalived/keepalived.conf /etc/keepalived/keepalived.conf_back
-sudo cp -f ${THISPATH}/keepalived.conf /etc/keepalived/keepalived.conf
+sudo cp -f ${THISPATH}/keepalived_nolb.conf /etc/keepalived/keepalived.conf
 
 sudo sed -i 's/MASTER1IP/'"$MASTER1IP"'/' /etc/keepalived/keepalived.conf
 sudo sed -i 's/MASTER2IP/'"$MASTER2IP"'/' /etc/keepalived/keepalived.conf
@@ -34,7 +34,7 @@ sudo sed -i 's/MASTER3IP/'"$MASTER3IP"'/' /etc/keepalived/keepalived.conf
 sudo sed -i 's/VIP/'"$VIP"'/' /etc/keepalived/keepalived.conf
 
 sudo mv /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg_back
-sudo cp -f ${THISPATH}/haproxy.cfg /etc/haproxy/haproxy.cfg
+sudo cp -f ${THISPATH}/haproxy_nolb.cfg /etc/haproxy/haproxy.cfg
 
 sudo sed -i 's/MASTER1NAME/'"$MASTER1NAME"'/' /etc/haproxy/haproxy.cfg
 sudo sed -i 's/MASTER2NAME/'"$MASTER2NAME"'/' /etc/haproxy/haproxy.cfg

@@ -27,8 +27,9 @@ sudo chmod +x /etc/keepalived/notify_action.sh
 sudo mv /etc/keepalived/keepalived.conf /etc/keepalived/keepalived.conf_back
 sudo cp -f ${THISPATH}/keepalived.conf /etc/keepalived/keepalived.conf
 
-sudo sed -i 's/LB1/'"$LB1"'/' /etc/keepalived/keepalived.conf
-sudo sed -i 's/LB2/'"$LB2"'/' /etc/keepalived/keepalived.conf
+sudo sed -i 's/MASTER1IP/'"$MASTER1IP"'/' /etc/keepalived/keepalived.conf
+sudo sed -i 's/MASTER2IP/'"$MASTER2IP"'/' /etc/keepalived/keepalived.conf
+sudo sed -i 's/MASTER3IP/'"$MASTER3IP"'/' /etc/keepalived/keepalived.conf
 
 sudo sed -i 's/VIP/'"$VIP"'/' /etc/keepalived/keepalived.conf
 

@@ -3,7 +3,7 @@
 * [A는 별도의 LBNode를 갖는 K8S 다중화 클러스터 구축을 위해 작성](#a-%EB%B3%84%EB%8F%84%EC%9D%98-lbnode%EB%A5%BC-%EA%B0%96%EB%8A%94-%EA%B2%BD%EC%9A%B0)되었음.
 	* 구축하려는 LBNode에 해당 파일들이 같은 디렉터리 내에 존재해야 함.
 	* LBNode 각각에서 아래의 작업들을 동일하게 수행해야 함.
-* [B는 별도의 LBNode 없이, K8S 다중화 클러스터 내에서 HAProxy가 동작하도록 작성](b-%EB%B3%84%EB%8F%84%EC%9D%98-lbnode%EB%A5%BC-%EA%B0%96%EC%A7%80-%EC%95%8A%EA%B3%A0-%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0-%EB%82%B4%EC%97%90%EC%84%9C-haproxy%EB%A5%BC-%EB%8F%99%EC%9E%91%EC%8B%9C%ED%82%AC-%EA%B2%BD%EC%9A%B0)되었음.
+* [B는 별도의 LBNode 없이, K8S 다중화 클러스터 내에서 HAProxy가 동작하도록 작성](#b-%EB%B3%84%EB%8F%84%EC%9D%98-lbnode%EB%A5%BC-%EA%B0%96%EC%A7%80-%EC%95%8A%EA%B3%A0-%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0-%EB%82%B4%EC%97%90%EC%84%9C-haproxy%EB%A5%BC-%EB%8F%99%EC%9E%91%EC%8B%9C%ED%82%AC-%EA%B2%BD%EC%9A%B0)되었음.
 	* 구축하려는 MasterNode에 해당 파일들이 같은 디렉터리 내에 존재해야 함.
 	* MasterNode 각각에서 아래의 작업들을 동일하게 수행해야 함.
 # A. 별도의 LBNode를 갖는 경우

@@ -355,4 +355,4 @@
 * 목적 : `이후, K8S 클러스터 구축을 계속한다`
 * 순서 :
 	* 아래의 GUIDE에서, 3-1번을 제외하고 클러스터 구축을 수행한다.
-	* [K8S MASTER INSTALL GUIDE](https://github.com/tmax-cloud/hypercloud-install-guide/blob/master/K8S_Master/README.md#k8s-master-%EC%84%A4%EC%B9%98-%EA%B0%80%EC%9D%B4%EB%93%9C)
+	* [K8S MASTER INSTALL GUIDE](https://github.com/tmax-cloud/hypercloud-install-guide/tree/old/K8S_Master#k8s-master-%EC%84%A4%EC%B9%98-%EA%B0%80%EC%9D%B4%EB%93%9C)

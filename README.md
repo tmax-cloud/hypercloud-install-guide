@@ -15,7 +15,7 @@
 | Tekton CI/CD | v0.21.0 | https://github.com/tmax-cloud/install-tekton/tree/5.0 |
 | Catalog Controller | v0.3.0 | https://github.com/tmax-cloud/install-catalog/tree/5.0 |
 | Template ServiceBroker | ??? | https://github.com/tmax-cloud/install-tsb/tree/tsb-5.0 |
-| HyperAuth | latest | https://github.com/tmax-cloud/install-hyperauth/tree/5.0 |
+| HyperAuth | b1.0.18.35 | https://github.com/tmax-cloud/install-hyperauth/tree/5.0 |
 | HyperCloud SecretWatcher |  | ??? |
 | CAPI(AWS) | v0.3.14, v0.6.4 | https://github.com/tmax-cloud/install-capi/tree/5.0 |
 | KubeFed | | |

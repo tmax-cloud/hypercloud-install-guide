@@ -38,7 +38,7 @@
 | ovirt                    | 4.4.3                | https://github.com/tmax-cloud/install-ovirt/tree/main                   |
 | OLM                      | 0.15.1               | https://github.com/tmax-cloud/install-OLM/tree/main                     |
 | clair                    | ???                  | https://github.com/tmax-cloud/install_clair/tree/main                   |
-| velero                   | ???                  | https://github.com/tmax-cloud/install-velero/tree/main                  |
+| velero                   | 1.4.2                  | https://github.com/tmax-cloud/install-velero/tree/main                  |
 | CAPI                     | ???                  | https://github.com/tmax-cloud/install-CAPI/tree/5.0                     |
 | registry-operator        | ???                  | https://github.com/tmax-cloud/install-registry-operator/tree/5.0        |
 | image-validating-webhook | ???                  | https://github.com/tmax-cloud/install-image-validating-webhook/tree/5.0 |

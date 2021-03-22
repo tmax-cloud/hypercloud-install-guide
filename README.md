@@ -9,7 +9,6 @@
 | CRI-O & Kubernetes                | 1.19.1, 1.19.4                                                  | https://github.com/tmax-cloud/install-k8s/tree/5.0               |
 | Calico                            | 3.16.6                                                          | https://github.com/tmax-cloud/install-cni/tree/5.0               |
 | MetalLB                           | v0.9.3                                                          | https://github.com/tmax-cloud/install-metallb/tree/5.0           |
-| Rook Ceph & CDI                   |                                                                 | ???                                                              |
 | Nginx Ingress Controller          | 0.33.0                                                          | https://github.com/tmax-cloud/install-ingress/tree/5.0           |
 | Prometheus                        | v2.11.0                                                         | https://github.com/tmax-cloud/install-prometheus/tree/5.0        |
 | Tekton CI/CD                      | Pipeline: v0.21.0<br>Trigger: v0.11.2<br>CI/CD Operator: v0.2.1 | https://github.com/tmax-cloud/install-tekton/tree/5.0            |
@@ -37,11 +36,9 @@
 | Helm                     | v3                   | https://github.com/tmax-cloud/install-helm/tree/master                  |
 | ChartMuseum              |                      | https://github.com/tmax-cloud/install-helm-repository/tree/master       |
 | ovirt                    | 4.4.3                | https://github.com/tmax-cloud/install-ovirt/tree/main                   |
-| kubevirt                 | 0.27.0               | https://github.com/tmax-cloud/install-kubevirt/tree/5.0                 |
 | OLM                      | 0.15.1               | https://github.com/tmax-cloud/install-OLM/tree/main                     |
 | clair                    | ???                  | https://github.com/tmax-cloud/install_clair/tree/main                   |
 | velero                   | ???                  | https://github.com/tmax-cloud/install-velero/tree/main                  |
 | CAPI                     | ???                  | https://github.com/tmax-cloud/install-CAPI/tree/5.0                     |
 | registry-operator        | ???                  | https://github.com/tmax-cloud/install-registry-operator/tree/5.0        |
 | image-validating-webhook | ???                  | https://github.com/tmax-cloud/install-image-validating-webhook/tree/5.0 |
-| vm-exporter              | ???                  | https://github.com/tmax-cloud/install-vm-exporter/tree/main             |

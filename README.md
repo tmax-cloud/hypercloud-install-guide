@@ -16,7 +16,7 @@
 | Template ServiceBroker            | 0.0.4                                                           | https://github.com/tmax-cloud/install-tsb/tree/tsb-5.0           |
 | HyperAuth                         | b1.0.18.35                                                      | https://github.com/tmax-cloud/install-hyperauth/tree/5.0         |
 | Registry Operator                 | v0.3.0                                                          | https://github.com/tmax-cloud/install-registry-operator/tree/5.0 |
-| CAPI(AWS)                         | v0.3.6, v0.5.5-alpha.0                                          | https://github.com/tmax-cloud/install-capi/tree/5.0              |
+| CAPI                              | v0.3.6                                                          | https://github.com/tmax-cloud/install-capi/tree/5.0              |
 | KubeFed                           | v0.3.0                                                          | https://github.com/tmax-cloud/install-federation/tree/5.0        |
 | HyperCloud 5 API Server, Operator | v5.0.2.0, v5.0.2.0                                              | https://github.com/tmax-cloud/install-hypercloud/tree/5.0        |
 | HyperCloud Console, Operator      | 0.5.1.32, 5.1.0.1                                               | https://github.com/tmax-cloud/install-console/tree/5.0           |
@@ -39,6 +39,6 @@
 | OLM                      | 0.15.1               | https://github.com/tmax-cloud/install-OLM/tree/main                     |
 | clair                    | ???                  | https://github.com/tmax-cloud/install_clair/tree/main                   |
 | velero                   | 1.4.2                | https://github.com/tmax-cloud/install-velero/tree/main                  |
-| CAPI                     | ???                  | https://github.com/tmax-cloud/install-CAPI/tree/5.0                     |
+| CAPI-provider-aws        | v0.5.5-alpha.0       | https://github.com/tmax-cloud/install-CAPI/tree/5.0                     |
 | registry-operator        | ???                  | https://github.com/tmax-cloud/install-registry-operator/tree/5.0        |
 | image-validating-webhook | ???                  | https://github.com/tmax-cloud/install-image-validating-webhook/tree/5.0 |

@@ -15,7 +15,7 @@
 | Catalog Controller                | v0.3.0                                                          | https://github.com/tmax-cloud/install-catalog/tree/5.0           |
 | Template ServiceBroker            | 0.0.4                                                           | https://github.com/tmax-cloud/install-tsb/tree/tsb-5.0           |
 | HyperAuth                         | b1.0.18.35                                                      | https://github.com/tmax-cloud/install-hyperauth/tree/5.0         |
-| Registry Operator                 | v0.3.0                                                          | https://github.com/tmax-cloud/install-registry-operator/tree/5.0 |
+| Registry Operator                 | v0.3.1                                                          | https://github.com/tmax-cloud/install-registry-operator/tree/5.0 |
 | CAPI                              | v0.3.6                                                          | https://github.com/tmax-cloud/install-capi/tree/5.0              |
 | KubeFed                           | v0.3.0                                                          | https://github.com/tmax-cloud/install-federation/tree/5.0        |
 | HyperCloud 5 API Server, Operator | v5.0.2.0, v5.0.2.0                                              | https://github.com/tmax-cloud/install-hypercloud/tree/5.0        |

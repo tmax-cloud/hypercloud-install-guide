@@ -40,5 +40,5 @@
 | clair                    | ???                  | https://github.com/tmax-cloud/install_clair/tree/main                   |
 | velero                   | 1.4.2                | https://github.com/tmax-cloud/install-velero/tree/main                  |
 | CAPI-provider-aws        | v0.5.5-alpha.0       | https://github.com/tmax-cloud/install-CAPI/tree/5.0                     |
-| registry-operator        | ???                  | https://github.com/tmax-cloud/install-registry-operator/tree/5.0        |
+| registry-operator        | v0.3.1               | https://github.com/tmax-cloud/install-registry-operator/tree/5.0        |
 | image-validating-webhook | ???                  | https://github.com/tmax-cloud/install-image-validating-webhook/tree/5.0 |

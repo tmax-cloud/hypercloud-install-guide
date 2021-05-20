@@ -25,7 +25,7 @@
 | ------ | ------ | ------ |
 | Grafana | 6.4.3 | https://github.com/tmax-cloud/install-grafana/tree/4.1 |
 | Istio | v1.5.1 | https://github.com/tmax-cloud/install-istio/tree/4.1 |
-| Kiali | 6.4.3 | https://github.com/tmax-cloud/install-grafana/tree/4.1 |
+| Kiali | v1.21 | https://github.com/tmax-cloud/install-kiali/tree/4.1 |
 | NetworkAgent | v0.4.2 | https://github.com/tmax-cloud/install-networkagent/tree/4.1 |
 | NetworkWebhook | v0.1.3 | https://github.com/tmax-cloud/install-networkwebhook/tree/4.1 |
 | Nvidia GPU | | https://github.com/tmax-cloud/install-nvidia-gpu-infra/tree/4.1 |

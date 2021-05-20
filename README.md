@@ -20,7 +20,7 @@
 | CAPI(AWS) | v0.3.14, v0.6.4 | https://github.com/tmax-cloud/install-capi/tree/5.0 |
 | KubeFed | | |
 | HyperCloud 5 API Server, Operator | v5.0.2.0, v5.0.2.0 | https://github.com/tmax-cloud/install-hypercloud/tree/5.0 |
-| HyperCloud Console, Operator | 0.5.1.32, 5.1.0.1 | https://github.com/tmax-cloud/install-console/tree/5.0 |
+| HyperCloud Console, Operator | 5.0.10.0, 5.1.0.1 | https://github.com/tmax-cloud/install-console/tree/5.0(new) |
 
 ### Module (Optional)
 | Module | Version | Guide |

@@ -35,3 +35,4 @@
 | EFK | 7.2.0, v1.4.2, 7.2.0 | https://github.com/tmax-cloud/install-EFK/tree/5.0 |
 | Helm | v3 | ??? |
 | ChartMuseum |  | ??? |
+| HAProxy & Keepalived | 1.5.18, 1.3.5 | https://github.com/tmax-cloud/install-haproxy/tree/5.0 |

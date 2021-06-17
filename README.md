@@ -11,7 +11,7 @@
 | MetalLB                           | v0.9.3                                                          | https://github.com/tmax-cloud/install-metallb/tree/5.0           |
 | Nginx Ingress Controller          | 0.33.0                                                          | https://github.com/tmax-cloud/install-ingress/tree/5.0           |
 | Prometheus                        | v2.11.0                                                         | https://github.com/tmax-cloud/install-prometheus/tree/5.0        |
-| Tekton CI/CD                      | Pipeline: v0.21.0<br>Trigger: v0.11.2<br>CI/CD Operator: v0.2.1 | https://github.com/tmax-cloud/install-tekton/tree/5.0            |
+| Tekton CI/CD                      | Pipeline: v0.22.0<br>Trigger: v0.12.1<br>CI/CD Operator: v0.3.0 | https://github.com/tmax-cloud/install-tekton/tree/5.0            |
 | Catalog Controller                | v0.3.0                                                          | https://github.com/tmax-cloud/install-catalog/tree/5.0           |
 | Template ServiceBroker            | 0.0.8                                                           | https://github.com/tmax-cloud/install-tsb/tree/tsb-5.0           |
 | HyperAuth                         | b1.1.0.23                                                      | https://github.com/tmax-cloud/install-hyperauth/tree/5.0         |

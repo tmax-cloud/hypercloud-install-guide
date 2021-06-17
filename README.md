@@ -13,7 +13,7 @@
 | Prometheus                        | v2.11.0                                                         | https://github.com/tmax-cloud/install-prometheus/tree/5.0        |
 | Tekton CI/CD                      | Pipeline: v0.21.0<br>Trigger: v0.11.2<br>CI/CD Operator: v0.2.1 | https://github.com/tmax-cloud/install-tekton/tree/5.0            |
 | Catalog Controller                | v0.3.0                                                          | https://github.com/tmax-cloud/install-catalog/tree/5.0           |
-| Template ServiceBroker            | 0.0.4                                                           | https://github.com/tmax-cloud/install-tsb/tree/tsb-5.0           |
+| Template ServiceBroker            | 0.0.8                                                           | https://github.com/tmax-cloud/install-tsb/tree/tsb-5.0           |
 | HyperAuth                         | b1.1.0.23                                                      | https://github.com/tmax-cloud/install-hyperauth/tree/5.0         |
 | Registry Operator                 | v0.3.1                                                          | https://github.com/tmax-cloud/install-registry-operator/tree/5.0 |
 | CAPI                              | v0.3.6                                                          | https://github.com/tmax-cloud/install-capi/tree/5.0              |

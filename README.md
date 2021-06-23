@@ -12,7 +12,7 @@
 | CSI - NFS                         |                                                                 |                                                                  |
 | CSI - Ceph                        |                                                                 |                                                                  |
 | Cert Manager                      |                                                                 |                                                                  |
-| Nginx Ingress Controller          | 0.33.0                                                          | https://github.com/tmax-cloud/install-ingress/tree/5.0           |
+| Ingress Controller - nginx        | 0.33.0                                                          | https://github.com/tmax-cloud/install-ingress/tree/5.0           |
 | GitLab                            |                                                                 |                                                                  |
 | Helm Operator                     |                                                                 |                                                                  |
 | Prometheus                        | v2.11.0                                                         | https://github.com/tmax-cloud/install-prometheus/tree/5.0        |

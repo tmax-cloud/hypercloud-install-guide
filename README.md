@@ -13,6 +13,7 @@
 | HyperAuth | b1.0.18.35 | https://github.com/tmax-cloud/install-hyperauth/tree/5.0 |
 | HyperCloud 5 API Server, Operator | v5.0.2.0, v5.0.2.0 | https://github.com/tmax-cloud/install-hypercloud/tree/5.0 |
 | HyperCloud Console, Operator | 5.0.10.0, 5.1.0.1 | https://github.com/tmax-cloud/install-console/tree/5.0(new) |
+| Helm Operator | 5.0.10.0, 5.1.0.1 | CK1-2 |
 
 ### Module (Recommended)
 | Module | Version | URL |
@@ -24,6 +25,7 @@
 | Registry Operator | v0.3.0 | https://github.com/tmax-cloud/install-registry-operator/tree/5.0 |
 | CAPI(AWS) | v0.3.14, v0.6.4 | https://github.com/tmax-cloud/install-capi/tree/5.0 |
 | KubeFed | | CK1-3 |
+| AWX Operator |  | CK2-2 |
 
 ### Module (Optional)
 | Module | Version | Guide |

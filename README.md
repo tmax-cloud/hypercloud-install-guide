@@ -16,6 +16,8 @@
 | HyperCloud Console, Operator      | 0.5.1.32, 5.1.0.1                                               | https://github.com/tmax-cloud/install-console/tree/5.0           |
 
 ### Module (Recommended)
+| Module                            | Version                                                         | URL                                                              |
+| --------------------------------- | --------------------------------------------------------------- | ---------------------------------------------------------------- |
 | Tekton CI/CD                      | Pipeline: v0.22.0<br>Trigger: v0.12.1<br>CI/CD Operator: v0.3.0 | https://github.com/tmax-cloud/install-tekton/tree/5.0            |
 | Catalog Controller                | v0.3.0                                                          | https://github.com/tmax-cloud/install-catalog/tree/5.0           |
 | Template ServiceBroker            | 0.0.8                                                           | https://github.com/tmax-cloud/install-tsb/tree/tsb-5.0           |

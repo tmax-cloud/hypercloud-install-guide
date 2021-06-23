@@ -14,6 +14,8 @@
 | Nginx Ingress Controller          | 0.33.0                                                          | https://github.com/tmax-cloud/install-ingress/tree/5.0           |
 | Prometheus                        | v2.11.0                                                         | https://github.com/tmax-cloud/install-prometheus/tree/5.0        |
 | HyperAuth                         | b1.1.0.23                                                       | https://github.com/tmax-cloud/install-hyperauth/tree/5.0         |
+| GitLab                            |                                                                 |                                                                  |
+| Helm Operator                     |                                                                 |                                                                  |
 | HyperCloud 5 API Server, Operator | v5.0.2.0, v5.0.2.0                                              | https://github.com/tmax-cloud/install-hypercloud/tree/5.0        |
 | HyperCloud Console, Operator      | 0.5.1.32, 5.1.0.1                                               | https://github.com/tmax-cloud/install-console/tree/5.0           |
 

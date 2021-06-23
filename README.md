@@ -9,7 +9,6 @@
 | CRI-O & Kubernetes | 1.19.1, 1.19.4  | https://github.com/tmax-cloud/install-k8s/tree/5.0 |
 | Calico | 3.16.6 | https://github.com/tmax-cloud/install-cni/tree/5.0 |
 | MetalLB | v0.9.3 | https://github.com/tmax-cloud/install-metallb/tree/5.0 |
-| Rook Ceph & CDI |  | ??? |
 | Nginx Ingress Controller |  | ??? |
 | Prometheus | v2.11.0 | https://github.com/tmax-cloud/install-prometheus/tree/5.0 |
 | Tekton CI/CD | v0.21.0 | https://github.com/tmax-cloud/install-tekton/tree/5.0 |
@@ -32,6 +31,7 @@
 | NetworkWebhook |  | ??? |
 | Nvidia GPU | | https://github.com/tmax-cloud/install-nvidia-gpu-infra/tree/5.0 |
 | KubeFlow | v1.0.2 | XXX |
+| Rook Ceph & CDI |  | ??? |
 | EFK | 7.2.0, v1.4.2, 7.2.0 | https://github.com/tmax-cloud/install-EFK/tree/5.0 |
 | Helm | v3 | ??? |
 | ChartMuseum |  | ??? |

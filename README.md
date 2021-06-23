@@ -4,8 +4,10 @@
 | Module                            | Version                                                         | URL                                                              |
 | --------------------------------- | --------------------------------------------------------------- | ---------------------------------------------------------------- |
 | OS & Packages                     | CentOS 8.2 <- ProLinux로                                        | https://github.com/tmax-cloud/install-pkg-repo/tree/5.0          |
-| Image Registry                    | v2                                                              | https://github.com/tmax-cloud/install-registry/tree/5.0          |
-| CRI-O & Kubernetes                | 1.19.1, 1.19.4                                                  | https://github.com/tmax-cloud/install-k8s/tree/5.0               |
+| CRI - CRI-O                       |                                                                 | https://github.com/tmax-cloud/install-k8s/tree/5.0               |
+| Image Registry - Docker           | v2                                                              | https://github.com/tmax-cloud/install-registry/tree/5.0          |
+| Image Registry - Harbor           |                                                                 |                                                                  |
+| Kubernetes                        | 1.19.1, 1.19.4                                                  | https://github.com/tmax-cloud/install-k8s/tree/5.0               |
 | CNI - Calico                      | 3.16.6                                                          | https://github.com/tmax-cloud/install-cni/tree/5.0               |
 | CSI - NFS                         |                                                                 |                                                                  |
 | CSI - Ceph                        |                                                                 |                                                                  |

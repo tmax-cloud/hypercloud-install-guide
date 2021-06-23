@@ -4,7 +4,7 @@
 | Module                            | Version                                                         | URL                                                              |
 | --------------------------------- | --------------------------------------------------------------- | ---------------------------------------------------------------- |
 | OS & Packages                     | CentOS 8.2 <- ProLinux로                                        | https://github.com/tmax-cloud/install-pkg-repo/tree/5.0          |
-| podman                            |                                                                 | https://github.com/tmax-cloud/install-k8s/tree/5.0               |
+| podman                            |                                                                 |                                                                  |
 | Image Registry - Docker           | v2(Deprecated)                                                  | https://github.com/tmax-cloud/install-registry/tree/5.0          |
 | Image Registry - Harbor           |                                                                 |                                                                  |
 | Kubernetes & CRI-O                | 1.19.1, 1.19.4                                                  | https://github.com/tmax-cloud/install-k8s/tree/5.0               |

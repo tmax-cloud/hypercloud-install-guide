@@ -7,7 +7,9 @@
 | OS & Packages | CentOS 8.2 <- ProLinux 변경 | 인스톨가이드 URL 넣을 것(CK2-2) |
 | Image Registry | v2 | https://github.com/tmax-cloud/install-registry/tree/5.0 |
 | CRI-O & Kubernetes | 1.19.1, 1.19.4  | https://github.com/tmax-cloud/install-k8s/tree/5.0 |
-| Calico | 3.16.6 | https://github.com/tmax-cloud/install-cni/tree/5.0 |
+| CNI - Calico | 3.16.6 | https://github.com/tmax-cloud/install-cni/tree/5.0 |
+| CSI - Ceph |  | CK2-4 |
+| CSI - NFS |  | CK2-4 |
 | Nginx Ingress Controller |  | CK1-2 |
 | Prometheus | v2.11.0 | https://github.com/tmax-cloud/install-prometheus/tree/5.0 |
 | HyperAuth | b1.0.18.35 | https://github.com/tmax-cloud/install-hyperauth/tree/5.0 |
@@ -24,7 +26,7 @@
 | Template ServiceBroker | CK1-2 | https://github.com/tmax-cloud/install-tsb/tree/tsb
 | Registry Operator | v0.3.0 | https://github.com/tmax-cloud/install-registry-operator/tree/5.0 |
 | CAPI(AWS) | v0.3.14, v0.6.4 | https://github.com/tmax-cloud/install-capi/tree/5.0 |
-| KubeFed | | CK1-3 |
+| KubeFed |  | CK1-3 |
 | AWX Operator |  | CK2-2 |
 
 ### Module (Optional)

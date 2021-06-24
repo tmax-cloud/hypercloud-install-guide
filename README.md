@@ -31,6 +31,7 @@
 | Registry Operator                 | v0.3.1                                                          | https://github.com/tmax-cloud/install-registry-operator/tree/5.0 |
 | CAPI                              | v0.3.6                                                          | https://github.com/tmax-cloud/install-capi/tree/5.0              |
 | KubeFed                           | v0.3.0                                                          | https://github.com/tmax-cloud/install-federation/tree/5.0        |
+| AWX Operator                      |                                                                 |                                                                  |
 
 ### Module (Optional)
 | Module                   | Version              | Guide                                                                   |

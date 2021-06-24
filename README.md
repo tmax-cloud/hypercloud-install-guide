@@ -4,6 +4,7 @@
 | Module                            | Version                                                         | URL                                                              |
 | --------------------------------- | --------------------------------------------------------------- | ---------------------------------------------------------------- |
 | OS & Packages                     | ProLinux                                                        | https://github.com/tmax-cloud/install-pkg-repo/tree/5.0          |
+| External DNS                      |                                                                 |                                                                  |
 | Podman                            |                                                                 |                                                                  |
 | Image Registry - Docker           | v2(Deprecated)                                                  | https://github.com/tmax-cloud/install-registry/tree/5.0          |
 | Image Registry - Harbor           |                                                                 |                                                                  |

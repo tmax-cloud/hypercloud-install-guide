@@ -7,15 +7,15 @@
 | External DNS                      |                                                                 |                                                                  |
 | Podman                            |                                                                 |                                                                  |
 | Image Registry - Docker           | v2(Deprecated)                                                  | https://github.com/tmax-cloud/install-registry/tree/5.0          |
-| Image Registry - Harbor           |                                                                 |                                                                  |
+| Image Registry - Harbor           |                                                                 | https://github.com/tmax-cloud/HyperRegistry-Chart/tree/5.0       |
 | Kubernetes & CRI-O                | 1.19.1, 1.19.4                                                  | https://github.com/tmax-cloud/install-k8s/tree/5.0               |
 | CNI - Calico                      | 3.16.6                                                          | https://github.com/tmax-cloud/install-cni/tree/5.0               |
 | CSI - NFS                         |                                                                 |                                                                  |
 | CSI - Ceph                        |                                                                 |                                                                  |
 | Cert Manager                      |                                                                 |                                                                  |
 | Ingress Controller - nginx        | 0.33.0                                                          | https://github.com/tmax-cloud/install-ingress/tree/5.0           |
-| GitLab                            |                                                                 |                                                                  |
-| Helm Operator                     |                                                                 |                                                                  |
+| GitLab                            |                                                                 | https://github.com/tmax-cloud/install-gitlab                     |
+| Helm Operator                     |                                                                 | https://github.com/tmax-cloud/install-helm-operator/tree/5.0     |
 | Prometheus                        | v2.11.0                                                         | https://github.com/tmax-cloud/install-prometheus/tree/5.0        |
 | HyperAuth                         | b1.1.0.23                                                       | https://github.com/tmax-cloud/install-hyperauth/tree/5.0         |
 | HyperCloud 5 API Server, Operator | v5.0.2.0, v5.0.2.0                                              | https://github.com/tmax-cloud/install-hypercloud/tree/5.0        |

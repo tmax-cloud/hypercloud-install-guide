@@ -7,7 +7,7 @@
 | External DNS                      |                                                                 |                                                                  |
 | Podman                            |                                                                 |                                                                  |
 | Image Registry - Docker           | v2(Deprecated)                                                  | https://github.com/tmax-cloud/install-registry/tree/5.0          |
-| Image Registry - Harbor           |                                                                 | https://github.com/tmax-cloud/HyperRegistry-Chart/tree/5.0       |
+| Image Registry - HyperRegistry    |                                                                 | https://github.com/tmax-cloud/HyperRegistry-Chart/tree/5.0       |
 | Kubernetes & CRI-O                | 1.19.1, 1.19.4                                                  | https://github.com/tmax-cloud/install-k8s/tree/5.0               |
 | CNI - Calico                      | 3.16.6                                                          | https://github.com/tmax-cloud/install-cni/tree/5.0               |
 | CSI - NFS                         |                                                                 |                                                                  |

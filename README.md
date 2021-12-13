@@ -24,7 +24,7 @@
 ### Module (Recommended)
 | Module                            | Version                                                         | URL                                                              |
 | --------------------------------- | --------------------------------------------------------------- | ---------------------------------------------------------------- |
-| Tekton CI/CD                      | Pipeline: v0.22.0<br>Trigger: v0.12.1<br>CI/CD Operator: v0.4.2 | https://github.com/tmax-cloud/install-tekton/tree/5.0            |
+| Tekton CI/CD                      | Pipeline: v0.26.0<br>Trigger: v0.15.0<br>CI/CD Operator: v0.4.2 | https://github.com/tmax-cloud/install-tekton/tree/5.0            |
 | Catalog Controller                | v0.3.0                                                          | https://github.com/tmax-cloud/install-catalog/tree/5.0           |
 | Template ServiceBroker            | 0.0.8                                                           | https://github.com/tmax-cloud/install-tsb/tree/tsb-5.0           |
 | MetalLB                           | v0.9.3                                                          | https://github.com/tmax-cloud/install-metallb/tree/5.0           |

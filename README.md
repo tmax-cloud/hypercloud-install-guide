@@ -18,7 +18,7 @@
 | Helm Operator                     |                                                                 | https://github.com/tmax-cloud/install-helm-operator/tree/5.0     |
 | Prometheus                        | v2.11.0                                                         | https://github.com/tmax-cloud/install-prometheus/tree/5.0        |
 | HyperAuth                         | b1.1.0.23                                                       | https://github.com/tmax-cloud/install-hyperauth/tree/5.0         |
-| HyperCloud 5 API Server, Operator | v5.0.2.0, v5.0.2.0                                              | https://github.com/tmax-cloud/install-hypercloud/tree/5.0        |
+| HyperCloud 5 API Server, Operator | v5.0.26.6, v5.0.25.16                                           | https://github.com/tmax-cloud/install-hypercloud/tree/5.0        |
 | HyperCloud Console, Operator      | 0.5.1.32, 5.1.0.1                                               | https://github.com/tmax-cloud/install-console/tree/5.0           |
 
 ### Module (Recommended)

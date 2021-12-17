@@ -12,7 +12,7 @@
 | CNI - Calico                      | 3.16.6                                                          | https://github.com/tmax-cloud/install-cni/tree/5.0               |
 | CSI - NFS                         |                                                                 |                                                                  |
 | CSI - Ceph                        |                                                                 |                                                                  |
-| Cert Manager                      | 1.5.4                                                           | https://github.com/tmax-cloud/install-cert-manager               |
+| Cert Manager                      | v1.5.4                                                           | https://github.com/tmax-cloud/install-cert-manager               |
 | Ingress Controller - nginx        | 0.33.0                                                          | https://github.com/tmax-cloud/install-ingress/tree/5.0           |
 | GitLab                            |                                                                 | https://github.com/tmax-cloud/install-gitlab                     |
 | Helm Operator                     |                                                                 | https://github.com/tmax-cloud/install-helm-operator/tree/5.0     |
